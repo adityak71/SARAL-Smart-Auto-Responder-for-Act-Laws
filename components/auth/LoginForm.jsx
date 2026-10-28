@@ -24,14 +24,14 @@ export default function LoginForm() {
 
   return (
     <section
-      className="w-full lg:w-[46%] xl:w-[47%] flex flex-col items-center justify-center px-4 py-4 sm:p-8 lg:p-12 xl:p-16 relative overflow-y-auto z-10"
+      className="w-full lg:w-[46%] xl:w-[47%] flex flex-col items-center justify-center px-4 py-4 sm:px-6 lg:px-8 xl:px-12 lg:py-4 relative z-10"
       data-purpose="auth-container"
     >
       <motion.div
         initial={{ opacity: 0, y: 15 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-        className="w-full max-w-107.5 flex flex-col items-center"
+        className="w-full max-w-[420px] sm:max-w-[430px] flex flex-col items-center"
       >
         {/* Top Segmented Role Switcher: Citizen vs Officer */}
         <RoleSwitcher />
@@ -41,21 +41,21 @@ export default function LoginForm() {
           initial={{ opacity: 0, scale: 0.98, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white rounded-3xl p-6 sm:p-9 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] border border-white text-slate-800"
+          className="w-full bg-white rounded-3xl p-6 sm:p-8 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] border border-white text-slate-800"
           data-purpose="login-form-card"
         >
           {/* Heading */}
-          <div className="mb-5 sm:mb-7">
-            <h2 className="text-[26px] sm:text-[32px] font-bold text-slate-900 tracking-tight leading-tight">
+          <div className="mb-4 sm:mb-6">
+            <h2 className="text-[26px] sm:text-[30px] font-bold text-slate-900 tracking-tight leading-tight">
               {loginContent.form.title}{" "}
               <span
                 style={{ fontFamily: "var(--font-serif)" }}
-                className="italic font-normal text-[#582fe0] tracking-normal text-[29px] sm:text-[35px]"
+                className="italic font-normal text-[#582fe0] tracking-normal text-[29px] sm:text-[33px]"
               >
                 {loginContent.form.titleItalic}
               </span>
             </h2>
-            <div className="min-h-5 mt-1 overflow-hidden">
+            <div className="min-h-[20px] mt-1 overflow-hidden">
               <AnimatePresence mode="wait">
                 <motion.p
                   key={selectedRole}
@@ -80,7 +80,7 @@ export default function LoginForm() {
               <label className="sr-only" htmlFor="email">
                 {loginContent.form.emailPlaceholder}
               </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-3 focus-within:ring-[#6d28d9]/15 transition">
+              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-2 focus-within:ring-[#6d28d9]/15 transition">
                 {/* Mail Icon */}
                 <div className="pl-3.5 pr-2 text-slate-400 pointer-events-none flex items-center">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
@@ -99,7 +99,7 @@ export default function LoginForm() {
                   value={loginForm.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
                   placeholder={loginContent.form.emailPlaceholder}
-                  className="w-full py-3 sm:py-3.5 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
+                  className="w-full py-2.8 sm:py-3.2 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
                 />
               </div>
             </div>
@@ -109,7 +109,7 @@ export default function LoginForm() {
               <label className="sr-only" htmlFor="password">
                 {loginContent.form.passwordPlaceholder}
               </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-3 focus-within:ring-[#6d28d9]/15 transition">
+              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-2 focus-within:ring-[#6d28d9]/15 transition">
                 {/* Lock Icon */}
                 <div className="pl-3.5 pr-2 text-slate-400 pointer-events-none flex items-center">
                   <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
@@ -128,7 +128,7 @@ export default function LoginForm() {
                   value={loginForm.password}
                   onChange={(e) => handleInputChange("password", e.target.value)}
                   placeholder={loginContent.form.passwordPlaceholder}
-                  className="w-full py-3 sm:py-3.5 pr-10 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
+                  className="w-full py-2.8 sm:py-3.2 pr-10 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
                 />
                 {/* Eye Toggle Icon with animation */}
                 <motion.button
@@ -176,7 +176,7 @@ export default function LoginForm() {
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full gradient-btn text-white py-3.2 sm:py-3.5 px-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] cursor-pointer group"
+                className="w-full gradient-btn text-white py-3 sm:py-3.2 px-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] cursor-pointer group"
               >
                 <span>{loginContent.form.submitButtonText}</span>
                 <motion.svg
@@ -192,7 +192,7 @@ export default function LoginForm() {
           </form>
 
           {/* Divider */}
-          <div className="relative my-5 sm:my-6 flex items-center justify-center">
+          <div className="relative my-4 sm:my-5 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200" />
             </div>
@@ -207,7 +207,7 @@ export default function LoginForm() {
               type="button"
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full py-2.5 sm:py-3 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition duration-150 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700 shadow-sm hover:shadow cursor-pointer"
+              className="w-full py-2.5 sm:py-2.8 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition duration-150 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700 shadow-sm hover:shadow cursor-pointer"
             >
               <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -232,7 +232,7 @@ export default function LoginForm() {
           </div>
 
           {/* Bottom Prompt */}
-          <div className="mt-5 sm:mt-7 text-center">
+          <div className="mt-4 sm:mt-5 text-center">
             <p className="text-xs text-slate-500 font-medium">
               {loginContent.form.noAccountText}{" "}
               <Link href="/signup" className="text-[#592ee0] font-semibold hover:underline ml-0.5">
@@ -242,9 +242,9 @@ export default function LoginForm() {
           </div>
         </motion.div>
 
-        {/* Mobile Quick App Features Footer (matching rti_portal_login_mobile reference) */}
+        {/* Mobile Quick App Features Footer */}
         <footer
-          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-[11px] px-2 max-w-95"
+          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-[11px] px-2 max-w-[380px]"
           data-purpose="mobile-features"
         >
           <div className="flex items-center space-x-1.5">
