@@ -26,13 +26,13 @@ export default function SignupForm() {
       className="w-full lg:w-[46%] xl:w-[47%] flex flex-col items-center justify-center px-4 py-3 sm:px-6 lg:px-8 xl:px-12 lg:py-2 relative z-10"
       data-purpose="registration-form-panel"
     >
-      <div className="w-full max-w-[420px] sm:max-w-[440px] xl:max-w-[460px] pt-5 relative flex flex-col items-center">
+      <div className="w-full max-w-105 sm:max-w-110 xl:max-w-115 pt-5 relative flex flex-col items-center">
         {/* White Frosted Registration Card */}
         <motion.div
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-[#f8fafc]/95 backdrop-blur-xl rounded-[24px] sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift border border-white/80 relative text-slate-800 pt-7 sm:pt-8"
+          className="w-full bg-[#f8fafc]/95 backdrop-blur-xl rounded-3xl sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift border border-white/80 relative text-slate-800 pt-7 sm:pt-8"
         >
           {/* Floating Citizen Icon Header Badge */}
           <motion.div
@@ -287,7 +287,7 @@ export default function SignupForm() {
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full py-2.5 px-6 rounded-xl font-medium text-xs sm:text-sm text-white bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 active:scale-[0.99] transition-all duration-200 shadow-btn-glow flex items-center justify-center gap-2 cursor-pointer group"
+                className="w-full py-2.5 px-6 rounded-xl font-medium text-xs sm:text-sm text-white bg-linear-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 active:scale-[0.99] transition-all duration-200 shadow-btn-glow flex items-center justify-center gap-2 cursor-pointer group"
               >
                 <span>{signupContent.form.submitButtonText}</span>
                 <motion.svg
