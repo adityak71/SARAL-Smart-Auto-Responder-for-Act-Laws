@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import RoleSwitcher from "./RoleSwitcher";
+import AuthInput from "./AuthInput";
 import { updateLoginForm } from "@/redux/slices/authSlice";
 import { toggleShowPassword } from "@/redux/slices/uiSlice";
 import { loginContent } from "@/data/authContent";
@@ -74,69 +75,54 @@ export default function LoginForm() {
           </div>
 
           {/* Login Form */}
-          <form className="space-y-3.5 sm:space-y-4" onSubmit={handleSubmit}>
-            {/* Email Input */}
-            <div>
-              <label className="sr-only" htmlFor="email">
-                {loginContent.form.emailPlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-2 focus-within:ring-[#6d28d9]/15 transition">
-                {/* Mail Icon */}
-                <div className="pl-3.5 pr-2 text-slate-400 pointer-events-none flex items-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
-                    <path
-                      d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={loginForm.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder={loginContent.form.emailPlaceholder}
-                  className="w-full py-2.8 sm:py-3.2 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
-                />
-              </div>
-            </div>
+          <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
+            {/* Email Input with hover scale & shadow */}
+            <AuthInput
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={loginForm.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              placeholder={loginContent.form.emailPlaceholder}
+              autoComplete="email"
+              icon={
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
+                  <path
+                    d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+            />
 
-            {/* Password Input */}
-            <div>
-              <label className="sr-only" htmlFor="password">
-                {loginContent.form.passwordPlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-[#6d28d9] focus-within:ring-2 focus-within:ring-[#6d28d9]/15 transition">
-                {/* Lock Icon */}
-                <div className="pl-3.5 pr-2 text-slate-400 pointer-events-none flex items-center">
-                  <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
-                    <path
-                      d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  required
-                  value={loginForm.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
-                  placeholder={loginContent.form.passwordPlaceholder}
-                  className="w-full py-2.8 sm:py-3.2 pr-10 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-sm focus:outline-none focus:ring-0"
-                />
-                {/* Eye Toggle Icon with animation */}
+            {/* Password Input with hover scale & shadow */}
+            <AuthInput
+              id="password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              required
+              value={loginForm.password}
+              onChange={(e) => handleInputChange("password", e.target.value)}
+              placeholder={loginContent.form.passwordPlaceholder}
+              autoComplete="current-password"
+              icon={
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
+                  <path
+                    d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+              rightElement={
                 <motion.button
                   type="button"
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="absolute right-3.5 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
@@ -157,30 +143,30 @@ export default function LoginForm() {
                     </svg>
                   )}
                 </motion.button>
-              </div>
-            </div>
+              }
+            />
 
             {/* Forgot Password Link */}
             <div className="flex justify-end pt-0.5">
               <a
                 href="#"
-                className="text-xs font-semibold text-[#5a2ee0] hover:text-[#4922b9] hover:underline transition"
+                className="text-xs sm:text-[13px] font-semibold text-[#5a2ee0] hover:text-[#4922b9] hover:underline transition py-0.5"
               >
                 {loginContent.form.forgotPasswordText}
               </a>
             </div>
 
             {/* Primary Sign In Button */}
-            <div className="pt-1">
+            <div className="pt-1.5 sm:pt-2">
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full gradient-btn text-white py-3 sm:py-3.2 px-4 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] cursor-pointer group"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-2.5 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] cursor-pointer group transition-all duration-200"
               >
                 <span>{loginContent.form.submitButtonText}</span>
                 <motion.svg
-                  className="w-4 h-4 stroke-[2.2] transition-transform group-hover:translate-x-1"
+                  className="w-4 h-4 sm:w-4.5 sm:h-4.5 stroke-[2.2] transition-transform duration-200 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -196,7 +182,7 @@ export default function LoginForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200" />
             </div>
-            <span className="relative bg-white px-3 text-xs font-normal text-slate-400">
+            <span className="relative bg-white px-3 text-xs font-normal text-slate-400 select-none">
               {loginContent.form.dividerText}
             </span>
           </div>
@@ -207,9 +193,9 @@ export default function LoginForm() {
               type="button"
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full py-2.5 sm:py-2.8 px-4 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 transition duration-150 flex items-center justify-center gap-3 text-sm font-semibold text-slate-700 shadow-sm hover:shadow cursor-pointer"
+              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 bg-white hover:bg-slate-50/90 hover:border-slate-300 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 shadow-sm cursor-pointer"
             >
-              <svg className="w-4 h-4 shrink-0" viewBox="0 0 24 24">
+              <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
                 <path
                   d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15Z"
                   fill="#4285F4"
@@ -233,7 +219,7 @@ export default function LoginForm() {
 
           {/* Bottom Prompt */}
           <div className="mt-4 sm:mt-5 text-center">
-            <p className="text-xs text-slate-500 font-medium">
+            <p className="text-xs sm:text-[13px] text-slate-500 font-medium">
               {loginContent.form.noAccountText}{" "}
               <Link href="/signup" className="text-[#592ee0] font-semibold hover:underline ml-0.5">
                 {loginContent.form.signupLinkText}

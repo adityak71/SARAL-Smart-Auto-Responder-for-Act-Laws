@@ -16,7 +16,7 @@ export default function RoleSwitcher() {
   return (
     <div
       aria-label="User Category Switcher"
-      className="glass-chip p-1 rounded-full flex items-center justify-between mb-6 shadow-inner w-60 border border-white/20 backdrop-blur-md relative"
+      className="glass-chip p-1 rounded-full flex items-center justify-between mb-4 sm:mb-6 shadow-inner w-56 sm:w-60 border border-white/20 backdrop-blur-md relative"
       role="tablist"
     >
       {roles.map((role) => {
@@ -28,7 +28,7 @@ export default function RoleSwitcher() {
             role="tab"
             aria-selected={isActive}
             onClick={() => dispatch(setSelectedRole(role.id))}
-            className={`relative flex-1 py-1.5 px-4 text-[13px] rounded-full text-center transition-colors duration-200 focus:outline-none cursor-pointer select-none ${
+            className={`relative flex-1 py-1.5 sm:py-2 px-3 sm:px-4 text-xs sm:text-[13px] rounded-full text-center transition-colors duration-200 focus:outline-none cursor-pointer select-none ${
               isActive ? "font-semibold text-slate-900" : "font-medium text-slate-300 hover:text-white"
             }`}
           >

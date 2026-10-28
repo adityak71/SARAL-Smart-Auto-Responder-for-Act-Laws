@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
+import AuthInput from "./AuthInput";
 import { updateSignupForm } from "@/redux/slices/authSlice";
 import { toggleShowPassword, toggleShowConfirmPassword } from "@/redux/slices/uiSlice";
 import { signupContent } from "@/data/authContent";
@@ -26,13 +27,13 @@ export default function SignupForm() {
       className="w-full lg:w-[46%] xl:w-[47%] flex flex-col items-center justify-center px-4 py-3 sm:px-6 lg:px-8 xl:px-12 lg:py-2 relative z-10"
       data-purpose="registration-form-panel"
     >
-      <div className="w-full max-w-105 sm:max-w-110 xl:max-w-115 pt-5 relative flex flex-col items-center">
+      <div className="w-full max-w-[420px] sm:max-w-[440px] xl:max-w-[460px] pt-5 relative flex flex-col items-center">
         {/* White Frosted Registration Card */}
         <motion.div
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-[#f8fafc]/95 backdrop-blur-xl rounded-3xl sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift border border-white/80 relative text-slate-800 pt-7 sm:pt-8"
+          className="w-full bg-[#f8fafc]/95 backdrop-blur-xl rounded-[24px] sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift border border-white/80 relative text-slate-800 pt-7 sm:pt-8"
         >
           {/* Floating Citizen Icon Header Badge */}
           <motion.div
@@ -63,123 +64,96 @@ export default function SignupForm() {
           </div>
 
           {/* Registration Form */}
-          <form className="space-y-2.5" onSubmit={handleSubmit}>
+          <form className="space-y-2.5 sm:space-y-3" onSubmit={handleSubmit}>
             {/* Full Name Input */}
-            <div>
-              <label className="sr-only" htmlFor="fullName">
-                {signupContent.form.fullNamePlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/15 transition">
-                <div className="pl-3 pr-2 flex items-center pointer-events-none text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                    <path
-                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="fullName"
-                  name="fullName"
-                  type="text"
-                  required
-                  value={signupForm.fullName}
-                  onChange={(e) => handleInputChange("fullName", e.target.value)}
-                  placeholder={signupContent.form.fullNamePlaceholder}
-                  className="w-full py-2 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-0"
-                />
-              </div>
-            </div>
+            <AuthInput
+              id="fullName"
+              name="fullName"
+              type="text"
+              required
+              value={signupForm.fullName}
+              onChange={(e) => handleInputChange("fullName", e.target.value)}
+              placeholder={signupContent.form.fullNamePlaceholder}
+              autoComplete="name"
+              icon={
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path
+                    d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+            />
 
             {/* Email Address Input */}
-            <div>
-              <label className="sr-only" htmlFor="email">
-                {signupContent.form.emailPlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/15 transition">
-                <div className="pl-3 pr-2 flex items-center pointer-events-none text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                    <path
-                      d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="email"
-                  name="email"
-                  type="email"
-                  required
-                  value={signupForm.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  placeholder={signupContent.form.emailPlaceholder}
-                  className="w-full py-2 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-0"
-                />
-              </div>
-            </div>
+            <AuthInput
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={signupForm.email}
+              onChange={(e) => handleInputChange("email", e.target.value)}
+              placeholder={signupContent.form.emailPlaceholder}
+              autoComplete="email"
+              icon={
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path
+                    d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+            />
 
             {/* Mobile Number Input */}
-            <div>
-              <label className="sr-only" htmlFor="mobile">
-                {signupContent.form.mobilePlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/15 transition">
-                <div className="pl-3 pr-2 flex items-center pointer-events-none text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                    <path
-                      d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="mobile"
-                  name="mobile"
-                  type="tel"
-                  required
-                  value={signupForm.mobile}
-                  onChange={(e) => handleInputChange("mobile", e.target.value)}
-                  placeholder={signupContent.form.mobilePlaceholder}
-                  className="w-full py-2 pr-4 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-0"
-                />
-              </div>
-            </div>
+            <AuthInput
+              id="mobile"
+              name="mobile"
+              type="tel"
+              required
+              value={signupForm.mobile}
+              onChange={(e) => handleInputChange("mobile", e.target.value)}
+              placeholder={signupContent.form.mobilePlaceholder}
+              autoComplete="tel"
+              icon={
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path
+                    d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+            />
 
             {/* Password Input */}
-            <div>
-              <label className="sr-only" htmlFor="password">
-                {signupContent.form.passwordPlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/15 transition">
-                <div className="pl-3 pr-2 flex items-center pointer-events-none text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                    <path
-                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 00 2.25 2.25z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="password"
-                  name="password"
-                  type={showPassword ? "text" : "password"}
-                  required
-                  value={signupForm.password}
-                  onChange={(e) => handleInputChange("password", e.target.value)}
-                  placeholder={signupContent.form.passwordPlaceholder}
-                  className="w-full py-2 pr-9 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-0"
-                />
-                {/* Eye Toggle Icon */}
+            <AuthInput
+              id="password"
+              name="password"
+              type={showPassword ? "text" : "password"}
+              required
+              value={signupForm.password}
+              onChange={(e) => handleInputChange("password", e.target.value)}
+              placeholder={signupContent.form.passwordPlaceholder}
+              autoComplete="new-password"
+              icon={
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path
+                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 00 2.25 2.25z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+              rightElement={
                 <motion.button
                   type="button"
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="absolute right-3 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -200,41 +174,35 @@ export default function SignupForm() {
                     </svg>
                   )}
                 </motion.button>
-              </div>
-            </div>
+              }
+            />
 
             {/* Confirm Password Input */}
-            <div>
-              <label className="sr-only" htmlFor="confirmPassword">
-                {signupContent.form.confirmPasswordPlaceholder}
-              </label>
-              <div className="relative flex items-center rounded-xl border border-slate-200 bg-slate-50/50 hover:border-slate-300 focus-within:border-indigo-600 focus-within:ring-2 focus-within:ring-indigo-600/15 transition">
-                <div className="pl-3 pr-2 flex items-center pointer-events-none text-slate-400">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
-                    <path
-                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 00 2.25 2.25z"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                <input
-                  id="confirmPassword"
-                  name="confirmPassword"
-                  type={showConfirmPassword ? "text" : "password"}
-                  required
-                  value={signupForm.confirmPassword}
-                  onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
-                  placeholder={signupContent.form.confirmPasswordPlaceholder}
-                  className="w-full py-2 pr-9 bg-transparent border-0 text-slate-800 placeholder-slate-400 text-xs sm:text-sm focus:outline-none focus:ring-0"
-                />
-                {/* Eye Toggle Icon */}
+            <AuthInput
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showConfirmPassword ? "text" : "password"}
+              required
+              value={signupForm.confirmPassword}
+              onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
+              placeholder={signupContent.form.confirmPasswordPlaceholder}
+              autoComplete="new-password"
+              icon={
+                <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
+                  <path
+                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 00 2.25 2.25z"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              }
+              rightElement={
                 <motion.button
                   type="button"
                   aria-label="Toggle confirm password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowConfirmPassword())}
-                  className="absolute right-3 text-slate-400 hover:text-slate-600 focus:outline-none cursor-pointer"
+                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showConfirmPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -255,8 +223,8 @@ export default function SignupForm() {
                     </svg>
                   )}
                 </motion.button>
-              </div>
-            </div>
+              }
+            />
 
             {/* Terms & Conditions Checkbox */}
             <div className="flex items-center gap-2 pt-0.5">
@@ -267,31 +235,31 @@ export default function SignupForm() {
                 required
                 checked={signupForm.agreeTerms}
                 onChange={(e) => handleInputChange("agreeTerms", e.target.checked)}
-                className="w-3.5 h-3.5 rounded text-indigo-600 border-slate-300 focus:ring-indigo-500 focus:ring-offset-0 cursor-pointer shrink-0"
+                className="w-4 h-4 rounded text-[#592ee0] border-slate-300 focus:ring-[#592ee0] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#592ee0]"
               />
               <label htmlFor="terms" className="text-[11px] sm:text-xs text-slate-600 select-none cursor-pointer leading-tight">
                 {signupContent.form.termsText}{" "}
-                <a href="#" className="font-semibold text-indigo-700 hover:underline">
+                <a href="#" className="font-semibold text-[#592ee0] hover:underline">
                   {signupContent.form.termsLink}
                 </a>{" "}
                 {signupContent.form.andText}{" "}
-                <a href="#" className="font-semibold text-indigo-700 hover:underline">
+                <a href="#" className="font-semibold text-[#592ee0] hover:underline">
                   {signupContent.form.privacyLink}
                 </a>
               </label>
             </div>
 
             {/* Primary Create Account Button */}
-            <div className="pt-1">
+            <div className="pt-1.5 sm:pt-2">
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full py-2.5 px-6 rounded-xl font-medium text-xs sm:text-sm text-white bg-linear-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 active:scale-[0.99] transition-all duration-200 shadow-btn-glow flex items-center justify-center gap-2 cursor-pointer group"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-6 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] flex items-center justify-center gap-2.5 cursor-pointer group transition-all duration-200"
               >
                 <span>{signupContent.form.submitButtonText}</span>
                 <motion.svg
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
+                  className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   strokeWidth="2.2"
@@ -304,9 +272,9 @@ export default function SignupForm() {
           </form>
 
           {/* Divider & Secondary Sign In Link */}
-          <div className="mt-3 sm:mt-3.5 text-center text-xs text-slate-500">
+          <div className="mt-3.5 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500">
             <span>{signupContent.form.haveAccountText}</span>
-            <Link href="/login" className="font-bold text-indigo-700 hover:text-indigo-800 ml-1 hover:underline">
+            <Link href="/login" className="font-bold text-[#592ee0] hover:text-[#4922b9] ml-1 hover:underline">
               {signupContent.form.signinLinkText}
             </Link>
           </div>

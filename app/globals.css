@@ -63,17 +63,12 @@
 
 .gradient-btn {
   background: linear-gradient(135deg, #6636ef 0%, #5125dd 100%);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
 .gradient-btn:hover {
   background: linear-gradient(135deg, #7443fb 0%, #5c2ded 100%);
   box-shadow: 0 10px 25px -4px rgba(99, 48, 240, 0.45);
-  transform: translateY(-1px);
-}
-
-.gradient-btn:active {
-  transform: translateY(0);
 }
 
 .shadow-card-lift {
