@@ -1,0 +1,212 @@
+// SARAL - Smart Auto-Responder for Act Laws
+// Database Schema with Full RBAC (Citizen, Officer, Admin)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// -------------------------------------------------------------
+// Core Authentication & User Management (RBAC)
+// -------------------------------------------------------------
+model User {
+  id                   String          @id @default(uuid())
+  email                String          @unique
+  passwordHash         String
+  fullName             String
+  phone                String?
+  role                 String          @default("CITIZEN") // "CITIZEN" | "OFFICER" | "ADMIN"
+  avatarUrl            String?
+  isDigiLockerVerified Boolean         @default(false)
+  isActive             Boolean         @default(true)
+  createdAt            DateTime        @default(now())
+  updatedAt            DateTime        @updatedAt
+
+  citizenProfile       CitizenProfile?
+  officerProfile       OfficerProfile?
+  auditLogs            AuditLog[]
+  notifications        Notification[]
+}
+
+// -------------------------------------------------------------
+// Citizen Profile & Grievance History
+// -------------------------------------------------------------
+model CitizenProfile {
+  id           String           @id @default(uuid())
+  userId       String           @unique
+  user         User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  addressLine  String?
+  district     String?
+  state        String?
+  pincode      String?
+  digiLockerId String?
+
+  applications RtiApplication[]
+  firstAppeals FirstAppeal[]
+}
+
+// -------------------------------------------------------------
+// Government Departments & Public Authorities Catalog
+// -------------------------------------------------------------
+model Department {
+  id              String           @id @default(uuid())
+  code            String           @unique // e.g. "PWD_MP", "RURAL_DEV"
+  name            String           // e.g. "Public Works Department"
+  ministry        String           // e.g. "Ministry of Rural Development"
+  stateOrCentral  String           // e.g. "Madhya Pradesh" or "Central"
+  nodalOffice     String
+  contactEmail    String
+  contactPhone    String?
+  avgResponseDays Int              @default(20)
+
+  officers        OfficerProfile[]
+  applications    RtiApplication[]
+  createdAt       DateTime         @default(now())
+}
+
+// -------------------------------------------------------------
+// Officer Profile (PIO, APIO, First Appellate Authority)
+// -------------------------------------------------------------
+model OfficerProfile {
+  id             String           @id @default(uuid())
+  userId         String           @unique
+  user           User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+  departmentId   String
+  department     Department       @relation(fields: [departmentId], references: [id])
+  employeeId     String           @unique
+  designation    String           // e.g. "Executive Engineer & Designated PIO"
+  officeLocation String
+  isPio          Boolean          @default(true)  // Public Information Officer
+  isFaa          Boolean          @default(false) // First Appellate Authority
+
+  assignedRtis   RtiApplication[]
+  createdAt      DateTime         @default(now())
+}
+
+// -------------------------------------------------------------
+// RTI Applications & Statutory Lifecycle (Section 6 & 7)
+// -------------------------------------------------------------
+model RtiApplication {
+  id                   String               @id @default(uuid())
+  applicationNumber    String               @unique // e.g. "SARAL-2026-00124"
+  citizenId            String
+  citizen              CitizenProfile       @relation(fields: [citizenId], references: [id])
+  departmentId         String
+  department           Department           @relation(fields: [departmentId], references: [id])
+  assignedOfficerId    String?
+  assignedOfficer      OfficerProfile?      @relation(fields: [assignedOfficerId], references: [id])
+
+  title                String
+  subject              String
+  rawCitizenPrompt     String               // Raw vernacular/Hinglish speech or text
+  structuredClauses    String               // JSON string of Section 6(1) legal clauses
+  targetAuthority      String
+
+  // Statutory 30-Day Clock Management
+  dateFiled            DateTime             @default(now())
+  statutoryDeadline    DateTime             // dateFiled + 30 days (or 48 hrs if Life & Liberty)
+  isLifeOrLiberty      Boolean              @default(false) // Section 7(1) proviso
+  currentStage         Int                  @default(2)     // 1: Drafted, 2: Submitted, 3: Assigned, 4: In Review, 5: Dispatched
+  status               String               @default("SUBMITTED") // "DRAFT" | "SUBMITTED" | "ASSIGNED" | "UNDER_REVIEW" | "RESPONSE_DISPATCHED" | "REJECTED" | "FIRST_APPEAL_PENDING"
+
+  // Statutory Fee Settlement (Section 6(1))
+  feeStatus            String               @default("PAID") // "UNPAID" | "PAID" | "EXEMPTED_BPL"
+  feeAmount            Float                @default(10.0)
+  paymentTxnId         String?
+
+  // AI-Assisted Officer Response Drafting
+  aiDraftSummary       String?              // Generated memo for PIO
+  suggestedSources     String?              // JSON string of referenced document registers
+  officialResponse     String?              // Final response memo
+  responseDispatchedAt DateTime?
+
+  timeline             ApplicationTimeline[]
+  documents            ApplicationDocument[]
+  firstAppeal          FirstAppeal?
+
+  createdAt            DateTime             @default(now())
+  updatedAt            DateTime             @updatedAt
+}
+
+// -------------------------------------------------------------
+// Application Lifecycle Milestones & Audit Trail
+// -------------------------------------------------------------
+model ApplicationTimeline {
+  id            String         @id @default(uuid())
+  applicationId String
+  application   RtiApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  stage         Int
+  title         String
+  description   String
+  completed     Boolean        @default(false)
+  active        Boolean        @default(false)
+  actionDate    DateTime       @default(now())
+}
+
+// -------------------------------------------------------------
+// Attached Documents, Certified Files & Treasury Receipts
+// -------------------------------------------------------------
+model ApplicationDocument {
+  id            String         @id @default(uuid())
+  applicationId String
+  application   RtiApplication @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  name          String
+  fileUrl       String
+  fileSize      String
+  fileType      String         // "pdf", "image", etc.
+  category      String         // "PETITION", "TREASURY_RECEIPT", "CERTIFIED_RESPONSE"
+  isCertified   Boolean        @default(false)
+  uploadedAt    DateTime       @default(now())
+}
+
+// -------------------------------------------------------------
+// Section 19(1) First Appeals
+// -------------------------------------------------------------
+model FirstAppeal {
+  id               String         @id @default(uuid())
+  appealNumber     String         @unique // e.g. "SARAL-APP-2026-00012"
+  applicationId    String         @unique
+  application      RtiApplication @relation(fields: [applicationId], references: [id])
+  citizenId        String
+  citizen          CitizenProfile @relation(fields: [citizenId], references: [id])
+  groundsOfAppeal  String         // e.g. "No Response within 30 days statutory window"
+  appealDate       DateTime       @default(now())
+  appealDeadline   DateTime
+  status           String         @default("PENDING") // "PENDING" | "ADMITTED" | "DISPOSED"
+  orderSummary     String?
+  orderDocumentUrl String?
+}
+
+// -------------------------------------------------------------
+// Live Notification System
+// -------------------------------------------------------------
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String   // "CLOCK_WARNING" | "ASSIGNMENT" | "RESPONSE" | "SYSTEM"
+  link      String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// -------------------------------------------------------------
+// Security Audit Logging (Admin & Compliance)
+// -------------------------------------------------------------
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  user       User?    @relation(fields: [userId], references: [id])
+  action     String   // e.g. "RTI_FILED", "FEE_PAID", "RESPONSE_DISPATCHED"
+  entityName String   // "RtiApplication", "User"
+  entityId   String
+  ipAddress  String?
+  userAgent  String?
+  timestamp  DateTime @default(now())
+}
