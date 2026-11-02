@@ -1,21 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import AuthInput from "./AuthInput";
-import { updateSignupForm } from "@/redux/slices/authSlice";
+import { updateSignupForm, setCredentials } from "@/redux/slices/authSlice";
 import { toggleShowPassword, toggleShowConfirmPassword } from "@/redux/slices/uiSlice";
 import { signupContent } from "@/data/authContent";
 
 export default function SignupForm() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const signupForm = useSelector((state) => state.auth.signupForm);
   const { showPassword, showConfirmPassword } = useSelector((state) => state.ui);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting citizen registration:", signupForm);
+    dispatch(
+      setCredentials({
+        name: signupForm.fullName || "Rahul Sharma",
+        email: signupForm.email || "rahul.sharma@citizen.in",
+        role: "citizen",
+        mobile: signupForm.mobile || "+91 98765 43210",
+        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+      })
+    );
+    router.push("/dashboard");
   };
 
   const handleInputChange = (field, value) => {
@@ -28,12 +39,12 @@ export default function SignupForm() {
       data-purpose="registration-form-panel"
     >
       <div className="w-full max-w-[420px] sm:max-w-[440px] xl:max-w-[460px] pt-5 relative flex flex-col items-center">
-        {/* White Frosted Registration Card */}
+        {/* White Frosted Registration Card (with adaptive Dark Mode) */}
         <motion.div
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-[#f8fafc]/95 backdrop-blur-xl rounded-[24px] sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift border border-white/80 relative text-slate-800 pt-7 sm:pt-8"
+          className="w-full bg-white dark:bg-[#0f0728]/95 backdrop-blur-xl rounded-[24px] sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_25px_rgba(139,92,246,0.15)] border border-white dark:border-white/15 relative text-slate-800 dark:text-slate-100 pt-7 sm:pt-8 transition-colors"
         >
           {/* Floating Citizen Icon Header Badge */}
           <motion.div
@@ -41,7 +52,7 @@ export default function SignupForm() {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 350, damping: 22, delay: 0.15 }}
             whileHover={{ scale: 1.08, rotate: [0, -5, 5, 0] }}
-            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 rounded-2xl shadow-md border border-indigo-100 flex items-center justify-center text-indigo-600 cursor-pointer"
+            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 dark:bg-[#190d3e] rounded-2xl shadow-md border border-indigo-100 dark:border-white/20 flex items-center justify-center text-indigo-600 dark:text-purple-300 cursor-pointer"
             data-purpose="citizen-badge"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -55,10 +66,10 @@ export default function SignupForm() {
 
           {/* Card Title & Subtitle */}
           <div className="text-center pt-1 pb-3 sm:pb-3.5">
-            <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
               {signupContent.form.title}
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               {signupContent.form.subtitle}
             </p>
           </div>
@@ -153,7 +164,7 @@ export default function SignupForm() {
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -202,7 +213,7 @@ export default function SignupForm() {
                   aria-label="Toggle confirm password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowConfirmPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showConfirmPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -235,15 +246,15 @@ export default function SignupForm() {
                 required
                 checked={signupForm.agreeTerms}
                 onChange={(e) => handleInputChange("agreeTerms", e.target.checked)}
-                className="w-4 h-4 rounded text-[#592ee0] border-slate-300 focus:ring-[#592ee0] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#592ee0]"
+                className="w-4 h-4 rounded text-[#592ee0] border-slate-300 dark:border-white/20 focus:ring-[#592ee0] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#592ee0]"
               />
-              <label htmlFor="terms" className="text-[11px] sm:text-xs text-slate-600 select-none cursor-pointer leading-tight">
+              <label htmlFor="terms" className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer leading-tight">
                 {signupContent.form.termsText}{" "}
-                <a href="#" className="font-semibold text-[#592ee0] hover:underline">
+                <a href="#" className="font-semibold text-[#592ee0] dark:text-purple-300 hover:underline">
                   {signupContent.form.termsLink}
                 </a>{" "}
                 {signupContent.form.andText}{" "}
-                <a href="#" className="font-semibold text-[#592ee0] hover:underline">
+                <a href="#" className="font-semibold text-[#592ee0] dark:text-purple-300 hover:underline">
                   {signupContent.form.privacyLink}
                 </a>
               </label>
@@ -272,17 +283,17 @@ export default function SignupForm() {
           </form>
 
           {/* Divider & Secondary Sign In Link */}
-          <div className="mt-3.5 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500">
+          <div className="mt-3.5 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500 dark:text-slate-400">
             <span>{signupContent.form.haveAccountText}</span>
-            <Link href="/login" className="font-bold text-[#592ee0] hover:text-[#4922b9] ml-1 hover:underline">
+            <Link href="/login" className="font-bold text-[#592ee0] dark:text-purple-300 hover:text-[#4922b9] dark:hover:text-purple-200 ml-1 hover:underline">
               {signupContent.form.signinLinkText}
             </Link>
           </div>
 
           {/* Bottom Officer Advisory Notice Box */}
           <motion.div whileHover={{ scale: 1.01 }} className="mt-3 pt-0.5">
-            <div className="bg-indigo-50/70 border border-indigo-100 rounded-xl p-2 sm:p-2.5 flex items-center gap-2 text-[11px] sm:text-xs text-slate-700">
-              <div className="text-indigo-600 shrink-0">
+            <div className="bg-indigo-50/70 dark:bg-purple-950/40 border border-indigo-100 dark:border-purple-500/30 rounded-xl p-2 sm:p-2.5 flex items-center gap-2 text-[11px] sm:text-xs text-slate-700 dark:text-purple-200">
+              <div className="text-indigo-600 dark:text-purple-300 shrink-0">
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path
                     d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"

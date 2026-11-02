@@ -1,22 +1,44 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import RoleSwitcher from "./RoleSwitcher";
 import AuthInput from "./AuthInput";
-import { updateLoginForm } from "@/redux/slices/authSlice";
+import { updateLoginForm, setCredentials } from "@/redux/slices/authSlice";
 import { toggleShowPassword } from "@/redux/slices/uiSlice";
 import { loginContent } from "@/data/authContent";
 
 export default function LoginForm() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { selectedRole, loginForm } = useSelector((state) => state.auth);
   const showPassword = useSelector((state) => state.ui.showPassword);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting login:", { role: selectedRole, ...loginForm });
+    dispatch(
+      setCredentials({
+        email: loginForm.email || "rahul.sharma@citizen.in",
+        name: selectedRole === "officer" ? "Er. Rameshwar Verma (PIO)" : "Rahul Sharma",
+        role: selectedRole,
+        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+      })
+    );
+    router.push("/dashboard");
+  };
+
+  const handleGoogleLogin = () => {
+    dispatch(
+      setCredentials({
+        email: "rahul.sharma@citizen.in",
+        name: "Rahul Sharma",
+        role: "citizen",
+        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+      })
+    );
+    router.push("/dashboard");
   };
 
   const handleInputChange = (field, value) => {
@@ -37,21 +59,21 @@ export default function LoginForm() {
         {/* Top Segmented Role Switcher: Citizen vs Officer */}
         <RoleSwitcher />
 
-        {/* Main White Login Card */}
+        {/* Main White Login Card (with adaptive Dark Mode) */}
         <motion.div
           initial={{ opacity: 0, scale: 0.98, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white rounded-3xl p-6 sm:p-8 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] border border-white text-slate-800"
+          className="w-full bg-white dark:bg-[#0f0728]/95 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_25px_rgba(139,92,246,0.15)] border border-white dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
           data-purpose="login-form-card"
         >
           {/* Heading */}
           <div className="mb-4 sm:mb-6">
-            <h2 className="text-[26px] sm:text-[30px] font-bold text-slate-900 tracking-tight leading-tight">
+            <h2 className="text-[26px] sm:text-[30px] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
               {loginContent.form.title}{" "}
               <span
                 style={{ fontFamily: "var(--font-serif)" }}
-                className="italic font-normal text-[#582fe0] tracking-normal text-[29px] sm:text-[33px]"
+                className="italic font-normal text-[#582fe0] dark:text-[#a78bfa] tracking-normal text-[29px] sm:text-[33px]"
               >
                 {loginContent.form.titleItalic}
               </span>
@@ -64,7 +86,7 @@ export default function LoginForm() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -4 }}
                   transition={{ duration: 0.18 }}
-                  className="text-xs sm:text-[14px] text-slate-500 font-normal"
+                  className="text-xs sm:text-[14px] text-slate-500 dark:text-slate-400 font-normal"
                 >
                   {selectedRole === "officer"
                     ? "Sign in with your official officer credentials."
@@ -122,7 +144,7 @@ export default function LoginForm() {
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 hover:text-purple-600 hover:bg-purple-50/60 focus:outline-none cursor-pointer transition-colors"
+                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
@@ -150,7 +172,7 @@ export default function LoginForm() {
             <div className="flex justify-end pt-0.5">
               <a
                 href="#"
-                className="text-xs sm:text-[13px] font-semibold text-[#5a2ee0] hover:text-[#4922b9] hover:underline transition py-0.5"
+                className="text-xs sm:text-[13px] font-semibold text-[#5a2ee0] dark:text-purple-300 hover:text-[#4922b9] dark:hover:text-purple-200 hover:underline transition py-0.5"
               >
                 {loginContent.form.forgotPasswordText}
               </a>
@@ -180,9 +202,9 @@ export default function LoginForm() {
           {/* Divider */}
           <div className="relative my-4 sm:my-5 flex items-center justify-center">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200" />
+              <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white px-3 text-xs font-normal text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#0f0728] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               {loginContent.form.dividerText}
             </span>
           </div>
@@ -191,9 +213,10 @@ export default function LoginForm() {
           <div>
             <motion.button
               type="button"
+              onClick={handleGoogleLogin}
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 bg-white hover:bg-slate-50/90 hover:border-slate-300 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 shadow-sm cursor-pointer"
+              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer"
             >
               <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
                 <path
@@ -219,9 +242,9 @@ export default function LoginForm() {
 
           {/* Bottom Prompt */}
           <div className="mt-4 sm:mt-5 text-center">
-            <p className="text-xs sm:text-[13px] text-slate-500 font-medium">
+            <p className="text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 font-medium">
               {loginContent.form.noAccountText}{" "}
-              <Link href="/signup" className="text-[#592ee0] font-semibold hover:underline ml-0.5">
+              <Link href="/signup" className="text-[#592ee0] dark:text-purple-300 font-semibold hover:underline ml-0.5">
                 {loginContent.form.signupLinkText}
               </Link>
             </p>

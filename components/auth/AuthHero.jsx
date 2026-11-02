@@ -83,7 +83,7 @@ export default function AuthHero({ type = "login" }) {
         ) : (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="glass-pill px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-[11px] sm:text-xs font-semibold text-white tracking-wide cursor-default shrink-0"
+            className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-[11px] sm:text-xs font-semibold text-white tracking-wide cursor-default shrink-0 bg-white/10 backdrop-blur-md border border-white/20"
           >
             <svg
               className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-300"
@@ -133,7 +133,7 @@ export default function AuthHero({ type = "login" }) {
             variants={itemFadeUp}
             whileHover={{ y: -3, borderColor: "rgba(255, 255, 255, 0.3)" }}
             transition={{ duration: 0.3 }}
-            className="hidden lg:block glass-card rounded-2xl p-4 sm:p-5 w-full max-w-[490px]"
+            className="hidden lg:block rounded-2xl p-4 sm:p-5 w-full max-w-[490px] bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_20px_45px_-10px_rgba(8,4,30,0.65),0_0_20px_2px_rgba(138,75,255,0.12)]"
             data-purpose="status-tracker-card"
           >
             {/* Card Header Info */}
@@ -293,7 +293,7 @@ export default function AuthHero({ type = "login" }) {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2.5 cursor-default"
           >
-            <div className="w-8 h-8 rounded-lg glass-chip flex items-center justify-center text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/40">
+            <div className="w-8 h-8 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/15 flex items-center justify-center text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/40">
               {feat.icon === "document" && (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path

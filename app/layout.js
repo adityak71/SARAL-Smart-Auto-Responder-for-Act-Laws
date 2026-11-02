@@ -1,15 +1,30 @@
 import "./globals.css";
 import { ReduxProvider } from "@/redux/provider";
+import Navbar from "@/components/common/Navbar";
 
 export const metadata = {
-  title: "RTI Portal - AI-Powered Right to Information",
-  description: "Digital platform for citizens to file RTI applications, track status, and receive responses powered by AI assistance.",
+  title: "SARAL - AI-Powered Right to Information Portal",
+  description: "Simplifying Right to Information with AI assistance for Indian citizens.",
 };
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="h-full antialiased dark">
+    <html lang="en" suppressHydrationWarning className="h-full antialiased dark">
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                const savedTheme = localStorage.getItem('saral-theme');
+                if (savedTheme === 'light') {
+                  document.documentElement.classList.remove('dark');
+                } else {
+                  document.documentElement.classList.add('dark');
+                }
+              } catch (e) {}
+            `,
+          }}
+        />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
@@ -17,8 +32,11 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-[#08031d] text-slate-100">
-        <ReduxProvider>{children}</ReduxProvider>
+      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 transition-colors">
+        <ReduxProvider>
+          <Navbar />
+          {children}
+        </ReduxProvider>
       </body>
     </html>
   );
