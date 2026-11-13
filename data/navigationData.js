@@ -18,11 +18,12 @@ export const userProfileData = {
   email: "rahul.sharma@citizen.in",
   avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
   menuItems: [
+    { label: "View Your Profile", href: "/profile", icon: "badge", badge: "Live Dossier" },
     { label: "Citizen Dashboard", href: "/dashboard", icon: "dashboard" },
     { label: "My Filed RTIs", href: "/tracking", icon: "folder_open", badge: "3 Active" },
     { label: "Drafted Applications", href: "/dashboard", icon: "edit_note", badge: "1" },
     { label: "Official Certified Responses", href: "/dashboard", icon: "verified" },
-    { label: "Account & Preferences", href: "/dashboard", icon: "settings" },
+    { label: "Account & Preferences", href: "/profile", icon: "settings" },
   ],
 };
 

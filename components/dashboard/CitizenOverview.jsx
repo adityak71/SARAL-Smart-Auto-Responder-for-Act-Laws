@@ -53,7 +53,7 @@ export default function CitizenOverview() {
 
         <div className="flex flex-wrap items-center gap-2.5">
           <Link
-            href="/login"
+            href="/file-rti"
             className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-md transition cursor-pointer"
           >
             + File New RTI Petition

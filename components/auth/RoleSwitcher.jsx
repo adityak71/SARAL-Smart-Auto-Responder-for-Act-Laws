@@ -11,12 +11,13 @@ export default function RoleSwitcher() {
   const roles = [
     { id: "citizen", label: "Citizen" },
     { id: "officer", label: "Officer" },
+    { id: "admin", label: "Admin" },
   ];
 
   return (
     <div
       aria-label="User Category Switcher"
-      className="p-1 rounded-full flex items-center justify-between mb-4 sm:mb-6 shadow-inner w-56 sm:w-60 bg-white/[0.08] border border-white/20 backdrop-blur-md relative"
+      className="p-1 rounded-full flex items-center justify-between mb-4 sm:mb-6 shadow-inner w-72 sm:w-80 bg-white/[0.08] border border-white/20 backdrop-blur-md relative"
       role="tablist"
     >
       {roles.map((role) => {

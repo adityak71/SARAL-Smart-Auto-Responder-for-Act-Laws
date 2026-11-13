@@ -167,6 +167,17 @@ export default function Navbar() {
                   {link.label}
                 </Link>
               ))}
+
+              {isAuthenticated && (
+                <Link
+                  href="/profile"
+                  onClick={() => dispatch(setMobileMenu(false))}
+                  className="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 flex items-center justify-between transition"
+                >
+                  <span>👤 View Your Profile</span>
+                  <span className="text-xs">→</span>
+                </Link>
+              )}
             </div>
 
             <div className="pt-3 border-t border-slate-200 dark:border-white/10 flex items-center justify-between">

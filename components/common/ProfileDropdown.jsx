@@ -24,8 +24,16 @@ export default function ProfileDropdown() {
     router.push("/");
   };
 
-  const displayName = user?.name || userProfileData.name;
+  const displayName = user?.name || user?.fullName || userProfileData.name;
   const displayEmail = user?.email || userProfileData.email;
+  const avatarUrl = user?.avatarUrl || userProfileData.avatarUrl;
+  const userRole = (user?.role || selectedRole || "CITIZEN").toUpperCase();
+  const roleBadge =
+    userRole === "ADMIN"
+      ? "Superadmin (CIC Controller)"
+      : userRole === "OFFICER"
+      ? "Section 5(1) Designated PIO"
+      : "DigiLocker Verified Citizen";
 
   return (
     <div className="relative">
@@ -41,7 +49,7 @@ export default function ProfileDropdown() {
       >
         <div className="relative">
           <img
-            src={userProfileData.avatarUrl}
+            src={avatarUrl}
             alt={displayName}
             className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-purple-500/60"
           />
@@ -84,7 +92,7 @@ export default function ProfileDropdown() {
               <div className="p-4 bg-gradient-to-br from-purple-100/80 via-slate-50 to-white dark:from-purple-900/40 dark:via-indigo-900/30 dark:to-slate-900/60 border-b border-slate-200 dark:border-white/10">
                 <div className="flex items-center gap-3">
                   <img
-                    src={userProfileData.avatarUrl}
+                    src={avatarUrl}
                     alt={displayName}
                     className="w-11 h-11 rounded-full object-cover ring-2 ring-purple-500 shadow-md"
                   />
@@ -103,10 +111,25 @@ export default function ProfileDropdown() {
                           clipRule="evenodd"
                         />
                       </svg>
-                      <span>{userProfileData.verificationBadge}</span>
+                      <span>{roleBadge}</span>
                     </div>
                   </div>
                 </div>
+
+                {/* Direct "View Your Profile" Action Button */}
+                <Link
+                  href="/profile"
+                  onClick={() => dispatch(setProfileDropdown(false))}
+                  className="mt-3.5 w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md shadow-purple-600/25 transition-all duration-200 group cursor-pointer"
+                >
+                  <div className="flex items-center gap-2">
+                    <svg className="w-3.5 h-3.5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                    <span>View Your Profile</span>
+                  </div>
+                  <span className="text-xs text-purple-200 group-hover:translate-x-0.5 transition-transform">→</span>
+                </Link>
               </div>
 
               {/* Navigation Menu Options */}
@@ -131,7 +154,7 @@ export default function ProfileDropdown() {
               {/* Role Indicator & Actions */}
               <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/60 flex items-center justify-between text-xs">
                 <span className="text-slate-500 dark:text-slate-400">
-                  Role: <strong className="text-slate-900 dark:text-white capitalize">{selectedRole}</strong>
+                  Role: <strong className="text-slate-900 dark:text-white uppercase">{userRole}</strong>
                 </span>
 
                 <button
