@@ -9,7 +9,7 @@ export function middleware(request) {
   const sessionCookie = request.cookies.get("saral_session")?.value;
 
   // 1. Protected Routes that require authenticated session
-  const protectedPaths = ["/dashboard", "/profile", "/file-rti"];
+  const protectedPaths = ["/dashboard", "/profile", "/file-rti", "/appeal"];
   const isProtected = protectedPaths.some(
     (path) => pathname === path || pathname.startsWith(`${path}/`)
   );
@@ -39,6 +39,8 @@ export const config = {
     "/profile/:path*",
     "/file-rti/:path*",
     "/file-rti",
+    "/appeal/:path*",
+    "/appeal",
     "/login",
     "/signup",
   ],

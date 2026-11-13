@@ -308,15 +308,25 @@ export default function ApplicationListTable() {
                   </td>
 
                   <td className="py-4 text-right whitespace-nowrap">
-                    <Link
-                      href={`/tracking?id=${app.idStr}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/30 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-200 dark:border-purple-500/30 text-xs font-semibold transition"
-                    >
-                      <span>View Dossier</span>
-                      <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
-                      </svg>
-                    </Link>
+                    <div className="inline-flex items-center gap-1.5 justify-end">
+                      {app.isAppeal && (
+                        <Link
+                          href={`/appeal?id=${app.idStr}`}
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-700 hover:text-white dark:bg-rose-600/20 dark:hover:bg-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 text-[11px] font-bold transition"
+                        >
+                          <span>File Appeal</span>
+                        </Link>
+                      )}
+                      <Link
+                        href={`/tracking?id=${app.idStr}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/30 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-200 dark:border-purple-500/30 text-xs font-semibold transition"
+                      >
+                        <span>View Dossier</span>
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))}

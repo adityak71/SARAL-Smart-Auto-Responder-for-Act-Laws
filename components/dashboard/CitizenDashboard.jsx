@@ -65,12 +65,20 @@ export default function CitizenDashboard({ user }) {
           </div>
         </div>
 
-        <Link
-          href="/tracking?id=SARAL-2026-00124"
-          className="px-4 py-2 rounded-xl text-xs font-bold text-amber-700 dark:text-amber-300 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 transition shrink-0"
-        >
-          Check Statutory Deadlines →
-        </Link>
+        <div className="flex items-center gap-2 shrink-0">
+          <Link
+            href="/appeal"
+            className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-sm transition"
+          >
+            File First Appeal →
+          </Link>
+          <Link
+            href="/tracking?id=SARAL-2026-00124"
+            className="px-4 py-2 rounded-xl text-xs font-semibold text-amber-700 dark:text-amber-300 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 transition"
+          >
+            Check Deadlines
+          </Link>
+        </div>
       </div>
     </div>
   );
