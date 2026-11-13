@@ -210,3 +210,20 @@ model AuditLog {
   userAgent  String?
   timestamp  DateTime @default(now())
 }
+
+// -------------------------------------------------------------
+// Landmark Central Information Commission (CIC) Precedents (RAG)
+// -------------------------------------------------------------
+model CicPrecedent {
+  id               String   @id @default(uuid())
+  decisionNumber   String   @unique // e.g. "CIC/WB/A/2006/0012"
+  title            String
+  citation         String   // e.g. "Div. Bench, Central Information Commission"
+  category         String   // "PUBLIC_WORKS", "HEALTH", "EDUCATION", "EXEMPTIONS", "PENSION"
+  statuteSection   String   // "Section 6(1)", "Section 8(1)(j)", "Section 2(j)"
+  rulingSummary    String
+  keyLegalTakeaway String
+  disclosableHeld  Boolean  @default(true)
+  keywords         String   // Searchable comma-separated terms
+  createdAt        DateTime @default(now())
+}

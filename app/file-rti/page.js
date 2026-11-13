@@ -33,6 +33,10 @@ export default function FileRtiPage() {
   const [section8ScanResult, setSection8ScanResult] = useState(null);
   const [isScanningSection8, setIsScanningSection8] = useState(false);
 
+  // Landmark CIC Precedents State (Sprint 2.4 - RAG)
+  const [precedents, setPrecedents] = useState([]);
+  const [loadingPrecedents, setLoadingPrecedents] = useState(false);
+
   // Form State
   const [formData, setFormData] = useState({
     stateOrCentral: "State",
@@ -96,6 +100,38 @@ export default function FileRtiPage() {
     }
     loadDepts();
   }, []);
+
+  // Fetch Landmark CIC Precedents in Step 5 (RAG)
+  useEffect(() => {
+    if (currentStep === 5) {
+      let isMounted = true;
+      async function loadPrecedents() {
+        setLoadingPrecedents(true);
+        try {
+          const res = await fetch("/api/ai/precedents", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              query: formData.title || formData.rawCitizenPrompt || "public works tender budget audit",
+              limit: 2,
+            }),
+          });
+          const data = await res.json();
+          if (res.ok && data.success && Array.isArray(data.precedents) && isMounted) {
+            setPrecedents(data.precedents);
+          }
+        } catch (err) {
+          console.warn("Precedents load error:", err);
+        } finally {
+          if (isMounted) setLoadingPrecedents(false);
+        }
+      }
+      loadPrecedents();
+      return () => {
+        isMounted = false;
+      };
+    }
+  }, [currentStep, formData.title, formData.rawCitizenPrompt]);
 
   const selectedDepartment = departments.find((d) => d.id === formData.departmentId);
 
@@ -1293,6 +1329,55 @@ export default function FileRtiPage() {
                     </strong>
                   </div>
                 </div>
+              </div>
+
+              {/* Landmark CIC Precedents Card (Sprint 2.4 - RAG) */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-purple-950/30 to-slate-900 border border-purple-500/25 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1 rounded-lg bg-purple-600/30 text-purple-300 text-xs">🏛️</span>
+                    <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                      <span>Landmark CIC Legal Precedents Supporting Your Petition</span>
+                      <span className="px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                        RAG Knowledge
+                      </span>
+                    </h4>
+                  </div>
+                  <span className="text-[10px] text-purple-300/70 font-mono hidden sm:inline">
+                    Supabase pgvector
+                  </span>
+                </div>
+
+                {loadingPrecedents ? (
+                  <div className="py-4 text-center text-slate-400 text-xs">
+                    Retrieving landmark CIC orders and Supreme Court rulings...
+                  </div>
+                ) : (
+                  <div className="space-y-2.5">
+                    {precedents.map((prec) => (
+                      <div
+                        key={prec.decisionNumber}
+                        className="p-3 rounded-xl bg-white/[0.04] border border-white/10 space-y-1 text-xs"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-mono font-bold text-purple-300 text-[11px]">
+                            {prec.decisionNumber} • {prec.citation}
+                          </span>
+                          <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
+                            {prec.relevancePercentage} Relevant
+                          </span>
+                        </div>
+                        <h5 className="font-bold text-white text-xs">{prec.title}</h5>
+                        <p className="text-slate-300 text-[11px] leading-relaxed">
+                          {prec.rulingSummary}
+                        </p>
+                        <p className="text-purple-200 text-[10px] italic">
+                          ⚖ Takeaway: {prec.keyLegalTakeaway}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
 
               {/* Citizen Statutory Declaration */}
