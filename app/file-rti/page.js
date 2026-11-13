@@ -24,6 +24,11 @@ export default function FileRtiPage() {
   const [aiResult, setAiResult] = useState(null);
   const [aiSuccessToast, setAiSuccessToast] = useState("");
 
+  // AI Authority Routing State (Sprint 2.2)
+  const [routingTopic, setRoutingTopic] = useState("");
+  const [isRoutingAi, setIsRoutingAi] = useState(false);
+  const [aiRoutingResult, setAiRoutingResult] = useState(null);
+
   // Form State
   const [formData, setFormData] = useState({
     stateOrCentral: "State",
@@ -210,6 +215,44 @@ export default function FileRtiPage() {
       setErrorMsg("Network error contacting SARAL AI Copilot.");
     } finally {
       setIsAnalyzingWithAi(false);
+    }
+  };
+
+  // Automated Department & Authority Routing Engine (Sprint 2.2)
+  const handleAutoRoute = async (customTopic) => {
+    const topic = (customTopic || routingTopic || formData.title || formData.rawCitizenPrompt || "").trim();
+    if (!topic) {
+      setErrorMsg("Please enter a subject or topic to auto-route the authority.");
+      return;
+    }
+
+    setIsRoutingAi(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/ai/route-authority", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: topic,
+          location: formData.locationDivision,
+          stateOrCentral: formData.stateOrCentral,
+        }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success && data.routing?.primary) {
+        setAiRoutingResult(data.routing);
+        setFormData((prev) => ({
+          ...prev,
+          departmentId: data.routing.primary.id,
+          targetAuthority: data.routing.primary.name,
+        }));
+      }
+    } catch {
+      console.warn("Auto routing failed.");
+    } finally {
+      setIsRoutingAi(false);
     }
   };
 
@@ -450,6 +493,107 @@ export default function FileRtiPage() {
                     </button>
                   ))}
                 </div>
+              </div>
+
+              {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900 border border-purple-500/25 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <span className="p-1 rounded-lg bg-purple-600/30 text-purple-300 text-xs font-bold">🎯</span>
+                    <div>
+                      <h4 className="text-xs font-bold text-white flex items-center gap-2">
+                        <span>AI Smart Authority Router</span>
+                        <span className="px-2 py-0.2 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-mono">
+                          Section 5(1) Direct Mapping
+                        </span>
+                      </h4>
+                      <p className="text-[11px] text-purple-200/70">
+                        Enter a short topic to auto-detect the exact competent authority and designated PIO.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={routingTopic}
+                    onChange={(e) => setRoutingTopic(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        e.preventDefault();
+                        handleAutoRoute();
+                      }
+                    }}
+                    placeholder="e.g. broken road in village, drinking water supply, ration card delay, hospital doctor absent..."
+                    className="flex-1 px-3.5 py-2 rounded-xl bg-black/40 border border-purple-500/30 text-white text-xs placeholder-purple-300/40 focus:outline-none focus:border-purple-400"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => handleAutoRoute()}
+                    disabled={isRoutingAi}
+                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 shrink-0 cursor-pointer"
+                  >
+                    {isRoutingAi ? "Routing..." : "Auto-Detect →"}
+                  </button>
+                </div>
+
+                {/* Quick Topic Chips */}
+                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                  <span className="text-[10px] text-slate-400">Quick Topics:</span>
+                  {[
+                    { label: "🚧 Road / Potholes", topic: "village road repair tender delay" },
+                    { label: "💧 Drinking Water", topic: "water pipeline and tanki connection" },
+                    { label: "🌾 Gram Panchayat", topic: "panchayat development funds and MGNREGA" },
+                    { label: "🏥 PHC Hospital", topic: "doctor duty roster and medicine availability" },
+                    { label: "🏫 School", topic: "mid day meal and teacher vacancy" },
+                    { label: "🍚 Ration / PDS", topic: "ration card grain distribution" },
+                  ].map((chip) => (
+                    <button
+                      key={chip.label}
+                      type="button"
+                      onClick={() => {
+                        setRoutingTopic(chip.topic);
+                        handleAutoRoute(chip.topic);
+                      }}
+                      className="px-2 py-0.5 rounded-lg bg-white/5 hover:bg-white/10 text-purple-200 text-[10px] border border-white/10 transition cursor-pointer"
+                    >
+                      {chip.label}
+                    </button>
+                  ))}
+                </div>
+
+                {/* Routing Result Banner */}
+                {aiRoutingResult?.primary && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-1.5"
+                  >
+                    <div className="flex items-center justify-between">
+                      <span className="font-bold text-emerald-300 flex items-center gap-1.5">
+                        <span>✓ Mapped to {aiRoutingResult.primary.name}</span>
+                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/30">
+                          {aiRoutingResult.primary.confidence} Match
+                        </span>
+                      </span>
+                      <span className="text-[11px] text-emerald-400 font-mono font-semibold">
+                        Avg: {aiRoutingResult.primary.avgResponseDays} Days
+                      </span>
+                    </div>
+
+                    <div className="text-[11px] text-slate-300 flex flex-wrap gap-x-4 gap-y-1">
+                      <span><strong>Designated PIO:</strong> {aiRoutingResult.primary.pioName}</span>
+                      <span><strong>Nodal Office:</strong> {aiRoutingResult.primary.nodalOffice}</span>
+                    </div>
+
+                    {aiRoutingResult.secondary && (
+                      <p className="text-[10px] text-slate-400 border-t border-emerald-500/20 pt-1 mt-1">
+                        🔄 <em>Secondary Jurisdiction:</em> {aiRoutingResult.secondary.name} ({aiRoutingResult.secondary.confidence} match)
+                      </p>
+                    )}
+                  </motion.div>
+                )}
               </div>
 
               {/* Department Selector */}
