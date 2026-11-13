@@ -29,6 +29,10 @@ export default function FileRtiPage() {
   const [isRoutingAi, setIsRoutingAi] = useState(false);
   const [aiRoutingResult, setAiRoutingResult] = useState(null);
 
+  // Section 8 Safety Scanner State (Sprint 2.3)
+  const [section8ScanResult, setSection8ScanResult] = useState(null);
+  const [isScanningSection8, setIsScanningSection8] = useState(false);
+
   // Form State
   const [formData, setFormData] = useState({
     stateOrCentral: "State",
@@ -253,6 +257,35 @@ export default function FileRtiPage() {
       console.warn("Auto routing failed.");
     } finally {
       setIsRoutingAi(false);
+    }
+  };
+
+  // Section 8 Statutory Exemption Scanner (Sprint 2.3)
+  const handleScanSection8 = async (overrideText) => {
+    const textToScan = overrideText || formData.rawCitizenPrompt || formData.title || "";
+    if (!textToScan.trim()) {
+      setErrorMsg("Please enter petition queries to run Section 8 exemption scan.");
+      return;
+    }
+
+    setIsScanningSection8(true);
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/ai/scan-exemptions", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ clauses: textToScan }),
+      });
+
+      const data = await res.json();
+      if (res.ok && data.success && data.scan) {
+        setSection8ScanResult(data.scan);
+      }
+    } catch {
+      console.warn("Section 8 scan failed.");
+    } finally {
+      setIsScanningSection8(false);
     }
   };
 
@@ -898,9 +931,73 @@ export default function FileRtiPage() {
                   onChange={(e) => setFormData({ ...formData, rawCitizenPrompt: e.target.value })}
                   className="w-full p-3.5 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 leading-relaxed font-sans"
                 />
-                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                  💡 Tip: Factual records (Sanction orders, bills, muster rolls, inspection reports) maangne se RTI reject nahi hoti.
-                </p>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-2">
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    💡 Tip: Factual records (Sanction orders, bills, muster rolls, inspection reports) maangne se RTI reject nahi hoti.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => handleScanSection8()}
+                    disabled={isScanningSection8}
+                    className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer disabled:opacity-50"
+                  >
+                    <span>🛡️</span>
+                    <span>{isScanningSection8 ? "Scanning Exemptions..." : "Scan Section 8 Compliance"}</span>
+                  </button>
+                </div>
+
+                {/* Section 8 Scanner Result Card (Sprint 2.3) */}
+                {section8ScanResult && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 5 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`mt-3 p-4 rounded-2xl border text-xs space-y-2 ${
+                      section8ScanResult.overallStatus === "SAFE"
+                        ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-800 dark:text-emerald-300"
+                        : section8ScanResult.overallStatus === "CAUTION"
+                        ? "bg-amber-500/10 border-amber-500/30 text-amber-800 dark:text-amber-300"
+                        : "bg-rose-500/10 border-rose-500/30 text-rose-800 dark:text-rose-300"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-sm">
+                          {section8ScanResult.overallStatus === "SAFE"
+                            ? "✓ Section 8 Safety Verified (Non-Exempt)"
+                            : section8ScanResult.overallStatus === "CAUTION"
+                            ? "⚠️ Section 8 Cautionary Touchpoint"
+                            : "🚫 Section 8 Statutory Exemption Risk"}
+                        </span>
+                        <span className="px-2 py-0.2 rounded-full bg-white/20 text-[10px] font-mono font-bold">
+                          {section8ScanResult.confidenceScore} Accuracy
+                        </span>
+                      </div>
+                      <span className="text-[11px] font-semibold">
+                        Risk Level: {section8ScanResult.riskLevel}
+                      </span>
+                    </div>
+
+                    <p className="text-[11px] leading-relaxed">
+                      {section8ScanResult.summary}
+                    </p>
+
+                    {section8ScanResult.touchpoints?.map((tp, idx) => (
+                      <div
+                        key={idx}
+                        className="p-3 rounded-xl bg-black/20 border border-white/10 space-y-1 text-[11px]"
+                      >
+                        <div className="flex items-center justify-between font-bold">
+                          <span>{tp.section}: {tp.title}</span>
+                          <span className="text-[10px] uppercase text-rose-400">{tp.severity} Severity</span>
+                        </div>
+                        <p className="text-slate-300">{tp.advice}</p>
+                        <p className="text-emerald-300">
+                          <strong>Recommended Legal Remedy:</strong> {tp.remedy}
+                        </p>
+                      </div>
+                    ))}
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           )}
