@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,11 +9,24 @@ import {
   setNotificationDropdown,
 } from "@/redux/slices/uiSlice";
 import {
+  setNotifications,
   markAsRead,
   markAllAsRead,
   dismissNotification,
   setNotificationFilter,
 } from "@/redux/slices/notificationSlice";
+
+function timeAgo(dateString) {
+  if (!dateString) return "Just now";
+  const diff = Math.max(0, Date.now() - new Date(dateString).getTime());
+  const minutes = Math.floor(diff / 60000);
+  if (minutes < 1) return "Just now";
+  if (minutes < 60) return `${minutes}m ago`;
+  const hours = Math.floor(minutes / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
 
 export default function NotificationDropdown() {
   const dispatch = useDispatch();
@@ -20,6 +34,81 @@ export default function NotificationDropdown() {
   const { notifications, unreadCount, filter } = useSelector(
     (state) => state.notifications
   );
+
+  // Sync live notifications from Supabase API on mount
+  useEffect(() => {
+    let isMounted = true;
+    async function fetchLiveNotifications() {
+      try {
+        const res = await fetch("/api/notifications");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && Array.isArray(data.notifications) && data.notifications.length > 0) {
+            const mapped = data.notifications.map((n) => ({
+              id: n.id,
+              title: n.title,
+              message: n.message,
+              category:
+                n.type === "CLOCK_WARNING"
+                  ? "Statutory Alert"
+                  : n.type === "RESPONSE"
+                  ? "Response Ready"
+                  : n.type === "ASSIGNMENT"
+                  ? "PIO Assigned"
+                  : "System Notice",
+              type:
+                n.type === "CLOCK_WARNING"
+                  ? "urgent"
+                  : n.type === "RESPONSE"
+                  ? "milestone"
+                  : "update",
+              appId: n.link?.includes("id=") ? n.link.split("id=")[1] : "SARAL",
+              timeAgo: timeAgo(n.createdAt),
+              unread: !n.isRead,
+              actionLabel: n.type === "RESPONSE" ? "Download Response" : "Track Progress",
+              actionLink: n.link || "/dashboard",
+            }));
+            if (isMounted) {
+              dispatch(setNotifications(mapped));
+            }
+          }
+        }
+      } catch (err) {
+        console.warn("Notifications offline fallback:", err);
+      }
+    }
+
+    fetchLiveNotifications();
+    return () => {
+      isMounted = false;
+    };
+  }, [dispatch]);
+
+  const handleMarkAsRead = async (id) => {
+    dispatch(markAsRead(id));
+    try {
+      await fetch("/api/notifications", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ notificationId: id }),
+      });
+    } catch (err) {
+      console.warn("Mark read network error:", err);
+    }
+  };
+
+  const handleMarkAllAsRead = async () => {
+    dispatch(markAllAsRead());
+    try {
+      await fetch("/api/notifications", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ markAll: true }),
+      });
+    } catch (err) {
+      console.warn("Mark all read network error:", err);
+    }
+  };
 
   const displayedNotifications =
     filter === "unread"
@@ -94,7 +183,7 @@ export default function NotificationDropdown() {
                   {unreadCount > 0 && (
                     <button
                       type="button"
-                      onClick={() => dispatch(markAllAsRead())}
+                      onClick={handleMarkAllAsRead}
                       className="text-[11px] text-purple-600 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 font-medium hover:underline cursor-pointer"
                     >
                       Mark all read
@@ -221,7 +310,7 @@ export default function NotificationDropdown() {
                         <Link
                           href={notif.actionLink}
                           onClick={() => {
-                            dispatch(markAsRead(notif.id));
+                            handleMarkAsRead(notif.id);
                             dispatch(setNotificationDropdown(false));
                           }}
                           className="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-100 dark:bg-purple-900/40 hover:bg-purple-200 dark:hover:bg-purple-800/60 px-2.5 py-1 rounded-lg border border-purple-300 dark:border-purple-500/30 transition"
@@ -235,7 +324,7 @@ export default function NotificationDropdown() {
                         {notif.unread && (
                           <button
                             type="button"
-                            onClick={() => dispatch(markAsRead(notif.id))}
+                            onClick={() => handleMarkAsRead(notif.id)}
                             className="text-[10px] text-slate-400 hover:text-slate-700 dark:hover:text-white transition cursor-pointer"
                           >
                             Mark as read

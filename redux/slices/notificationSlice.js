@@ -11,6 +11,10 @@ export const notificationSlice = createSlice({
   name: "notifications",
   initialState,
   reducers: {
+    setNotifications: (state, action) => {
+      state.notifications = action.payload;
+      state.unreadCount = action.payload.filter((n) => n.unread).length;
+    },
     markAsRead: (state, action) => {
       const id = action.payload;
       const notif = state.notifications.find((n) => n.id === id);
@@ -40,6 +44,7 @@ export const notificationSlice = createSlice({
 });
 
 export const {
+  setNotifications,
   markAsRead,
   markAllAsRead,
   dismissNotification,
