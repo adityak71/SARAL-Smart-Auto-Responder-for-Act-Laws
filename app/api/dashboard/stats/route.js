@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 import { getAuthSession } from "@/lib/auth";
 import {
   getCitizenDashboardStats,
@@ -15,11 +16,21 @@ export async function GET(request) {
     let stats = {};
 
     if (requestedRole === "OFFICER") {
-      stats = await getOfficerDashboardStats(session?.userId);
+      let userId = session?.userId;
+      if (!userId) {
+        const demoOfficer = await prisma.user.findFirst({ where: { role: "OFFICER" } });
+        userId = demoOfficer?.id;
+      }
+      stats = await getOfficerDashboardStats(userId);
     } else if (requestedRole === "ADMIN") {
       stats = await getAdminDashboardStats();
     } else {
-      stats = await getCitizenDashboardStats(session?.userId);
+      let userId = session?.userId;
+      if (!userId) {
+        const demoCitizen = await prisma.user.findFirst({ where: { role: "CITIZEN" } });
+        userId = demoCitizen?.id;
+      }
+      stats = await getCitizenDashboardStats(userId);
     }
 
     return NextResponse.json({

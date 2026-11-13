@@ -150,17 +150,17 @@ async function main() {
     },
   });
 
-  // 5. Sample RTI Application: SARAL-2026-00124
-  const dateFiled = new Date();
-  dateFiled.setDate(dateFiled.getDate() - 18); // 18 days ago
-  const deadline = new Date(dateFiled);
-  deadline.setDate(deadline.getDate() + 30); // 30-day statutory window
+  // 5. Sample RTI Application 1: SARAL-2026-00124 (Under Review)
+  const dateFiled1 = new Date();
+  dateFiled1.setDate(dateFiled1.getDate() - 18); // 18 days ago
+  const deadline1 = new Date(dateFiled1);
+  deadline1.setDate(deadline1.getDate() + 30); // 30-day statutory window
 
   const rtiApp = await prisma.rtiApplication.create({
     data: {
       applicationNumber: "SARAL-2026-00124",
       citizenId: citizenProfile.id,
-      departmentId: ruralDept.id,
+      departmentId: pwdDept.id,
       assignedOfficerId: officerProfile.id,
       title: "Gram Panchayat Road Construction & Contractor Budget Allocation",
       subject: "Pothole & Road Budget Audit",
@@ -172,9 +172,9 @@ async function main() {
         "Itemized copy of Measurement Book (MB) recordings and Running Account (RA) bills cleared by the Sub-Divisional Officer as of September 2026.",
         "Reasons recorded in official file notes for the 8-month delay beyond the statutory contract period under General Financial Rules (GFR).",
       ]),
-      targetAuthority: "Public Works Department (PWD) / Zila Parishad",
-      dateFiled: dateFiled,
-      statutoryDeadline: deadline,
+      targetAuthority: "Public Works Department (PWD) Division II",
+      dateFiled: dateFiled1,
+      statutoryDeadline: deadline1,
       isLifeOrLiberty: false,
       currentStage: 4, // In Review
       status: "UNDER_REVIEW",
@@ -188,6 +188,95 @@ async function main() {
         "Measurement_Book_Vol_IV_P38.pdf",
         "Contractor_Agreement_ShreeRam_Infra.pdf",
       ]),
+    },
+  });
+
+  // Sample RTI Application 2: SARAL-2026-00089 (Resolved / Response Dispatched)
+  const dateFiled2 = new Date();
+  dateFiled2.setDate(dateFiled2.getDate() - 25);
+  const deadline2 = new Date(dateFiled2);
+  deadline2.setDate(deadline2.getDate() + 30);
+  const dispatchedAt2 = new Date();
+  dispatchedAt2.setDate(dispatchedAt2.getDate() - 3);
+
+  const rtiApp2 = await prisma.rtiApplication.create({
+    data: {
+      applicationNumber: "SARAL-2026-00089",
+      citizenId: citizenProfile.id,
+      departmentId: pwdDept.id,
+      assignedOfficerId: officerProfile.id,
+      title: "Government Primary School Drinking Water Pipeline Sanction",
+      subject: "Safe Drinking Water Infrastructure",
+      rawCitizenPrompt:
+        "School mein safe drinking water facility kab lagai jayegi aur budget kitna allocated tha?",
+      structuredClauses: JSON.stringify([
+        "Copy of sanction order for RO water filtration unit at Government Primary School Pipariya.",
+        "Expenditure voucher details and vendor inspection certificate.",
+      ]),
+      targetAuthority: "Public Works Department (Water Works Section)",
+      dateFiled: dateFiled2,
+      statutoryDeadline: deadline2,
+      responseDispatchedAt: dispatchedAt2,
+      isLifeOrLiberty: false,
+      currentStage: 5,
+      status: "RESPONSE_DISPATCHED",
+      feeStatus: "PAID",
+      feeAmount: 10.0,
+      paymentTxnId: "TXN-BHARATKOSH-87123491",
+      officialResponse:
+        "Certified copy of Work Completion Certificate No. WCC/2026/89 along with water quality test report (BIS 10500:2012 certified) enclosed. Project completed on 15 Oct 2026 with total outlay of ₹3,45,000.",
+      aiDraftSummary:
+        "Project completed and inspected. Total sanctioned outlay ₹3,45,000 fully verified.",
+      suggestedSources: JSON.stringify(["Water_Unit_Completion_Cert.pdf"]),
+    },
+  });
+
+  // Sample RTI Application 3: SARAL-2026-00042 (Section 19 First Appeal Pending)
+  const dateFiled3 = new Date();
+  dateFiled3.setDate(dateFiled3.getDate() - 35); // 35 days ago (Overdue 30 days)
+  const deadline3 = new Date(dateFiled3);
+  deadline3.setDate(deadline3.getDate() + 30);
+
+  const rtiApp3 = await prisma.rtiApplication.create({
+    data: {
+      applicationNumber: "SARAL-2026-00042",
+      citizenId: citizenProfile.id,
+      departmentId: ruralDept.id,
+      title: "Community Health Center Medicine Stock & Doctor Duty Rosters",
+      subject: "Public Healthcare Accountability",
+      rawCitizenPrompt:
+        "CHC Pipariya mein essential medicines available kyun nahi hain aur doctor roster details di jayein.",
+      structuredClauses: JSON.stringify([
+        "Certified stock ledger copy for essential life-saving drugs at CHC Pipariya for June-August 2026.",
+        "Biometric attendance log of designated Medical Officers.",
+      ]),
+      targetAuthority: "Chief Medical Officer Directorate",
+      dateFiled: dateFiled3,
+      statutoryDeadline: deadline3,
+      isLifeOrLiberty: false,
+      currentStage: 4,
+      status: "FIRST_APPEAL_PENDING",
+      feeStatus: "PAID",
+      feeAmount: 10.0,
+      paymentTxnId: "TXN-BHARATKOSH-65129840",
+    },
+  });
+
+  // First Appeal for Application 3
+  const appealDeadline = new Date();
+  appealDeadline.setDate(appealDeadline.getDate() + 30); // 30-day first appeal disposal clock
+
+  await prisma.firstAppeal.create({
+    data: {
+      appealNumber: "APPEAL-2026-00019",
+      applicationId: rtiApp3.id,
+      citizenId: citizenProfile.id,
+      groundsOfAppeal:
+        "The 30-day statutory period mandated under Section 7(1) of the RTI Act 2005 expired without any formal response or disclosure from the designated Public Information Officer.",
+      appealDeadline: appealDeadline,
+      status: "PENDING",
+      orderSummary:
+        "First Appellate Authority notice issued to PIO to produce records within 15 days.",
     },
   });
 
