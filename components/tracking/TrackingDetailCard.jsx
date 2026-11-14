@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
 
 export default function TrackingDetailCard({ application }) {
   const [downloadSuccess, setDownloadSuccess] = useState(false);
+  const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
 
   if (!application) return null;
 
@@ -30,17 +32,29 @@ export default function TrackingDetailCard({ application }) {
           </p>
         </div>
 
-        <span
-          className={`px-3 py-1 rounded-full text-xs font-bold w-fit shrink-0 ${
-            application.status === "completed"
-              ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30"
-              : application.status === "appeal_open"
-              ? "bg-rose-500/15 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
-              : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30"
-          }`}
-        >
-          {application.statusLabel}
-        </span>
+        <div className="flex items-center gap-2 shrink-0">
+          {(application.status === "completed" || application.officialResponse) && (
+            <button
+              type="button"
+              onClick={() => setIsCertifiedModalOpen(true)}
+              className="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>📜 Certified Response PDF</span>
+            </button>
+          )}
+
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${
+              application.status === "completed"
+                ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30"
+                : application.status === "appeal_open"
+                ? "bg-rose-500/15 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
+                : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30"
+            }`}
+          >
+            {application.statusLabel}
+          </span>
+        </div>
       </div>
 
       {/* Citizen Raw Speech / Inquiry */}
@@ -122,6 +136,14 @@ export default function TrackingDetailCard({ application }) {
           </div>
         )}
       </div>
+
+      {/* Sovereign Certified Response Modal */}
+      <CertifiedResponseModal
+        isOpen={isCertifiedModalOpen}
+        onClose={() => setIsCertifiedModalOpen(false)}
+        application={application}
+        officialResponse={application.officialResponse}
+      />
     </div>
   );
 }
