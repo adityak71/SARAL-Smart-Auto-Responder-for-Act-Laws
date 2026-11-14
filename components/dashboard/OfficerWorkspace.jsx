@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { officerDashboardStats, officerReviewQueue } from "@/data/dashboardData";
+import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
+import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
 
 export default function OfficerWorkspace() {
   const [stats, setStats] = useState(officerDashboardStats);
@@ -13,7 +15,36 @@ export default function OfficerWorkspace() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [actionSuccessMsg, setActionSuccessMsg] = useState("");
 
-  // Section 6(3) Transfer Modal State
+  // Response Studio Multi-Tab State
+  const [studioTab, setStudioTab] = useState("memorandum"); // "memorandum" | "records" | "exemptions" | "precedents"
+  const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
+  const [faaDesignation, setFaaDesignation] = useState("Chief Engineer & First Appellate Authority (FAA)");
+  const [faaOffice, setFaaOffice] = useState("Office of the Chief Engineer, PWD Zone 1, Capital Complex, New Delhi");
+  const [exemptionReason, setExemptionReason] = useState("");
+  const [attachedRecords, setAttachedRecords] = useState([
+    { id: "rec-1", name: "Measurement_Book_Vol_IV_Certified.pdf", size: "4.2 MB", included: true },
+    { id: "rec-2", name: "Sanction_Order_PWD_2025_381.pdf", size: "1.8 MB", included: true },
+    { id: "rec-3", name: "Running_Account_Bill_Summary.pdf", size: "850 KB", included: true },
+  ]);
+
+  // Precedents state
+  const [precedents, setPrecedents] = useState([
+    {
+      caseTitle: "CBSE & Anr. v. Aditya Bandopadhyay & Ors.",
+      citation: "(2011) 8 SCC 497",
+      ratio: "Fiduciary relationship does not bar disclosure of evaluated answers / public inspection documents.",
+    },
+    {
+      caseTitle: "Central Board of Direct Taxes v. Subhash Chandra Agarwal",
+      citation: "CIC/AT/A/2006/00045",
+      ratio: "Sanctioned budgets, tender awards, and government asset measurements are strictly public domain.",
+    },
+    {
+      caseTitle: "Reserve Bank of India v. Jayantilal N. Mistry",
+      citation: "(2016) 3 SCC 525",
+      ratio: "Economic and public interest override generic commercial secrecy claims when public funds are involved.",
+    },
+  ]);
   const [showTransferModal, setShowTransferModal] = useState(false);
   const [departments, setDepartments] = useState([]);
   const [selectedDeptId, setSelectedDeptId] = useState("");
@@ -166,10 +197,12 @@ export default function OfficerWorkspace() {
       if (res.ok) {
         setApprovedCaseIds((prev) => [...prev, selectedCase.id]);
         setActionSuccessMsg("✓ Official RTI Response Digitally Signed with Class 3 PKI & Dispatched to Citizen!");
+        setIsCertifiedModalOpen(true);
       } else {
         // Fallback simulate local dispatch
         setApprovedCaseIds((prev) => [...prev, selectedCase.id]);
         setActionSuccessMsg("✓ Response Dispatched Successfully (Local Fallback)");
+        setIsCertifiedModalOpen(true);
       }
     } catch (err) {
       console.warn("Dispatched with local confirmation:", err);
@@ -216,6 +249,29 @@ export default function OfficerWorkspace() {
   };
 
   const isApproved = approvedCaseIds.includes(selectedCase?.id);
+
+  // Quick Clause Insertion Helpers
+  const handleInsertClause = (clause) => {
+    setDraftText((prev) => (prev ? `${prev}\n\n${clause}` : clause));
+  };
+
+  const handleInsertPrecedent = (prec) => {
+    const citationText = `[Legal Precedent Cited: In ${prec.caseTitle} (${prec.citation}), it is settled that: "${prec.ratio}"]`;
+    handleInsertClause(citationText);
+    setStudioTab("memorandum");
+  };
+
+  const handleInsertAppellateNotice = () => {
+    const notice = `FIRST APPELLATE AUTHORITY (FAA) MANDATORY NOTICE (Section 7(8) RTI Act 2005):\nIf aggrieved by this decision or partial redaction, an appeal may be preferred under Section 19(1) of the RTI Act within thirty (30) days from receipt to:\nDesignation: ${faaDesignation}\nOffice: ${faaOffice}`;
+    handleInsertClause(notice);
+    setStudioTab("memorandum");
+  };
+
+  const handleToggleRecord = (recId) => {
+    setAttachedRecords((prev) =>
+      prev.map((r) => (r.id === recId ? { ...r, included: !r.included } : r))
+    );
+  };
 
   return (
     <div className="space-y-6">
@@ -320,8 +376,8 @@ export default function OfficerWorkspace() {
           )}
         </div>
 
-        {/* Right Officer Verification & AI Draft Editor (7 Cols) */}
-        <div className="lg:col-span-7 bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
+        {/* Right Officer Verification & Multi-Tab AI Response Studio (7 Cols) */}
+        <div className="lg:col-span-7 bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
           {actionSuccessMsg && (
             <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
               <span>{actionSuccessMsg}</span>
@@ -335,70 +391,317 @@ export default function OfficerWorkspace() {
             </div>
           )}
 
-          <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
+          {/* Dossier Header with Statutory Clock */}
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-4">
             <div>
-              <span className="text-xs font-mono text-purple-700 dark:text-purple-300 font-bold">
-                {selectedCase?.id || "SARAL-2026-00124"}
-              </span>
-              <h3 className="text-base font-bold text-slate-900 dark:text-white mt-0.5">
+              <div className="flex items-center gap-2">
+                <span className="text-xs font-mono text-purple-700 dark:text-purple-300 font-bold">
+                  {selectedCase?.id || "SARAL-2026-00124"}
+                </span>
+                <span className="px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-[10px] font-bold">
+                  {selectedCase?.aiMatchScore || "98.4% Match"}
+                </span>
+              </div>
+              <h3 className="text-base font-bold text-slate-900 dark:text-white mt-1">
                 {selectedCase?.subject || "Pending Case Examination"}
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
-                Citizen: {selectedCase?.citizen || "Rahul Sharma"} • Target: {selectedCase?.suggestedDepartment || "Public Works Department"}
+                Citizen: <strong>{selectedCase?.citizen || "Rahul Sharma"}</strong> • Authority: {selectedCase?.suggestedDepartment || "Public Works Department"}
               </p>
             </div>
 
-            <span className="px-2.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-bold">
-              {selectedCase?.aiMatchScore || "98.4% Match"}
-            </span>
+            {/* Live Statutory Compliance Countdown */}
+            <div className="sm:text-right flex flex-col sm:items-end">
+              <span className="text-[10px] text-slate-400 font-mono block">STATUTORY CLOCK:</span>
+              <StatutoryCountdownClock
+                dateFiled={selectedCase?.dateFiled || Date.now() - 14 * 86400000}
+                statutoryDeadline={Date.now() + (selectedCase?.daysRemaining || 16) * 86400000}
+                status={isApproved ? "RESPONSE_DISPATCHED" : "UNDER_REVIEW"}
+                size="compact"
+              />
+            </div>
           </div>
 
-          {/* AI Pre-Retrieved Source Files */}
-          <div className="space-y-1.5 text-xs">
-            <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
-              Pre-Retrieved Public Records & Gazettes:
-            </span>
-            <div className="flex flex-wrap gap-2">
-              {(selectedCase?.suggestedSources || ["PWD_Works_Register.pdf", "Measurement_Book_Vol_IV.pdf"]).map((source) => (
-                <span
-                  key={source}
-                  className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-purple-800 dark:text-purple-200 text-xs font-mono"
-                >
-                  📄 {source}
+          {/* Response Studio Tab Navigation */}
+          <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 text-xs overflow-x-auto">
+            <button
+              type="button"
+              onClick={() => setStudioTab("memorandum")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                studioTab === "memorandum"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <span>📝</span>
+              <span>Statutory Memorandum</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setStudioTab("records")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                studioTab === "records"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <span>📁</span>
+              <span>Attached Registers ({attachedRecords.filter((r) => r.included).length})</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setStudioTab("exemptions")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                studioTab === "exemptions"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <span>⚖️</span>
+              <span>Section 8 & FAA Notice</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setStudioTab("precedents")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                studioTab === "precedents"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+              }`}
+            >
+              <span>🏛️</span>
+              <span>CIC Precedents (RAG)</span>
+            </button>
+          </div>
+
+          {/* TAB 1: Statutory Memorandum */}
+          {studioTab === "memorandum" && (
+            <div className="space-y-3 text-xs">
+              {/* Quick Snippet Injectors */}
+              <div className="flex items-center justify-between gap-2 flex-wrap">
+                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                  Quick Legal Snippets:
                 </span>
-              ))}
-            </div>
-          </div>
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleInsertClause(
+                        "Certified copy of Sanctioned Administrative & Financial Approval (A&F Order No. PWD/2025/381) is hereby enclosed."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                  >
+                    + A&amp;F Sanction
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleInsertClause(
+                        "On-site technical inspection was conducted by the Executive Engineer on 15 Oct 2026. The bituminous road top was verified as per IRC standards."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                  >
+                    + Site Inspection
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      handleInsertClause(
+                        "Measurement Book Vol. IV pages 42-49 recording exact chainage dimensions have been extracted and verified under Section 2(j)(ii)."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                  >
+                    + MB Vol IV Pages
+                  </button>
+                </div>
+              </div>
 
-          {/* AI Draft Response Editor */}
-          <div className="space-y-2 text-xs">
-            <div className="flex items-center justify-between">
-              <span className="font-bold text-slate-900 dark:text-white text-xs">
-                AI Suggested Response Memorandum (Section 7 Compliant):
-              </span>
-              <span className="text-[10px] text-purple-700 dark:text-purple-300 font-semibold">
-                Designated PIO can edit before digital seal
-              </span>
-            </div>
+              {/* Memorandum Draft Textarea */}
+              <div className="space-y-1.5">
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-900 dark:text-white">
+                    Official Response Text (Section 7 Compliant):
+                  </label>
+                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-mono">
+                    Ref: MEMO/{selectedCase?.id || "SARAL-001"}/PIO-CERT
+                  </span>
+                </div>
+                <textarea
+                  rows={6}
+                  value={draftText}
+                  onChange={(e) => setDraftText(e.target.value)}
+                  disabled={isApproved}
+                  placeholder="Draft official statutory response here..."
+                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500 resize-none font-sans"
+                />
+              </div>
 
-            <textarea
-              rows={5}
-              value={draftText}
-              onChange={(e) => setDraftText(e.target.value)}
-              disabled={isApproved}
-              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500 resize-none font-sans"
-            />
-          </div>
+              {/* Pre-Retrieved Source Files */}
+              <div className="space-y-1.5">
+                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                  Referenced Departmental Records:
+                </span>
+                <div className="flex flex-wrap gap-2">
+                  {(selectedCase?.suggestedSources || ["PWD_Works_Register.pdf", "Measurement_Book_Vol_IV.pdf"]).map((source) => (
+                    <span
+                      key={source}
+                      className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-purple-800 dark:text-purple-200 text-xs font-mono"
+                    >
+                      📄 {source}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* TAB 2: Attached Registers */}
+          {studioTab === "records" && (
+            <div className="space-y-3 text-xs">
+              <p className="text-slate-500 dark:text-slate-400">
+                Select departmental files to bind into the digitally certified PDF response package under Section 2(j)(ii):
+              </p>
+
+              <div className="space-y-2">
+                {attachedRecords.map((rec) => (
+                  <div
+                    key={rec.id}
+                    onClick={() => handleToggleRecord(rec.id)}
+                    className={`p-3 rounded-2xl border transition flex items-center justify-between cursor-pointer ${
+                      rec.included
+                        ? "bg-purple-500/10 border-purple-500/30 text-slate-900 dark:text-white"
+                        : "bg-slate-50 dark:bg-white/[0.02] border-slate-200 dark:border-white/5 text-slate-500 opacity-60"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <input
+                        type="checkbox"
+                        checked={rec.included}
+                        onChange={() => {}}
+                        className="w-4 h-4 text-purple-600 rounded cursor-pointer"
+                      />
+                      <div>
+                        <div className="font-semibold text-xs font-mono">{rec.name}</div>
+                        <div className="text-[11px] text-slate-400">
+                          {rec.size} • Public Record Register
+                        </div>
+                      </div>
+                    </div>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                      Certified
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* TAB 3: Section 8 Exemptions & FAA Notice */}
+          {studioTab === "exemptions" && (
+            <div className="space-y-3 text-xs">
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs leading-relaxed">
+                ⚖ <strong>Section 7(8) RTI Act Mandate:</strong> When any information is refused or redacted under Section 8(1), the PIO <em>must</em> state the reasons and furnish particulars of the First Appellate Authority (FAA) with the 30-day limitation window.
+              </div>
+
+              <div>
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Designation of First Appellate Authority (FAA):
+                </label>
+                <input
+                  type="text"
+                  value={faaDesignation}
+                  onChange={(e) => setFaaDesignation(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
+                />
+              </div>
+
+              <div>
+                <label className="block font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                  Appellate Office Postal &amp; Jurisdictional Address:
+                </label>
+                <input
+                  type="text"
+                  value={faaOffice}
+                  onChange={(e) => setFaaOffice(e.target.value)}
+                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
+                />
+              </div>
+
+              <button
+                type="button"
+                onClick={handleInsertAppellateNotice}
+                className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+              >
+                <span>➕</span>
+                <span>Inject Section 7(8) Appellate Notice into Memorandum</span>
+              </button>
+            </div>
+          )}
+
+          {/* TAB 4: CIC Landmark Precedents */}
+          {studioTab === "precedents" && (
+            <div className="space-y-3 text-xs">
+              <p className="text-slate-500 dark:text-slate-400">
+                Landmark Central Information Commission &amp; Supreme Court decisions relevant to public works, tenders, and governance:
+              </p>
+
+              <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                {precedents.map((prec) => (
+                  <div
+                    key={prec.citation}
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5"
+                  >
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <h5 className="font-bold text-slate-900 dark:text-white text-xs">
+                          {prec.caseTitle}
+                        </h5>
+                        <span className="font-mono text-[10px] text-purple-700 dark:text-purple-300">
+                          {prec.citation}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => handleInsertPrecedent(prec)}
+                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-[11px] font-bold transition cursor-pointer whitespace-nowrap"
+                      >
+                        + Cite in Memo
+                      </button>
+                    </div>
+                    <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                      &ldquo;{prec.ratio}&rdquo;
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
 
           {/* Officer Action Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-white/10">
             <span className="text-[11px] text-slate-500 dark:text-slate-400">
               {isApproved
-                ? "✓ Digitally signed with Officer Class 3 PKI Certificate"
-                : "Certified response will be dispatched directly to Citizen DigiLocker."}
+                ? "✓ Digitally signed with Class 3 PKI & Dispatched"
+                : "Certified response will be sealed and synchronized with DigiLocker."}
             </span>
 
             <div className="flex items-center gap-2 w-full sm:w-auto">
+              {/* Preview Certified PDF Button */}
+              <button
+                type="button"
+                onClick={() => setIsCertifiedModalOpen(true)}
+                className="px-3.5 py-2.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-500/30 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+              >
+                <span>🖨️</span>
+                <span>Preview Certified PDF</span>
+              </button>
+
               {!isApproved ? (
                 <>
                   <button
@@ -413,27 +716,35 @@ export default function OfficerWorkspace() {
                         <span>Applying PKI Seal...</span>
                       </>
                     ) : (
-                      <span>Approve & Apply Digital Seal</span>
+                      <span>Approve &amp; Apply Digital Seal</span>
                     )}
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setShowTransferModal(true)}
-                    className="px-3.5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-xs font-semibold transition cursor-pointer whitespace-nowrap"
+                    className="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-xs font-semibold transition cursor-pointer whitespace-nowrap"
                   >
                     Section 6(3) Transfer
                   </button>
                 </>
               ) : (
                 <span className="px-4 py-2 rounded-xl bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
-                  ✓ Response Dispatched Successfully
+                  ✓ Dispatched Successfully
                 </span>
               )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Certified Sovereign Response Modal */}
+      <CertifiedResponseModal
+        isOpen={isCertifiedModalOpen}
+        onClose={() => setIsCertifiedModalOpen(false)}
+        application={selectedCase}
+        officialResponse={draftText}
+      />
 
       {/* Section 6(3) Transfer Modal */}
       {showTransferModal && (
