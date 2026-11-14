@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
+import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
 
 export default function FileRtiPage() {
   const router = useRouter();
@@ -1452,12 +1453,10 @@ export default function FileRtiPage() {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    alert(`Downloading Section 6(1) Acknowledgement Receipt: ${submittedApplication.applicationNumber}.pdf`)
-                  }
-                  className="px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white border border-slate-200 dark:border-white/10 font-semibold text-xs sm:text-sm transition cursor-pointer"
+                  onClick={() => downloadRtiReceipt(submittedApplication)}
+                  className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
                 >
-                  📄 Download Receipt
+                  <span>📄 Download Statutory PDF Receipt</span>
                 </button>
 
                 <Link

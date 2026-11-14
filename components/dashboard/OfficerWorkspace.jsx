@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { officerDashboardStats, officerReviewQueue } from "@/data/dashboardData";
 import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
+import { downloadPublicRecordDoc, downloadCertifiedResponse } from "@/lib/services/pdfGenerator";
 
 export default function OfficerWorkspace() {
   const [stats, setStats] = useState(officerDashboardStats);
@@ -593,9 +594,21 @@ export default function OfficerWorkspace() {
                         </div>
                       </div>
                     </div>
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
-                      Certified
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          downloadPublicRecordDoc(rec.name, selectedCase);
+                        }}
+                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-[10px] font-bold transition cursor-pointer"
+                      >
+                        📥 Download Extract
+                      </button>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                        Certified
+                      </span>
+                    </div>
                   </div>
                 ))}
               </div>

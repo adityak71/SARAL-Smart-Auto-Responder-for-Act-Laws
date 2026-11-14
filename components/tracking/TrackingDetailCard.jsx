@@ -2,6 +2,11 @@
 
 import { useState } from "react";
 import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
+import {
+  downloadRtiReceipt,
+  downloadCertifiedResponse,
+  downloadPublicRecordDoc,
+} from "@/lib/services/pdfGenerator";
 
 export default function TrackingDetailCard({ application }) {
   const [downloadSuccess, setDownloadSuccess] = useState(false);
@@ -11,6 +16,24 @@ export default function TrackingDetailCard({ application }) {
 
   const handleDownload = (docName) => {
     setDownloadSuccess(docName);
+    try {
+      if (
+        docName.toLowerCase().includes("receipt") ||
+        docName.toLowerCase().includes("acknowledgment") ||
+        docName.toLowerCase().includes("slip")
+      ) {
+        downloadRtiReceipt(application);
+      } else if (
+        docName.toLowerCase().includes("response") ||
+        docName.toLowerCase().includes("memorandum")
+      ) {
+        downloadCertifiedResponse(application, application.officialResponse);
+      } else {
+        downloadPublicRecordDoc(docName, application);
+      }
+    } catch (err) {
+      console.error("PDF Download error:", err);
+    }
     setTimeout(() => {
       setDownloadSuccess(false);
     }, 3500);
@@ -32,14 +55,22 @@ export default function TrackingDetailCard({ application }) {
           </p>
         </div>
 
-        <div className="flex items-center gap-2 shrink-0">
+        <div className="flex items-center gap-2 shrink-0 flex-wrap">
+          <button
+            type="button"
+            onClick={() => downloadRtiReceipt(application)}
+            className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-white/15 transition flex items-center gap-1.5 cursor-pointer"
+          >
+            <span>📄 Receipt PDF</span>
+          </button>
+
           {(application.status === "completed" || application.officialResponse) && (
             <button
               type="button"
               onClick={() => setIsCertifiedModalOpen(true)}
               className="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
             >
-              <span>📜 Certified Response PDF</span>
+              <span>📜 Certified Response</span>
             </button>
           )}
 

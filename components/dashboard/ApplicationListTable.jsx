@@ -5,6 +5,7 @@ import Link from "next/link";
 import { mockRtiApplications } from "@/data/trackingData";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
 import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
+import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
 
 export default function ApplicationListTable() {
   const [filter, setFilter] = useState("all");
@@ -300,7 +301,17 @@ export default function ApplicationListTable() {
                   </td>
 
                   <td className="py-4 text-right whitespace-nowrap">
-                    <div className="inline-flex items-center gap-1.5 justify-end">
+                    <div className="inline-flex items-center gap-1.5 justify-end flex-wrap">
+                      {/* Statutory Receipt Download */}
+                      <button
+                        type="button"
+                        onClick={() => downloadRtiReceipt(app)}
+                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 text-[11px] font-semibold transition cursor-pointer"
+                        title="Download Official PDF Receipt"
+                      >
+                        <span>📄 Receipt</span>
+                      </button>
+
                       {/* Certified Response Quick View */}
                       {app.isResolved && (
                         <button

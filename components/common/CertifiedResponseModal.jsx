@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { downloadCertifiedResponse } from "@/lib/services/pdfGenerator";
 
 export default function CertifiedResponseModal({ isOpen, onClose, application, officialResponse }) {
   if (!isOpen || !application) return null;
@@ -37,11 +38,17 @@ export default function CertifiedResponseModal({ isOpen, onClose, application, o
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={handlePrint}
+              onClick={() => downloadCertifiedResponse(application, responseText)}
               className="px-4 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
             >
-              <span>🖨️</span>
-              <span>Print / Save PDF</span>
+              <span>📥 Download Certified PDF</span>
+            </button>
+            <button
+              type="button"
+              onClick={handlePrint}
+              className="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
+            >
+              <span>🖨️ Print</span>
             </button>
             <button
               type="button"
