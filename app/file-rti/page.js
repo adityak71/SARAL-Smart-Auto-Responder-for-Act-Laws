@@ -3,14 +3,55 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setCredentials } from "@/redux/slices/authSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
 import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 import DigiLockerModal from "@/components/common/DigiLockerModal";
 
+const INDIAN_STATES = [
+  "Andaman and Nicobar Islands",
+  "Andhra Pradesh",
+  "Arunachal Pradesh",
+  "Assam",
+  "Bihar",
+  "Chandigarh",
+  "Chhattisgarh",
+  "Dadra and Nagar Haveli and Daman and Diu",
+  "Delhi (NCT)",
+  "Goa",
+  "Gujarat",
+  "Haryana",
+  "Himachal Pradesh",
+  "Jammu and Kashmir",
+  "Jharkhand",
+  "Karnataka",
+  "Kerala",
+  "Ladakh",
+  "Lakshadweep",
+  "Madhya Pradesh",
+  "Maharashtra",
+  "Manipur",
+  "Meghalaya",
+  "Mizoram",
+  "Nagaland",
+  "Odisha",
+  "Puducherry",
+  "Punjab",
+  "Rajasthan",
+  "Sikkim",
+  "Tamil Nadu",
+  "Telangana",
+  "Tripura",
+  "Uttar Pradesh",
+  "Uttarakhand",
+  "West Bengal",
+];
+
 export default function FileRtiPage() {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   // Stepper state: 1 to 5, and 6 = Success
@@ -42,9 +83,14 @@ export default function FileRtiPage() {
   const [precedents, setPrecedents] = useState([]);
   const [loadingPrecedents, setLoadingPrecedents] = useState(false);
 
+  // Derive effective user state from profile or manual selection
+  const userProfileState = user?.citizenProfile?.state || "";
+  const activeState = formData.selectedState || userProfileState || "Select State";
+
   // Form State
   const [formData, setFormData] = useState({
     stateOrCentral: "State",
+    selectedState: "",
     departmentId: "",
     targetAuthority: "",
     title: "",
@@ -52,7 +98,7 @@ export default function FileRtiPage() {
     rawCitizenPrompt: "",
     structuredClauses: [],
     yearOrPeriod: "FY 2024-2026",
-    locationDivision: "Pipariya Sub-Division / Hoshangabad",
+    locationDivision: "",
     isLifeOrLiberty: false,
     lifeLibertyJustification: "",
     deliveryMode: "DIGITAL", // "DIGITAL" | "SPEED_POST"
@@ -68,6 +114,38 @@ export default function FileRtiPage() {
       router.push("/login?redirect=/file-rti");
     }
   }, [isAuthenticated, router]);
+
+  // Sync profile state & district into formData
+  useEffect(() => {
+    if (user?.citizenProfile) {
+      const { state, district } = user.citizenProfile;
+      setFormData((prev) => ({
+        ...prev,
+        selectedState: prev.selectedState || state || "",
+        locationDivision:
+          prev.locationDivision ||
+          (district ? (state ? `${district}, ${state}` : `${district} District`) : (state || "")),
+      }));
+    }
+  }, [user]);
+
+  // Fetch fresh profile from API if citizenProfile is not yet loaded in redux
+  useEffect(() => {
+    async function refreshProfile() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.user) {
+            dispatch(setCredentials(data.user));
+          }
+        }
+      } catch (e) {}
+    }
+    if (isAuthenticated && !user?.citizenProfile) {
+      refreshProfile();
+    }
+  }, [isAuthenticated, user?.citizenProfile, dispatch]);
 
   // Fetch Departments from API
   useEffect(() => {
@@ -281,7 +359,7 @@ export default function FileRtiPage() {
         body: JSON.stringify({
           prompt: topic,
           location: formData.locationDivision,
-          stateOrCentral: formData.stateOrCentral,
+          stateOrCentral: formData.stateOrCentral === "State" ? activeState : "Central",
         }),
       });
 
@@ -343,13 +421,15 @@ export default function FileRtiPage() {
         title: formData.title,
         subject: formData.subject || formData.title,
         rawCitizenPrompt: formData.rawCitizenPrompt,
+        location: formData.locationDivision,
+        stateOrCentral: formData.stateOrCentral === "State" ? activeState : "Central",
         structuredClauses:
           formData.structuredClauses && formData.structuredClauses.length > 0
             ? formData.structuredClauses
             : [
                 `Certified copy of records regarding: ${formData.title}`,
                 `Inspection of Measurement Book, expenditure register or sanctions for ${formData.yearOrPeriod}`,
-                `Names and statutory designations of officers responsible for administrative clearance at ${formData.locationDivision}`,
+                `Names and statutory designations of officers responsible for administrative clearance at ${formData.locationDivision || "the concerned department"}`,
               ],
         targetAuthority: formData.targetAuthority || selectedDepartment?.name,
         isLifeOrLiberty: formData.isLifeOrLiberty,
@@ -639,9 +719,16 @@ export default function FileRtiPage() {
 
               {/* State vs Central Toggle */}
               <div>
-                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
-                  Government Tier
-                </label>
+                <div className="flex items-center justify-between mb-2">
+                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
+                    Government Tier
+                  </label>
+                  {formData.stateOrCentral === "State" && (
+                    <span className="text-[11px] text-purple-600 dark:text-purple-400 font-semibold">
+                      State Jurisdiction: {activeState}
+                    </span>
+                  )}
+                </div>
                 <div className="grid grid-cols-2 gap-3 max-w-md">
                   {["State", "Central"].map((tier) => (
                     <button
@@ -654,10 +741,45 @@ export default function FileRtiPage() {
                           : "bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10"
                       }`}
                     >
-                      <span>{tier === "State" ? "🏛️ State Government (Madhya Pradesh)" : "🇮🇳 Central Government (GoI)"}</span>
+                      <span>
+                        {tier === "State"
+                          ? `🏛️ State Government (${activeState})`
+                          : "🇮🇳 Central Government (GoI)"}
+                      </span>
                     </button>
                   ))}
                 </div>
+
+                {formData.stateOrCentral === "State" && (
+                  <div className="mt-3 p-3 rounded-2xl bg-purple-50/70 dark:bg-white/[0.03] border border-purple-200 dark:border-purple-500/20 max-w-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                    <div>
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
+                        Target State Government:
+                      </span>
+                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                        {userProfileState
+                          ? `Synced from your profile (${userProfileState})`
+                          : "Select your target state public authority"}
+                      </p>
+                    </div>
+                    <select
+                      value={activeState === "Select State" ? "" : activeState}
+                      onChange={(e) =>
+                        setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
+                      }
+                      className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#150a2e] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-semibold focus:outline-none focus:border-purple-500 shadow-xs cursor-pointer shrink-0"
+                    >
+                      <option value="" disabled>
+                        -- Select State / UT --
+                      </option>
+                      {INDIAN_STATES.map((st) => (
+                        <option key={st} value={st}>
+                          {st} {userProfileState === st ? "✓ (Your Profile)" : ""}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                )}
               </div>
 
               {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
@@ -1036,7 +1158,7 @@ export default function FileRtiPage() {
                   </label>
                   <input
                     type="text"
-                    placeholder="e.g. Ward No. 4, Village Pipariya, PWD Division II"
+                    placeholder="e.g. Ward No. 4, Division II or District"
                     value={formData.locationDivision}
                     onChange={(e) => setFormData({ ...formData, locationDivision: e.target.value })}
                     className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
@@ -1382,7 +1504,9 @@ export default function FileRtiPage() {
                   <div>
                     <span className="text-slate-400 block text-[11px]">Target Public Authority:</span>
                     <strong className="text-purple-600 dark:text-purple-400 text-sm">{selectedDepartment?.name}</strong>
-                    <span className="text-slate-500 text-[10px] block">{selectedDepartment?.ministry}</span>
+                    <span className="text-slate-500 text-[10px] block">
+                      {selectedDepartment?.ministry} • {formData.stateOrCentral === "State" ? `State Government (${activeState})` : "Central Government (GoI)"}
+                    </span>
                   </div>
                 </div>
 
@@ -1423,7 +1547,7 @@ export default function FileRtiPage() {
                   <div>
                     <span className="text-slate-400 block text-[10px]">Location:</span>
                     <strong className="text-slate-800 dark:text-slate-200 truncate block">
-                      {formData.locationDivision}
+                      {formData.locationDivision || (activeState !== "Select State" ? activeState : "Jurisdiction Designated")}
                     </strong>
                   </div>
                 </div>

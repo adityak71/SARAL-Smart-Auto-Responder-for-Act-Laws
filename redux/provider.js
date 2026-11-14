@@ -18,11 +18,8 @@ function SessionHydrator({ children }) {
           if (data.success && data.user && isMounted) {
             dispatch(
               setCredentials({
-                id: data.user.id,
-                email: data.user.email,
-                name: data.user.fullName,
-                role: data.user.role,
-                avatarUrl: data.user.avatarUrl,
+                ...data.user,
+                name: data.user.fullName || data.user.name,
               })
             );
           }

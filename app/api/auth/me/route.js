@@ -29,6 +29,12 @@ export async function GET(request) {
         name: session.fullName || "SARAL Citizen",
         role: session.role || "CITIZEN",
         isDigiLockerVerified: false,
+        citizenProfile: {
+          addressLine: "",
+          district: "",
+          state: "",
+          pincode: "",
+        },
       };
     }
 
