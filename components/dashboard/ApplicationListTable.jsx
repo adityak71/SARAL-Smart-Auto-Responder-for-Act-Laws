@@ -24,53 +24,15 @@ export default function ApplicationListTable() {
         const res = await fetch("/api/applications");
         if (res.ok) {
           const data = await res.json();
-          if (data.success && Array.isArray(data.applications) && data.applications.length > 0) {
+          if (data.success && Array.isArray(data.applications)) {
             if (isMounted) setApplications(data.applications);
             return;
           }
         }
-        // Fallback to mock data if API returned empty or unauthenticated sample
-        if (isMounted) {
-          setApplications(
-            mockRtiApplications.map((app) => ({
-              id: app.id,
-              applicationNumber: app.id,
-              title: app.title,
-              subject: app.title,
-              department: { name: app.department },
-              dateFiled: app.dateFiled,
-              createdAt: app.dateFiled,
-              statutoryDeadline: new Date(Date.now() + (30 - app.daysElapsed) * 86400000).toISOString(),
-              status:
-                app.status === "completed"
-                  ? "RESPONSE_DISPATCHED"
-                  : app.status === "appeal_open"
-                  ? "FIRST_APPEAL_PENDING"
-                  : "UNDER_REVIEW",
-              daysElapsed: app.daysElapsed,
-            }))
-          );
-        }
+        if (isMounted) setApplications([]);
       } catch (err) {
-        console.warn("Using offline applications:", err);
-        if (isMounted) {
-          setApplications(
-            mockRtiApplications.map((app) => ({
-              id: app.id,
-              applicationNumber: app.id,
-              title: app.title,
-              department: { name: app.department },
-              dateFiled: app.dateFiled,
-              status:
-                app.status === "completed"
-                  ? "RESPONSE_DISPATCHED"
-                  : app.status === "appeal_open"
-                  ? "FIRST_APPEAL_PENDING"
-                  : "UNDER_REVIEW",
-              daysElapsed: app.daysElapsed,
-            }))
-          );
-        }
+        console.warn("Applications fetch fallback:", err);
+        if (isMounted) setApplications([]);
       } finally {
         if (isMounted) setIsLoading(false);
       }

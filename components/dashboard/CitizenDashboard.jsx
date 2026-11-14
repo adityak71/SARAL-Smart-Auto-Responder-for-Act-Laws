@@ -5,7 +5,15 @@ import CitizenOverview from "@/components/dashboard/CitizenOverview";
 import ApplicationListTable from "@/components/dashboard/ApplicationListTable";
 
 export default function CitizenDashboard({ user }) {
-  const citizenName = user?.name || user?.fullName || "Rahul Sharma";
+  const citizenName =
+    user?.fullName ||
+    user?.name ||
+    (user?.email
+      ? user.email
+          .split("@")[0]
+          .replace(/[._]/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase())
+      : "Citizen Applicant");
 
   return (
     <div className="space-y-8 animate-fadeIn">
@@ -15,10 +23,17 @@ export default function CitizenDashboard({ user }) {
         <div className="absolute -right-10 -top-10 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
 
         <div className="space-y-2 z-10">
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            DigiLocker Verified Citizen • Section 6(1) Authorized
-          </div>
+          {user?.isDigiLockerVerified ? (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              DigiLocker Verified Citizen • Section 6(1) Authorized
+            </div>
+          ) : (
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+              Citizen Account • Verification Pending
+            </div>
+          )}
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
             Namaste, {citizenName}
           </h2>

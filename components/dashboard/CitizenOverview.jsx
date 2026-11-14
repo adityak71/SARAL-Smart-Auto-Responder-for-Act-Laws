@@ -30,12 +30,17 @@ export default function CitizenOverview() {
     };
   }, []);
 
-  const statsSource = liveStats || citizenDashboardStats;
+  const statsSource = liveStats || {
+    activeFilings: 0,
+    resolvedFilings: 0,
+    appealsPending: 0,
+    averageResponseDays: 0,
+  };
 
   const stats = [
     {
       label: "Active In-Review",
-      value: statsSource.activeFilings ?? 1,
+      value: statsSource.activeFilings ?? 0,
       subtext: "Currently under PIO examination",
       color: "amber",
       icon: "⏳",
@@ -43,7 +48,7 @@ export default function CitizenOverview() {
     },
     {
       label: "Completed Responses",
-      value: statsSource.resolvedFilings ?? 1,
+      value: statsSource.resolvedFilings ?? 0,
       subtext: "Certified documents available",
       color: "emerald",
       icon: "✓",
@@ -51,7 +56,7 @@ export default function CitizenOverview() {
     },
     {
       label: "First Appeals",
-      value: statsSource.appealsPending ?? 1,
+      value: statsSource.appealsPending ?? 0,
       subtext: "Section 19(1) window active",
       color: "rose",
       icon: "⚠️",
@@ -59,8 +64,8 @@ export default function CitizenOverview() {
     },
     {
       label: "Average Turnaround",
-      value: `${statsSource.averageResponseDays ?? 18} Days`,
-      subtext: "Well within 30-day mandate",
+      value: statsSource.averageResponseDays ? `${statsSource.averageResponseDays} Days` : "30-Day Mandate",
+      subtext: "Statutory Section 7(1) clock",
       color: "purple",
       icon: "⚡",
       badgeColor: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",

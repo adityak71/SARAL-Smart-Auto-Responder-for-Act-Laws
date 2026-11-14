@@ -27,8 +27,16 @@ export async function GET(request) {
     } else {
       let userId = session?.userId;
       if (!userId) {
-        const demoCitizen = await prisma.user.findFirst({ where: { role: "CITIZEN" } });
-        userId = demoCitizen?.id;
+        return NextResponse.json({
+          success: true,
+          role: "CITIZEN",
+          stats: {
+            activeFilings: 0,
+            resolvedFilings: 0,
+            appealsPending: 0,
+            averageResponseDays: 0,
+          },
+        });
       }
       stats = await getCitizenDashboardStats(userId);
     }
