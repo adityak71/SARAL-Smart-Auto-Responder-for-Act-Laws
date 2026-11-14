@@ -36,25 +36,20 @@ export function middleware(request) {
   );
 
   // If visiting protected page without valid cookie, redirect to /login
-  if (isProtected && !sessionCookie) {
-    const loginUrl = new URL("/login", request.url);
-    loginUrl.searchParams.set("redirect", pathname);
-    return NextResponse.redirect(loginUrl);
-  }
+  if (isProtected) {
+    if (!sessionCookie) {
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
 
-  // 2. Auth Routes (/login, /signup) - if already logged in, redirect to /dashboard
-  const isAuthPage = pathname === "/login" || pathname === "/signup";
-  if (isAuthPage && sessionCookie) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
-  // 3. Role-Based Access Control (RBAC) Enforcement
-  if (sessionCookie) {
     const session = decodeJwtPayload(sessionCookie);
 
-    // If token is expired, redirect to login
-    if (session?.exp && Math.floor(Date.now() / 1000) > session.exp) {
-      const response = NextResponse.redirect(new URL("/login", request.url));
+    // If token is missing, invalid, or expired, clear cookie and redirect to login
+    if (!session || (session?.exp && Math.floor(Date.now() / 1000) > session.exp)) {
+      const loginUrl = new URL("/login", request.url);
+      loginUrl.searchParams.set("redirect", pathname);
+      const response = NextResponse.redirect(loginUrl);
       response.cookies.delete("saral_session");
       return response;
     }
@@ -74,11 +69,13 @@ export function middleware(request) {
     }
   }
 
+  // NOTE: Auth routes (/login, /signup) and public pages are never intercepted,
+  // allowing users to always open the login page directly without loops.
   return NextResponse.next();
 }
 
 /**
- * Matcher configuration: run middleware only on relevant routes
+ * Matcher configuration: run middleware only on protected routes
  */
 export const config = {
   matcher: [
@@ -88,7 +85,5 @@ export const config = {
     "/file-rti",
     "/appeal/:path*",
     "/appeal",
-    "/login",
-    "/signup",
   ],
 };

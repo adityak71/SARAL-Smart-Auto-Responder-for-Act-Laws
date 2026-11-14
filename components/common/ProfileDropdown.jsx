@@ -18,10 +18,16 @@ export default function ProfileDropdown() {
   const selectedRole = useSelector((state) => state.auth.selectedRole);
   const user = useSelector((state) => state.auth.user);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (err) {
+      console.warn("Logout request:", err);
+    }
     dispatch(logout());
     dispatch(setProfileDropdown(false));
     router.push("/");
+    router.refresh();
   };
 
   const displayName = user?.name || user?.fullName || userProfileData.name;

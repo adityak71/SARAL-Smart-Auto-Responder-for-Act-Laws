@@ -20,15 +20,21 @@ export default function Navbar() {
   const isMobileMenuOpen = useSelector((state) => state.ui.mobileMenuOpen);
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch (err) {
+      console.warn("Logout request:", err);
+    }
     dispatch(logout());
     dispatch(setMobileMenu(false));
     router.push("/");
+    router.refresh();
   };
 
   const handleLinkClick = (e, link) => {
     dispatch(setMobileMenu(false));
-    // If user clicks dashboard while logged out, take them to login
+    // If user clicks dashboard while logged out, take them directly to login
     if (link.id === "dashboard" && !isAuthenticated) {
       e.preventDefault();
       router.push("/login");
@@ -100,8 +106,8 @@ export default function Navbar() {
           {/* 1. Theme Switch (Logo / Icon only) */}
           <ThemeToggle />
 
-          {/* 2. Notification (Logo with Live Unread Badge + Popup Dropdown) */}
-          <NotificationDropdown />
+          {/* 2. Notification (ONLY SHOWN WHEN LOGGED IN) */}
+          {isAuthenticated && <NotificationDropdown />}
 
           {/* 3. Login or Logout Button */}
           {isAuthenticated ? (

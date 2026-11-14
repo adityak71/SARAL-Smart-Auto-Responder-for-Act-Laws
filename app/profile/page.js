@@ -218,8 +218,12 @@ export default function ProfilePage() {
     } finally {
       setIsDeleting(false);
       setIsDeleteModalOpen(false);
+      try {
+        await fetch("/api/auth/logout", { method: "POST" });
+      } catch (e) {}
       dispatch(logout());
       router.push("/");
+      router.refresh();
     }
   };
 
