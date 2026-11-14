@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import WikipediaArticleModal from "@/components/common/WikipediaArticleModal";
 
 const POPULAR_TOPICS = [
   { label: "RTI Act 2005", query: "Right to Information Act" },
@@ -24,6 +25,8 @@ export default function GeneralInfoPage() {
     matchingDepartments: [],
   });
   const [hasSearched, setHasSearched] = useState(false);
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [isArticleModalOpen, setIsArticleModalOpen] = useState(false);
 
   // Initial fetch on mount
   useEffect(() => {
@@ -275,17 +278,24 @@ export default function GeneralInfoPage() {
                     </div>
 
                     <div className="pt-3.5 mt-3 border-t border-slate-100 dark:border-white/5 flex items-center justify-between">
-                      <a
-                        href={article.pageUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setSelectedArticle(article);
+                          setIsArticleModalOpen(true);
+                        }}
+                        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline flex items-center gap-1.5 cursor-pointer py-1 px-2 -ml-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                       >
-                        Read Full Article
+                        <span>Read Full Article</span>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                         </svg>
-                      </a>
+                      </button>
+
+                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
+                        In-App Preview ⚡
+                      </span>
                     </div>
                   </article>
                 ))}
@@ -366,6 +376,13 @@ export default function GeneralInfoPage() {
           )}
         </div>
       </div>
+
+      {/* Floating In-App Wikipedia Article Preview Modal */}
+      <WikipediaArticleModal
+        isOpen={isArticleModalOpen}
+        onClose={() => setIsArticleModalOpen(false)}
+        article={selectedArticle}
+      />
     </div>
   );
 }
