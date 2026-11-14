@@ -70,7 +70,13 @@ export default function ApplicationTimeline({ application }) {
                     {item.title}
                   </h4>
                   <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300/80 bg-purple-50 dark:bg-white/5 border border-purple-200 dark:border-transparent px-2 py-0.5 rounded-md">
-                    {item.date}
+                    {!item.date || item.date === "Invalid Date"
+                      ? isCompleted
+                        ? "Completed"
+                        : isActive
+                        ? "In Progress"
+                        : "Upcoming"
+                      : item.date}
                   </span>
                 </div>
 

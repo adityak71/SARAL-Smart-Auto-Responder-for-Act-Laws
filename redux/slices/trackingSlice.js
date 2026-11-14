@@ -38,19 +38,46 @@ export function mapApiAppToTrackingApp(app) {
 
   const stage = app.currentStage || (app.status === "RESOLVED" ? 5 : 3);
 
+  // Helper to format milestone date safely without "Invalid Date"
+  const formatMilestoneDate = (t) => {
+    if (t.stage === 5 && !t.completed) {
+      return `Expected by ${deadline.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })}`;
+    }
+    if (t.stage === 4 && !t.completed) {
+      return t.active ? "In Progress" : "Pending Review";
+    }
+    if (t.stage === 3 && !t.completed) {
+      return "Pending Allocation";
+    }
+    const candidate = t.actionDate || t.date || t.createdAt || dateFiled;
+    const d = candidate ? new Date(candidate) : null;
+    if (d && !isNaN(d.getTime())) {
+      return d.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    }
+    return dateFiled.toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
+  };
+
   // Timeline
   const timeline =
     app.timeline && app.timeline.length > 0
       ? app.timeline.map((t) => ({
           stage: t.stage,
           title: t.title,
-          date: new Date(t.createdAt).toLocaleDateString("en-IN", {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          }),
+          date: formatMilestoneDate(t),
           description: t.description || "",
           completed: t.completed,
           active: t.active,
