@@ -1373,7 +1373,9 @@ export default function FileRtiPage() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-slate-200 dark:border-white/10">
                   <div>
                     <span className="text-slate-400 block text-[11px]">Applicant:</span>
-                    <strong className="text-slate-900 dark:text-white text-sm">{user?.fullName || "Rahul Sharma"}</strong>
+                    <strong className="text-slate-900 dark:text-white text-sm">
+                      {user?.fullName || user?.name || (user?.email ? user.email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) : "Citizen Applicant")}
+                    </strong>
                     <span className="text-emerald-600 dark:text-emerald-400 block text-[10px]">DigiLocker Verified Citizen</span>
                   </div>
 

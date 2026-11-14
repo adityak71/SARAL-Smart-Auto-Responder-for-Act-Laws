@@ -14,12 +14,21 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
 
+  // Dynamic Citizen Legal Name resolution
+  const citizenLegalName =
+    user?.fullName ||
+    user?.name ||
+    (user?.email
+      ? user.email
+          .split("@")[0]
+          .replace(/[._]/g, " ")
+          .replace(/\b\w/g, (c) => c.toUpperCase())
+      : "Citizen Applicant");
+
   // Steps: 'INPUT' -> 'OTP' -> 'CONSENT' -> 'SUCCESS'
   const [step, setStep] = useState("INPUT");
   const [authMode, setAuthMode] = useState("aadhaar"); // "aadhaar" | "mobile"
-  const [identifier, setIdentifier] = useState(
-    user?.phone?.replace("+91", "").trim() || "9876543210"
-  );
+  const [identifier, setIdentifier] = useState("548921459012");
   const [pin, setPin] = useState("123456");
   const [otp, setOtp] = useState(["1", "2", "3", "4", "5", "6"]);
   const [timer, setTimer] = useState(59);
@@ -32,8 +41,11 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
       setStep("INPUT");
       setErrorMessage("");
       setTimer(59);
+      if (authMode === "mobile") {
+        setIdentifier(user?.phone?.replace("+91", "").trim() || "9876543210");
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, authMode, user]);
 
   // Countdown timer for OTP
   useEffect(() => {
@@ -432,14 +444,14 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Full Legal Name:</strong>{" "}
-                      <span>{user?.name || "Rahul Sharma"}</span>
+                      <span className="font-semibold text-slate-900 dark:text-white">{citizenLegalName}</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Masked Aadhaar:</strong>{" "}
-                      <span className="font-mono">XXXX-XXXX-4210</span>
+                      <span className="font-mono">XXXX-XXXX-{identifier.slice(-4) || "4210"}</span>
                     </div>
                   </div>
                   <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
@@ -453,7 +465,13 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Communication Address:</strong>{" "}
-                      <span>State/District address for postal delivery</span>
+                      <span>
+                        {user?.citizenProfile?.addressLine
+                          ? `${user.citizenProfile.addressLine}, ${user.citizenProfile.district || ""}`
+                          : user?.citizenProfile?.district && user?.citizenProfile?.state
+                          ? `${user.citizenProfile.district}, ${user.citizenProfile.state}`
+                          : "Verified Residential Address (UIDAI / DigiLocker Database)"}
+                      </span>
                     </div>
                   </div>
                 </div>
