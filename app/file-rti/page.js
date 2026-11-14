@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
+import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 
 export default function FileRtiPage() {
   const router = useRouter();
@@ -18,6 +19,7 @@ export default function FileRtiPage() {
   const [submitting, setSubmitting] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
   const [submittedApplication, setSubmittedApplication] = useState(null);
+  const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
 
   // AI Copilot State
   const [aiInputPrompt, setAiInputPrompt] = useState("");
@@ -1453,10 +1455,10 @@ export default function FileRtiPage() {
 
                 <button
                   type="button"
-                  onClick={() => downloadRtiReceipt(submittedApplication)}
+                  onClick={() => setIsPreviewModalOpen(true)}
                   className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
                 >
-                  <span>📄 Download Statutory PDF Receipt</span>
+                  <span>📄 View &amp; Download Statutory Receipt</span>
                 </button>
 
                 <Link
@@ -1515,6 +1517,14 @@ export default function FileRtiPage() {
           )}
         </div>
       </main>
+
+      {/* Floating Document Preview & Download Modal */}
+      <DocumentPreviewModal
+        isOpen={isPreviewModalOpen}
+        onClose={() => setIsPreviewModalOpen(false)}
+        documentType="RECEIPT"
+        application={submittedApplication}
+      />
     </div>
   );
 }

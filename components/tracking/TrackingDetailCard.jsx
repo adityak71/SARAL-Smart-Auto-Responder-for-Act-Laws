@@ -1,42 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
-import {
-  downloadRtiReceipt,
-  downloadCertifiedResponse,
-  downloadPublicRecordDoc,
-} from "@/lib/services/pdfGenerator";
+import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 
 export default function TrackingDetailCard({ application }) {
-  const [downloadSuccess, setDownloadSuccess] = useState(false);
-  const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
+  const [previewModal, setPreviewModal] = useState({
+    isOpen: false,
+    documentType: "RECEIPT",
+    docName: "",
+  });
 
   if (!application) return null;
 
-  const handleDownload = (docName) => {
-    setDownloadSuccess(docName);
-    try {
-      if (
-        docName.toLowerCase().includes("receipt") ||
-        docName.toLowerCase().includes("acknowledgment") ||
-        docName.toLowerCase().includes("slip")
-      ) {
-        downloadRtiReceipt(application);
-      } else if (
-        docName.toLowerCase().includes("response") ||
-        docName.toLowerCase().includes("memorandum")
-      ) {
-        downloadCertifiedResponse(application, application.officialResponse);
-      } else {
-        downloadPublicRecordDoc(docName, application);
-      }
-    } catch (err) {
-      console.error("PDF Download error:", err);
-    }
-    setTimeout(() => {
-      setDownloadSuccess(false);
-    }, 3500);
+  const handleOpenPreview = (documentType, docName = "") => {
+    setPreviewModal({
+      isOpen: true,
+      documentType,
+      docName,
+    });
   };
 
   return (
@@ -58,19 +39,19 @@ export default function TrackingDetailCard({ application }) {
         <div className="flex items-center gap-2 shrink-0 flex-wrap">
           <button
             type="button"
-            onClick={() => downloadRtiReceipt(application)}
-            className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-white/15 transition flex items-center gap-1.5 cursor-pointer"
+            onClick={() => handleOpenPreview("RECEIPT", "Statutory Filing Receipt")}
+            className="px-3.5 py-1.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/25 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white text-xs font-semibold border border-purple-500/30 transition flex items-center gap-1.5 cursor-pointer"
           >
-            <span>📄 Receipt PDF</span>
+            <span>📄 View Receipt</span>
           </button>
 
           {(application.status === "completed" || application.officialResponse) && (
             <button
               type="button"
-              onClick={() => setIsCertifiedModalOpen(true)}
-              className="px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
+              onClick={() => handleOpenPreview("CERTIFIED_RESPONSE", "Official Response Memorandum")}
+              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
             >
-              <span>📜 Certified Response</span>
+              <span>📜 View Certified Response</span>
             </button>
           )}
 
@@ -151,27 +132,22 @@ export default function TrackingDetailCard({ application }) {
 
               <button
                 type="button"
-                onClick={() => handleDownload(doc.name)}
+                onClick={() => handleOpenPreview("PUBLIC_RECORD", doc.name)}
                 className="px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white border border-purple-300 dark:border-purple-500/30 text-xs font-semibold transition shrink-0 cursor-pointer"
               >
-                Download
+                View &amp; Download
               </button>
             </div>
           ))}
         </div>
-
-        {downloadSuccess && (
-          <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs flex items-center gap-2 animate-fadeIn">
-            <span>✓</span>
-            <span>Downloading <strong>{downloadSuccess}</strong> (Certified Digital Copy with SHA-256 seal)</span>
-          </div>
-        )}
       </div>
 
-      {/* Sovereign Certified Response Modal */}
-      <CertifiedResponseModal
-        isOpen={isCertifiedModalOpen}
-        onClose={() => setIsCertifiedModalOpen(false)}
+      {/* Floating Document Preview & Download Modal */}
+      <DocumentPreviewModal
+        isOpen={previewModal.isOpen}
+        onClose={() => setPreviewModal({ ...previewModal, isOpen: false })}
+        documentType={previewModal.documentType}
+        docName={previewModal.docName}
         application={application}
         officialResponse={application.officialResponse}
       />

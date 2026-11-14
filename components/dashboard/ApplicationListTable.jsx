@@ -4,16 +4,18 @@ import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { mockRtiApplications } from "@/data/trackingData";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
-import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
-import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
+import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 
 export default function ApplicationListTable() {
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [selectedCertifiedApp, setSelectedCertifiedApp] = useState(null);
-  const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
+  const [previewState, setPreviewState] = useState({
+    isOpen: false,
+    documentType: "RECEIPT",
+    application: null,
+  });
 
   useEffect(() => {
     let isMounted = true;
@@ -302,24 +304,33 @@ export default function ApplicationListTable() {
 
                   <td className="py-4 text-right whitespace-nowrap">
                     <div className="inline-flex items-center gap-1.5 justify-end flex-wrap">
-                      {/* Statutory Receipt Download */}
+                      {/* Statutory Receipt Preview & Download */}
                       <button
                         type="button"
-                        onClick={() => downloadRtiReceipt(app)}
-                        className="inline-flex items-center gap-1 px-2 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 text-[11px] font-semibold transition cursor-pointer"
-                        title="Download Official PDF Receipt"
+                        onClick={() =>
+                          setPreviewState({
+                            isOpen: true,
+                            documentType: "RECEIPT",
+                            application: app,
+                          })
+                        }
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[11px] font-semibold transition cursor-pointer"
+                        title="View & Download Official Receipt"
                       >
                         <span>📄 Receipt</span>
                       </button>
 
-                      {/* Certified Response Quick View */}
+                      {/* Certified Response Preview & Download */}
                       {app.isResolved && (
                         <button
                           type="button"
-                          onClick={() => {
-                            setSelectedCertifiedApp(app);
-                            setIsCertifiedModalOpen(true);
-                          }}
+                          onClick={() =>
+                            setPreviewState({
+                              isOpen: true,
+                              documentType: "CERTIFIED_RESPONSE",
+                              application: app,
+                            })
+                          }
                           className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white dark:bg-emerald-600/20 dark:hover:bg-emerald-600 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[11px] font-bold transition cursor-pointer"
                         >
                           <span>📜 Certified PDF</span>
@@ -337,7 +348,7 @@ export default function ApplicationListTable() {
 
                       <Link
                         href={`/tracking?id=${app.idStr}`}
-                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/30 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-200 dark:border-purple-500/30 text-xs font-semibold transition"
+                        className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 text-xs font-semibold border border-slate-200 dark:border-white/10 transition"
                       >
                         <span>View Dossier</span>
                         <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -365,12 +376,13 @@ export default function ApplicationListTable() {
         )}
       </div>
 
-      {/* Citizen Certified Response Modal */}
-      <CertifiedResponseModal
-        isOpen={isCertifiedModalOpen}
-        onClose={() => setIsCertifiedModalOpen(false)}
-        application={selectedCertifiedApp}
-        officialResponse={selectedCertifiedApp?.officialResponse}
+      {/* Floating Document Preview & Download Modal */}
+      <DocumentPreviewModal
+        isOpen={previewState.isOpen}
+        onClose={() => setPreviewState({ ...previewState, isOpen: false })}
+        documentType={previewState.documentType}
+        application={previewState.application}
+        officialResponse={previewState.application?.officialResponse}
       />
     </div>
   );

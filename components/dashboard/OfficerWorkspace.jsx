@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { officerDashboardStats, officerReviewQueue } from "@/data/dashboardData";
 import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
+import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
 import { downloadPublicRecordDoc, downloadCertifiedResponse } from "@/lib/services/pdfGenerator";
 
@@ -15,6 +16,7 @@ export default function OfficerWorkspace() {
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [actionSuccessMsg, setActionSuccessMsg] = useState("");
+  const [docPreview, setDocPreview] = useState({ isOpen: false, name: "", application: null });
 
   // Response Studio Multi-Tab State
   const [studioTab, setStudioTab] = useState("memorandum"); // "memorandum" | "records" | "exemptions" | "precedents"
@@ -599,11 +601,15 @@ export default function OfficerWorkspace() {
                         type="button"
                         onClick={(e) => {
                           e.stopPropagation();
-                          downloadPublicRecordDoc(rec.name, selectedCase);
+                          setDocPreview({
+                            isOpen: true,
+                            name: rec.name,
+                            application: selectedCase,
+                          });
                         }}
                         className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-[10px] font-bold transition cursor-pointer"
                       >
-                        📥 Download Extract
+                        👁️ Preview & Download
                       </button>
                       <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                         Certified
@@ -844,6 +850,15 @@ export default function OfficerWorkspace() {
           </div>
         </div>
       )}
+
+      {/* Floating Document Preview Modal */}
+      <DocumentPreviewModal
+        isOpen={docPreview.isOpen}
+        onClose={() => setDocPreview({ ...docPreview, isOpen: false })}
+        documentType="PUBLIC_RECORD"
+        docName={docPreview.name}
+        application={docPreview.application}
+      />
     </div>
   );
 }
