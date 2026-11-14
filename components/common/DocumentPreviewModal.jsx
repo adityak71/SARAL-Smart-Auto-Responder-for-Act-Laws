@@ -36,12 +36,31 @@ export default function DocumentPreviewModal({
     application.officialResponse ||
     "Certified copy of Sanctioned Administrative & Financial Approval (A&F Order No. PWD/2025/381) and Measurement Book Vol. IV entries are hereby furnished. The project was inspected on-site by the Executive Engineer on 15 Oct 2026. All disbursed Running Account (RA) bills are audited and found compliant.";
 
-  const clauses = application.structuredClauses || [
-    "Certified copies of Sanction Orders and Administrative Approval issued for works executed in the division.",
-    "Inspection and certified extracts of Measurement Book (MB) Vol. IV recording exact chainage dimensions and bitumen thickness.",
-    "Total expenditure incurred and Running Account (RA) bills disbursed to the contractor as verified by the Divisional Accounts Officer.",
-    "Names, designations, and postings of engineers responsible for on-site execution and quality testing.",
-  ];
+  const parseClauses = (val) => {
+    if (Array.isArray(val)) return val.filter(Boolean);
+    if (typeof val === "string") {
+      const trimmed = val.trim();
+      if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+        try {
+          const parsed = JSON.parse(trimmed);
+          if (Array.isArray(parsed)) return parsed.filter(Boolean);
+        } catch {}
+      }
+      const lines = trimmed
+        .split(/\n+/)
+        .map((l) => l.replace(/^\d+[\.\)]\s*/, "").trim())
+        .filter(Boolean);
+      if (lines.length > 0) return lines;
+    }
+    return [
+      "Certified copies of Sanction Orders and Administrative Approval issued for works executed in the division.",
+      "Inspection and certified extracts of Measurement Book (MB) Vol. IV recording exact chainage dimensions and bitumen thickness.",
+      "Total expenditure incurred and Running Account (RA) bills disbursed to the contractor as verified by the Divisional Accounts Officer.",
+      "Names, designations, and postings of engineers responsible for on-site execution and quality testing.",
+    ];
+  };
+
+  const clauses = parseClauses(application.structuredClauses);
 
   const handleDownload = () => {
     if (documentType === "RECEIPT") {

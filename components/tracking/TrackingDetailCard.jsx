@@ -91,14 +91,35 @@ export default function TrackingDetailCard({ application }) {
         </div>
 
         <div className="space-y-1.5">
-          {application.structuredClauses.map((clause, index) => (
-            <div key={index} className="flex items-start gap-2 text-slate-700 dark:text-slate-200 text-xs leading-relaxed">
-              <span className="w-5 h-5 rounded-full bg-purple-600/15 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
-                {index + 1}
-              </span>
-              <span>{clause}</span>
-            </div>
-          ))}
+          {(() => {
+            const raw = application.structuredClauses;
+            let clauses = [];
+            if (Array.isArray(raw)) {
+              clauses = raw.filter(Boolean);
+            } else if (typeof raw === "string") {
+              const trimmed = raw.trim();
+              if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+                try {
+                  const parsed = JSON.parse(trimmed);
+                  if (Array.isArray(parsed)) clauses = parsed.filter(Boolean);
+                } catch {}
+              }
+              if (clauses.length === 0) {
+                clauses = trimmed
+                  .split(/\n+/)
+                  .map((l) => l.replace(/^\d+[\.\)]\s*/, "").trim())
+                  .filter(Boolean);
+              }
+            }
+            return clauses.map((clause, index) => (
+              <div key={index} className="flex items-start gap-2 text-slate-700 dark:text-slate-200 text-xs leading-relaxed">
+                <span className="w-5 h-5 rounded-full bg-purple-600/15 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                  {index + 1}
+                </span>
+                <span>{clause}</span>
+              </div>
+            ));
+          })()}
         </div>
       </div>
 
