@@ -343,9 +343,15 @@ export default function FileRtiPage() {
         }));
 
         setAiResult(data.analysis);
-        setAiSuccessToast(
-          "✨ Successfully converted into Section 6(1) clauses, department routed, and Section 8 scan complete!"
-        );
+        if (data.analysis.source === "gemini-ai") {
+          setAiSuccessToast(
+            `✨ Structured with Google Gemini AI (${data.analysis.model || "3.1 Flash-Lite"})! Clauses tailored specifically to your prompt.`
+          );
+        } else {
+          setAiSuccessToast(
+            "⚡ Structured with SARAL Civic Engine (Rule-based fallback)"
+          );
+        }
       } else {
         setErrorMsg(data.error || "AI could not parse the petition. Please enter details manually.");
       }
@@ -1112,13 +1118,23 @@ export default function FileRtiPage() {
                     className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-2.5"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <div className="flex items-center gap-2">
+                      <div className="flex flex-wrap items-center gap-2">
                         <span className="px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[10px] font-bold font-mono">
                           Mapped: {aiResult.suggestedDepartmentName}
                         </span>
                         <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[10px] font-bold">
                           ✓ Section 8 Non-Exempt ({aiResult.section8Compliance?.confidenceScore || "98.7%"})
                         </span>
+                        {aiResult.source === "gemini-ai" ? (
+                          <span className="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 text-[10px] font-bold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                            AI Powered: Gemini ({aiResult.model || "3.1 Flash-Lite"})
+                          </span>
+                        ) : (
+                          <span className="px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-[10px] font-bold flex items-center gap-1">
+                            🛡️ SARAL Civic NLP Fallback
+                          </span>
+                        )}
                       </div>
                       <span className="text-[10px] text-purple-700 dark:text-purple-300/80 font-medium">
                         {aiResult.structuredClauses?.length || 4} Enforceable Clauses Generated
