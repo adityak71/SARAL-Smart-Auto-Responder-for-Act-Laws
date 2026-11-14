@@ -62,10 +62,10 @@ export default function AuthHero({ type = "login" }) {
             </div>
           </motion.div>
           <div className="leading-tight text-left">
-            <h1 className="text-[20px] sm:text-[22px] lg:text-[26px] font-bold tracking-tight text-slate-900 dark:text-white font-sans">
+            <h1 className="text-[20px] sm:text-[22px] lg:text-[26px] font-bold tracking-tight text-white font-sans">
               {portalConfig.name}
             </h1>
-            <p className="text-[11px] sm:text-[12px] text-slate-600 dark:text-white/75 font-medium tracking-wide">
+            <p className="text-[11px] sm:text-[12px] text-white/75 font-medium tracking-wide">
               {portalConfig.shortDescription}
             </p>
           </div>
@@ -75,12 +75,12 @@ export default function AuthHero({ type = "login" }) {
         {isLogin ? (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold text-purple-700 bg-purple-100/90 border border-purple-200 shadow-sm dark:text-purple-200 dark:bg-purple-950/60 dark:border-purple-500/40 dark:shadow-[0_0_15px_rgba(168,85,247,0.25)] backdrop-blur-md cursor-default shrink-0"
+            className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold text-purple-200 bg-purple-950/60 border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.25)] backdrop-blur-md cursor-default shrink-0"
           >
             <motion.svg
               animate={{ rotate: [0, 15, -15, 0] }}
               transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-              className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-600 dark:text-purple-300 fill-current"
+              className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-300 fill-current"
               viewBox="0 0 24 24"
             >
               <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
@@ -90,10 +90,10 @@ export default function AuthHero({ type = "login" }) {
         ) : (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-[11px] sm:text-xs font-semibold text-slate-800 dark:text-white tracking-wide cursor-default shrink-0 bg-white/80 dark:bg-white/10 backdrop-blur-md border border-slate-200 dark:border-white/20"
+            className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-[11px] sm:text-xs font-semibold text-white tracking-wide cursor-default shrink-0 bg-white/10 backdrop-blur-md border border-white/20"
           >
             <svg
-              className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-600 dark:text-emerald-300"
+              className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-300"
               fill="none"
               stroke="currentColor"
               strokeWidth="2.5"
@@ -110,14 +110,14 @@ export default function AuthHero({ type = "login" }) {
       <div className="my-2 sm:my-3 lg:my-auto flex flex-col justify-center max-w-[540px] text-left">
         {/* Headline */}
         <motion.div variants={itemFadeLeft} className="space-y-0.5 sm:space-y-1 mb-2 sm:mb-3">
-          <h2 className="text-2xl sm:text-3xl lg:text-[44px] font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight lg:leading-[1.14]">
+          <h2 className="text-2xl sm:text-3xl lg:text-[44px] font-extrabold tracking-tight text-white leading-tight lg:leading-[1.14]">
             {content.headline}
           </h2>
           <div
             className={`text-2xl sm:text-3xl lg:text-[44px] font-extrabold tracking-tight leading-tight lg:leading-[1.14] ${
               isLogin
-                ? "text-purple-600 dark:text-purple-300 lg:dark:text-[#ba99ff]"
-                : "text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-indigo-600 to-purple-800 dark:from-purple-200 dark:via-white dark:to-purple-300"
+                ? "text-purple-300 lg:text-[#ba99ff]"
+                : "text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-purple-300"
             }`}
           >
             {content.highlight}
@@ -127,7 +127,7 @@ export default function AuthHero({ type = "login" }) {
         {/* Description */}
         <motion.p
           variants={itemFadeLeft}
-          className="text-xs sm:text-[14px] lg:text-[15px] text-slate-600 dark:text-purple-200/80 lg:dark:text-slate-300 font-normal leading-relaxed mb-3 lg:mb-6 max-w-[460px]"
+          className="text-xs sm:text-[14px] lg:text-[15px] text-purple-200/80 lg:text-slate-300 font-normal leading-relaxed mb-3 lg:mb-6 max-w-[460px]"
         >
           {isLogin
             ? "Submit RTI applications, track progress & receive official updates."
@@ -140,7 +140,7 @@ export default function AuthHero({ type = "login" }) {
             variants={itemFadeUp}
             whileHover={{ y: -3, borderColor: "rgba(147, 51, 234, 0.4)" }}
             transition={{ duration: 0.3 }}
-            className="hidden lg:block rounded-2xl p-4 sm:p-5 w-full max-w-[490px] bg-white/95 dark:bg-white/[0.08] backdrop-blur-xl border border-purple-100/90 dark:border-white/20 shadow-[0_20px_45px_-10px_rgba(109,40,217,0.12),0_4px_16px_rgba(0,0,0,0.04)] dark:shadow-[0_20px_45px_-10px_rgba(8,4,30,0.65),0_0_20px_2px_rgba(138,75,255,0.12)] text-slate-800 dark:text-slate-100"
+            className="hidden lg:block rounded-2xl p-4 sm:p-5 w-full max-w-[490px] bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_20px_45px_-10px_rgba(8,4,30,0.65),0_0_20px_2px_rgba(138,75,255,0.12)] text-slate-100"
             data-purpose="status-tracker-card"
           >
             {/* Card Header Info */}
@@ -148,7 +148,7 @@ export default function AuthHero({ type = "login" }) {
               <div className="flex items-center gap-3">
                 <motion.div
                   whileHover={{ rotate: 10, scale: 1.08 }}
-                  className="w-10 h-10 rounded-xl bg-purple-100/90 dark:bg-purple-500/20 border border-purple-200 dark:border-purple-400/30 flex items-center justify-center text-purple-700 dark:text-purple-200 shadow-xs"
+                  className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/30 flex items-center justify-center text-purple-200"
                 >
                   <svg className="w-5 h-5 stroke-current" fill="none" strokeWidth="1.8" viewBox="0 0 24 24">
                     <path
@@ -159,10 +159,10 @@ export default function AuthHero({ type = "login" }) {
                   </svg>
                 </motion.div>
                 <div>
-                  <h3 className="text-slate-900 dark:text-white text-sm font-bold tracking-tight">
+                  <h3 className="text-white text-sm font-semibold tracking-tight">
                     {loginContent.hero.trackerCard.title}
                   </h3>
-                  <p className="text-xs text-purple-700 dark:text-purple-300 font-mono font-medium tracking-wide">
+                  <p className="text-xs text-purple-300 font-mono tracking-wide">
                     {loginContent.hero.trackerCard.trackingId}
                   </p>
                 </div>
@@ -178,7 +178,7 @@ export default function AuthHero({ type = "login" }) {
                   ],
                 }}
                 transition={{ repeat: Infinity, duration: 2.5 }}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-800 dark:text-amber-300 bg-amber-100/80 dark:bg-amber-500/15 border border-amber-300 dark:border-amber-500/30"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-300 bg-amber-500/15 border border-amber-500/30"
               >
                 {loginContent.hero.trackerCard.statusBadge}
               </motion.span>
@@ -186,7 +186,7 @@ export default function AuthHero({ type = "login" }) {
 
             {/* Progress Stepper */}
             <div className="relative pt-1 pb-1 px-3">
-              <div className="absolute top-[17px] left-9 right-9 h-[2px] bg-slate-200 dark:bg-slate-700/80 -z-0" />
+              <div className="absolute top-[17px] left-9 right-9 h-[2px] bg-slate-700/80 -z-0" />
               <motion.div
                 initial={{ width: "0%" }}
                 animate={{ width: "48%" }}
@@ -201,11 +201,11 @@ export default function AuthHero({ type = "login" }) {
                       <path d="m4.5 12.75 6 6 9-13.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-xs font-medium text-slate-700 dark:text-slate-200 mt-1.5">Submitted</span>
+                  <span className="text-xs font-medium text-slate-200 mt-1.5">Submitted</span>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-purple-600 dark:bg-indigo-900 border-2 border-purple-400 flex items-center justify-center shadow-[0_0_14px_rgba(168,85,247,0.85)] relative">
+                  <div className="w-7 h-7 rounded-full bg-purple-600 border-2 border-purple-400 flex items-center justify-center shadow-[0_0_14px_rgba(168,85,247,0.85)] relative">
                     <motion.div
                       animate={{ scale: [1, 1.35, 1], opacity: [0.8, 0.3, 0.8] }}
                       transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
@@ -213,14 +213,14 @@ export default function AuthHero({ type = "login" }) {
                     />
                     <div className="w-2.5 h-2.5 rounded-full bg-white ring-4 ring-purple-500/50" />
                   </div>
-                  <span className="text-xs font-semibold text-slate-900 dark:text-white mt-1.5">Under Review</span>
+                  <span className="text-xs font-semibold text-white mt-1.5">Under Review</span>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800/90 border border-slate-300 dark:border-slate-600/60 flex items-center justify-center text-slate-400">
-                    <div className="w-2 h-2 rounded-full bg-slate-400 dark:bg-slate-600" />
+                  <div className="w-7 h-7 rounded-full bg-slate-800/90 border border-slate-600/60 flex items-center justify-center text-slate-400">
+                    <div className="w-2 h-2 rounded-full bg-slate-600" />
                   </div>
-                  <span className="text-xs font-medium text-slate-500 dark:text-slate-400 mt-1.5">Response</span>
+                  <span className="text-xs font-medium text-slate-400 mt-1.5">Response</span>
                 </div>
               </div>
             </div>
@@ -300,7 +300,7 @@ export default function AuthHero({ type = "login" }) {
             whileTap={{ scale: 0.97 }}
             className="flex items-center gap-2.5 cursor-default"
           >
-            <div className="w-8 h-8 rounded-lg bg-white dark:bg-white/[0.08] backdrop-blur-md border border-purple-200/80 dark:border-white/15 flex items-center justify-center text-purple-700 dark:text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/60">
+            <div className="w-8 h-8 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/15 flex items-center justify-center text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/40">
               {feat.icon === "document" && (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path
@@ -326,8 +326,8 @@ export default function AuthHero({ type = "login" }) {
               )}
             </div>
             <div className="text-[11px] font-medium leading-tight">
-              <span className="block text-slate-900 dark:text-slate-200 font-semibold">{feat.title}</span>
-              <span className="text-slate-600 dark:text-slate-400 font-medium">{feat.subtitle}</span>
+              <span className="block text-slate-200 font-semibold">{feat.title}</span>
+              <span className="text-slate-400 font-medium">{feat.subtitle}</span>
             </div>
           </motion.div>
         ))}
