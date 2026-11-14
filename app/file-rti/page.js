@@ -568,18 +568,18 @@ export default function FileRtiPage() {
               </div>
 
               {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-950/40 via-indigo-950/30 to-slate-900 border border-purple-500/25 space-y-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-50 via-indigo-50/60 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-sm transition-all">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="p-1 rounded-lg bg-purple-600/30 text-purple-300 text-xs font-bold">🎯</span>
+                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs font-bold">🎯</span>
                     <div>
-                      <h4 className="text-xs font-bold text-white flex items-center gap-2">
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>AI Smart Authority Router</span>
-                        <span className="px-2 py-0.2 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-mono">
+                        <span className="px-2 py-0.2 rounded-full bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 text-[10px] font-mono font-bold">
                           Section 5(1) Direct Mapping
                         </span>
                       </h4>
-                      <p className="text-[11px] text-purple-200/70">
+                      <p className="text-[11px] text-purple-800/80 dark:text-purple-200/70">
                         Enter a short topic to auto-detect the exact competent authority and designated PIO.
                       </p>
                     </div>
@@ -598,7 +598,7 @@ export default function FileRtiPage() {
                       }
                     }}
                     placeholder="e.g. broken road in village, drinking water supply, ration card delay, hospital doctor absent..."
-                    className="flex-1 px-3.5 py-2 rounded-xl bg-black/40 border border-purple-500/30 text-white text-xs placeholder-purple-300/40 focus:outline-none focus:border-purple-400"
+                    className="flex-1 px-3.5 py-2 rounded-xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 shadow-sm"
                   />
                   <button
                     type="button"
@@ -612,7 +612,7 @@ export default function FileRtiPage() {
 
                 {/* Quick Topic Chips */}
                 <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="text-[10px] text-slate-400">Quick Topics:</span>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Quick Topics:</span>
                   {[
                     { label: "🚧 Road / Potholes", topic: "village road repair tender delay" },
                     { label: "💧 Drinking Water", topic: "water pipeline and tanki connection" },
@@ -628,7 +628,7 @@ export default function FileRtiPage() {
                         setRoutingTopic(chip.topic);
                         handleAutoRoute(chip.topic);
                       }}
-                      className="px-2 py-0.5 rounded-lg bg-white/5 hover:bg-white/10 text-purple-200 text-[10px] border border-white/10 transition cursor-pointer"
+                      className="px-2 py-0.5 rounded-lg bg-white dark:bg-white/5 hover:bg-purple-50 dark:hover:bg-white/10 text-purple-700 dark:text-purple-200 text-[10px] border border-purple-200 dark:border-white/10 transition cursor-pointer shadow-xs"
                     >
                       {chip.label}
                     </button>
@@ -640,21 +640,21 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-1.5"
+                    className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-1.5"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-emerald-300 flex items-center gap-1.5">
+                      <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
                         <span>✓ Mapped to {aiRoutingResult.primary.name}</span>
-                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-200 border border-emerald-500/30">
+                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-500/30 font-bold">
                           {aiRoutingResult.primary.confidence} Match
                         </span>
                       </span>
-                      <span className="text-[11px] text-emerald-400 font-mono font-semibold">
+                      <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">
                         Avg: {aiRoutingResult.primary.avgResponseDays} Days
                       </span>
                     </div>
 
-                    <div className="text-[11px] text-slate-300 flex flex-wrap gap-x-4 gap-y-1">
+                    <div className="text-[11px] text-slate-700 dark:text-slate-300 flex flex-wrap gap-x-4 gap-y-1">
                       <span><strong>Designated PIO:</strong> {aiRoutingResult.primary.pioName}</span>
                       <span><strong>Nodal Office:</strong> {aiRoutingResult.primary.nodalOffice}</span>
                     </div>
@@ -746,33 +746,33 @@ export default function FileRtiPage() {
               </div>
 
               {/* SARAL AI Vernacular Copilot Card */}
-              <div className="p-5 rounded-3xl bg-gradient-to-br from-purple-950/70 via-indigo-950/50 to-slate-900 border border-purple-500/30 shadow-xl space-y-4">
+              <div className="p-5 rounded-3xl bg-gradient-to-br from-purple-50 via-indigo-50/60 to-slate-50 dark:from-purple-950/70 dark:via-indigo-950/50 dark:to-slate-900 border border-purple-200 dark:border-purple-500/30 shadow-md dark:shadow-xl space-y-4 transition-all">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2.5">
-                    <div className="w-8 h-8 rounded-xl bg-purple-600/30 text-purple-300 flex items-center justify-center text-sm font-bold shadow-inner">
+                    <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 flex items-center justify-center text-sm font-bold shadow-inner">
                       ✨
                     </div>
                     <div>
-                      <h3 className="text-sm font-bold text-white flex items-center gap-2">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>SARAL AI Vernacular Copilot</span>
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
                           Hindi • Hinglish • English
                         </span>
                       </h3>
-                      <p className="text-[11px] text-purple-200/80">
+                      <p className="text-[11px] text-purple-900/80 dark:text-purple-200/80">
                         Apni aam bolchaal me likhein — Copilot isko Section 6(1) legal clauses me structure karega.
                       </p>
                     </div>
                   </div>
 
-                  <span className="text-[10px] text-purple-300 font-mono self-start sm:self-center">
+                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-mono self-start sm:self-center font-medium">
                     Powered by Google Gemini & Civic NLP
                   </span>
                 </div>
 
                 {/* Quick Vernacular Preset Pills */}
                 <div className="space-y-1.5">
-                  <span className="text-[10px] text-purple-300/70 font-semibold block uppercase tracking-wider">
+                  <span className="text-[10px] text-purple-800/80 dark:text-purple-300/70 font-semibold block uppercase tracking-wider">
                     Quick Sample Vernacular Prompts:
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -783,7 +783,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-purple-600/30 text-purple-200 border border-white/15 text-[11px] transition cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
                     >
                       🚧 Sadak & Thekedar Budget
                     </button>
@@ -794,7 +794,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-purple-600/30 text-purple-200 border border-white/15 text-[11px] transition cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
                     >
                       💧 Paani Pipeline Sanction
                     </button>
@@ -805,7 +805,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-purple-600/30 text-purple-200 border border-white/15 text-[11px] transition cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
                     >
                       🏥 PHC Doctor & Dawai Shortage
                     </button>
@@ -816,7 +816,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-purple-600/30 text-purple-200 border border-white/15 text-[11px] transition cursor-pointer"
+                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
                     >
                       🏫 School Mid-Day Meal
                     </button>
@@ -831,7 +831,7 @@ export default function FileRtiPage() {
                       value={aiInputPrompt}
                       onChange={(e) => setAiInputPrompt(e.target.value)}
                       placeholder="Likh ya bol yahan: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
-                      className="w-full p-3.5 pr-28 rounded-2xl bg-black/40 border border-purple-500/30 text-white text-xs leading-relaxed placeholder-purple-300/40 focus:outline-none focus:border-purple-400 resize-none font-sans"
+                      className="w-full p-3.5 pr-28 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
                     />
                     <button
                       type="button"
@@ -1023,14 +1023,14 @@ export default function FileRtiPage() {
                     {section8ScanResult.touchpoints?.map((tp, idx) => (
                       <div
                         key={idx}
-                        className="p-3 rounded-xl bg-black/20 border border-white/10 space-y-1 text-[11px]"
+                        className="p-3 rounded-xl bg-slate-100/90 dark:bg-black/20 border border-slate-200 dark:border-white/10 space-y-1 text-[11px]"
                       >
                         <div className="flex items-center justify-between font-bold">
                           <span>{tp.section}: {tp.title}</span>
-                          <span className="text-[10px] uppercase text-rose-400">{tp.severity} Severity</span>
+                          <span className="text-[10px] uppercase text-rose-600 dark:text-rose-400 font-bold">{tp.severity} Severity</span>
                         </div>
-                        <p className="text-slate-300">{tp.advice}</p>
-                        <p className="text-emerald-300">
+                        <p className="text-slate-700 dark:text-slate-300">{tp.advice}</p>
+                        <p className="text-emerald-700 dark:text-emerald-300">
                           <strong>Recommended Legal Remedy:</strong> {tp.remedy}
                         </p>
                       </div>

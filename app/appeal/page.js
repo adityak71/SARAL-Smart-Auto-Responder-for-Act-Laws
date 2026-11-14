@@ -282,9 +282,9 @@ function AppealForm() {
               onChange={(e) => handleSelectApp(e.target.value)}
               className="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
             >
-              <option value="">-- Choose RTI Petition --</option>
+              <option value="" className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white">-- Choose RTI Petition --</option>
               {applications.map((app) => (
-                <option key={app.id} value={app.id} className="bg-slate-900 text-white">
+                <option key={app.id} value={app.id} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white">
                   {app.applicationNumber || app.id} — {app.title?.substring(0, 40)}...
                 </option>
               ))}

@@ -10,7 +10,7 @@ export default function CitizenDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner & Quick Actions */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-950/70 via-indigo-950/50 to-slate-900 border border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-700 via-indigo-700 to-slate-900 dark:from-purple-950/70 dark:via-indigo-950/50 dark:to-slate-900 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
         {/* Glow decoration */}
         <div className="absolute -right-10 -top-10 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
 

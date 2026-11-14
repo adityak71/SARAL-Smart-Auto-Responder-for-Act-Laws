@@ -9,7 +9,7 @@ export default function OfficerDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Officer Bio & Department Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-950/80 via-slate-900 to-indigo-950/70 border border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-700 via-indigo-800 to-slate-900 dark:from-purple-950/80 dark:via-slate-900 dark:to-indigo-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
         {/* Glow decoration */}
         <div className="absolute -left-10 -bottom-10 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
 

@@ -798,7 +798,7 @@ export default function OfficerWorkspace() {
                   className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
                 >
                   {departments.map((dept) => (
-                    <option key={dept.id} value={dept.id} className="bg-slate-900 text-white">
+                    <option key={dept.id} value={dept.id} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white">
                       {dept.name} ({dept.stateOrCentral})
                     </option>
                   ))}
