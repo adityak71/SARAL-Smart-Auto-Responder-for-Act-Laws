@@ -25,8 +25,8 @@ export default function ApplicationTimeline({ application }) {
       {/* Stepper Vertical Milestones */}
       <div className="relative pl-6 sm:pl-8 space-y-8 before:absolute before:left-3 sm:before:left-4 before:top-3 before:bottom-3 before:w-0.5 before:bg-slate-200 dark:before:bg-white/10">
         {application.timeline.map((item, index) => {
-          const isCompleted = item.completed;
-          const isActive = item.active;
+          const isCompleted = Boolean(item.completed);
+          const isActive = Boolean(item.active) && !isCompleted;
 
           return (
             <motion.div
@@ -39,14 +39,14 @@ export default function ApplicationTimeline({ application }) {
               {/* Dot Icon Anchor */}
               <div
                 className={`absolute -left-6 sm:-left-8 top-0.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md transition-all ${
-                  isCompleted && !isActive
+                  isCompleted
                     ? "bg-purple-600 text-white ring-4 ring-purple-100 dark:ring-purple-900/40"
                     : isActive
                     ? "bg-cyan-500 text-slate-900 ring-4 ring-cyan-500/30 animate-pulse"
                     : "bg-slate-100 dark:bg-white/10 text-slate-400 border border-slate-300 dark:border-white/10"
                 }`}
               >
-                {isCompleted && !isActive ? (
+                {isCompleted ? (
                   "✓"
                 ) : isActive ? (
                   "●"

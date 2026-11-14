@@ -71,17 +71,36 @@ export function mapApiAppToTrackingApp(app) {
     });
   };
 
+  // Normalize timeline stages so that any completed stage is strictly completed=true, active=false
+  const rawTimeline = Array.isArray(app.timeline) ? app.timeline : [];
+  const sortedTimeline = [...rawTimeline].sort((a, b) => a.stage - b.stage);
+
+  let maxCompletedStage = 0;
+  sortedTimeline.forEach((t) => {
+    if (t.completed) {
+      maxCompletedStage = Math.max(maxCompletedStage, t.stage);
+    }
+  });
+
+  // Next active stage is the first non-completed stage (e.g. Stage 4 if PIO is assigned)
+  const activeStageNum =
+    app.status === "RESOLVED" ? 5 : Math.min(5, maxCompletedStage + 1);
+
   // Timeline
   const timeline =
-    app.timeline && app.timeline.length > 0
-      ? app.timeline.map((t) => ({
-          stage: t.stage,
-          title: t.title,
-          date: formatMilestoneDate(t),
-          description: t.description || "",
-          completed: t.completed,
-          active: t.active,
-        }))
+    sortedTimeline.length > 0
+      ? sortedTimeline.map((t) => {
+          const isDone = t.stage <= maxCompletedStage || Boolean(t.completed);
+          const isActive = !isDone && t.stage === activeStageNum;
+          return {
+            stage: t.stage,
+            title: t.title,
+            date: formatMilestoneDate(t),
+            description: t.description || "",
+            completed: isDone,
+            active: isActive,
+          };
+        })
       : [
           {
             stage: 1,
@@ -227,7 +246,7 @@ export function mapApiAppToTrackingApp(app) {
       app.feeStatus === "EXEMPTED_BPL"
         ? "Exempted (BPL Category)"
         : "Paid (₹10 via Bharatkosh Gateway)",
-    currentStage: stage,
+    currentStage: activeStageNum,
     status: statusInfo.code,
     statusLabel: statusInfo.label,
     statusColor: statusInfo.color,
