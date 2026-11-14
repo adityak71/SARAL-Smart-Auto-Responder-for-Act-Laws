@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function StatutoryClock({ application }) {
   if (!application) return null;
 
@@ -75,12 +77,12 @@ export default function StatutoryClock({ application }) {
           <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-snug">
             The Public Information Officer has not provided certified records within the 30-day statutory period. SARAL has auto-drafted your First Appeal memorandum.
           </p>
-          <button
-            type="button"
-            className="w-full py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition shadow-md cursor-pointer"
+          <Link
+            href={`/appeal?id=${application.id}`}
+            className="w-full py-2 rounded-xl bg-rose-600 hover:bg-rose-500 text-white font-semibold text-xs transition shadow-md cursor-pointer text-center block"
           >
             Submit First Appeal to Appellate Authority (FAA)
-          </button>
+          </Link>
         </div>
       )}
 

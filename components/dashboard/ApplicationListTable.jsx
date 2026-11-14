@@ -3,12 +3,16 @@
 import { useEffect, useState, useMemo } from "react";
 import Link from "next/link";
 import { mockRtiApplications } from "@/data/trackingData";
+import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
+import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
 
 export default function ApplicationListTable() {
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [applications, setApplications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [selectedCertifiedApp, setSelectedCertifiedApp] = useState(null);
+  const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -278,25 +282,13 @@ export default function ApplicationListTable() {
                   </td>
 
                   <td className="py-4 pr-3 whitespace-nowrap">
-                    <div className="flex items-center gap-2">
-                      <span className="font-semibold text-slate-700 dark:text-slate-200">
-                        {app.isResolved ? "Dispatched" : `Day ${app.elapsedDays}/30`}
-                      </span>
-                      <div className="w-16 h-1.5 rounded-full bg-slate-100 dark:bg-white/10 overflow-hidden border border-slate-200 dark:border-transparent">
-                        <div
-                          className={`h-full rounded-full ${
-                            app.isResolved
-                              ? "bg-emerald-500"
-                              : app.isAppeal
-                              ? "bg-rose-500"
-                              : "bg-cyan-400"
-                          }`}
-                          style={{
-                            width: `${Math.min(100, (app.elapsedDays / 30) * 100)}%`,
-                          }}
-                        />
-                      </div>
-                    </div>
+                    <StatutoryCountdownClock
+                      dateFiled={app.dateFiled || app.createdAt}
+                      statutoryDeadline={app.statutoryDeadline}
+                      isLifeOrLiberty={app.isLifeOrLiberty}
+                      status={app.status}
+                      size="compact"
+                    />
                   </td>
 
                   <td className="py-4 pr-3 whitespace-nowrap">
@@ -309,6 +301,20 @@ export default function ApplicationListTable() {
 
                   <td className="py-4 text-right whitespace-nowrap">
                     <div className="inline-flex items-center gap-1.5 justify-end">
+                      {/* Certified Response Quick View */}
+                      {app.isResolved && (
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedCertifiedApp(app);
+                            setIsCertifiedModalOpen(true);
+                          }}
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white dark:bg-emerald-600/20 dark:hover:bg-emerald-600 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[11px] font-bold transition cursor-pointer"
+                        >
+                          <span>📜 Certified PDF</span>
+                        </button>
+                      )}
+
                       {app.isAppeal && (
                         <Link
                           href={`/appeal?id=${app.idStr}`}
@@ -317,6 +323,7 @@ export default function ApplicationListTable() {
                           <span>File Appeal</span>
                         </Link>
                       )}
+
                       <Link
                         href={`/tracking?id=${app.idStr}`}
                         className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/30 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-200 dark:border-purple-500/30 text-xs font-semibold transition"
@@ -346,6 +353,14 @@ export default function ApplicationListTable() {
           </div>
         )}
       </div>
+
+      {/* Citizen Certified Response Modal */}
+      <CertifiedResponseModal
+        isOpen={isCertifiedModalOpen}
+        onClose={() => setIsCertifiedModalOpen(false)}
+        application={selectedCertifiedApp}
+        officialResponse={selectedCertifiedApp?.officialResponse}
+      />
     </div>
   );
 }
