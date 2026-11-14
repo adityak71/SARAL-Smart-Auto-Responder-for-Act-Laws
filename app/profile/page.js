@@ -52,25 +52,54 @@ export default function ProfilePage() {
   const [deleteConfirmText, setDeleteConfirmText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
-  // Sync state when user or activeRole loads
+  // Fetch fresh profile from database on mount
   useEffect(() => {
     if (!isAuthenticated) {
       router.push("/login");
       return;
     }
 
+    async function loadFreshUser() {
+      try {
+        const res = await fetch("/api/auth/me");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.user) {
+            dispatch(setCredentials(data.user));
+          }
+        }
+      } catch (e) {}
+    }
+    loadFreshUser();
+  }, [isAuthenticated, dispatch, router]);
+
+  // Sync state when user or activeRole loads
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
     const isOfficer = activeRole === "OFFICER";
     const isAdmin = activeRole === "ADMIN";
 
+    // Auto-extract citizen's legal name from Google Auth / user state or email prefix
+    let derivedName = user?.fullName || user?.name || "";
+    if (!derivedName && user?.email) {
+      const emailPrefix = user.email.split("@")[0];
+      derivedName = emailPrefix
+        .replace(/[._]/g, " ")
+        .replace(/\b\w/g, (c) => c.toUpperCase());
+    }
+
+    if (!derivedName) {
+      derivedName = isOfficer
+        ? "Er. Rameshwar Verma"
+        : isAdmin
+        ? "SARAL Central Administrator"
+        : "Citizen User";
+    }
+
     setDetailsForm({
-      fullName:
-        user?.fullName ||
-        (isOfficer
-          ? "Er. Rameshwar Verma"
-          : isAdmin
-          ? "SARAL Central Administrator"
-          : "Rahul Sharma"),
-      phone: user?.phone || (isOfficer ? "+91 7574-254190" : "+91 98260-12345"),
+      fullName: derivedName,
+      phone: user?.phone || "",
       avatarUrl:
         user?.avatarUrl ||
         (isOfficer
@@ -78,18 +107,19 @@ export default function ProfilePage() {
           : isAdmin
           ? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256"
           : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256"),
-      careOf: "Shri Kailash Sharma",
-      addressLine: user?.citizenProfile?.addressLine || "Ward No. 4, Village Pipariya",
-      district: user?.citizenProfile?.district || "Hoshangabad",
-      state: user?.citizenProfile?.state || "Madhya Pradesh",
-      pincode: user?.citizenProfile?.pincode || "461775",
+      careOf: user?.citizenProfile?.careOf || "",
+      addressLine: user?.citizenProfile?.addressLine || "",
+      district: user?.citizenProfile?.district || "",
+      state: user?.citizenProfile?.state || "",
+      pincode: user?.citizenProfile?.pincode || "",
       designation:
-        user?.officerProfile?.designation || "Executive Engineer & Designated PIO",
+        user?.officerProfile?.designation ||
+        (isOfficer ? "Executive Engineer & Designated PIO" : ""),
       officeLocation:
         user?.officerProfile?.officeLocation ||
-        "Divisional Works Office, PWD Division II, Pipariya",
+        (isOfficer ? "Divisional Works Office, PWD Division II, Pipariya" : ""),
     });
-  }, [isAuthenticated, user, activeRole, router]);
+  }, [isAuthenticated, user, activeRole]);
 
   // Avatar presets for quick photo change
   const avatarPresets = [
@@ -116,16 +146,38 @@ export default function ProfilePage() {
       const data = await res.json();
 
       if (data.success && data.user) {
-        dispatch(setCredentials(data.user));
+        dispatch(
+          setCredentials({
+            ...user,
+            ...data.user,
+            name: data.user.fullName,
+            fullName: data.user.fullName,
+          })
+        );
         setDetailsFeedback({
           type: "success",
           text: "✓ Profile details updated successfully in database.",
         });
       } else {
-        // Fallback for mock/demo mode without breaking
+        // Fallback local update
+        dispatch(
+          setCredentials({
+            ...user,
+            name: detailsForm.fullName,
+            fullName: detailsForm.fullName,
+            phone: detailsForm.phone,
+            citizenProfile: {
+              ...user?.citizenProfile,
+              addressLine: detailsForm.addressLine,
+              district: detailsForm.district,
+              state: detailsForm.state,
+              pincode: detailsForm.pincode,
+            },
+          })
+        );
         setDetailsFeedback({
           type: "success",
-          text: "✓ Profile details updated and saved locally.",
+          text: "✓ Profile details updated successfully.",
         });
       }
     } catch {
@@ -342,10 +394,10 @@ export default function ProfilePage() {
               {/* User Identity Overview */}
               <div className="mt-4 space-y-1">
                 <h3 className="text-xl font-extrabold text-slate-900 dark:text-white">
-                  {detailsForm.fullName}
+                  {detailsForm.fullName || user?.name || user?.fullName || "Citizen User"}
                 </h3>
                 <p className="text-xs text-purple-700 dark:text-purple-300 font-medium truncate">
-                  {user?.email || (activeRole === "OFFICER" ? "er.rameshwar@mp.gov.in" : activeRole === "ADMIN" ? "admin@saral-rti.in" : "rahul.sharma@citizen.in")}
+                  {user?.email || (activeRole === "OFFICER" ? "officer@mp.gov.in" : activeRole === "ADMIN" ? "admin@saral-rti.in" : "citizen@saral-rti.in")}
                 </p>
 
                 <div className="pt-2 flex justify-center">
@@ -378,7 +430,9 @@ export default function ProfilePage() {
               <div className="mt-6 pt-5 border-t border-slate-200 dark:border-white/10 text-left text-xs space-y-3">
                 <div className="flex justify-between items-center">
                   <span className="text-slate-500 dark:text-slate-400">Registered Phone:</span>
-                  <span className="font-semibold text-slate-800 dark:text-slate-200">{detailsForm.phone}</span>
+                  <span className="font-semibold text-slate-800 dark:text-slate-200">
+                    {detailsForm.phone || "Not provided"}
+                  </span>
                 </div>
 
                 {activeRole === "CITIZEN" && (
@@ -414,7 +468,9 @@ export default function ProfilePage() {
                     <div className="flex justify-between items-center">
                       <span className="text-slate-500 dark:text-slate-400">Jurisdiction:</span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
-                        {detailsForm.district}, {detailsForm.state}
+                        {detailsForm.district && detailsForm.state
+                          ? `${detailsForm.district}, ${detailsForm.state}`
+                          : detailsForm.state || detailsForm.district || "Not specified"}
                       </span>
                     </div>
                   </>
@@ -517,6 +573,7 @@ export default function ProfilePage() {
                     <input
                       type="text"
                       required
+                      placeholder="e.g. Aditya Kumar"
                       value={detailsForm.fullName}
                       onChange={(e) =>
                         setDetailsForm({ ...detailsForm, fullName: e.target.value })
@@ -528,11 +585,11 @@ export default function ProfilePage() {
                   {/* Registered Phone */}
                   <div>
                     <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
-                      Phone Number <span className="text-rose-500">*</span>
+                      Phone Number
                     </label>
                     <input
                       type="tel"
-                      required
+                      placeholder="e.g. +91 98765 43210"
                       value={detailsForm.phone}
                       onChange={(e) =>
                         setDetailsForm({ ...detailsForm, phone: e.target.value })
@@ -550,6 +607,7 @@ export default function ProfilePage() {
                         </label>
                         <input
                           type="text"
+                          placeholder="e.g. Flat/House No., Street, Landmark (Leave blank until verified)"
                           value={detailsForm.addressLine}
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, addressLine: e.target.value })
@@ -564,6 +622,7 @@ export default function ProfilePage() {
                         </label>
                         <input
                           type="text"
+                          placeholder="e.g. Bhopal, New Delhi, Patna"
                           value={detailsForm.district}
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, district: e.target.value })
@@ -579,6 +638,7 @@ export default function ProfilePage() {
                           </label>
                           <input
                             type="text"
+                            placeholder="e.g. Madhya Pradesh, Bihar"
                             value={detailsForm.state}
                             onChange={(e) =>
                               setDetailsForm({ ...detailsForm, state: e.target.value })
@@ -593,6 +653,7 @@ export default function ProfilePage() {
                           </label>
                           <input
                             type="text"
+                            placeholder="e.g. 462001"
                             value={detailsForm.pincode}
                             onChange={(e) =>
                               setDetailsForm({ ...detailsForm, pincode: e.target.value })

@@ -1,9 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { initialNotifications } from "@/data/notificationsData";
 
 const initialState = {
-  notifications: initialNotifications,
-  unreadCount: initialNotifications.filter((n) => n.unread).length,
+  notifications: [],
+  unreadCount: 0,
   filter: "all", // "all" | "unread"
 };
 

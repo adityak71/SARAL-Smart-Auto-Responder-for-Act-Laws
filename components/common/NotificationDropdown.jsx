@@ -43,7 +43,7 @@ export default function NotificationDropdown() {
         const res = await fetch("/api/notifications");
         if (res.ok) {
           const data = await res.json();
-          if (data.success && Array.isArray(data.notifications) && data.notifications.length > 0) {
+          if (data.success && Array.isArray(data.notifications)) {
             const mapped = data.notifications.map((n) => ({
               id: n.id,
               title: n.title,

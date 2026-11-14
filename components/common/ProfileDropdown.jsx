@@ -39,7 +39,9 @@ export default function ProfileDropdown() {
       ? "Superadmin (CIC Controller)"
       : userRole === "OFFICER"
       ? "Section 5(1) Designated PIO"
-      : "DigiLocker Verified Citizen";
+      : user?.isDigiLockerVerified
+      ? "DigiLocker Verified Citizen"
+      : "Verification Pending";
 
   return (
     <div className="relative">

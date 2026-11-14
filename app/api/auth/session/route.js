@@ -41,8 +41,20 @@ export async function POST(request) {
         include: { citizenProfile: true, officerProfile: true },
       });
 
-      // 2. If not found, provision in database
-      if (!dbUser) {
+      // 2. If found, ensure cleanName from Google Auth updates any legacy placeholder name
+      if (dbUser) {
+        if (cleanName && cleanName !== "Citizen User" && dbUser.fullName !== cleanName) {
+          dbUser = await prisma.user.update({
+            where: { id: dbUser.id },
+            data: {
+              fullName: cleanName,
+              avatarUrl: cleanAvatar || dbUser.avatarUrl,
+            },
+            include: { citizenProfile: true, officerProfile: true },
+          });
+        }
+      } else {
+        // If not found, provision in database
         const dummyHash = await hashPassword(`SARAL_AUTH_${cleanEmail}_${Date.now()}`);
         dbUser = await prisma.user.create({
           data: {
@@ -78,6 +90,23 @@ export async function POST(request) {
           });
         } catch (e) {}
       }
+
+      // Seed personalized welcome notification if user has 0 notifications
+      try {
+        const notifCount = await prisma.notification.count({ where: { userId: dbUser.id } });
+        if (notifCount === 0) {
+          await prisma.notification.create({
+            data: {
+              userId: dbUser.id,
+              title: `Welcome to SARAL RTI, ${dbUser.fullName}!`,
+              message: `Your citizen account (${cleanEmail}) is ready. Explore verified encyclopedias, complete DigiLocker citizenship verification, and file statutory RTIs under Section 6(1).`,
+              type: "SYSTEM",
+              link: "/dashboard",
+              isRead: false,
+            },
+          });
+        }
+      } catch (nErr) {}
     } catch (dbErr) {
       console.warn("Database lookup/create skipped or offline, using virtual user:", dbErr.message);
       dbUser = {
@@ -103,9 +132,16 @@ export async function POST(request) {
       email: dbUser.email,
       name: dbUser.fullName,
       fullName: dbUser.fullName,
+      phone: dbUser.phone || "",
       role: dbUser.role,
       avatarUrl: dbUser.avatarUrl || cleanAvatar,
       isDigiLockerVerified: Boolean(dbUser.isDigiLockerVerified),
+      citizenProfile: dbUser.citizenProfile || {
+        addressLine: "",
+        district: "",
+        state: "",
+        pincode: "",
+      },
     };
 
     const response = NextResponse.json({

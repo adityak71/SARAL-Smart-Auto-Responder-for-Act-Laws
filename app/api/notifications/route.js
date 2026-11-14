@@ -9,10 +9,7 @@ import {
 
 async function getTargetUserId(request) {
   const session = getAuthSession(request);
-  if (session?.userId) return session.userId;
-  // Fallback demo user if unauthenticated in preview
-  const demoUser = await prisma.user.findFirst({ where: { role: "CITIZEN" } });
-  return demoUser?.id || null;
+  return session?.userId || null;
 }
 
 export async function GET(request) {
