@@ -98,30 +98,30 @@ export default function ProfileDropdown() {
               <Link
                 href="/profile"
                 onClick={() => dispatch(setProfileDropdown(false))}
-                className="p-4 bg-gradient-to-br from-purple-900/30 via-[#130a38] to-[#0c0628] border-b border-white/10 block hover:bg-purple-900/40 transition group cursor-pointer"
+                className="p-4 bg-gradient-to-br from-purple-700 via-indigo-700 to-purple-900 dark:from-purple-900/40 dark:via-[#130a38] dark:to-[#0c0628] border-b border-purple-600/30 dark:border-white/10 block hover:opacity-95 transition group cursor-pointer text-white"
               >
                 <div className="flex items-center gap-3">
                   <div className="relative shrink-0">
                     <img
                       src={avatarUrl}
                       alt={displayName}
-                      className="w-12 h-12 rounded-full object-cover ring-2 ring-purple-500/80 shadow-md group-hover:ring-purple-400 transition"
+                      className="w-12 h-12 rounded-full object-cover ring-2 ring-white/60 dark:ring-purple-500/80 shadow-md group-hover:ring-white transition"
                     />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-500 ring-2 ring-[#0c0628]" />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-[#0c0628]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
-                      <h3 className="font-bold text-sm text-white truncate group-hover:text-purple-300 transition">
+                      <h3 className="font-bold text-sm text-white truncate group-hover:text-purple-200 transition">
                         {displayName}
                       </h3>
-                      <span className="text-[10px] text-purple-400 opacity-0 group-hover:opacity-100 transition">
+                      <span className="text-[10px] text-purple-200 opacity-0 group-hover:opacity-100 transition font-semibold">
                         Edit ↗
                       </span>
                     </div>
-                    <p className="text-xs text-purple-200/70 truncate">
+                    <p className="text-xs text-purple-100/80 truncate">
                       {displayEmail}
                     </p>
-                    <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-semibold">
+                    <div className="mt-1.5 inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/25 text-emerald-200 border border-emerald-400/40 text-[10px] font-semibold">
                       <svg className="w-2.5 h-2.5 fill-current" viewBox="0 0 20 20">
                         <path
                           fillRule="evenodd"
@@ -141,15 +141,15 @@ export default function ProfileDropdown() {
                 <Link
                   href="/profile"
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-purple-600/15 hover:bg-purple-600/25 border border-purple-500/30 text-purple-200 hover:text-white font-semibold transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-purple-50 hover:bg-purple-100 dark:bg-purple-600/15 dark:hover:bg-purple-600/25 border border-purple-200 dark:border-purple-500/30 text-purple-900 dark:text-purple-200 hover:text-purple-950 dark:hover:text-white font-semibold transition group"
                 >
                   <div className="flex items-center gap-2.5">
-                    <svg className="w-4 h-4 text-purple-400 group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <svg className="w-4 h-4 text-purple-600 dark:text-purple-400 group-hover:text-purple-700 dark:group-hover:text-purple-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                     </svg>
                     <span>View Your Profile</span>
                   </div>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-purple-500/25 text-purple-300 border border-purple-500/30">
+                  <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-md bg-purple-600 text-white dark:bg-purple-500/25 dark:text-purple-300 border border-purple-600 dark:border-purple-500/30 shadow-xs">
                     Live
                   </span>
                 </Link>
@@ -158,9 +158,9 @@ export default function ProfileDropdown() {
                 <Link
                   href="/dashboard"
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 text-slate-800 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition group"
                 >
-                  <span className="font-medium">
+                  <span className="font-semibold">
                     {userRole === "ADMIN"
                       ? "Admin Governance Console"
                       : userRole === "OFFICER"
@@ -172,16 +172,16 @@ export default function ProfileDropdown() {
                 <Link
                   href={userRole === "CITIZEN" ? "/tracking" : "/dashboard"}
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 text-slate-800 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition group"
                 >
-                  <span className="font-medium">
+                  <span className="font-semibold">
                     {userRole === "ADMIN"
                       ? "Public Authorities Directory"
                       : userRole === "OFFICER"
                       ? "Assigned Inward Docket"
                       : "My Filed RTIs"}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full bg-[#281552] text-purple-300 text-[10px] font-bold border border-purple-500/30">
+                  <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-[#281552] dark:text-purple-300 text-[10px] font-bold border border-purple-200 dark:border-purple-500/30">
                     {userRole === "OFFICER" ? "5 Pending" : "3 Active"}
                   </span>
                 </Link>
@@ -189,16 +189,16 @@ export default function ProfileDropdown() {
                 <Link
                   href="/dashboard"
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 text-slate-800 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition group"
                 >
-                  <span className="font-medium">
+                  <span className="font-semibold">
                     {userRole === "ADMIN"
                       ? "Section 25 Compliance Reports"
                       : userRole === "OFFICER"
                       ? "Section 6(3) Transfer Queue"
                       : "Drafted Applications"}
                   </span>
-                  <span className="px-2 py-0.5 rounded-full bg-[#281552] text-purple-300 text-[10px] font-bold border border-purple-500/30">
+                  <span className="px-2 py-0.5 rounded-full bg-purple-100 text-purple-800 dark:bg-[#281552] dark:text-purple-300 text-[10px] font-bold border border-purple-200 dark:border-purple-500/30">
                     1
                   </span>
                 </Link>
@@ -206,17 +206,17 @@ export default function ProfileDropdown() {
                 <Link
                   href="/dashboard"
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 text-slate-800 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition group"
                 >
-                  <span className="font-medium">Official Certified Responses</span>
+                  <span className="font-semibold">Official Certified Responses</span>
                 </Link>
 
                 <Link
                   href="/profile"
                   onClick={() => dispatch(setProfileDropdown(false))}
-                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-white/5 text-slate-300 hover:text-white transition group"
+                  className="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-purple-50 dark:hover:bg-white/5 text-slate-800 dark:text-slate-300 hover:text-purple-700 dark:hover:text-white transition group"
                 >
-                  <span className="font-medium">Account & Preferences</span>
+                  <span className="font-semibold">Account & Preferences</span>
                 </Link>
               </div>
 

@@ -230,7 +230,7 @@ export default function ProfilePage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-gradient-to-br from-slate-100/90 via-purple-50/50 to-indigo-50/70 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-6">
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5">
@@ -271,18 +271,18 @@ export default function ProfilePage() {
 
         {/* Superadmin Inspector Controller Bar (Only visible to ADMIN) */}
         {actualRole === "ADMIN" && (
-          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-900/30 via-slate-900/50 to-indigo-900/30 border border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-md">
+          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-100 via-indigo-50 to-purple-100 dark:from-purple-900/30 dark:via-slate-900/50 dark:to-indigo-900/30 border border-purple-200 dark:border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm dark:shadow-md">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse" />
-              <span className="text-xs font-bold text-cyan-300 uppercase tracking-wider">
+              <span className="w-2.5 h-2.5 rounded-full bg-purple-600 dark:bg-cyan-400 animate-pulse" />
+              <span className="text-xs font-bold text-purple-900 dark:text-cyan-300 uppercase tracking-wider">
                 Admin Profile Inspector:
               </span>
-              <span className="text-xs text-slate-400 hidden md:inline">
+              <span className="text-xs text-slate-600 dark:text-slate-400 hidden md:inline">
                 (Preview how different roles view and edit their profile)
               </span>
             </div>
 
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-900/80 border border-white/10 w-fit">
+            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white dark:bg-slate-900/80 border border-purple-200 dark:border-white/10 w-fit shadow-xs">
               {["CITIZEN", "OFFICER", "ADMIN"].map((r) => (
                 <button
                   key={r}
@@ -290,8 +290,8 @@ export default function ProfilePage() {
                   onClick={() => setActiveRole(r)}
                   className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                     activeRole === r
-                      ? "bg-purple-600 text-white shadow-md"
-                      : "text-slate-400 hover:text-white"
+                      ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
+                      : "text-slate-600 dark:text-slate-400 hover:text-purple-700 dark:hover:text-white"
                   }`}
                 >
                   {r === "CITIZEN" ? "Citizen" : r === "OFFICER" ? "Officer" : "Admin"}

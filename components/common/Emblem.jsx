@@ -1,10 +1,9 @@
-export default function Emblem({ className = "w-12 h-14" }) {
+export default function Emblem({ className = "w-12 h-14 text-slate-800 dark:text-white/95" }) {
   return (
     <div className={`flex items-center justify-center shrink-0 ${className}`}>
       <svg
         aria-label="National Emblem of India"
-        className="w-full h-full text-white/95"
-        fill="currentColor"
+        className="w-full h-full fill-current"
         viewBox="0 0 120 140"
       >
         <path
