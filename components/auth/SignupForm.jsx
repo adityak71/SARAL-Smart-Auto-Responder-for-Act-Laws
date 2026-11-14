@@ -15,15 +15,50 @@ export default function SignupForm() {
   const signupForm = useSelector((state) => state.auth.signupForm);
   const { showPassword, showConfirmPassword } = useSelector((state) => state.ui);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (signupForm.email && signupForm.password) {
+      try {
+        const { createUserWithEmailAndPassword, updateProfile } = await import("firebase/auth");
+        const { auth } = await import("@/lib/firebase");
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          signupForm.email,
+          signupForm.password
+        );
+        if (userCredential?.user) {
+          if (signupForm.fullName) {
+            await updateProfile(userCredential.user, { displayName: signupForm.fullName });
+          }
+          dispatch(
+            setCredentials({
+              id: userCredential.user.uid,
+              name: signupForm.fullName || "Citizen User",
+              email: signupForm.email,
+              role: "CITIZEN",
+              mobile: signupForm.mobile || "+91 98765 43210",
+              avatarUrl:
+                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+              isDigiLockerVerified: false,
+            })
+          );
+          router.push("/dashboard");
+          return;
+        }
+      } catch (err) {
+        console.warn("Firebase Signup fallback to local session:", err.message);
+      }
+    }
+
     dispatch(
       setCredentials({
         name: signupForm.fullName || "Rahul Sharma",
         email: signupForm.email || "rahul.sharma@citizen.in",
-        role: "citizen",
+        role: "CITIZEN",
         mobile: signupForm.mobile || "+91 98765 43210",
         avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+        isDigiLockerVerified: false,
       })
     );
     router.push("/dashboard");

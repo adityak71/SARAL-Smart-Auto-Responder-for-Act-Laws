@@ -35,6 +35,31 @@ export default function LoginForm() {
       defaultAvatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256";
     }
 
+    // Attempt Firebase Email/Password Auth if credentials provided
+    if (loginForm.email && loginForm.password) {
+      try {
+        const { signInWithEmailAndPassword } = await import("firebase/auth");
+        const { auth } = await import("@/lib/firebase");
+        const userCredential = await signInWithEmailAndPassword(auth, loginForm.email, loginForm.password);
+        if (userCredential?.user) {
+          dispatch(
+            setCredentials({
+              id: userCredential.user.uid,
+              email: userCredential.user.email,
+              name: userCredential.user.displayName || defaultName,
+              role: roleKey,
+              avatarUrl: userCredential.user.photoURL || defaultAvatar,
+              isDigiLockerVerified: roleKey !== "CITIZEN",
+            })
+          );
+          router.push("/dashboard");
+          return;
+        }
+      } catch (fbErr) {
+        console.warn("Firebase Email auth fallback to local session:", fbErr.message);
+      }
+    }
+
     try {
       // Attempt backend authentication
       const res = await fetch("/api/auth/login", {
@@ -78,16 +103,40 @@ export default function LoginForm() {
     router.push("/dashboard");
   };
 
-  const handleGoogleLogin = () => {
-    dispatch(
-      setCredentials({
-        email: "rahul.sharma@citizen.in",
-        name: "Rahul Sharma",
-        role: "citizen",
-        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-      })
-    );
-    router.push("/dashboard");
+  const handleGoogleLogin = async () => {
+    try {
+      const { signInWithPopup } = await import("firebase/auth");
+      const { auth, googleProvider } = await import("@/lib/firebase");
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      dispatch(
+        setCredentials({
+          id: user.uid,
+          email: user.email,
+          name: user.displayName || "Google Citizen",
+          role: "CITIZEN",
+          avatarUrl:
+            user.photoURL ||
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+          isDigiLockerVerified: false, // Per diagram: starts unverified until verified
+        })
+      );
+      router.push("/dashboard");
+    } catch (err) {
+      console.warn("Firebase Google Auth popup cancelled/offline, using fallback:", err);
+      dispatch(
+        setCredentials({
+          email: "rahul.sharma@citizen.in",
+          name: "Rahul Sharma",
+          role: "CITIZEN",
+          avatarUrl:
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+          isDigiLockerVerified: false,
+        })
+      );
+      router.push("/dashboard");
+    }
   };
 
   const handleInputChange = (field, value) => {

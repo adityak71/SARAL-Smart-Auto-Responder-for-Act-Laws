@@ -50,6 +50,17 @@ export const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    setDigiLockerVerified: (state, action) => {
+      if (state.user) {
+        state.user.isDigiLockerVerified = Boolean(action.payload);
+        if (action.payload) {
+          state.user.citizenProfile = {
+            ...state.user.citizenProfile,
+            digiLockerId: "DL-IND-" + Math.floor(10000000 + Math.random() * 90000000),
+          };
+        }
+      }
+    },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
@@ -67,6 +78,7 @@ export const {
   setLoading,
   setError,
   setCredentials,
+  setDigiLockerVerified,
   logout,
 } = authSlice.actions;
 
