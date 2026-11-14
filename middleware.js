@@ -69,13 +69,20 @@ export function middleware(request) {
     }
   }
 
-  // NOTE: Auth routes (/login, /signup) and public pages are never intercepted,
-  // allowing users to always open the login page directly without loops.
+  // 2. Redirect logged-in users away from /login or /signup to /dashboard
+  const isAuthPage = pathname === "/login" || pathname === "/signup";
+  if (isAuthPage && sessionCookie) {
+    const session = decodeJwtPayload(sessionCookie);
+    if (session && (!session.exp || Math.floor(Date.now() / 1000) <= session.exp)) {
+      return NextResponse.redirect(new URL("/dashboard", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 
 /**
- * Matcher configuration: run middleware only on protected routes
+ * Matcher configuration: run middleware on protected routes and auth pages
  */
 export const config = {
   matcher: [
@@ -85,5 +92,7 @@ export const config = {
     "/file-rti",
     "/appeal/:path*",
     "/appeal",
+    "/login",
+    "/signup",
   ],
 };

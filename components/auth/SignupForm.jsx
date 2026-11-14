@@ -18,6 +18,10 @@ export default function SignupForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    let targetUid = null;
+    let registeredEmail = signupForm.email?.trim() || "rahul.sharma@citizen.in";
+    let registeredName = signupForm.fullName?.trim() || "Rahul Sharma";
+
     if (signupForm.email && signupForm.password) {
       try {
         const { createUserWithEmailAndPassword, updateProfile } = await import("firebase/auth");
@@ -28,40 +32,53 @@ export default function SignupForm() {
           signupForm.password
         );
         if (userCredential?.user) {
+          targetUid = userCredential.user.uid;
+          registeredEmail = userCredential.user.email;
           if (signupForm.fullName) {
             await updateProfile(userCredential.user, { displayName: signupForm.fullName });
           }
-          dispatch(
-            setCredentials({
-              id: userCredential.user.uid,
-              name: signupForm.fullName || "Citizen User",
-              email: signupForm.email,
-              role: "CITIZEN",
-              mobile: signupForm.mobile || "+91 98765 43210",
-              avatarUrl:
-                "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-              isDigiLockerVerified: false,
-            })
-          );
-          router.push("/dashboard");
-          return;
         }
       } catch (err) {
         console.warn("Firebase Signup fallback to local session:", err.message);
       }
     }
 
+    // Establish session and write saral_session cookie
+    try {
+      const res = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: registeredEmail,
+          fullName: registeredName,
+          role: "CITIZEN",
+          firebaseUid: targetUid,
+          isDigiLockerVerified: false,
+        }),
+      });
+
+      const data = await res.json();
+      if (data?.success && data?.user) {
+        dispatch(setCredentials(data.user));
+        window.location.href = "/dashboard";
+        return;
+      }
+    } catch (e) {
+      console.warn("Session bridge error on signup:", e);
+    }
+
     dispatch(
       setCredentials({
-        name: signupForm.fullName || "Rahul Sharma",
-        email: signupForm.email || "rahul.sharma@citizen.in",
+        name: registeredName,
+        email: registeredEmail,
         role: "CITIZEN",
         mobile: signupForm.mobile || "+91 98765 43210",
-        avatarUrl: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+        avatarUrl:
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
         isDigiLockerVerified: false,
       })
     );
-    router.push("/dashboard");
+    window.location.href = "/dashboard";
   };
 
   const handleInputChange = (field, value) => {

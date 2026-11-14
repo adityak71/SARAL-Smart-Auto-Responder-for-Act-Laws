@@ -7,6 +7,7 @@ import { useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
 import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
+import DigiLockerModal from "@/components/common/DigiLockerModal";
 
 export default function FileRtiPage() {
   const router = useRouter();
@@ -20,6 +21,7 @@ export default function FileRtiPage() {
   const [errorMsg, setErrorMsg] = useState("");
   const [submittedApplication, setSubmittedApplication] = useState(null);
   const [isPreviewModalOpen, setIsPreviewModalOpen] = useState(false);
+  const [isDigiLockerModalOpen, setIsDigiLockerModalOpen] = useState(false);
 
   // AI Copilot State
   const [aiInputPrompt, setAiInputPrompt] = useState("");
@@ -436,12 +438,103 @@ export default function FileRtiPage() {
           </div>
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>DigiLocker Verified Citizen</span>
-            </span>
+            {user?.isDigiLockerVerified ? (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                <span>DigiLocker Verified Citizen</span>
+              </span>
+            ) : (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span>Verification Pending</span>
+              </span>
+            )}
           </div>
         </div>
+
+        {!user?.isDigiLockerVerified ? (
+          /* ========================================================= */
+          /* VERIFY YOURSELF FIRST GATE SCREEN (Per Workflow Diagram)  */
+          /* ========================================================= */
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="rounded-3xl bg-white dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden"
+          >
+            {/* Top Tricolor Accent Line */}
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-500 via-white to-emerald-500" />
+
+            <div className="max-w-2xl mx-auto text-center space-y-6 pt-2">
+              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500/20 via-purple-500/20 to-indigo-500/20 border border-amber-500/30 flex items-center justify-center text-4xl sm:text-5xl shadow-xl shadow-amber-500/10">
+                🛡️
+              </div>
+
+              <div className="space-y-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                  Section 6(1) Citizen Mandate
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                  Verify Yourself First to File RTI
+                </h2>
+                <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed max-w-lg mx-auto">
+                  Under <strong className="text-purple-600 dark:text-purple-400">Section 6(1) of the Right to Information Act 2005</strong>, only citizens of India are eligible to seek official information from public authorities.
+                </p>
+              </div>
+
+              {/* Explanatory Cards */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left pt-2">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                  <div className="text-xl">🇮🇳</div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Citizenship Proof</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Certifies your statutory eligibility to demand records from government departments.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                  <div className="text-xl">📬</div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Postal Delivery</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Ensures certified physical records and notices reach your verified address.
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                  <div className="text-xl">🔒</div>
+                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Zero Data Abuse</h4>
+                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                    Protected under DPDP Act 2023. Aadhaar is securely masked (XXXX-XXXX-4210).
+                  </p>
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => setIsDigiLockerModalOpen(true)}
+                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 hover:from-blue-800 hover:to-purple-700 shadow-xl shadow-indigo-500/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
+                    alt="Emblem"
+                    className="h-5 w-auto filter invert brightness-0"
+                  />
+                  <span>Authenticate via DigiLocker →</span>
+                </button>
+
+                <Link
+                  href="/dashboard"
+                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition text-center"
+                >
+                  Return to Dashboard
+                </Link>
+              </div>
+            </div>
+          </motion.div>
+        ) : (
+          <>
 
         {/* ========================================================= */}
         {/* PROGRESS STEPPER (Steps 1 to 5)                           */}
@@ -1516,7 +1609,15 @@ export default function FileRtiPage() {
             </div>
           )}
         </div>
+        </>
+        )}
       </main>
+
+      {/* DigiLocker National Gateway Authentication Modal */}
+      <DigiLockerModal
+        isOpen={isDigiLockerModalOpen}
+        onClose={() => setIsDigiLockerModalOpen(false)}
+      />
 
       {/* Floating Document Preview & Download Modal */}
       <DocumentPreviewModal

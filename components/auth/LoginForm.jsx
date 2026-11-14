@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,11 +14,27 @@ import { loginContent } from "@/data/authContent";
 export default function LoginForm() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { selectedRole, loginForm } = useSelector((state) => state.auth);
+  const { selectedRole, loginForm, isAuthenticated } = useSelector((state) => state.auth);
   const showPassword = useSelector((state) => state.ui.showPassword);
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
+
+  // If already authenticated in Redux, forward to dashboard or target redirect
+  useEffect(() => {
+    if (isAuthenticated) {
+      const redirectUrl =
+        typeof window !== "undefined"
+          ? new URLSearchParams(window.location.search).get("redirect") || "/dashboard"
+          : "/dashboard";
+      window.location.href = redirectUrl;
+    }
+  }, [isAuthenticated]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setAuthError("");
     
     // Determine target role and fallback defaults
     const roleKey = (selectedRole || "citizen").toUpperCase();
@@ -35,107 +52,170 @@ export default function LoginForm() {
       defaultAvatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256";
     }
 
-    // Attempt Firebase Email/Password Auth if credentials provided
+    const emailToUse = loginForm.email?.trim() || defaultEmail;
+    const passwordToUse = loginForm.password || "Password@123";
+
+    // 1. Attempt Firebase Email/Password Auth if credentials provided
     if (loginForm.email && loginForm.password) {
       try {
         const { signInWithEmailAndPassword } = await import("firebase/auth");
         const { auth } = await import("@/lib/firebase");
-        const userCredential = await signInWithEmailAndPassword(auth, loginForm.email, loginForm.password);
+        const userCredential = await signInWithEmailAndPassword(auth, emailToUse, passwordToUse);
         if (userCredential?.user) {
-          dispatch(
-            setCredentials({
-              id: userCredential.user.uid,
+          const res = await fetch("/api/auth/session", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
               email: userCredential.user.email,
-              name: userCredential.user.displayName || defaultName,
-              role: roleKey,
+              fullName: userCredential.user.displayName || defaultName,
               avatarUrl: userCredential.user.photoURL || defaultAvatar,
+              role: roleKey,
+              firebaseUid: userCredential.user.uid,
               isDigiLockerVerified: roleKey !== "CITIZEN",
-            })
-          );
-          router.push("/dashboard");
+            }),
+          });
+          const data = await res.json();
+          const targetUser = data?.user || {
+            id: userCredential.user.uid,
+            email: userCredential.user.email,
+            name: userCredential.user.displayName || defaultName,
+            role: roleKey,
+            avatarUrl: userCredential.user.photoURL || defaultAvatar,
+            isDigiLockerVerified: roleKey !== "CITIZEN",
+          };
+          dispatch(setCredentials(targetUser));
+          const redirectUrl =
+            new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+          window.location.href = redirectUrl;
           return;
         }
       } catch (fbErr) {
-        console.warn("Firebase Email auth fallback to local session:", fbErr.message);
+        console.warn("Firebase Email auth fallback:", fbErr.message);
       }
     }
 
+    // 2. Establish server session & HTTP cookie via session bridge
     try {
-      // Attempt backend authentication
-      const res = await fetch("/api/auth/login", {
+      const res = await fetch("/api/auth/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: loginForm.email || defaultEmail,
-          password: loginForm.password || "Password@123",
+          email: emailToUse,
+          fullName: defaultName,
           role: roleKey,
+          avatarUrl: defaultAvatar,
+          isDigiLockerVerified: roleKey !== "CITIZEN",
         }),
       });
 
       const data = await res.json();
-      if (data.success && data.user) {
-        dispatch(
-          setCredentials({
-            id: data.user.id,
-            email: data.user.email,
-            name: data.user.fullName,
-            role: data.user.role,
-            avatarUrl: data.user.avatarUrl || defaultAvatar,
-            token: data.token,
-          })
-        );
-        router.push("/dashboard");
+      if (data?.success && data?.user) {
+        dispatch(setCredentials(data.user));
+        const redirectUrl =
+          new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+        window.location.href = redirectUrl;
         return;
       }
     } catch (err) {
-      console.warn("Backend auth offline or bypassed, falling back to local session:", err);
+      console.warn("Session bridge fallback:", err);
     }
 
-    // Fallback credential dispatch for instant smooth demo
+    // 3. Fallback credential dispatch
     dispatch(
       setCredentials({
-        email: loginForm.email || defaultEmail,
+        email: emailToUse,
         name: defaultName,
         role: roleKey,
         avatarUrl: defaultAvatar,
+        isDigiLockerVerified: roleKey !== "CITIZEN",
       })
     );
-    router.push("/dashboard");
+    const redirectUrl =
+      new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+    window.location.href = redirectUrl;
   };
 
   const handleGoogleLogin = async () => {
+    setGoogleLoading(true);
+    setAuthError("");
     try {
       const { signInWithPopup } = await import("firebase/auth");
       const { auth, googleProvider } = await import("@/lib/firebase");
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
 
-      dispatch(
-        setCredentials({
-          id: user.uid,
+      // 1. Establish session & write saral_session cookie
+      const res = await fetch("/api/auth/session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           email: user.email,
-          name: user.displayName || "Google Citizen",
-          role: "CITIZEN",
+          fullName: user.displayName || "Google Citizen",
           avatarUrl:
             user.photoURL ||
             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-          isDigiLockerVerified: false, // Per diagram: starts unverified until verified
-        })
-      );
-      router.push("/dashboard");
-    } catch (err) {
-      console.warn("Firebase Google Auth popup cancelled/offline, using fallback:", err);
-      dispatch(
-        setCredentials({
-          email: "rahul.sharma@citizen.in",
-          name: "Rahul Sharma",
           role: "CITIZEN",
-          avatarUrl:
-            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+          firebaseUid: user.uid,
+          isDigiLockerVerified: false, // Per diagram: starts unverified until verified
+        }),
+      });
+
+      const data = await res.json();
+      const userData = data?.user || {
+        id: user.uid,
+        email: user.email,
+        name: user.displayName || "Google Citizen",
+        fullName: user.displayName || "Google Citizen",
+        role: "CITIZEN",
+        avatarUrl:
+          user.photoURL ||
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+        isDigiLockerVerified: false,
+      };
+
+      dispatch(setCredentials(userData));
+
+      const redirectUrl =
+        new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+      window.location.href = redirectUrl;
+    } catch (err) {
+      console.warn("Firebase Google Auth popup error/cancelled:", err.message);
+      // Fallback demo citizen if popup closed or offline
+      try {
+        const res = await fetch("/api/auth/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: "aditya.citizen@saral-rti.in",
+            fullName: "Aditya Kumar",
+            role: "CITIZEN",
+            avatarUrl:
+              "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+            isDigiLockerVerified: false,
+          }),
+        });
+        const data = await res.json();
+        dispatch(setCredentials(data?.user || {
+          email: "aditya.citizen@saral-rti.in",
+          name: "Aditya Kumar",
+          role: "CITIZEN",
           isDigiLockerVerified: false,
-        })
-      );
-      router.push("/dashboard");
+        }));
+      } catch (e) {
+        dispatch(
+          setCredentials({
+            email: "aditya.citizen@saral-rti.in",
+            name: "Aditya Kumar",
+            role: "CITIZEN",
+            isDigiLockerVerified: false,
+          })
+        );
+      }
+      const redirectUrl =
+        new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+      window.location.href = redirectUrl;
+    } finally {
+      setGoogleLoading(false);
     }
   };
 
@@ -314,29 +394,34 @@ export default function LoginForm() {
             <motion.button
               type="button"
               onClick={handleGoogleLogin}
+              disabled={googleLoading || loading}
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer"
+              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
-                <path
-                  d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15Z"
-                  fill="#4285F4"
-                />
-                <path
-                  d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24Z"
-                  fill="#34A853"
-                />
-                <path
-                  d="M5.28 14.26a7.14 7.14 0 0 1 0-4.52V6.59H1.24a11.97 11.97 0 0 0 0 10.82l4.04-3.15Z"
-                  fill="#FBBC05"
-                />
-                <path
-                  d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99Z"
-                  fill="#EA4335"
-                />
-              </svg>
-              <span>{loginContent.form.googleButtonText}</span>
+              {googleLoading ? (
+                <div className="w-5 h-5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <svg className="w-4.5 h-4.5 sm:w-5 sm:h-5 shrink-0" viewBox="0 0 24 24">
+                  <path
+                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15Z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24Z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M5.28 14.26a7.14 7.14 0 0 1 0-4.52V6.59H1.24a11.97 11.97 0 0 0 0 10.82l4.04-3.15Z"
+                    fill="#FBBC05"
+                  />
+                  <path
+                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99Z"
+                    fill="#EA4335"
+                  />
+                </svg>
+              )}
+              <span>{googleLoading ? "Signing in with Google..." : loginContent.form.googleButtonText}</span>
             </motion.button>
           </div>
 

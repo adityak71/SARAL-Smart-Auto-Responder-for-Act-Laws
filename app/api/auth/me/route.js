@@ -13,13 +13,23 @@ export async function GET(request) {
       );
     }
 
-    const user = await getUserById(session.userId);
+    let user = null;
+    try {
+      user = await getUserById(session.userId);
+    } catch (e) {
+      console.warn("getUserById error in /api/auth/me:", e.message);
+    }
 
     if (!user) {
-      return NextResponse.json(
-        { success: false, authenticated: false, user: null },
-        { status: 404 }
-      );
+      // Fallback to verified JWT session details
+      user = {
+        id: session.userId,
+        email: session.email,
+        fullName: session.fullName || "SARAL Citizen",
+        name: session.fullName || "SARAL Citizen",
+        role: session.role || "CITIZEN",
+        isDigiLockerVerified: false,
+      };
     }
 
     return NextResponse.json({

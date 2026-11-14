@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { setCredentials, logout } from "@/redux/slices/authSlice";
+import DigiLockerModal from "@/components/common/DigiLockerModal";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function ProfilePage() {
   // Determine authorized role
   const actualRole = (user?.role || selectedRole || "CITIZEN").toUpperCase();
   const [activeRole, setActiveRole] = useState(actualRole);
+  const [isDigiLockerModalOpen, setIsDigiLockerModalOpen] = useState(false);
 
   // Form States for "Update Details"
   const [detailsForm, setDetailsForm] = useState({
@@ -353,16 +355,20 @@ export default function ProfilePage() {
                         ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
                         : activeRole === "OFFICER"
                         ? "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30"
-                        : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
+                        : user?.isDigiLockerVerified
+                        ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
+                        : "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
                     }`}
                   >
-                    <span>{activeRole === "ADMIN" ? "🏛️" : activeRole === "OFFICER" ? "⚖️" : "🛡️"}</span>
+                    <span>{activeRole === "ADMIN" ? "🏛️" : activeRole === "OFFICER" ? "⚖️" : user?.isDigiLockerVerified ? "🛡️" : "⏳"}</span>
                     <span>
                       {activeRole === "ADMIN"
                         ? "Superadmin (CIC Controller)"
                         : activeRole === "OFFICER"
                         ? "Section 5(1) Designated PIO"
-                        : "DigiLocker Verified Citizen"}
+                        : user?.isDigiLockerVerified
+                        ? "DigiLocker Verified Citizen"
+                        : "Verification Pending"}
                     </span>
                   </span>
                 </div>
@@ -377,16 +383,34 @@ export default function ProfilePage() {
 
                 {activeRole === "CITIZEN" && (
                   <>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-500 dark:text-slate-400">DigiLocker ID:</span>
-                      <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
-                        {user?.citizenProfile?.digiLockerId || "DL-IND-90218821"}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-500 dark:text-slate-400">Aadhaar (Masked):</span>
-                      <span className="font-mono text-slate-800 dark:text-slate-200">XXXX-XXXX-4912</span>
-                    </div>
+                    {user?.isDigiLockerVerified ? (
+                      <>
+                        <div className="flex justify-between items-center">
+                          <span className="text-slate-500 dark:text-slate-400">DigiLocker ID:</span>
+                          <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">
+                            {user?.citizenProfile?.digiLockerId || "DL-IND-90218821"}
+                          </span>
+                        </div>
+                        <div className="flex justify-between items-center">
+                          <span className="text-slate-500 dark:text-slate-400">Aadhaar (Masked):</span>
+                          <span className="font-mono text-slate-800 dark:text-slate-200">XXXX-XXXX-4210</span>
+                        </div>
+                      </>
+                    ) : (
+                      <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 text-center space-y-2 mt-2">
+                        <p className="text-[11px] text-amber-800 dark:text-amber-300">
+                          ⚠️ Section 6(1) requires DigiLocker citizenship verification before filing an RTI.
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setIsDigiLockerModalOpen(true)}
+                          className="w-full py-2 px-3 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer"
+                        >
+                          <span>Verify with DigiLocker</span>
+                          <span>→</span>
+                        </button>
+                      </div>
+                    )}
                     <div className="flex justify-between items-center">
                       <span className="text-slate-500 dark:text-slate-400">Jurisdiction:</span>
                       <span className="font-semibold text-slate-800 dark:text-slate-200">
@@ -901,6 +925,12 @@ export default function ProfilePage() {
           </div>
         )}
       </AnimatePresence>
+
+      {/* DigiLocker National Gateway Authentication Modal */}
+      <DigiLockerModal
+        isOpen={isDigiLockerModalOpen}
+        onClose={() => setIsDigiLockerModalOpen(false)}
+      />
     </div>
   );
 }
