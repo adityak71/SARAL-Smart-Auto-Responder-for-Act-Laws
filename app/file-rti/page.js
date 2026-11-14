@@ -83,10 +83,6 @@ export default function FileRtiPage() {
   const [precedents, setPrecedents] = useState([]);
   const [loadingPrecedents, setLoadingPrecedents] = useState(false);
 
-  // Derive effective user state from profile or manual selection
-  const userProfileState = user?.citizenProfile?.state || "";
-  const activeState = formData.selectedState || userProfileState || "Select State";
-
   // Form State
   const [formData, setFormData] = useState({
     stateOrCentral: "State",
@@ -107,6 +103,10 @@ export default function FileRtiPage() {
     paymentMethod: "UPI", // "UPI" | "NETBANKING" | "CARDS"
     declarationAgreed: true,
   });
+
+  // Derive effective user state from profile or manual selection
+  const userProfileState = user?.citizenProfile?.state || "";
+  const activeState = formData.selectedState || userProfileState || "Select State";
 
   // Verify Auth
   useEffect(() => {
