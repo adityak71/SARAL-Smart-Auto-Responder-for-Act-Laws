@@ -49,6 +49,18 @@ const INDIAN_STATES = [
   "West Bengal",
 ];
 
+function findCanonicalState(rawState) {
+  if (!rawState || typeof rawState !== "string") return "";
+  const cleaned = rawState.trim().toLowerCase();
+  if (!cleaned || cleaned === "select state") return "";
+  const match = INDIAN_STATES.find((st) => st.toLowerCase() === cleaned);
+  if (match) return match;
+  const partial = INDIAN_STATES.find(
+    (st) => st.toLowerCase().includes(cleaned) || cleaned.includes(st.toLowerCase())
+  );
+  return partial || rawState.trim();
+}
+
 export default function FileRtiPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -104,9 +116,11 @@ export default function FileRtiPage() {
     declarationAgreed: true,
   });
 
-  // Derive effective user state from profile or manual selection
-  const userProfileState = user?.citizenProfile?.state || "";
-  const activeState = formData.selectedState || userProfileState || "Select State";
+  // Derive effective user state from profile or manual selection (normalized Title Case)
+  const userProfileState = findCanonicalState(user?.citizenProfile?.state);
+  const activeState = formData.selectedState
+    ? findCanonicalState(formData.selectedState)
+    : userProfileState;
 
   // Verify Auth
   useEffect(() => {
@@ -118,13 +132,14 @@ export default function FileRtiPage() {
   // Sync profile state & district into formData
   useEffect(() => {
     if (user?.citizenProfile) {
-      const { state, district } = user.citizenProfile;
+      const canonicalState = findCanonicalState(user.citizenProfile.state);
+      const district = user.citizenProfile.district;
       setFormData((prev) => ({
         ...prev,
-        selectedState: prev.selectedState || state || "",
+        selectedState: prev.selectedState || canonicalState || "",
         locationDivision:
           prev.locationDivision ||
-          (district ? (state ? `${district}, ${state}` : `${district} District`) : (state || "")),
+          (district ? (canonicalState ? `${district}, ${canonicalState}` : `${district} District`) : (canonicalState || "")),
       }));
     }
   }, [user]);
@@ -758,15 +773,13 @@ export default function FileRtiPage() {
                         <span>State:</span>
                       </span>
                       <select
-                        value={activeState === "Select State" ? "" : activeState}
+                        value={activeState || ""}
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
                         }
                         className="py-1 px-2.5 rounded-lg bg-white dark:bg-[#1a0f37] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
                       >
-                        <option value="" disabled>
-                          -- Select State / UT --
-                        </option>
+                        <option value="">Select State</option>
                         {INDIAN_STATES.map((st) => (
                           <option
                             key={st}
@@ -777,7 +790,7 @@ export default function FileRtiPage() {
                           </option>
                         ))}
                       </select>
-                      {userProfileState && activeState.toLowerCase() === userProfileState.toLowerCase() && (
+                      {userProfileState && activeState === userProfileState && (
                         <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 font-semibold hidden md:inline">
                           Profile Synced
                         </span>
