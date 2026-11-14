@@ -717,69 +717,74 @@ export default function FileRtiPage() {
                 </p>
               </div>
 
-              {/* State vs Central Toggle */}
+              {/* State vs Central Toggle & State Selector (Side-by-Side) */}
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
-                    Government Tier
-                  </label>
-                  {formData.stateOrCentral === "State" && (
-                    <span className="text-[11px] text-purple-600 dark:text-purple-400 font-semibold">
-                      State Jurisdiction: {activeState}
-                    </span>
-                  )}
-                </div>
-                <div className="grid grid-cols-2 gap-3 max-w-md">
-                  {["State", "Central"].map((tier) => (
+                <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
+                  Government Tier &amp; Target Jurisdiction
+                </label>
+                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                  {/* Tier Selection Buttons */}
+                  <div className="flex items-center gap-2">
                     <button
-                      key={tier}
                       type="button"
-                      onClick={() => setFormData({ ...formData, stateOrCentral: tier })}
-                      className={`py-2.5 px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-2 ${
-                        formData.stateOrCentral === tier
+                      onClick={() => setFormData({ ...formData, stateOrCentral: "State" })}
+                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                        formData.stateOrCentral === "State"
                           ? "bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-600/30"
-                          : "bg-slate-50 dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-white/10 hover:bg-slate-100 dark:hover:bg-white/10"
+                          : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
                       }`}
                     >
-                      <span>
-                        {tier === "State"
-                          ? `🏛️ State Government (${activeState})`
-                          : "🇮🇳 Central Government (GoI)"}
-                      </span>
+                      <span>🏛️ State Government</span>
                     </button>
-                  ))}
-                </div>
 
-                {formData.stateOrCentral === "State" && (
-                  <div className="mt-3 p-3 rounded-2xl bg-purple-50/70 dark:bg-white/[0.03] border border-purple-200 dark:border-purple-500/20 max-w-md flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                    <div>
-                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 block">
-                        Target State Government:
-                      </span>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                        {userProfileState
-                          ? `Synced from your profile (${userProfileState})`
-                          : "Select your target state public authority"}
-                      </p>
-                    </div>
-                    <select
-                      value={activeState === "Select State" ? "" : activeState}
-                      onChange={(e) =>
-                        setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
-                      }
-                      className="px-3 py-1.5 rounded-xl bg-white dark:bg-[#150a2e] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-semibold focus:outline-none focus:border-purple-500 shadow-xs cursor-pointer shrink-0"
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, stateOrCentral: "Central" })}
+                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                        formData.stateOrCentral === "Central"
+                          ? "bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-600/30"
+                          : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
+                      }`}
                     >
-                      <option value="" disabled>
-                        -- Select State / UT --
-                      </option>
-                      {INDIAN_STATES.map((st) => (
-                        <option key={st} value={st}>
-                          {st} {userProfileState === st ? "✓ (Your Profile)" : ""}
-                        </option>
-                      ))}
-                    </select>
+                      <span>🇮🇳 Central Government (GoI)</span>
+                    </button>
                   </div>
-                )}
+
+                  {/* Dropdown Menu - Aligned just to the side! */}
+                  {formData.stateOrCentral === "State" && (
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50/70 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 shadow-xs">
+                      <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0">
+                        <span className="text-purple-600 dark:text-purple-400">📍</span>
+                        <span>State:</span>
+                      </span>
+                      <select
+                        value={activeState === "Select State" ? "" : activeState}
+                        onChange={(e) =>
+                          setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
+                        }
+                        className="py-1 px-2.5 rounded-lg bg-white dark:bg-[#1a0f37] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
+                      >
+                        <option value="" disabled>
+                          -- Select State / UT --
+                        </option>
+                        {INDIAN_STATES.map((st) => (
+                          <option
+                            key={st}
+                            value={st}
+                            className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white"
+                          >
+                            {st} {userProfileState && st.toLowerCase() === userProfileState.toLowerCase() ? "✓ (Your Profile)" : ""}
+                          </option>
+                        ))}
+                      </select>
+                      {userProfileState && activeState.toLowerCase() === userProfileState.toLowerCase() && (
+                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 font-semibold hidden md:inline">
+                          Profile Synced
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
@@ -910,7 +915,7 @@ export default function FileRtiPage() {
                           className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
                             isSelected
                               ? "bg-purple-50 dark:bg-purple-950/40 border-purple-600 dark:border-purple-500 ring-2 ring-purple-500/20 shadow-md"
-                              : "bg-slate-50/70 dark:bg-white/5 border-slate-200 dark:border-white/10 hover:border-purple-300 dark:hover:border-white/20"
+                              : "bg-white dark:bg-white/5 border-slate-300/80 dark:border-white/10 hover:border-purple-400 hover:shadow-sm"
                           }`}
                         >
                           <div>
@@ -994,7 +999,7 @@ export default function FileRtiPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        const sample = "Mere gaon Pipariya mein sadak tuti hui hai aur thekedar ne kaam band kar diya. Kitna budget pass hua tha aur kitne paise release hue?";
+                        const sample = "Mere ilaqe mein sadak tuti hui hai aur thekedar ne kaam band kar diya. Kitna budget pass hua tha aur kitne paise release hue?";
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
@@ -1005,7 +1010,7 @@ export default function FileRtiPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        const sample = "Pipariya gaon mein 2 saal pehle drinking water tanki aur pipeline ka tender hua tha par paani nahi aaya. Kitna paisa pass hua tha aur thekedar kaun hai?";
+                        const sample = "Hamare gaon/ward mein drinking water tanki aur pipeline ka tender hua tha par paani nahi aaya. Kitna paisa pass hua tha aur thekedar kaun hai?";
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
@@ -1016,7 +1021,7 @@ export default function FileRtiPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        const sample = "CHC Pipariya mein essential medicines aur doctors ki attendance detail chahiye. Duty roster aur stock register ki certified copy do.";
+                        const sample = "CHC / District hospital mein essential medicines aur doctors ki attendance detail chahiye. Duty roster aur stock register ki certified copy do.";
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
@@ -1027,7 +1032,7 @@ export default function FileRtiPage() {
                     <button
                       type="button"
                       onClick={() => {
-                        const sample = "Primary school Pipariya mein Mid-Day Meal ka monthly expenditure aur teacher vacancy details di jayein.";
+                        const sample = "Primary school mein Mid-Day Meal ka monthly expenditure aur teacher vacancy details di jayein.";
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
@@ -1073,13 +1078,13 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-semibold flex items-center justify-between"
+                    className="p-3 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between"
                   >
                     <span>{aiSuccessToast}</span>
                     <button
                       type="button"
                       onClick={() => setAiSuccessToast("")}
-                      className="text-emerald-400 hover:text-emerald-200 text-sm ml-2 font-bold"
+                      className="text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-200 text-sm ml-2 font-bold"
                     >
                       ✕
                     </button>
@@ -1091,28 +1096,28 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-2xl bg-white/[0.04] border border-white/10 text-xs space-y-2.5"
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-2.5"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 text-[10px] font-bold font-mono">
+                        <span className="px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[10px] font-bold font-mono">
                           Mapped: {aiResult.suggestedDepartmentName}
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[10px] font-bold">
                           ✓ Section 8 Non-Exempt ({aiResult.section8Compliance?.confidenceScore || "98.7%"})
                         </span>
                       </div>
-                      <span className="text-[10px] text-purple-300/80">
+                      <span className="text-[10px] text-purple-700 dark:text-purple-300/80 font-medium">
                         {aiResult.structuredClauses?.length || 4} Enforceable Clauses Generated
                       </span>
                     </div>
 
-                    <p className="text-[11px] text-slate-300 leading-relaxed">
+                    <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
                       ⚖ <strong>Citizen Right (Sec 6(2)):</strong> {aiResult.citizenLegalTip}
                     </p>
 
                     {aiResult.isLifeOrLibertySuggested && (
-                      <div className="p-2.5 rounded-xl bg-rose-500/20 border border-rose-500/30 text-rose-300 text-[11px] flex items-center gap-2">
+                      <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-[11px] flex items-center gap-2">
                         <span>🚨</span>
                         <span>
                           <strong>Section 7(1) Proviso Triggered:</strong> Query involves life or emergency medical care. 48-Hour statutory clock activated!
@@ -1554,24 +1559,24 @@ export default function FileRtiPage() {
               </div>
 
               {/* Landmark CIC Precedents Card (Sprint 2.4 - RAG) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-indigo-950/40 via-purple-950/30 to-slate-900 border border-purple-500/25 space-y-3">
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-purple-50/80 via-indigo-50/50 to-slate-50 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="p-1 rounded-lg bg-purple-600/30 text-purple-300 text-xs">🏛️</span>
-                    <h4 className="text-xs sm:text-sm font-bold text-white flex items-center gap-2">
+                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs">🏛️</span>
+                    <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                       <span>Landmark CIC Legal Precedents Supporting Your Petition</span>
-                      <span className="px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                      <span className="px-2 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[10px] font-bold">
                         RAG Knowledge
                       </span>
                     </h4>
                   </div>
-                  <span className="text-[10px] text-purple-300/70 font-mono hidden sm:inline">
+                  <span className="text-[10px] text-purple-600 dark:text-purple-300/70 font-mono hidden sm:inline font-medium">
                     Supabase pgvector
                   </span>
                 </div>
 
                 {loadingPrecedents ? (
-                  <div className="py-4 text-center text-slate-400 text-xs">
+                  <div className="py-4 text-center text-slate-500 dark:text-slate-400 text-xs">
                     Retrieving landmark CIC orders and Supreme Court rulings...
                   </div>
                 ) : (
@@ -1579,21 +1584,21 @@ export default function FileRtiPage() {
                     {precedents.map((prec) => (
                       <div
                         key={prec.decisionNumber}
-                        className="p-3 rounded-xl bg-white/[0.04] border border-white/10 space-y-1 text-xs"
+                        className="p-3 rounded-xl bg-white dark:bg-white/[0.04] border border-purple-100 dark:border-white/10 space-y-1 text-xs shadow-xs"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-mono font-bold text-purple-300 text-[11px]">
+                          <span className="font-mono font-bold text-purple-700 dark:text-purple-300 text-[11px]">
                             {prec.decisionNumber} • {prec.citation}
                           </span>
-                          <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
+                          <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-500/30">
                             {prec.relevancePercentage} Relevant
                           </span>
                         </div>
-                        <h5 className="font-bold text-white text-xs">{prec.title}</h5>
-                        <p className="text-slate-300 text-[11px] leading-relaxed">
+                        <h5 className="font-bold text-slate-900 dark:text-white text-xs">{prec.title}</h5>
+                        <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
                           {prec.rulingSummary}
                         </p>
-                        <p className="text-purple-200 text-[10px] italic">
+                        <p className="text-purple-800 dark:text-purple-200 text-[10px] italic">
                           ⚖ Takeaway: {prec.keyLegalTakeaway}
                         </p>
                       </div>
