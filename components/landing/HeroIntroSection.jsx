@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
 export default function HeroIntroSection() {
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
   return (
     <section className="relative w-full py-12 lg:py-20 overflow-hidden">
       {/* Ambient Radial Lights */}
@@ -60,31 +62,70 @@ export default function HeroIntroSection() {
               transition={{ duration: 0.5, delay: 0.22 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2"
             >
-              <Link
-                href="/login"
-                className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-semibold text-sm sm:text-base shadow-[0_8px_25px_-4px_rgba(99,102,241,0.5)] active:scale-[0.98] transition-all group cursor-pointer"
-              >
-                <span>File an RTI Application</span>
-                <svg
-                  className="w-4.5 h-4.5 stroke-[2.2] transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-semibold text-sm sm:text-base shadow-[0_8px_25px_-4px_rgba(99,102,241,0.5)] active:scale-[0.98] transition-all group cursor-pointer"
+                  >
+                    <span>Go to My Dashboard</span>
+                    <svg
+                      className="w-4.5 h-4.5 stroke-[2.2] transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
 
-              <Link
-                href="/tracking"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
-              >
-                <svg className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
-                <span>Track Existing RTI</span>
-              </Link>
+                  <Link
+                    href="/file-rti"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-purple-100 hover:bg-purple-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-purple-900 dark:text-purple-200 border border-purple-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  >
+                    <span>+ File New RTI</span>
+                  </Link>
+
+                  <Link
+                    href="/tracking"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  >
+                    <svg className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>Track Status</span>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href="/login?redirect=/file-rti"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-indigo-700 hover:from-purple-500 hover:to-indigo-600 text-white font-semibold text-sm sm:text-base shadow-[0_8px_25px_-4px_rgba(99,102,241,0.5)] active:scale-[0.98] transition-all group cursor-pointer"
+                  >
+                    <span>File an RTI Application</span>
+                    <svg
+                      className="w-4.5 h-4.5 stroke-[2.2] transition-transform group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </Link>
+
+                  <Link
+                    href="/tracking"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                  >
+                    <svg className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    <span>Track Existing RTI</span>
+                  </Link>
+                </>
+              )}
             </motion.div>
 
             {/* Trust Pills */}

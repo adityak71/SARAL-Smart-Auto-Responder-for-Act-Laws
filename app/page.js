@@ -1,24 +1,11 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useSelector } from "react-redux";
 import HeroIntroSection from "@/components/landing/HeroIntroSection";
 import WhyRtiMattersSection from "@/components/landing/WhyRtiMattersSection";
 import HowSaralWorksSection from "@/components/landing/HowSaralWorksSection";
 import CivicFooter from "@/components/common/CivicFooter";
 
 export default function HomePage() {
-  const router = useRouter();
-  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
-
-  useEffect(() => {
-    // When citizen or officer is logged in, automatically open their dashboard
-    if (isAuthenticated) {
-      router.push("/dashboard");
-    }
-  }, [isAuthenticated, router]);
-
   return (
     <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased selection:bg-purple-600 selection:text-white transition-colors">
       <main className="flex-1 w-full">
