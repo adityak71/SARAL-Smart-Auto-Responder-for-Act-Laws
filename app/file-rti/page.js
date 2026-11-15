@@ -61,6 +61,83 @@ function findCanonicalState(rawState) {
   return partial || rawState.trim();
 }
 
+/**
+ * Phonetic Devanagari to Roman Hinglish Transliteration Engine
+ * Converts Hindi speech transcripts into clean, readable Roman Hinglish text (A-Z)
+ */
+function devanagariToHinglish(text) {
+  if (!text) return "";
+
+  const commonWords = {
+    "है": "hai", "हैं": "hain", "हो": "ho", "था": "tha", "थी": "thee", "थे": "the",
+    "का": "ka", "की": "ki", "के": "ke", "को": "ko", "से": "se", "में": "mein",
+    "पर": "par", "और": "aur", "या": "ya", "कि": "ki", "जो": "jo", "यह": "yeh",
+    "वह": "woh", "इस": "is", "उस": "us", "क्या": "kya", "क्यों": "kyun", "कैसे": "kaise",
+    "कहाँ": "kahan", "कब": "kab", "कितना": "kitna", "कितने": "kitne", "कितनी": "kitni",
+    "सड़क": "sadak", "गाँव": "gaon", "गांव": "gaon", "पानी": "paani", "दवाई": "dawai",
+    "स्कूल": "school", "ठेकेदार": "thekedar", "रुपये": "rupaye", "पैसे": "paise",
+    "चाहिए": "chahiye", "दीजिए": "dijiye", "बताइए": "bataiye", "नहीं": "nahi",
+    "कैन": "can", "यू": "you", "राइट": "write", "दिस": "this", "थिंग": "thing",
+    "इन": "in", "इंग्लिश": "english", "काम": "kaam", "बजट": "budget", "टेंडर": "tender",
+    "अस्पताल": "hospital", "डॉक्टर": "doctor", "मास्टर": "master", "टीचर": "teacher"
+  };
+
+  const charMap = {
+    "अ": "a", "आ": "aa", "इ": "i", "ई": "ee", "उ": "u", "ऊ": "oo", "ऋ": "ri",
+    "ए": "e", "ऐ": "ai", "ओ": "o", "औ": "au", "अं": "an", "अः": "ah",
+    "क": "k", "ख": "kh", "ग": "g", "घ": "gh", "ङ": "ng",
+    "च": "ch", "छ": "chh", "ज": "j", "झ": "jh", "ञ": "ny",
+    "ट": "t", "ठ": "th", "ड": "d", "ढ": "dh", "ण": "n",
+    "त": "t", "थ": "th", "द": "d", "ध": "dh", "न": "n",
+    "प": "p", "फ": "f", "ब": "b", "भ": "bh", "म": "m",
+    "य": "y", "र": "r", "ल": "l", "व": "v",
+    "श": "sh", "ष": "sh", "स": "s", "ह": "h",
+    "ड़": "d", "ढ़": "dh", "फ़": "f", "ज़": "z", "क़": "q", "ख़": "kh", "ग़": "gh"
+  };
+
+  const matraMap = {
+    "ा": "a", "ि": "i", "ी": "ee", "ु": "u", "ू": "oo", "ृ": "ri",
+    "े": "e", "ै": "ai", "ो": "o", "ौ": "au", "ं": "n", "ँ": "n", "ः": "h"
+  };
+  const halant = "्";
+
+  const words = text.split(/\s+/);
+  const outWords = words.map((w) => {
+    const clean = w.replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "");
+    if (commonWords[clean.toLowerCase()]) {
+      return w.replace(clean, commonWords[clean.toLowerCase()]);
+    }
+
+    let res = "";
+    for (let i = 0; i < w.length; i++) {
+      const ch = w[i];
+      const next = w[i + 1];
+
+      if (charMap[ch]) {
+        res += charMap[ch];
+        const isConsonant =
+          (ch.charCodeAt(0) >= 0x0915 && ch.charCodeAt(0) <= 0x0939) ||
+          ch === "ड़" ||
+          ch === "ढ़";
+        if (isConsonant) {
+          if (!next || next === halant || matraMap[next]) {
+            // suppressed
+          } else {
+            res += "a";
+          }
+        }
+      } else if (matraMap[ch]) {
+        res += matraMap[ch];
+      } else if (ch !== halant) {
+        res += ch;
+      }
+    }
+    return res;
+  });
+
+  return outWords.join(" ");
+}
+
 export default function FileRtiPage() {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -82,9 +159,9 @@ export default function FileRtiPage() {
   const [aiResult, setAiResult] = useState(null);
   const [aiSuccessToast, setAiSuccessToast] = useState("");
 
-  // Speech Recognition (Voice Input) State
+  // Speech Recognition (Voice Input) State: "hinglish" (A-Z) | "english" | "hindi" (Devanagari)
   const [isListening, setIsListening] = useState(false);
-  const [speechLang, setSpeechLang] = useState("hi-IN"); // "hi-IN" | "en-IN"
+  const [speechMode, setSpeechMode] = useState("hinglish");
   const recognitionRef = useRef(null);
   const speechInitialPromptRef = useRef("");
 
@@ -297,6 +374,21 @@ export default function FileRtiPage() {
     };
   }, []);
 
+  // Switch Speech Mode with smart auto-transliterate
+  const handleSwitchSpeechMode = (mode) => {
+    setSpeechMode(mode);
+    if (isListening && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {}
+      setIsListening(false);
+    }
+    // If switching to Hinglish and existing text has Devanagari, automatically convert to Hinglish A-Z
+    if (mode === "hinglish" && aiInputPrompt && /[\u0900-\u097F]/.test(aiInputPrompt)) {
+      setAiInputPrompt(devanagariToHinglish(aiInputPrompt));
+    }
+  };
+
   // Voice Mic (Speech-to-Text) Toggle
   const toggleVoiceInput = () => {
     if (isListening) {
@@ -323,7 +415,8 @@ export default function FileRtiPage() {
     try {
       const recognition = new SpeechRecognition();
       recognitionRef.current = recognition;
-      recognition.lang = speechLang;
+      // In English mode use en-IN; in Hinglish and Hindi modes use hi-IN
+      recognition.lang = speechMode === "english" ? "en-IN" : "hi-IN";
       recognition.continuous = true;
       recognition.interimResults = true;
 
@@ -339,10 +432,16 @@ export default function FileRtiPage() {
         for (let i = 0; i < event.results.length; i++) {
           transcript += event.results[i][0].transcript;
         }
+
+        let formattedTranscript = transcript.trim();
+        if (speechMode === "hinglish") {
+          formattedTranscript = devanagariToHinglish(formattedTranscript);
+        }
+
         const base = speechInitialPromptRef.current
           ? speechInitialPromptRef.current.trim() + " "
           : "";
-        setAiInputPrompt(base + transcript.trim());
+        setAiInputPrompt(base + formattedTranscript);
       };
 
       recognition.onerror = (event) => {
@@ -1159,19 +1258,47 @@ export default function FileRtiPage() {
 
                 {/* Copilot Input Box */}
                 <div className="space-y-2">
-                  <div className="flex items-center justify-between text-xs px-1">
+                  <div className="flex flex-wrap items-center justify-between text-xs px-1 gap-2">
                     <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-1.5">
                       <span>💬</span> Apni pareshani type karein ya aawaz se bole:
                     </span>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[11px] text-slate-400">Aawaz Bhasha:</span>
+                    <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl border border-slate-200 dark:border-white/10">
+                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold px-1">Aawaz Mode:</span>
                       <button
                         type="button"
-                        onClick={() => setSpeechLang((l) => (l === "hi-IN" ? "en-IN" : "hi-IN"))}
-                        className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 hover:bg-purple-200 dark:hover:bg-purple-800/60 transition cursor-pointer"
-                        title="Click to toggle Voice Language (Hindi vs English)"
+                        onClick={() => handleSwitchSpeechMode("hinglish")}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                          speechMode === "hinglish"
+                            ? "bg-purple-600 text-white shadow-xs"
+                            : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                        }`}
+                        title="Bole Hindi/Hinglish me, likhe Roman Hinglish (A-Z) me"
                       >
-                        {speechLang === "hi-IN" ? "🇮🇳 Hindi / Hinglish" : "🇬🇧 English"}
+                        🔤 Hinglish (A-Z)
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSwitchSpeechMode("english")}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                          speechMode === "english"
+                            ? "bg-purple-600 text-white shadow-xs"
+                            : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                        }`}
+                        title="Bole English me, likhe English me"
+                      >
+                        🇬🇧 English
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => handleSwitchSpeechMode("hindi")}
+                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                          speechMode === "hindi"
+                            ? "bg-purple-600 text-white shadow-xs"
+                            : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
+                        }`}
+                        title="Bole Hindi me, likhe Devanagari (हिंदी लिपि) me"
+                      >
+                        🇮🇳 हिंदी
                       </button>
                     </div>
                   </div>
@@ -1181,7 +1308,13 @@ export default function FileRtiPage() {
                       rows={3}
                       value={aiInputPrompt}
                       onChange={(e) => setAiInputPrompt(e.target.value)}
-                      placeholder="Likh ya bol yahan: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
+                      placeholder={
+                        speechMode === "english"
+                          ? "Speak or type in English: e.g. 'What was the sanctioned budget for the road in my village and why was it delayed? Provide copy of contractor agreement and measurement book...'"
+                          : speechMode === "hindi"
+                          ? "हिंदी में बोलें या लिखें: जैसे 'मेरे गांव की सड़क का कितना बजट पास हुआ था और देरी क्यों हुई? ठेकेदार का टेंडर एग्रीमेंट और मेजरमेंट बुक की कॉपी चाहिए...'"
+                          : "Hinglish me bole ya likhe: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
+                      }
                       className="w-full p-3.5 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
                     />
 
@@ -1190,7 +1323,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={toggleVoiceInput}
-                        title={isListening ? "Listening... Click to stop" : "Click to speak in Hindi or English"}
+                        title={isListening ? "Listening... Click to stop" : "Click to speak"}
                         className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
                           isListening
                             ? "bg-rose-600 hover:bg-rose-700 text-white animate-pulse shadow-rose-500/30 ring-2 ring-rose-400"
@@ -1243,7 +1376,13 @@ export default function FileRtiPage() {
                           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
                         </span>
                         <span>
-                          🎙️ <strong>Sun rahe hain...</strong> Saaf aawaz mein bole ({speechLang === "hi-IN" ? "Hindi / Hinglish" : "English"}). Pura hone par &quot;Stop&quot; ya &quot;Structure AI&quot; dabayein.
+                          🎙️ <strong>Sun rahe hain (
+                            {speechMode === "hinglish"
+                              ? "Hinglish: Bole Hindi me, likhega A-Z me"
+                              : speechMode === "english"
+                              ? "English: Bole English me, likhega English me"
+                              : "Hindi: Bole Hindi me, likhega Devanagari me"}
+                          )...</strong> Bolna shuru karein. Pura hone par &quot;Stop&quot; ya &quot;Structure AI&quot; dabayein.
                         </span>
                       </div>
                       <button
