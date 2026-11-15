@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
@@ -81,6 +81,12 @@ export default function FileRtiPage() {
   const [isAnalyzingWithAi, setIsAnalyzingWithAi] = useState(false);
   const [aiResult, setAiResult] = useState(null);
   const [aiSuccessToast, setAiSuccessToast] = useState("");
+
+  // Speech Recognition (Voice Input) State
+  const [isListening, setIsListening] = useState(false);
+  const [speechLang, setSpeechLang] = useState("hi-IN"); // "hi-IN" | "en-IN"
+  const recognitionRef = useRef(null);
+  const speechInitialPromptRef = useRef("");
 
   // AI Authority Routing State (Sprint 2.2)
   const [routingTopic, setRoutingTopic] = useState("");
@@ -280,8 +286,97 @@ export default function FileRtiPage() {
     setCurrentStep((prev) => Math.max(prev - 1, 1));
   };
 
+  // Cleanup Speech Recognition on unmount
+  useEffect(() => {
+    return () => {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.abort();
+        } catch {}
+      }
+    };
+  }, []);
+
+  // Voice Mic (Speech-to-Text) Toggle
+  const toggleVoiceInput = () => {
+    if (isListening) {
+      if (recognitionRef.current) {
+        try {
+          recognitionRef.current.stop();
+        } catch {}
+      }
+      setIsListening(false);
+      return;
+    }
+
+    const SpeechRecognition =
+      typeof window !== "undefined" &&
+      (window.SpeechRecognition || window.webkitSpeechRecognition);
+
+    if (!SpeechRecognition) {
+      setErrorMsg(
+        "Aapke browser mein Speech Recognition (Voice Input) available nahi hai. Kripya Chrome ya Edge use karein ya manually type karein."
+      );
+      return;
+    }
+
+    try {
+      const recognition = new SpeechRecognition();
+      recognitionRef.current = recognition;
+      recognition.lang = speechLang;
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      speechInitialPromptRef.current = aiInputPrompt || "";
+
+      recognition.onstart = () => {
+        setIsListening(true);
+        setErrorMsg("");
+      };
+
+      recognition.onresult = (event) => {
+        let transcript = "";
+        for (let i = 0; i < event.results.length; i++) {
+          transcript += event.results[i][0].transcript;
+        }
+        const base = speechInitialPromptRef.current
+          ? speechInitialPromptRef.current.trim() + " "
+          : "";
+        setAiInputPrompt(base + transcript.trim());
+      };
+
+      recognition.onerror = (event) => {
+        console.warn("Speech recognition error:", event.error);
+        if (event.error === "not-allowed") {
+          setErrorMsg(
+            "Microphone permission blocked hai. Browser address bar mein jaakar microphone allow karein."
+          );
+        } else if (event.error !== "no-speech") {
+          setErrorMsg(`Voice input: ${event.error}`);
+        }
+        setIsListening(false);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.start();
+    } catch (err) {
+      console.error("SpeechRecognition start failed:", err);
+      setErrorMsg("Voice input start karne mein samasya aayi. Dobara try karein.");
+      setIsListening(false);
+    }
+  };
+
   // SARAL AI Vernacular Structuring Engine
   const handleAiAnalyze = async (overridePrompt) => {
+    if (isListening && recognitionRef.current) {
+      try {
+        recognitionRef.current.stop();
+      } catch {}
+      setIsListening(false);
+    }
     const promptText = (overridePrompt || aiInputPrompt || formData.rawCitizenPrompt || "").trim();
     if (!promptText) {
       setErrorMsg("Please enter your RTI concern or question in Hindi, Hinglish, or English.");
@@ -1064,32 +1159,102 @@ export default function FileRtiPage() {
 
                 {/* Copilot Input Box */}
                 <div className="space-y-2">
+                  <div className="flex items-center justify-between text-xs px-1">
+                    <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-1.5">
+                      <span>💬</span> Apni pareshani type karein ya aawaz se bole:
+                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-slate-400">Aawaz Bhasha:</span>
+                      <button
+                        type="button"
+                        onClick={() => setSpeechLang((l) => (l === "hi-IN" ? "en-IN" : "hi-IN"))}
+                        className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 hover:bg-purple-200 dark:hover:bg-purple-800/60 transition cursor-pointer"
+                        title="Click to toggle Voice Language (Hindi vs English)"
+                      >
+                        {speechLang === "hi-IN" ? "🇮🇳 Hindi / Hinglish" : "🇬🇧 English"}
+                      </button>
+                    </div>
+                  </div>
+
                   <div className="relative">
                     <textarea
                       rows={3}
                       value={aiInputPrompt}
                       onChange={(e) => setAiInputPrompt(e.target.value)}
                       placeholder="Likh ya bol yahan: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
-                      className="w-full p-3.5 pr-28 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
+                      className="w-full p-3.5 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
                     />
-                    <button
-                      type="button"
-                      onClick={() => handleAiAnalyze()}
-                      disabled={isAnalyzingWithAi}
-                      className="absolute right-2.5 bottom-3.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
-                    >
-                      {isAnalyzingWithAi ? (
-                        <>
-                          <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          <span>Structuring...</span>
-                        </>
-                      ) : (
-                        <>
-                          <span>✨ Structure AI</span>
-                        </>
-                      )}
-                    </button>
+
+                    <div className="absolute right-2.5 bottom-3 flex items-center gap-1.5">
+                      {/* Voice Mic Button */}
+                      <button
+                        type="button"
+                        onClick={toggleVoiceInput}
+                        title={isListening ? "Listening... Click to stop" : "Click to speak in Hindi or English"}
+                        className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
+                          isListening
+                            ? "bg-rose-600 hover:bg-rose-700 text-white animate-pulse shadow-rose-500/30 ring-2 ring-rose-400"
+                            : "bg-purple-100 hover:bg-purple-200 dark:bg-purple-900/50 dark:hover:bg-purple-800/60 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-500/30"
+                        }`}
+                      >
+                        {isListening ? (
+                          <>
+                            <span className="w-2 h-2 rounded-full bg-white animate-ping" />
+                            <span>Stop ⏹️</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>🎙️ Mic</span>
+                          </>
+                        )}
+                      </button>
+
+                      {/* Structure AI Button */}
+                      <button
+                        type="button"
+                        onClick={() => handleAiAnalyze()}
+                        disabled={isAnalyzingWithAi}
+                        className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                      >
+                        {isAnalyzingWithAi ? (
+                          <>
+                            <span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            <span>Structuring...</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>✨ Structure AI</span>
+                          </>
+                        )}
+                      </button>
+                    </div>
                   </div>
+
+                  {/* Active Voice Listening Live Banner */}
+                  {isListening && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-center justify-between"
+                    >
+                      <div className="flex items-center gap-2">
+                        <span className="relative flex h-2.5 w-2.5">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
+                        </span>
+                        <span>
+                          🎙️ <strong>Sun rahe hain...</strong> Saaf aawaz mein bole ({speechLang === "hi-IN" ? "Hindi / Hinglish" : "English"}). Pura hone par &quot;Stop&quot; ya &quot;Structure AI&quot; dabayein.
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={toggleVoiceInput}
+                        className="text-rose-700 dark:text-rose-400 hover:underline text-[11px] font-bold cursor-pointer"
+                      >
+                        Band karein ✕
+                      </button>
+                    </motion.div>
+                  )}
                 </div>
 
                 {/* AI Structuring Feedback / Success Toast */}
