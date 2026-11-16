@@ -22,19 +22,31 @@ export async function GET(request) {
 
     if (!user) {
       // Fallback to verified JWT session details
+      const fallbackRole = session.role || "CITIZEN";
+      const fallbackName =
+        session.fullName ||
+        (fallbackRole === "ADMIN"
+          ? "SARAL Central Administrator"
+          : fallbackRole === "OFFICER"
+          ? "Designated PIO"
+          : "SARAL Citizen");
+
       user = {
         id: session.userId,
         email: session.email,
-        fullName: session.fullName || "SARAL Citizen",
-        name: session.fullName || "SARAL Citizen",
-        role: session.role || "CITIZEN",
-        isDigiLockerVerified: false,
-        citizenProfile: {
-          addressLine: "",
-          district: "",
-          state: "",
-          pincode: "",
-        },
+        fullName: fallbackName,
+        name: fallbackName,
+        role: fallbackRole,
+        isDigiLockerVerified: fallbackRole !== "CITIZEN",
+        citizenProfile:
+          fallbackRole === "CITIZEN"
+            ? {
+                addressLine: "",
+                district: "",
+                state: "",
+                pincode: "",
+              }
+            : null,
       };
     }
 

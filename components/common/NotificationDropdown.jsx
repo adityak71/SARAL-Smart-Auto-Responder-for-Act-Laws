@@ -31,6 +31,8 @@ function timeAgo(dateString) {
 export default function NotificationDropdown() {
   const dispatch = useDispatch();
   const isOpen = useSelector((state) => state.ui.notificationOpen);
+  const user = useSelector((state) => state.auth?.user);
+  const userRole = (user?.role || "CITIZEN").toUpperCase();
   const { notifications, unreadCount, filter } = useSelector(
     (state) => state.notifications
   );
@@ -170,7 +172,11 @@ export default function NotificationDropdown() {
               <div className="p-4 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-slate-950/60">
                 <div className="flex items-center gap-2">
                   <span className="font-bold text-sm tracking-tight text-slate-900 dark:text-white">
-                    Citizen Notifications
+                    {userRole === "ADMIN"
+                      ? "System Notifications"
+                      : userRole === "OFFICER"
+                      ? "Officer Notifications"
+                      : "Notifications"}
                   </span>
                   {unreadCount > 0 && (
                     <span className="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:bg-rose-500/20 dark:text-rose-300 text-[11px] font-bold border border-rose-500/30">

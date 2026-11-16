@@ -15,24 +15,24 @@ export default function ProfilePage() {
 
   // Determine authorized role
   const actualRole = (user?.role || selectedRole || "CITIZEN").toUpperCase();
-  const [activeRole, setActiveRole] = useState(actualRole);
+  const activeRole = actualRole;
   const [isDigiLockerModalOpen, setIsDigiLockerModalOpen] = useState(false);
 
   // Form States for "Update Details"
-  const [detailsForm, setDetailsForm] = useState({
-    fullName: "",
-    phone: "",
-    avatarUrl: "",
+  const [detailsForm, setDetailsForm] = useState(() => ({
+    fullName: user?.fullName || user?.name || (actualRole === "ADMIN" ? "SARAL Central Administrator" : actualRole === "OFFICER" ? "Er. Rameshwar Verma" : "Citizen User"),
+    phone: user?.phone || "",
+    avatarUrl: user?.avatarUrl || "",
     // Citizen specific
-    careOf: "",
-    addressLine: "",
-    district: "",
-    state: "",
-    pincode: "",
+    careOf: user?.citizenProfile?.careOf || "",
+    addressLine: user?.citizenProfile?.addressLine || "",
+    district: user?.citizenProfile?.district || "",
+    state: user?.citizenProfile?.state || "",
+    pincode: user?.citizenProfile?.pincode || "",
     // Officer specific
-    designation: "",
-    officeLocation: "",
-  });
+    designation: user?.officerProfile?.designation || (actualRole === "OFFICER" ? "Executive Engineer & Designated PIO" : ""),
+    officeLocation: user?.officerProfile?.officeLocation || (actualRole === "OFFICER" ? "Divisional Works Office, PWD Division II, Pipariya" : ""),
+  }));
 
   // Form States for "Change Password"
   const [passwordForm, setPasswordForm] = useState({
@@ -66,60 +66,25 @@ export default function ProfilePage() {
           const data = await res.json();
           if (data.success && data.user) {
             dispatch(setCredentials(data.user));
+            const freshUser = data.user;
+            setDetailsForm({
+              fullName: freshUser.fullName || freshUser.name || "",
+              phone: freshUser.phone || "",
+              avatarUrl: freshUser.avatarUrl || "",
+              careOf: freshUser.citizenProfile?.careOf || "",
+              addressLine: freshUser.citizenProfile?.addressLine || "",
+              district: freshUser.citizenProfile?.district || "",
+              state: freshUser.citizenProfile?.state || "",
+              pincode: freshUser.citizenProfile?.pincode || "",
+              designation: freshUser.officerProfile?.designation || "",
+              officeLocation: freshUser.officerProfile?.officeLocation || "",
+            });
           }
         }
       } catch (e) {}
     }
     loadFreshUser();
   }, [isAuthenticated, dispatch, router]);
-
-  // Sync state when user or activeRole loads
-  useEffect(() => {
-    if (!isAuthenticated) return;
-
-    const isOfficer = activeRole === "OFFICER";
-    const isAdmin = activeRole === "ADMIN";
-
-    // Auto-extract citizen's legal name from Google Auth / user state or email prefix
-    let derivedName = user?.fullName || user?.name || "";
-    if (!derivedName && user?.email) {
-      const emailPrefix = user.email.split("@")[0];
-      derivedName = emailPrefix
-        .replace(/[._]/g, " ")
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-    }
-
-    if (!derivedName) {
-      derivedName = isOfficer
-        ? "Er. Rameshwar Verma"
-        : isAdmin
-        ? "SARAL Central Administrator"
-        : "Citizen User";
-    }
-
-    setDetailsForm({
-      fullName: derivedName,
-      phone: user?.phone || "",
-      avatarUrl:
-        user?.avatarUrl ||
-        (isOfficer
-          ? "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256"
-          : isAdmin
-          ? "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256"
-          : "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256"),
-      careOf: user?.citizenProfile?.careOf || "",
-      addressLine: user?.citizenProfile?.addressLine || "",
-      district: user?.citizenProfile?.district || "",
-      state: user?.citizenProfile?.state || "",
-      pincode: user?.citizenProfile?.pincode || "",
-      designation:
-        user?.officerProfile?.designation ||
-        (isOfficer ? "Executive Engineer & Designated PIO" : ""),
-      officeLocation:
-        user?.officerProfile?.officeLocation ||
-        (isOfficer ? "Divisional Works Office, PWD Division II, Pipariya" : ""),
-    });
-  }, [isAuthenticated, user, activeRole]);
 
   // Avatar presets for quick photo change
   const avatarPresets = [
@@ -322,38 +287,6 @@ export default function ProfilePage() {
             </span>
           </div>
         </div>
-
-        {/* Superadmin Inspector Controller Bar (Only visible to ADMIN) */}
-        {actualRole === "ADMIN" && (
-          <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-100 via-indigo-50 to-purple-100 dark:from-purple-900/30 dark:via-slate-900/50 dark:to-indigo-900/30 border border-purple-200 dark:border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm dark:shadow-md">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-purple-600 dark:bg-cyan-400 animate-pulse" />
-              <span className="text-xs font-bold text-purple-900 dark:text-cyan-300 uppercase tracking-wider">
-                Admin Profile Inspector:
-              </span>
-              <span className="text-xs text-slate-600 dark:text-slate-400 hidden md:inline">
-                (Preview how different roles view and edit their profile)
-              </span>
-            </div>
-
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-white dark:bg-slate-900/80 border border-purple-200 dark:border-white/10 w-fit shadow-xs">
-              {["CITIZEN", "OFFICER", "ADMIN"].map((r) => (
-                <button
-                  key={r}
-                  type="button"
-                  onClick={() => setActiveRole(r)}
-                  className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
-                    activeRole === r
-                      ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
-                      : "text-slate-600 dark:text-slate-400 hover:text-purple-700 dark:hover:text-white"
-                  }`}
-                >
-                  {r === "CITIZEN" ? "Citizen" : r === "OFFICER" ? "Officer" : "Admin"}
-                </button>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Main 2-Column Responsive Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-start">

@@ -41,9 +41,10 @@ export async function POST(request) {
         include: { citizenProfile: true, officerProfile: true },
       });
 
-      // 2. If found, ensure cleanName from Google Auth updates any legacy placeholder name
+      // 2. If found, only update name if previous name was empty or generic placeholder
       if (dbUser) {
-        if (cleanName && cleanName !== "Citizen User" && dbUser.fullName !== cleanName) {
+        const isPlaceholder = !dbUser.fullName || dbUser.fullName === "Citizen User" || dbUser.fullName === "User";
+        if (isPlaceholder && cleanName && cleanName !== "Citizen User" && cleanName !== "Rahul Sharma") {
           dbUser = await prisma.user.update({
             where: { id: dbUser.id },
             data: {
@@ -95,13 +96,27 @@ export async function POST(request) {
       try {
         const notifCount = await prisma.notification.count({ where: { userId: dbUser.id } });
         if (notifCount === 0) {
+          let welcomeTitle = `Welcome to SARAL RTI, ${dbUser.fullName}!`;
+          let welcomeMessage = `Your citizen account (${cleanEmail}) is ready. Explore verified encyclopedias, complete DigiLocker citizenship verification, and file statutory RTIs under Section 6(1).`;
+          let welcomeLink = "/dashboard";
+
+          if (dbUser.role === "ADMIN") {
+            welcomeTitle = `Welcome to SARAL Administration!`;
+            welcomeMessage = `Your master administration portal (${cleanEmail}) is active with platform governance, officer management, and statutory audit oversight.`;
+            welcomeLink = "/dashboard";
+          } else if (dbUser.role === "OFFICER") {
+            welcomeTitle = `Welcome to SARAL Officer Desk, ${dbUser.fullName}!`;
+            welcomeMessage = `Your designated officer workstation (${cleanEmail}) is ready. Complete DigiLocker identity verification to inspect assigned Section 6(1) petitions.`;
+            welcomeLink = "/dashboard";
+          }
+
           await prisma.notification.create({
             data: {
               userId: dbUser.id,
-              title: `Welcome to SARAL RTI, ${dbUser.fullName}!`,
-              message: `Your citizen account (${cleanEmail}) is ready. Explore verified encyclopedias, complete DigiLocker citizenship verification, and file statutory RTIs under Section 6(1).`,
+              title: welcomeTitle,
+              message: welcomeMessage,
               type: "SYSTEM",
-              link: "/dashboard",
+              link: welcomeLink,
               isRead: false,
             },
           });
@@ -136,12 +151,13 @@ export async function POST(request) {
       role: dbUser.role,
       avatarUrl: dbUser.avatarUrl || cleanAvatar,
       isDigiLockerVerified: Boolean(dbUser.isDigiLockerVerified),
-      citizenProfile: dbUser.citizenProfile || {
+      citizenProfile: dbUser.citizenProfile || (dbUser.role === "CITIZEN" ? {
         addressLine: "",
         district: "",
         state: "",
         pincode: "",
-      },
+      } : null),
+      officerProfile: dbUser.officerProfile || null,
     };
 
     const response = NextResponse.json({

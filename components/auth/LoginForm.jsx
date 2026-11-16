@@ -37,9 +37,24 @@ export default function LoginForm() {
     setAuthError("");
     
     // Determine target role and fallback defaults
-    const roleKey = (selectedRole || "citizen").toUpperCase();
+    const rawEmail = (loginForm.email || "").trim().toLowerCase();
+    
+    // Auto-detect role if user typed an admin or official government/officer email
+    let detectedRole = (selectedRole || "citizen").toUpperCase();
+    if (rawEmail === "admin@saral.gov.in" || rawEmail.startsWith("admin@")) {
+      detectedRole = "ADMIN";
+    } else if (
+      rawEmail.endsWith(".gov.in") ||
+      rawEmail.includes("officer") ||
+      rawEmail.includes("pio") ||
+      rawEmail === "er.rameshwar@mp.gov.in"
+    ) {
+      detectedRole = "OFFICER";
+    }
+
+    const roleKey = detectedRole;
     let defaultEmail = "rahul.sharma@citizen.in";
-    let defaultName = "Rahul Sharma";
+    let defaultName = "Citizen User";
     let defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256";
 
     if (roleKey === "OFFICER") {
@@ -50,6 +65,8 @@ export default function LoginForm() {
       defaultEmail = "admin@saral.gov.in";
       defaultName = "SARAL Central Administrator";
       defaultAvatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256";
+    } else if (rawEmail === "rahul.sharma@citizen.in") {
+      defaultName = "Rahul Sharma";
     }
 
     const emailToUse = loginForm.email?.trim() || defaultEmail;
@@ -67,7 +84,7 @@ export default function LoginForm() {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
               email: userCredential.user.email,
-              fullName: userCredential.user.displayName || defaultName,
+              fullName: userCredential.user.displayName || (roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName),
               avatarUrl: userCredential.user.photoURL || defaultAvatar,
               role: roleKey,
               firebaseUid: userCredential.user.uid,
@@ -101,7 +118,7 @@ export default function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: emailToUse,
-          fullName: defaultName,
+          fullName: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
           role: roleKey,
           avatarUrl: defaultAvatar,
           isDigiLockerVerified: roleKey !== "CITIZEN",
@@ -124,7 +141,8 @@ export default function LoginForm() {
     dispatch(
       setCredentials({
         email: emailToUse,
-        name: defaultName,
+        name: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
+        fullName: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
         role: roleKey,
         avatarUrl: defaultAvatar,
         isDigiLockerVerified: roleKey !== "CITIZEN",
@@ -143,6 +161,13 @@ export default function LoginForm() {
       const { auth, googleProvider } = await import("@/lib/firebase");
       const result = await signInWithPopup(auth, googleProvider);
       const user = result.user;
+      const googleEmail = (user.email || "").toLowerCase().trim();
+      let googleRole = "CITIZEN";
+      if (googleEmail === "admin@saral.gov.in" || googleEmail.startsWith("admin@")) {
+        googleRole = "ADMIN";
+      } else if (googleEmail.endsWith(".gov.in") || googleEmail.includes("officer")) {
+        googleRole = "OFFICER";
+      }
 
       // 1. Establish session & write saral_session cookie
       const res = await fetch("/api/auth/session", {
@@ -150,13 +175,13 @@ export default function LoginForm() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: user.email,
-          fullName: user.displayName || "Google Citizen",
+          fullName: user.displayName || (googleRole === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
           avatarUrl:
             user.photoURL ||
             "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-          role: "CITIZEN",
+          role: googleRole,
           firebaseUid: user.uid,
-          isDigiLockerVerified: false, // Per diagram: starts unverified until verified
+          isDigiLockerVerified: googleRole !== "CITIZEN",
         }),
       });
 
@@ -164,13 +189,13 @@ export default function LoginForm() {
       const userData = data?.user || {
         id: user.uid,
         email: user.email,
-        name: user.displayName || "Google Citizen",
-        fullName: user.displayName || "Google Citizen",
-        role: "CITIZEN",
+        name: user.displayName || (googleRole === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
+        fullName: user.displayName || (googleRole === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
+        role: googleRole,
         avatarUrl:
           user.photoURL ||
           "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-        isDigiLockerVerified: false,
+        isDigiLockerVerified: googleRole !== "CITIZEN",
       };
 
       dispatch(setCredentials(userData));
