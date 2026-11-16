@@ -1,14 +1,38 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { adminProfileData } from "@/data/profileData";
 
 export default function AdminProfileView({ user }) {
+  const [liveStats, setLiveStats] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadStats() {
+      try {
+        const res = await fetch("/api/admin/stats");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.stats && isMounted) {
+            setLiveStats(data.stats);
+          }
+        }
+      } catch (err) {
+        console.warn("Admin stats fetch error:", err);
+      }
+    }
+    loadStats();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   const stats = [
     {
       label: "Registered Citizens",
-      val: adminProfileData.platformStats.totalCitizens,
+      val: liveStats?.totalUsers ?? adminProfileData.platformStats.totalCitizens,
       sub: "Active verified accounts",
       icon: "👥",
       color: "text-purple-600 dark:text-purple-400",
@@ -16,7 +40,7 @@ export default function AdminProfileView({ user }) {
     },
     {
       label: "Public Authorities",
-      val: adminProfileData.platformStats.connectedAuthorities,
+      val: liveStats?.totalDepartments ?? adminProfileData.platformStats.connectedAuthorities,
       sub: "Mapped departments",
       icon: "🏛️",
       color: "text-cyan-600 dark:text-cyan-400",
@@ -24,7 +48,7 @@ export default function AdminProfileView({ user }) {
     },
     {
       label: "Active PIO Officers",
-      val: adminProfileData.platformStats.activeOfficers,
+      val: liveStats?.activeOfficers ?? adminProfileData.platformStats.activeOfficers,
       sub: "Section 5(1) verified",
       icon: "👷",
       color: "text-emerald-600 dark:text-emerald-400",
@@ -32,7 +56,7 @@ export default function AdminProfileView({ user }) {
     },
     {
       label: "Security Audit Events",
-      val: adminProfileData.platformStats.auditLogCount,
+      val: liveStats?.totalAuditEvents ?? adminProfileData.platformStats.auditLogCount,
       sub: "Immutable transaction log",
       icon: "🛡️",
       color: "text-amber-600 dark:text-amber-400",

@@ -1,23 +1,51 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { officerProfileData } from "@/data/profileData";
 
 export default function OfficerProfileView({ user, isEditing }) {
+  const [liveStats, setLiveStats] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    async function loadOfficerStats() {
+      try {
+        const res = await fetch("/api/dashboard/stats?role=OFFICER");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.success && data.stats && isMounted) {
+            setLiveStats(data.stats);
+          }
+        }
+      } catch (err) {
+        console.warn("Officer stats fetch error:", err);
+      }
+    }
+    loadOfficerStats();
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const totalAssigned = liveStats?.assignedApplications ?? officerProfileData.performanceMetrics.totalAssigned;
+  const dispatchedCount = liveStats?.dispatchedToday ?? officerProfileData.performanceMetrics.disposedOnTime;
+  const complianceScore = liveStats?.complianceRatio || officerProfileData.performanceMetrics.complianceScore;
+
   const stats = [
     {
       label: "Total RTIs Assigned",
-      val: officerProfileData.performanceMetrics.totalAssigned,
-      sub: "Division II Pipariya",
+      val: totalAssigned,
+      sub: user?.officerProfile?.divisionLocation || "Departmental Jurisdiction",
       icon: "⚖️",
       color: "text-purple-600 dark:text-purple-400",
       bg: "bg-purple-500/10 border-purple-500/20",
     },
     {
-      label: "Disposed Within 30 Days",
-      val: officerProfileData.performanceMetrics.disposedOnTime,
-      sub: "Statutory deadline satisfied",
+      label: "Disposed / Dispatched",
+      val: dispatchedCount,
+      sub: "Digitally certified responses",
       icon: "🛡️",
       color: "text-emerald-600 dark:text-emerald-400",
       bg: "bg-emerald-500/10 border-emerald-500/20",
@@ -32,7 +60,7 @@ export default function OfficerProfileView({ user, isEditing }) {
     },
     {
       label: "Compliance Rating",
-      val: officerProfileData.performanceMetrics.complianceScore,
+      val: complianceScore,
       sub: "State Information Commission Score",
       icon: "⭐",
       color: "text-amber-600 dark:text-amber-400",

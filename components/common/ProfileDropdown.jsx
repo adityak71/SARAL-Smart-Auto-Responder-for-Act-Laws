@@ -30,10 +30,23 @@ export default function ProfileDropdown() {
     router.refresh();
   };
 
-  const displayName = user?.name || user?.fullName || userProfileData.name;
-  const displayEmail = user?.email || userProfileData.email;
-  const avatarUrl = user?.avatarUrl || userProfileData.avatarUrl;
   const userRole = (user?.role || selectedRole || "CITIZEN").toUpperCase();
+  const defaultEmail =
+    userRole === "ADMIN"
+      ? "admin@saral.gov.in"
+      : userRole === "OFFICER"
+      ? "officer@saral.gov.in"
+      : "citizen@saral.gov.in";
+  const defaultName =
+    userRole === "ADMIN"
+      ? "SARAL Administrator"
+      : userRole === "OFFICER"
+      ? "Designated PIO"
+      : "SARAL Citizen";
+
+  const displayName = user?.name || user?.fullName || defaultName;
+  const displayEmail = user?.email || defaultEmail;
+  const avatarUrl = user?.avatarUrl || userProfileData.avatarUrl;
   const roleBadge =
     userRole === "ADMIN"
       ? "Superadmin (CIC Controller)"
