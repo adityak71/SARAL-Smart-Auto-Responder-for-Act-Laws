@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { requireRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
+import { normalizeStructuredClauses } from "@/lib/services/applicationService";
 
 export async function GET(request) {
   try {
@@ -89,7 +90,7 @@ export async function GET(request) {
         title: app.title,
         subject: app.subject,
         rawCitizenPrompt: app.rawCitizenPrompt,
-        structuredClauses: app.structuredClauses,
+        structuredClauses: normalizeStructuredClauses(app.structuredClauses),
         targetAuthority: app.targetAuthority,
         isLifeOrLiberty: app.isLifeOrLiberty,
         status: app.status,

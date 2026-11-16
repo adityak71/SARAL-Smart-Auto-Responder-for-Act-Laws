@@ -7,55 +7,65 @@ export async function GET(request) {
     const { user, response } = requireRole(request, ["ADMIN"]);
     if (response) return response;
 
-    // Fetch real counts from DB
+    // Fetch 100% genuine real counts from PostgreSQL database
     const [
-      dbUserCount,
-      dbVerifiedUserCount,
-      dbRtiCount,
-      dbSubmittedCount,
-      dbInProgressCount,
-      dbRespondedCount,
-      dbOfficers,
+      totalUsers,
+      verifiedUsers,
+      totalRtis,
+      submittedCount,
+      inProgressCount,
+      respondedCount,
+      officers,
+      applications,
     ] = await Promise.all([
       prisma.user.count(),
       prisma.user.count({ where: { isDigiLockerVerified: true } }),
       prisma.rtiApplication.count(),
       prisma.rtiApplication.count({ where: { status: "SUBMITTED" } }),
-      prisma.rtiApplication.count({ where: { status: { in: ["ASSIGNED", "UNDER_REVIEW"] } } }),
-      prisma.rtiApplication.count({ where: { status: { in: ["RESPONSE_DISPATCHED", "RESOLVED"] } } }),
-      prisma.officerProfile.findMany({ include: { user: true } }),
+      prisma.rtiApplication.count({
+        where: { status: { in: ["IN_REVIEW", "ASSIGNED", "UNDER_REVIEW"] } },
+      }),
+      prisma.rtiApplication.count({
+        where: { status: { in: ["RESPONDED", "CLOSED", "RESPONSE_DISPATCHED", "RESOLVED"] } },
+      }),
+      prisma.officerProfile.findMany({
+        include: {
+          user: {
+            select: { isActive: true },
+          },
+        },
+      }),
+      prisma.rtiApplication.findMany({
+        select: { createdAt: true },
+      }),
     ]);
 
-    // Baseline metrics (scaled with live counts for authentic institutional view)
-    const baseUsers = 2450;
-    const baseRtis = 1280;
-    const baseVerified = 1850;
-    const basePending = 125;
+    const activeOfficers = officers.filter((o) => o.user?.isActive).length;
+    const suspendedOfficers = officers.filter((o) => !o.user?.isActive).length;
 
-    const totalUsers = Math.max(baseUsers, dbUserCount);
-    const totalRtis = Math.max(baseRtis, dbRtiCount);
-    const verifiedUsers = Math.max(baseVerified, dbVerifiedUserCount);
-    const pendingRequests = Math.max(basePending, dbSubmittedCount + dbInProgressCount);
+    // Calculate real monthly RTI counts for current year (Jan to Dec)
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const currentMonthIndex = new Date().getMonth(); // 0 to 11
+    
+    // Default 6-month window ending on current month (or Jan-Jun)
+    const monthsToShow = monthNames.slice(0, Math.max(6, currentMonthIndex + 1));
+    const monthlyCounts = {};
+    monthsToShow.forEach((m) => {
+      monthlyCounts[m] = 0;
+    });
 
-    const submittedCount = Math.max(780, dbSubmittedCount);
-    const inProgressCount = Math.max(320, dbInProgressCount);
-    const respondedCount = Math.max(180, dbRespondedCount);
+    applications.forEach((app) => {
+      const appDate = new Date(app.createdAt);
+      const mName = monthNames[appDate.getMonth()];
+      if (monthlyCounts[mName] !== undefined) {
+        monthlyCounts[mName] += 1;
+      }
+    });
 
-    // Officers breakdown
-    const totalOfficers = Math.max(48, dbOfficers.length);
-    const activeOfficers = Math.max(42, dbOfficers.filter((o) => o.user?.isActive).length);
-    const suspendedOfficers = Math.max(4, dbOfficers.filter((o) => !o.user?.isActive).length);
-    const inactiveOfficers = totalOfficers - activeOfficers - suspendedOfficers;
-
-    // Monthly RTI trends (Jan - Jun) as shown in Admin Analytics (Screenshot 2)
-    const monthlyApplications = [
-      { month: "Jan", count: 120 },
-      { month: "Feb", count: 180 },
-      { month: "Mar", count: 150 },
-      { month: "Apr", count: 240 },
-      { month: "May", count: 210 },
-      { month: "Jun", count: 295 },
-    ];
+    const monthlyApplications = monthsToShow.map((m) => ({
+      month: m,
+      count: monthlyCounts[m],
+    }));
 
     return NextResponse.json({
       success: true,
@@ -63,25 +73,19 @@ export async function GET(request) {
         totalUsers,
         totalRtis,
         verifiedUsers,
-        pendingRequests,
+        pendingRequests: submittedCount + inProgressCount,
         statusBreakdown: {
           submitted: submittedCount,
           inProgress: inProgressCount,
           responded: respondedCount,
         },
         officerStats: {
-          total: totalOfficers,
+          total: officers.length,
           active: activeOfficers,
           suspended: suspendedOfficers,
-          inactive: Math.max(2, inactiveOfficers),
+          inactive: 0,
         },
         monthlyApplications,
-        realDb: {
-          users: dbUserCount,
-          rtis: dbRtiCount,
-          verified: dbVerifiedUserCount,
-          officers: dbOfficers.length,
-        },
       },
     });
   } catch (error) {
