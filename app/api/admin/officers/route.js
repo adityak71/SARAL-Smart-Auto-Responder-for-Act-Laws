@@ -3,12 +3,54 @@ import { requireRole } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 
+/**
+ * Automatically calculates the next incremented sequential Employee / Service ID
+ * Formatted as: EMP-[DEPT_CODE]-[0001, 0002, ...]
+ */
+export async function generateNextEmployeeId(departmentId) {
+  let deptCode = "PIO";
+  if (departmentId) {
+    const dept = await prisma.department.findUnique({
+      where: { id: departmentId },
+      select: { code: true },
+    });
+    if (dept?.code) {
+      deptCode = dept.code.toUpperCase().replace(/[^A-Z0-9_]/g, "");
+    }
+  }
+
+  // Count existing officers in this department
+  const existingInDept = await prisma.officerProfile.count({
+    where: departmentId ? { departmentId } : {},
+  });
+
+  let nextNum = existingInDept + 1;
+  let candidate = `EMP-${deptCode}-${String(nextNum).padStart(4, "0")}`;
+
+  // Loop to guarantee zero collision in case of manual deletions/gaps
+  while (await prisma.officerProfile.findUnique({ where: { employeeId: candidate } })) {
+    nextNum++;
+    candidate = `EMP-${deptCode}-${String(nextNum).padStart(4, "0")}`;
+  }
+
+  return candidate;
+}
+
 export async function GET(request) {
   try {
     const { user, response } = requireRole(request, ["ADMIN"]);
     if (response) return response;
 
     const { searchParams } = new URL(request.url);
+    const action = searchParams.get("action");
+
+    // Dynamic auto-increment generation endpoint
+    if (action === "next-id") {
+      const departmentId = searchParams.get("departmentId");
+      const nextEmployeeId = await generateNextEmployeeId(departmentId);
+      return NextResponse.json({ success: true, nextEmployeeId });
+    }
+
     const status = searchParams.get("status"); // "all" | "active" | "suspended"
 
     const officers = await prisma.officerProfile.findMany({
@@ -85,14 +127,14 @@ export async function POST(request) {
       sendInvitation = true,
     } = body;
 
-    if (!fullName || !email || !employeeId || !designation || !departmentId) {
+    if (!fullName || !email || !designation || !departmentId) {
       return NextResponse.json(
-        { success: false, error: "Full Name, Official Email, Employee ID, Designation, and Department are required." },
+        { success: false, error: "Full Name, Official Email, Designation, and Department are required." },
         { status: 400 }
       );
     }
 
-    // Check duplicate email or employeeId
+    // Check duplicate email
     const existingUser = await prisma.user.findUnique({ where: { email: email.trim().toLowerCase() } });
     if (existingUser) {
       return NextResponse.json(
@@ -101,27 +143,32 @@ export async function POST(request) {
       );
     }
 
-    const existingOfficer = await prisma.officerProfile.findUnique({ where: { employeeId: employeeId.trim() } });
-    if (existingOfficer) {
-      return NextResponse.json(
-        { success: false, error: `An officer with Employee ID ${employeeId} already exists.` },
-        { status: 409 }
-      );
+    // Auto-generate or sanitize unique sequential employeeId
+    let finalEmployeeId = employeeId ? employeeId.trim() : "";
+    if (!finalEmployeeId) {
+      finalEmployeeId = await generateNextEmployeeId(departmentId);
+    } else {
+      const existingOfficer = await prisma.officerProfile.findUnique({ where: { employeeId: finalEmployeeId } });
+      if (existingOfficer) {
+        finalEmployeeId = await generateNextEmployeeId(departmentId);
+      }
     }
 
-    // Default invitation password for new officers
-    const defaultPasswordHash = await bcrypt.hash("Password@123", 10);
+    // Admin specifies initial password or auto-generate Officer@2026
+    const temporaryPassword = (body.password || body.temporaryPassword || "Officer@2026").trim();
+    const passwordHash = await bcrypt.hash(temporaryPassword, 10);
 
     // Create user and profile in transaction
+    // isDigiLockerVerified is explicitly false: Officer must authenticate via DigiLocker upon login
     const [newUser, newProfile] = await prisma.$transaction(async (tx) => {
       const u = await tx.user.create({
         data: {
           email: email.trim().toLowerCase(),
-          passwordHash: defaultPasswordHash,
+          passwordHash,
           fullName: fullName.trim(),
           phone: phone ? phone.trim() : null,
           role: "OFFICER",
-          isDigiLockerVerified: true,
+          isDigiLockerVerified: false,
           isActive: true,
           avatarUrl: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256",
         },
@@ -131,7 +178,7 @@ export async function POST(request) {
         data: {
           userId: u.id,
           departmentId,
-          employeeId: employeeId.trim(),
+          employeeId: finalEmployeeId,
           designation: designation.trim(),
           officeLocation: officeLocation ? officeLocation.trim() : "Divisional Nodal Office",
           isPio: Boolean(isPio),
@@ -159,7 +206,7 @@ export async function POST(request) {
 
     return NextResponse.json({
       success: true,
-      message: `Officer ${fullName} created successfully. Invitation sent to ${email}.`,
+      message: `Officer ${fullName} registered successfully. Credentials issued.`,
       officer: {
         id: newProfile.id,
         userId: newUser.id,
@@ -168,6 +215,8 @@ export async function POST(request) {
         employeeId: newProfile.employeeId,
         designation: newProfile.designation,
         department: newProfile.department,
+        temporaryPassword,
+        isDigiLockerVerified: false,
         isActive: true,
       },
     });
