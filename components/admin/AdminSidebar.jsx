@@ -1,67 +1,82 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  LayoutDashboard,
+  Users,
+  ShieldCheck,
+  Briefcase,
+  UserPlus,
+  FileText,
+  Landmark,
+  MessageSquare,
+  Bell,
+  BookOpen,
+  BarChart3,
+  History,
+  Settings,
+  LogOut,
+} from "lucide-react";
 
 export const ADMIN_SECTIONS = [
   {
     category: null,
     items: [
-      { id: "dashboard", label: "Dashboard", icon: "📊" },
+      { id: "dashboard", label: "Dashboard", Icon: LayoutDashboard },
     ],
   },
   {
     category: "USER MANAGEMENT",
     items: [
-      { id: "users", label: "Users", icon: "👥" },
-      { id: "identity-verification", label: "Identity Verification", icon: "🛡️" },
+      { id: "users", label: "Users", Icon: Users },
+      { id: "identity-verification", label: "Identity Verification", Icon: ShieldCheck },
     ],
   },
   {
     category: "OFFICER MANAGEMENT",
     items: [
-      { id: "all-officers", label: "All Officers", icon: "👔" },
-      { id: "create-officer", label: "Create Officer", icon: "➕" },
+      { id: "all-officers", label: "All Officers", Icon: Briefcase },
+      { id: "create-officer", label: "Create Officer", Icon: UserPlus },
     ],
   },
   {
     category: "RTI MANAGEMENT",
     items: [
-      { id: "all-rtis", label: "All RTI Applications", icon: "📄" },
-      { id: "departments", label: "Departments", icon: "🏛️" },
+      { id: "all-rtis", label: "All RTI Applications", Icon: FileText },
+      { id: "departments", label: "Departments", Icon: Landmark },
     ],
   },
   {
     category: "SUPPORT MANAGEMENT",
     items: [
-      { id: "complaints", label: "Complaints & Support", icon: "💬" },
-      { id: "notifications", label: "Notifications", icon: "🔔" },
-      { id: "content-faqs", label: "Content & FAQs", icon: "📖" },
+      { id: "complaints", label: "Complaints", Icon: MessageSquare },
+      { id: "notifications", label: "Notifications", Icon: Bell },
+      { id: "content-faqs", label: "Content & FAQs", Icon: BookOpen },
     ],
   },
   {
     category: "SYSTEM MANAGEMENT",
     items: [
-      { id: "analytics", label: "Analytics & Reports", icon: "📈" },
-      { id: "audit-logs", label: "Audit Logs", icon: "📜" },
-      { id: "settings", label: "Settings", icon: "⚙️" },
+      { id: "analytics", label: "Analytics", Icon: BarChart3 },
+      { id: "audit-logs", label: "Audit Logs", Icon: History },
+      { id: "settings", label: "Settings", Icon: Settings },
     ],
   },
 ];
 
 export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
   return (
-    <aside className="w-full lg:w-72 bg-black/90 dark:bg-[#070217] border border-white/10 rounded-3xl p-5 text-white flex flex-col justify-between shadow-2xl shrink-0">
+    <aside className="w-full lg:w-72 bg-black/95 dark:bg-[#070217] border border-white/10 rounded-3xl p-5 text-white flex flex-col justify-between shadow-2xl shrink-0">
       <div className="space-y-6">
         {/* Brand Header matching Screenshot 3 & 7 */}
         <div className="flex items-center justify-between pb-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-purple-600/30 border border-purple-500/40 flex items-center justify-center text-lg">
-              🏛️
+            <div className="w-9 h-9 rounded-xl bg-purple-600/30 border border-purple-500/40 flex items-center justify-center text-purple-300">
+              <Landmark className="w-5 h-5 text-purple-300" />
             </div>
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-white">SARAL</span>
-                <span className="px-1.5 py-0.2 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                   Admin
                 </span>
               </div>
@@ -70,18 +85,19 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
           </div>
         </div>
 
-        {/* Navigation Categories */}
-        <nav className="space-y-5 text-xs">
+        {/* Navigation Categories matching Screenshot 7 */}
+        <nav className="space-y-4 text-xs">
           {ADMIN_SECTIONS.map((section, idx) => (
-            <div key={idx} className="space-y-1.5">
+            <div key={idx} className="space-y-1">
               {section.category && (
-                <div className="px-3 text-[10px] font-bold uppercase tracking-wider text-slate-400/80">
+                <div className="px-3 pt-2 text-[10px] font-bold uppercase tracking-wider text-slate-400/80">
                   {section.category}
                 </div>
               )}
               <div className="space-y-0.5">
                 {section.items.map((item) => {
                   const isActive = activeTab === item.id;
+                  const Icon = item.Icon;
                   return (
                     <button
                       key={item.id}
@@ -93,8 +109,8 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
                           : "text-slate-300 hover:text-white hover:bg-white/5"
                       }`}
                     >
-                      <span className="text-sm">{item.icon}</span>
-                      <span>{item.label}</span>
+                      <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-white" : "text-slate-400"}`} />
+                      <span className="truncate">{item.label}</span>
                     </button>
                   );
                 })}
@@ -104,14 +120,14 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
         </nav>
       </div>
 
-      {/* Logout Link matching Screenshot 3 */}
+      {/* Logout Link matching Screenshot 3 & 7 */}
       <div className="pt-4 border-t border-white/10 mt-6">
         <button
           type="button"
           onClick={onLogout}
           className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition cursor-pointer text-left"
         >
-          <span className="text-sm">🚪</span>
+          <LogOut className="w-4 h-4 text-rose-400 shrink-0" />
           <span>Logout</span>
         </button>
       </div>

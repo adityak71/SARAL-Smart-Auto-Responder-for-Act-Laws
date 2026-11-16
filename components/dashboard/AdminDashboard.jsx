@@ -15,29 +15,26 @@ import SupportManagement from "@/components/admin/SupportManagement";
 import SystemManagement from "@/components/admin/SystemManagement";
 
 import {
-  Menu as FiMenu,
-  X as FiX,
-  Shield as FiShield,
-  UserCheck as FiUserCheck,
-  FileText as FiFileText,
-  Grid as FiGrid,
-  ChevronRight as FiChevronRight,
+  Menu,
+  X,
+  ChevronRight,
+  ShieldCheck,
 } from "lucide-react";
 
 const TAB_BREADCRUMBS = {
-  dashboard: { group: "Overview", label: "Dashboard Analytics" },
-  users: { group: "User Management", label: "Registered Citizens" },
-  "identity-verification": { group: "User Management", label: "DigiLocker Identity Verification" },
-  "all-officers": { group: "Officer Management", label: "Departmental Public Information Officers" },
-  "create-officer": { group: "Officer Management", label: "Register New Officer" },
-  "all-rtis": { group: "RTI Management", label: "All RTI Applications Ledger" },
-  departments: { group: "RTI Management", label: "Ministries & Departments Directory" },
-  complaints: { group: "Support Management", label: "Citizen Grievances & Resolution" },
-  notifications: { group: "Support Management", label: "Broadcast Announcements" },
-  "content-faqs": { group: "Support Management", label: "Knowledgebase & Filing FAQs" },
-  analytics: { group: "System Management", label: "Analytics & Statutory Reports" },
-  "audit-logs": { group: "System Management", label: "Central Audit Trail" },
-  settings: { group: "System Management", label: "Platform Governance & Security" },
+  dashboard: { group: "Overview", label: "Dashboard" },
+  users: { group: "USER MANAGEMENT", label: "Users" },
+  "identity-verification": { group: "USER MANAGEMENT", label: "Identity Verification" },
+  "all-officers": { group: "OFFICER MANAGEMENT", label: "All Officers" },
+  "create-officer": { group: "OFFICER MANAGEMENT", label: "Create Officer" },
+  "all-rtis": { group: "RTI MANAGEMENT", label: "All RTI Applications" },
+  departments: { group: "RTI MANAGEMENT", label: "Departments" },
+  complaints: { group: "SUPPORT MANAGEMENT", label: "Complaints" },
+  notifications: { group: "SUPPORT MANAGEMENT", label: "Notifications" },
+  "content-faqs": { group: "SUPPORT MANAGEMENT", label: "Content & FAQs" },
+  analytics: { group: "SYSTEM MANAGEMENT", label: "Analytics" },
+  "audit-logs": { group: "SYSTEM MANAGEMENT", label: "Audit Logs" },
+  settings: { group: "SYSTEM MANAGEMENT", label: "Settings" },
 };
 
 export default function AdminDashboard({ user }) {
@@ -83,14 +80,14 @@ export default function AdminDashboard({ user }) {
     setMobileMenuOpen(false);
   };
 
-  const breadcrumb = TAB_BREADCRUMBS[activeTab] || { group: "Admin", label: activeTab };
+  const breadcrumb = TAB_BREADCRUMBS[activeTab] || { group: "ADMIN", label: activeTab };
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 items-start animate-fadeIn">
       {/* Mobile Sidebar Drawer Toggle */}
-      <div className="w-full lg:hidden flex items-center justify-between p-4 rounded-2xl bg-slate-900 text-white border border-white/10 shadow-lg">
+      <div className="w-full lg:hidden flex items-center justify-between p-4 rounded-2xl bg-black/95 text-white border border-white/10 shadow-lg">
         <div className="flex items-center gap-2">
-          <span className="font-extrabold text-sm tracking-tight">SARAL Admin Console</span>
+          <span className="font-extrabold text-sm tracking-tight">SARAL Admin Panel</span>
           <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
             Admin
           </span>
@@ -99,7 +96,7 @@ export default function AdminDashboard({ user }) {
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className="p-2 rounded-xl bg-white/10 hover:bg-white/15 transition text-white"
         >
-          {mobileMenuOpen ? <FiX className="text-xl" /> : <FiMenu className="text-xl" />}
+          {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
         </button>
       </div>
 
@@ -122,7 +119,7 @@ export default function AdminDashboard({ user }) {
       </AnimatePresence>
 
       {/* Desktop Persistent Sidebar (matching Screenshot 3 & 7) */}
-      <div className="hidden lg:block lg:sticky lg:top-24 shrink-0">
+      <div className="hidden lg:block lg:sticky lg:top-24 shrink-0 self-start">
         <AdminSidebar
           activeTab={activeTab}
           onSelectTab={handleSelectTab}
@@ -132,31 +129,29 @@ export default function AdminDashboard({ user }) {
 
       {/* Main Administrative Workspace */}
       <div className="flex-1 w-full space-y-6 min-w-0">
-        {/* Top Control Header */}
-        <div className="p-4 sm:p-5 rounded-3xl bg-white dark:bg-[#0c0424] border border-slate-200 dark:border-purple-500/20 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        {/* Top Control Header matching deep black card theme */}
+        <div className="p-5 sm:p-6 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-              <span>{breadcrumb.group}</span>
-              <FiChevronRight className="text-xs text-slate-400" />
-              <span className="text-purple-600 dark:text-purple-400 font-bold">
-                {breadcrumb.label}
-              </span>
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-400">
+              <span className="uppercase tracking-wider">{breadcrumb.group}</span>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+              <span className="text-white font-bold">{breadcrumb.label}</span>
             </div>
-            <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
               <span>{breadcrumb.label}</span>
-              <span className="px-2 py-0.5 rounded-full text-[11px] font-bold bg-emerald-500/15 text-emerald-500 dark:text-emerald-400 border border-emerald-500/20">
+              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 Admin
               </span>
             </h1>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs font-medium text-purple-700 dark:text-purple-300">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              CIC Section 6(1) Enforced
+            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-500/15 border border-purple-500/30 text-xs font-medium text-purple-300">
+              <ShieldCheck className="w-4 h-4 text-emerald-400" />
+              <span>Section 6(1) RTI Act 2005 Enforced</span>
             </div>
             <div className="text-xs text-right hidden sm:block">
-              <p className="font-bold text-slate-900 dark:text-white">
+              <p className="font-bold text-white">
                 {user?.fullName || "SARAL Superadmin"}
               </p>
               <p className="text-[11px] text-slate-400 font-mono">admin@saral.gov.in</p>
@@ -164,14 +159,14 @@ export default function AdminDashboard({ user }) {
           </div>
         </div>
 
-        {/* Dynamic Content Views */}
+        {/* Dynamic Content Views with key for fresh subtab sync */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeTab}
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.15 }}
             className="w-full"
           >
             {/* Tab: Dashboard Overview */}
@@ -180,16 +175,19 @@ export default function AdminDashboard({ user }) {
             )}
 
             {/* Tab: Users */}
-            {activeTab === "users" && <UserManagement initialSubTab="users" />}
+            {activeTab === "users" && (
+              <UserManagement key="users-tab" initialSubTab="users" />
+            )}
 
             {/* Tab: Identity Verification */}
             {activeTab === "identity-verification" && (
-              <UserManagement initialSubTab="verification" />
+              <UserManagement key="verification-tab" initialSubTab="verification" />
             )}
 
             {/* Tab: All Officers */}
             {activeTab === "all-officers" && (
               <OfficerManagement
+                key="officers-list-tab"
                 openCreateDirectly={false}
                 onNavigateToCreate={() => setActiveTab("create-officer")}
               />
@@ -198,47 +196,50 @@ export default function AdminDashboard({ user }) {
             {/* Tab: Create Officer */}
             {activeTab === "create-officer" && (
               <OfficerManagement
+                key="officers-create-tab"
                 openCreateDirectly={true}
                 onNavigateToCreate={() => setActiveTab("create-officer")}
               />
             )}
 
             {/* Tab: All RTIs */}
-            {activeTab === "all-rtis" && <RtiManagement initialSubTab="rtis" />}
+            {activeTab === "all-rtis" && (
+              <RtiManagement key="rtis-tab" initialSubTab="rtis" />
+            )}
 
             {/* Tab: Departments */}
             {activeTab === "departments" && (
-              <RtiManagement initialSubTab="departments" />
+              <RtiManagement key="departments-tab" initialSubTab="departments" />
             )}
 
             {/* Tab: Complaints */}
             {activeTab === "complaints" && (
-              <SupportManagement initialSubTab="complaints" />
+              <SupportManagement key="complaints-tab" initialSubTab="complaints" />
             )}
 
             {/* Tab: Notifications */}
             {activeTab === "notifications" && (
-              <SupportManagement initialSubTab="notifications" />
+              <SupportManagement key="notifications-tab" initialSubTab="notifications" />
             )}
 
             {/* Tab: Content & FAQs */}
             {activeTab === "content-faqs" && (
-              <SupportManagement initialSubTab="content" />
+              <SupportManagement key="content-tab" initialSubTab="content" />
             )}
 
             {/* Tab: Analytics */}
             {activeTab === "analytics" && (
-              <SystemManagement initialSubTab="analytics" />
+              <SystemManagement key="analytics-tab" initialSubTab="analytics" />
             )}
 
             {/* Tab: Audit Logs */}
             {activeTab === "audit-logs" && (
-              <SystemManagement initialSubTab="audit" />
+              <SystemManagement key="audit-tab" initialSubTab="audit" />
             )}
 
             {/* Tab: Settings */}
             {activeTab === "settings" && (
-              <SystemManagement initialSubTab="settings" />
+              <SystemManagement key="settings-tab" initialSubTab="settings" />
             )}
           </motion.div>
         </AnimatePresence>

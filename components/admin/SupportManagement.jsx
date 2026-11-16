@@ -3,21 +3,18 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  LifeBuoy as FiLifeBuoy,
-  Bell as FiBell,
-  BookOpen as FiBookOpen,
-  Search as FiSearch,
-  CheckCircle2 as FiCheckCircle,
-  Clock as FiClock,
-  AlertCircle as FiAlertCircle,
-  Send as FiSend,
-  Plus as FiPlus,
-  RefreshCw as FiRefreshCw,
-  XCircle as FiXCircle,
-  MessageSquare as FiMessageSquare,
-  UserCheck as FiUserCheck,
-  Filter as FiFilter,
-  Mail as FiMail,
+  LifeBuoy,
+  Bell,
+  BookOpen,
+  Search,
+  CheckCircle2,
+  Clock,
+  AlertCircle,
+  Send,
+  Plus,
+  RefreshCw,
+  XCircle,
+  MessageSquare,
 } from "lucide-react";
 
 const INITIAL_FAQS = [
@@ -153,7 +150,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
         }
         showToast(`Complaint status advanced to ${nextStatus}.`, "success");
       }
-    } catch (err) {
+    } catch {
       showToast("Failed to update status.", "error");
     }
   };
@@ -209,7 +206,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       : complaints.filter((c) => c.status.toUpperCase() === complaintFilter);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 w-full animate-fadeIn">
       {/* Toast */}
       <AnimatePresence>
         {toast && (
@@ -223,155 +220,172 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 : "bg-rose-500/10 text-rose-400 border-rose-500/30 backdrop-blur-md"
             }`}
           >
-            {toast.type === "success" ? <FiCheckCircle /> : <FiAlertCircle />}
+            {toast.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertCircle className="w-4 h-4" />}
             {toast.message}
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Subtab Navigation */}
-      <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
-        <div className="flex items-center gap-3 overflow-x-auto">
+      {/* Subtab Navigation Pills */}
+      <div className="flex items-center justify-between pb-2 border-b border-white/10">
+        <div className="flex items-center gap-2 overflow-x-auto">
           <button
             onClick={() => setActiveSubTab("complaints")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "complaints"
-                ? "bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow-lg shadow-blue-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                ? "bg-white text-slate-900 shadow-md"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <FiLifeBuoy />
-            Citizen Grievances ({complaints.length})
+            <LifeBuoy className="w-4 h-4" />
+            <span>Citizen Grievances</span>
+            <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300">
+              {complaints.length}
+            </span>
           </button>
           <button
             onClick={() => setActiveSubTab("notifications")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "notifications"
-                ? "bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                ? "bg-white text-slate-900 shadow-md"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <FiBell />
-            Broadcast Notifications
+            <Bell className="w-4 h-4" />
+            <span>Broadcast Notifications</span>
           </button>
           <button
             onClick={() => setActiveSubTab("content")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "content"
-                ? "bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-lg shadow-emerald-500/25"
-                : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                ? "bg-white text-slate-900 shadow-md"
+                : "text-slate-400 hover:text-white hover:bg-white/5"
             }`}
           >
-            <FiBookOpen />
-            Content & FAQs ({faqs.length})
+            <BookOpen className="w-4 h-4" />
+            <span>Content & FAQs</span>
+            <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] bg-slate-800 text-slate-300">
+              {faqs.length}
+            </span>
           </button>
         </div>
+
+        {activeSubTab === "complaints" && (
+          <button
+            onClick={fetchComplaints}
+            className="p-2 text-slate-400 hover:text-white rounded-xl hover:bg-white/5 transition cursor-pointer"
+            title="Refresh Complaints"
+          >
+            <RefreshCw className={`w-4 h-4 ${loadingComplaints ? "animate-spin" : ""}`} />
+          </button>
+        )}
       </div>
 
       {/* VIEW 1: COMPLAINTS & GRIEVANCE MANAGEMENT */}
       {activeSubTab === "complaints" && (
         <div className="space-y-6">
           {/* Status Lifecycle Flow Indicator */}
-          <div className="p-4 rounded-2xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/20 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-            <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+          <div className="p-6 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="text-xs font-semibold text-slate-400">
               Grievance SLA Lifecycle:
             </div>
             <div className="flex items-center gap-2 text-xs font-bold overflow-x-auto">
-              <span className="px-3 py-1 rounded-lg bg-blue-500/15 text-blue-400 border border-blue-500/30">
+              <span className="px-3 py-1 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
                 1. Open
               </span>
-              <span className="text-slate-400">→</span>
-              <span className="px-3 py-1 rounded-lg bg-purple-500/15 text-purple-400 border border-purple-500/30">
+              <span className="text-slate-500">→</span>
+              <span className="px-3 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
                 2. Assigned
               </span>
-              <span className="text-slate-400">→</span>
-              <span className="px-3 py-1 rounded-lg bg-amber-500/15 text-amber-400 border border-amber-500/30">
+              <span className="text-slate-500">→</span>
+              <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/30">
                 3. In Progress
               </span>
-              <span className="text-slate-400">→</span>
-              <span className="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+              <span className="text-slate-500">→</span>
+              <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
                 4. Resolved
               </span>
-              <span className="text-slate-400">→</span>
-              <span className="px-3 py-1 rounded-lg bg-slate-500/15 text-slate-400 border border-slate-500/30">
+              <span className="text-slate-500">→</span>
+              <span className="px-3 py-1 rounded-full bg-slate-500/20 text-slate-300 border border-slate-500/30">
                 5. Closed
               </span>
             </div>
           </div>
 
-          {/* Filter Pills */}
-          <div className="flex items-center gap-2 overflow-x-auto">
-            {["ALL", "OPEN", "IN PROGRESS", "RESOLVED", "CLOSED"].map((f) => (
-              <button
-                key={f}
-                onClick={() => setComplaintFilter(f)}
-                className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                  complaintFilter === f
-                    ? "bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow"
-                    : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-white/10"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
+          {/* Table Container */}
+          <div className="p-6 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl space-y-4">
+            {/* Filter Pills */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-white/10">
+              {["ALL", "OPEN", "IN PROGRESS", "RESOLVED", "CLOSED"].map((f) => (
+                <button
+                  key={f}
+                  onClick={() => setComplaintFilter(f)}
+                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                    complaintFilter === f
+                      ? "bg-purple-600 text-white font-bold shadow"
+                      : "text-slate-400 hover:text-white"
+                  }`}
+                >
+                  {f}
+                </button>
+              ))}
+            </div>
 
-          {/* Complaints Table */}
-          <div className="rounded-2xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/20 overflow-hidden shadow-sm">
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-sm">
-                <thead className="bg-slate-50 dark:bg-black/30 text-xs uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/5">
+            {/* Complaints Table */}
+            <div className="overflow-x-auto w-full">
+              <table className="w-full min-w-[850px] text-left text-sm">
+                <thead className="bg-white/5 text-[11px] uppercase tracking-wider text-slate-400 border-b border-white/10">
                   <tr>
-                    <th className="px-5 py-4 font-bold">Ticket ID</th>
-                    <th className="px-5 py-4 font-bold">Citizen Petitioner</th>
-                    <th className="px-5 py-4 font-bold">Grievance Category</th>
-                    <th className="px-5 py-4 font-bold">Subject</th>
-                    <th className="px-5 py-4 font-bold">Assigned To</th>
-                    <th className="px-5 py-4 font-bold">Status</th>
-                    <th className="px-5 py-4 font-bold text-right">Action</th>
+                    <th className="px-5 py-3.5 font-bold">Ticket ID</th>
+                    <th className="px-5 py-3.5 font-bold">Citizen Petitioner</th>
+                    <th className="px-5 py-3.5 font-bold">Grievance Category</th>
+                    <th className="px-5 py-3.5 font-bold">Subject</th>
+                    <th className="px-5 py-3.5 font-bold">Assigned To</th>
+                    <th className="px-5 py-3.5 font-bold">Status</th>
+                    <th className="px-5 py-3.5 font-bold text-right">Action</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-700 dark:text-slate-300">
+                <tbody className="divide-y divide-white/5 text-slate-300">
                   {filteredComplaints.map((c) => (
-                    <tr key={c.id} className="hover:bg-slate-50 dark:hover:bg-white/[0.02]">
-                      <td className="px-5 py-4 font-mono text-xs font-bold text-cyan-500">
+                    <tr key={c.id} className="hover:bg-white/[0.03] transition-colors">
+                      <td className="px-5 py-3.5 font-mono text-xs font-bold text-cyan-400">
                         {c.id}
                       </td>
-                      <td className="px-5 py-4">
-                        <p className="font-semibold text-slate-900 dark:text-white text-xs">
+                      <td className="px-5 py-3.5">
+                        <p className="font-semibold text-white text-xs">
                           {c.citizenName}
                         </p>
                         <p className="text-xs text-slate-400 font-mono">{c.citizenEmail}</p>
                       </td>
-                      <td className="px-5 py-4 text-xs font-medium text-purple-400">
+                      <td className="px-5 py-3.5 text-xs font-medium text-purple-300">
                         {c.category}
                       </td>
-                      <td className="px-5 py-4 text-xs font-medium text-slate-800 dark:text-slate-200 max-w-xs truncate">
+                      <td className="px-5 py-3.5 text-xs text-slate-200 max-w-xs truncate">
                         {c.subject}
                       </td>
-                      <td className="px-5 py-4 text-xs text-slate-400 font-medium">
+                      <td className="px-5 py-3.5 text-xs text-slate-400 font-medium">
                         {c.assignedTo}
                       </td>
-                      <td className="px-5 py-4">
+                      <td className="px-5 py-3.5">
                         <span
-                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wider ${
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
                             c.status === "Resolved" || c.status === "Closed"
-                              ? "bg-emerald-500/15 text-emerald-400 border border-emerald-500/30"
+                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                               : c.status === "In Progress"
-                              ? "bg-amber-500/15 text-amber-400 border border-amber-500/30"
-                              : "bg-blue-500/15 text-blue-400 border border-blue-500/30"
+                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/30"
+                              : "bg-blue-500/20 text-blue-300 border border-blue-500/30"
                           }`}
                         >
                           {c.status}
                         </span>
                       </td>
-                      <td className="px-5 py-4 text-right">
+                      <td className="px-5 py-3.5 text-right">
                         <button
                           onClick={() => {
                             setSelectedComplaint(c);
                             setInternalNoteInput(c.internalNotes || "");
                           }}
-                          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-blue-500/10 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors"
+                          className="px-3 py-1.5 rounded-full text-xs font-bold bg-white/10 hover:bg-white/20 text-white transition cursor-pointer"
                         >
                           Manage
                         </button>
@@ -389,44 +403,44 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {activeSubTab === "notifications" && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Notification Composer */}
-          <div className="lg:col-span-1 p-6 rounded-3xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/20 shadow-sm space-y-4">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
-              <FiSend className="text-purple-400" /> Dispatch Platform Broadcast
+          <div className="lg:col-span-1 p-6 sm:p-8 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl space-y-4">
+            <h3 className="text-base font-extrabold text-white flex items-center gap-2">
+              <Send className="w-5 h-5 text-purple-400" /> Dispatch Platform Broadcast
             </h3>
             <p className="text-xs text-slate-400">
               Send system announcements, scheduled maintenance notices, or targeted verification reminders.
             </p>
 
-            <form onSubmit={handleSendNotification} className="space-y-4">
+            <form onSubmit={handleSendNotification} className="space-y-4 pt-2">
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
                   Target Audience
                 </label>
                 <select
                   value={notifForm.audience}
                   onChange={(e) => setNotifForm({ ...notifForm, audience: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white focus:outline-none focus:border-purple-500"
                 >
-                  <option value="ALL_CITIZENS">All Registered Citizens (2,450)</option>
-                  <option value="UNVERIFIED">Unverified Citizens Only (125)</option>
-                  <option value="OFFICERS">Departmental PIO Officers</option>
+                  <option value="ALL_CITIZENS" className="bg-slate-900 text-white">All Registered Citizens (2,450)</option>
+                  <option value="UNVERIFIED" className="bg-slate-900 text-white">Unverified Citizens Only (125)</option>
+                  <option value="OFFICERS" className="bg-slate-900 text-white">Departmental PIO Officers</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">Channel</label>
+                <label className="block text-xs font-semibold text-slate-300 mb-1">Channel</label>
                 <select
                   value={notifForm.channel}
                   onChange={(e) => setNotifForm({ ...notifForm, channel: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white focus:outline-none focus:border-purple-500"
                 >
-                  <option value="IN_APP">In-App Notification Banner</option>
-                  <option value="IN_APP_EMAIL">In-App + Official Email Notice</option>
+                  <option value="IN_APP" className="bg-slate-900 text-white">In-App Notification Banner</option>
+                  <option value="IN_APP_EMAIL" className="bg-slate-900 text-white">In-App + Official Email Notice</option>
                 </select>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
                   Notice Subject
                 </label>
                 <input
@@ -435,12 +449,12 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                   placeholder="e.g. Server Maintenance Window"
                   value={notifForm.title}
                   onChange={(e) => setNotifForm({ ...notifForm, title: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-400 mb-1">
+                <label className="block text-xs font-semibold text-slate-300 mb-1">
                   Announcement Message
                 </label>
                 <textarea
@@ -449,14 +463,14 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                   placeholder="Official notice body..."
                   value={notifForm.message}
                   onChange={(e) => setNotifForm({ ...notifForm, message: e.target.value })}
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={sendingNotif}
-                className="w-full py-2.5 rounded-xl text-xs font-bold bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-500/25 transition-all"
+                className="w-full py-3 rounded-full text-xs font-extrabold bg-white text-slate-950 hover:bg-slate-200 transition shadow-lg cursor-pointer"
               >
                 {sendingNotif ? "Broadcasting..." : "Dispatch Broadcast"}
               </button>
@@ -464,23 +478,23 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           </div>
 
           {/* Broadcast History */}
-          <div className="lg:col-span-2 rounded-3xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/20 p-6 shadow-sm space-y-4">
-            <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+          <div className="lg:col-span-2 p-6 sm:p-8 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl space-y-4">
+            <h3 className="text-base font-extrabold text-white">
               Dispatched Broadcast Log
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-3 pt-2">
               {notifications.map((n) => (
                 <div
                   key={n.id}
-                  className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 space-y-2"
+                  className="p-4 rounded-2xl bg-white/5 border border-white/10 space-y-2"
                 >
                   <div className="flex items-center justify-between">
-                    <h4 className="font-bold text-slate-900 dark:text-white text-sm">{n.title}</h4>
-                    <span className="text-xs text-emerald-500 font-bold bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                    <h4 className="font-bold text-white text-sm">{n.title}</h4>
+                    <span className="text-xs text-emerald-400 font-bold bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
                       {n.status}
                     </span>
                   </div>
-                  <div className="flex items-center gap-4 text-xs text-slate-400">
+                  <div className="flex flex-wrap items-center gap-3 text-xs text-slate-400">
                     <span>Audience: {n.audience}</span>
                     <span>•</span>
                     <span>Channel: {n.channel}</span>
@@ -499,39 +513,39 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {/* VIEW 3: CONTENT & FAQS */}
       {activeSubTab === "content" && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between">
+          <div className="p-6 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 className="text-lg font-extrabold text-slate-900 dark:text-white">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
                 RTI Knowledgebase & FAQs
               </h3>
-              <p className="text-xs text-slate-400">
-                Maintain public filing guidelines, statutory explanations, and citizen advice.
+              <p className="text-xs text-slate-400 mt-1">
+                Maintain public filing guidelines, statutory explanations, and citizen advice
               </p>
             </div>
             <button
               onClick={() => setShowAddFaqModal(true)}
-              className="px-4 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/20 transition-all flex items-center gap-1.5"
+              className="px-5 py-2.5 rounded-full text-xs font-bold bg-white text-slate-950 hover:bg-slate-200 transition-all flex items-center gap-1.5 cursor-pointer shadow-lg shrink-0"
             >
-              <FiPlus /> Add Knowledge Item
+              <Plus className="w-4 h-4" /> Add Knowledge Item
             </button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {faqs.map((faq) => (
               <div
                 key={faq.id}
-                className="p-5 rounded-2xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/20 shadow-sm space-y-3"
+                className="p-6 rounded-3xl bg-black/95 dark:bg-[#0b0422] border border-white/10 text-white shadow-2xl space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-md">
+                  <span className="text-xs font-bold text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
                     {faq.category}
                   </span>
-                  <span className="text-xs text-slate-400">Published to Citizen Portal</span>
+                  <span className="text-xs text-slate-400">Published</span>
                 </div>
-                <h4 className="font-bold text-slate-900 dark:text-white text-sm">
+                <h4 className="font-bold text-white text-sm">
                   {faq.question}
                 </h4>
-                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p className="text-xs text-slate-300 leading-relaxed">
                   {faq.answer}
                 </p>
               </div>
@@ -543,19 +557,19 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {/* COMPLAINT DETAIL & WORKFLOW MODAL */}
       <AnimatePresence>
         {selectedComplaint && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/30 p-6 shadow-2xl space-y-6"
+              className="w-full max-w-lg rounded-3xl bg-black/95 border border-white/20 p-6 shadow-2xl space-y-6 text-white"
             >
-              <div className="flex items-start justify-between border-b border-slate-100 dark:border-white/10 pb-4">
+              <div className="flex items-start justify-between border-b border-white/10 pb-4">
                 <div>
                   <span className="font-mono text-xs font-bold text-cyan-400">
                     {selectedComplaint.id}
                   </span>
-                  <h3 className="font-black text-slate-900 dark:text-white text-lg mt-0.5">
+                  <h3 className="font-black text-white text-lg mt-0.5">
                     {selectedComplaint.subject}
                   </h3>
                   <p className="text-xs text-slate-400">
@@ -564,9 +578,9 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 </div>
                 <button
                   onClick={() => setSelectedComplaint(null)}
-                  className="p-1 text-slate-400 hover:text-white rounded-lg"
+                  className="p-1 text-slate-400 hover:text-white rounded-lg cursor-pointer"
                 >
-                  <FiXCircle className="text-xl" />
+                  <XCircle className="w-5 h-5" />
                 </button>
               </div>
 
@@ -574,7 +588,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Citizen Grievance Description
                 </h4>
-                <p className="p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-200">
+                <p className="p-3.5 rounded-xl bg-white/5 border border-white/10 text-xs text-slate-200 leading-relaxed">
                   {selectedComplaint.description}
                 </p>
               </div>
@@ -588,7 +602,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                   value={internalNoteInput}
                   onChange={(e) => setInternalNoteInput(e.target.value)}
                   placeholder="Record internal troubleshooting actions..."
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                  className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -601,10 +615,10 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                     <button
                       key={s}
                       onClick={() => handleUpdateComplaintStatus(selectedComplaint.id, s)}
-                      className={`py-2 rounded-xl text-xs font-bold transition-all ${
+                      className={`py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
                         selectedComplaint.status === s
                           ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
-                          : "bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/10"
+                          : "bg-white/10 text-slate-300 hover:bg-white/20"
                       }`}
                     >
                       {s}
@@ -616,7 +630,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
               <div className="flex justify-end pt-2">
                 <button
                   onClick={() => setSelectedComplaint(null)}
-                  className="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300"
+                  className="px-5 py-2.5 rounded-full text-xs font-semibold bg-white/10 text-white hover:bg-white/20 cursor-pointer"
                 >
                   Close
                 </button>
@@ -629,14 +643,14 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {/* ADD FAQ MODAL */}
       <AnimatePresence>
         {showAddFaqModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#11092a] border border-slate-200 dark:border-purple-500/30 p-6 shadow-2xl space-y-4"
+              className="w-full max-w-lg rounded-3xl bg-black/95 border border-white/20 p-6 shadow-2xl space-y-4 text-white"
             >
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
+              <h3 className="font-extrabold text-white text-lg">
                 Add Knowledgebase FAQ
               </h3>
               <form onSubmit={handleAddFaq} className="space-y-4">
@@ -648,7 +662,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                     placeholder="e.g. Statutory Deadlines"
                     value={newFaq.category}
                     onChange={(e) => setNewFaq({ ...newFaq, category: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div>
@@ -659,7 +673,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                     placeholder="Question title"
                     value={newFaq.question}
                     onChange={(e) => setNewFaq({ ...newFaq, question: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div>
@@ -670,20 +684,20 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                     placeholder="Provide clear legal guidance..."
                     value={newFaq.answer}
                     onChange={(e) => setNewFaq({ ...newFaq, answer: e.target.value })}
-                    className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white"
+                    className="w-full px-3 py-2 rounded-xl text-xs bg-white/5 border border-white/10 text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                   />
                 </div>
                 <div className="flex justify-end gap-3 pt-2">
                   <button
                     type="button"
                     onClick={() => setShowAddFaqModal(false)}
-                    className="px-4 py-2 text-xs font-semibold text-slate-400"
+                    className="px-4 py-2 text-xs font-semibold text-slate-400 hover:text-white cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/20"
+                    className="px-6 py-2 rounded-full text-xs font-bold bg-white text-slate-950 hover:bg-slate-200 transition shadow-md cursor-pointer"
                   >
                     Publish FAQ
                   </button>

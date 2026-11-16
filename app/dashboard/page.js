@@ -23,13 +23,6 @@ export default function DashboardPage() {
     }
   }, [isAuthenticated, router]);
 
-  // Sync admin view mode with logged in role
-  useEffect(() => {
-    if (userRole === "ADMIN") {
-      setAdminViewMode("ADMIN");
-    }
-  }, [userRole]);
-
   if (!isAuthenticated) {
     return (
       <div className="flex-1 bg-slate-50 dark:bg-[#08031d] flex flex-col items-center justify-center p-6 text-center min-h-[60vh]">
@@ -48,7 +41,7 @@ export default function DashboardPage() {
 
   return (
     <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-6">
+      <main className={`flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-6 ${adminViewMode === "ADMIN" ? "max-w-[1580px]" : "max-w-7xl"}`}>
         {/* Admin Multi-Role Supervisory Switcher Bar (Visible only to ADMIN) */}
         {userRole === "ADMIN" && (
           <div className="p-3 sm:p-4 rounded-2xl bg-gradient-to-r from-purple-100 via-indigo-50 to-purple-100 dark:from-purple-900/30 dark:via-slate-900/50 dark:to-indigo-900/30 border border-purple-200 dark:border-purple-500/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm dark:shadow-lg">
