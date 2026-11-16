@@ -6,6 +6,38 @@ import CertifiedResponseModal from "@/components/common/CertifiedResponseModal";
 import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
 import { downloadPublicRecordDoc, downloadCertifiedResponse } from "@/lib/services/pdfGenerator";
+import {
+  Sparkles,
+  Check,
+  RefreshCw,
+  FileText,
+  AlertCircle,
+  Copy,
+  CheckCircle2,
+} from "lucide-react";
+
+function parseClauses(val) {
+  if (Array.isArray(val)) return val.filter(Boolean);
+  if (typeof val === "string") {
+    const trimmed = val.trim();
+    if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+      try {
+        const parsed = JSON.parse(trimmed);
+        if (Array.isArray(parsed)) return parsed.filter(Boolean);
+      } catch {}
+    }
+    const lines = trimmed
+      .split(/\n+/)
+      .map((l) => l.replace(/^\d+[\.\)]\s*/, "").trim())
+      .filter(Boolean);
+    if (lines.length > 0) return lines;
+  }
+  return [
+    "Certified copies of Sanction Orders and Administrative Approval issued for works executed in the division.",
+    "Inspection and certified extracts of Measurement Book (MB) Vol. IV recording exact chainage dimensions and bitumen thickness.",
+    "Total expenditure incurred and Running Account (RA) bills disbursed to the contractor as verified by the Divisional Accounts Officer.",
+  ];
+}
 
 export default function OfficerWorkspace() {
   const [stats, setStats] = useState(officerDashboardStats);
@@ -19,11 +51,19 @@ export default function OfficerWorkspace() {
   const [docPreview, setDocPreview] = useState({ isOpen: false, name: "", application: null });
 
   // Response Studio Multi-Tab State
-  const [studioTab, setStudioTab] = useState("memorandum"); // "memorandum" | "records" | "exemptions" | "precedents"
+  const [studioTab, setStudioTab] = useState("memorandum"); // "memorandum" | "ai-report" | "records" | "exemptions" | "precedents"
   const [isCertifiedModalOpen, setIsCertifiedModalOpen] = useState(false);
   const [faaDesignation, setFaaDesignation] = useState("Chief Engineer & First Appellate Authority (FAA)");
   const [faaOffice, setFaaOffice] = useState("Office of the Chief Engineer, PWD Zone 1, Capital Complex, New Delhi");
   const [exemptionReason, setExemptionReason] = useState("");
+
+  // AI Report Structuring Studio States
+  const [officerNotesInput, setOfficerNotesInput] = useState("");
+  const [isAiStructuring, setIsAiStructuring] = useState(false);
+  const [aiStructuredReport, setAiStructuredReport] = useState(null);
+  const [aiStructureError, setAiStructureError] = useState("");
+  const [copiedMemoText, setCopiedMemoText] = useState(false);
+
   const [attachedRecords, setAttachedRecords] = useState([
     { id: "rec-1", name: "Measurement_Book_Vol_IV_Certified.pdf", size: "4.2 MB", included: true },
     { id: "rec-2", name: "Sanction_Order_PWD_2025_381.pdf", size: "1.8 MB", included: true },
@@ -115,6 +155,10 @@ export default function OfficerWorkspace() {
                   "Administrative and financial sanction verified from departmental ledgers. Work was inspected by the Executive Engineer on site.",
                 suggestedSources: parsedSources,
                 status: app.status,
+                structuredClauses: parseClauses(app.structuredClauses),
+                rawCitizenPrompt: app.citizenNotes || app.subject || "",
+                dateFiled: app.dateFiled || app.createdAt,
+                statutoryDeadline: app.statutoryDeadline,
               };
             });
 
@@ -129,16 +173,24 @@ export default function OfficerWorkspace() {
 
         // Fallback to mock queue
         if (isMounted) {
-          setCases(officerReviewQueue);
-          setSelectedCase(officerReviewQueue[0]);
-          setDraftText(officerReviewQueue[0]?.draftSummary || "");
+          const mappedQueue = officerReviewQueue.map((item) => ({
+            ...item,
+            structuredClauses: parseClauses(item.structuredClauses),
+          }));
+          setCases(mappedQueue);
+          setSelectedCase(mappedQueue[0]);
+          setDraftText(mappedQueue[0]?.draftSummary || "");
         }
       } catch (err) {
         console.warn("Using offline review queue:", err);
         if (isMounted) {
-          setCases(officerReviewQueue);
-          setSelectedCase(officerReviewQueue[0]);
-          setDraftText(officerReviewQueue[0]?.draftSummary || "");
+          const mappedQueue = officerReviewQueue.map((item) => ({
+            ...item,
+            structuredClauses: parseClauses(item.structuredClauses),
+          }));
+          setCases(mappedQueue);
+          setSelectedCase(mappedQueue[0]);
+          setDraftText(mappedQueue[0]?.draftSummary || "");
         }
       } finally {
         if (isMounted) setIsLoading(false);
@@ -176,6 +228,59 @@ export default function OfficerWorkspace() {
     setSelectedCase(c);
     setDraftText(c.draftSummary || "");
     setActionSuccessMsg("");
+    setAiStructuredReport(null);
+    setAiStructureError("");
+    setOfficerNotesInput("");
+    setCopiedMemoText(false);
+  };
+
+  // AI Structuring Handlers
+  const handleGenerateAiReport = async () => {
+    if (!selectedCase) return;
+    setIsAiStructuring(true);
+    setAiStructureError("");
+    try {
+      const res = await fetch("/api/officer/ai-structure-report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          applicationId: selectedCase.rawId || selectedCase.id,
+          officerNotes: officerNotesInput,
+          customClauses: selectedCase.structuredClauses || parseClauses(null),
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || "Failed to structure report via AI");
+      }
+      setAiStructuredReport(data.report);
+    } catch (err) {
+      console.error("AI Report generation error:", err);
+      setAiStructureError(err.message || "AI structuring service encountered an issue. Using fallback structure.");
+    } finally {
+      setIsAiStructuring(false);
+    }
+  };
+
+  const handleApplyAiReportToMemo = () => {
+    if (!aiStructuredReport) return;
+    const fullText = aiStructuredReport.fullReportText || "";
+    if (fullText) {
+      setDraftText(fullText);
+      setStudioTab("memorandum");
+      setActionSuccessMsg("✓ Point-by-point AI Structured Report successfully applied to Official Memorandum!");
+    }
+  };
+
+  const handleCopyReportText = () => {
+    if (!aiStructuredReport) return;
+    const text = aiStructuredReport.fullReportText || "";
+    if (navigator?.clipboard && text) {
+      navigator.clipboard.writeText(text);
+      setCopiedMemoText(true);
+      setTimeout(() => setCopiedMemoText(false), 2500);
+    }
   };
 
   // 4. Live dispatch response with digital seal
@@ -417,8 +522,8 @@ export default function OfficerWorkspace() {
             <div className="sm:text-right flex flex-col sm:items-end">
               <span className="text-[10px] text-slate-400 font-mono block">STATUTORY CLOCK:</span>
               <StatutoryCountdownClock
-                dateFiled={selectedCase?.dateFiled || Date.now() - 14 * 86400000}
-                statutoryDeadline={Date.now() + (selectedCase?.daysRemaining || 16) * 86400000}
+                dateFiled={selectedCase?.dateFiled || "2026-11-01T00:00:00Z"}
+                statutoryDeadline={selectedCase?.statutoryDeadline || "2026-12-01T00:00:00Z"}
                 status={isApproved ? "RESPONSE_DISPATCHED" : "UNDER_REVIEW"}
                 size="compact"
               />
@@ -438,6 +543,22 @@ export default function OfficerWorkspace() {
             >
               <span>📝</span>
               <span>Statutory Memorandum</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setStudioTab("ai-report")}
+              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+                studioTab === "ai-report"
+                  ? "bg-purple-600 text-white shadow-sm"
+                  : "text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/30"
+              }`}
+            >
+              <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+              <span>AI Report Structuring</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase bg-purple-500/20 dark:bg-purple-400/20 text-purple-700 dark:text-purple-300">
+                Copilot
+              </span>
             </button>
 
             <button
@@ -483,6 +604,31 @@ export default function OfficerWorkspace() {
           {/* TAB 1: Statutory Memorandum */}
           {studioTab === "memorandum" && (
             <div className="space-y-3 text-xs">
+              {/* Quick AI Report Structuring Banner */}
+              <div className="p-3 rounded-2xl bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-transparent border border-purple-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-700 dark:text-purple-300 font-bold shrink-0">
+                    <Sparkles className="w-4 h-4 text-amber-500" />
+                  </div>
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                      Need point-by-point Section 7(1) Compliance?
+                    </h4>
+                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                      Let Officer AI Copilot structure your raw findings and map to Citizen Clauses automatically.
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setStudioTab("ai-report")}
+                  className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shrink-0 shadow-sm"
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                  <span>Launch AI Structuring</span>
+                </button>
+              </div>
+
               {/* Quick Snippet Injectors */}
               <div className="flex items-center justify-between gap-2 flex-wrap">
                 <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
@@ -561,6 +707,282 @@ export default function OfficerWorkspace() {
                   ))}
                 </div>
               </div>
+            </div>
+          )}
+
+          {/* TAB 2: AI Report Structuring Studio */}
+          {studioTab === "ai-report" && (
+            <div className="space-y-4 text-xs">
+              {/* Top Explainer Header */}
+              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-500/15 via-indigo-500/10 to-transparent border border-purple-500/30 flex items-start gap-3">
+                <div className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
+                  <Sparkles className="w-4 h-4 text-amber-300" />
+                </div>
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-2">
+                    <h4 className="font-bold text-slate-900 dark:text-white text-xs">
+                      Section 7(1) Officer AI Report Structuring Copilot
+                    </h4>
+                    <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30">
+                      Official PIO Tool
+                    </span>
+                  </div>
+                  <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                    Citizen petitions contain distinct statutory clauses under Section 6(1). Enter your raw departmental observations, physical measurements, or sanction numbers. AI will map each citizen query point-by-point into an official Section 7(1) certified compliance report.
+                  </p>
+                </div>
+              </div>
+
+              {/* Citizen Clauses Under Examination */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <span>📋</span>
+                    <span>Citizen Section 6(1) Clauses Under Audit:</span>
+                  </label>
+                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+                    {(selectedCase?.structuredClauses || parseClauses(null)).length} Statutory Items
+                  </span>
+                </div>
+                <div className="space-y-2 max-h-48 overflow-y-auto pr-1">
+                  {(selectedCase?.structuredClauses || parseClauses(null)).map((clause, idx) => (
+                    <div
+                      key={idx}
+                      className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-start gap-2.5 text-slate-700 dark:text-slate-300"
+                    >
+                      <span className="w-5 h-5 rounded-lg bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold font-mono text-[11px] flex items-center justify-center shrink-0">
+                        {idx + 1}
+                      </span>
+                      <p className="text-xs leading-relaxed">{clause}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Officer Raw Findings Input */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                    <span>🔍</span>
+                    <span>Officer&apos;s Departmental Findings &amp; Ledger Notes:</span>
+                  </label>
+                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-semibold">
+                    Raw notes will be legally structured
+                  </span>
+                </div>
+
+                {/* Quick Presets for Officer */}
+                <div className="flex items-center gap-1.5 flex-wrap">
+                  <span className="text-[10px] font-bold text-slate-400">Quick Remarks:</span>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOfficerNotesInput((prev) =>
+                        prev
+                          ? `${prev}\n• Administrative & Financial Sanction Order #381 verified and intact.`
+                          : "• Administrative & Financial Sanction Order #381 verified and intact."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                  >
+                    + Sanction Order #381
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOfficerNotesInput((prev) =>
+                        prev
+                          ? `${prev}\n• Measurement Book (MB Vol. IV, Pg 42-58) site inspection records enclosed.`
+                          : "• Measurement Book (MB Vol. IV, Pg 42-58) site inspection records enclosed."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                  >
+                    + MB Vol IV Pg 42-58
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOfficerNotesInput((prev) =>
+                        prev
+                          ? `${prev}\n• Total disbursement ₹42.50 Lakhs disbursed across 3 Running Account bills.`
+                          : "• Total disbursement ₹42.50 Lakhs disbursed across 3 Running Account bills."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                  >
+                    + RA Bills (₹42.50 Lakhs)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setOfficerNotesInput((prev) =>
+                        prev
+                          ? `${prev}\n• Quality test reports (bitumen core test) dated 12/03/2026 attached.`
+                          : "• Quality test reports (bitumen core test) dated 12/03/2026 attached."
+                      )
+                    }
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                  >
+                    + Core Test Report
+                  </button>
+                </div>
+
+                <textarea
+                  rows={3}
+                  value={officerNotesInput}
+                  onChange={(e) => setOfficerNotesInput(e.target.value)}
+                  placeholder="Type your departmental findings, ledger entries, or physical inspection observations here (e.g. Sanction order verified, ₹42.50 Lakhs disbursed via RA Bill #3, MB Vol IV inspected)..."
+                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500 resize-none font-sans"
+                />
+
+                <div className="flex items-center justify-between gap-3 pt-1">
+                  <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                    AI synthesizes clauses, findings, and Section 7(1) compliance text.
+                  </span>
+                  <button
+                    type="button"
+                    onClick={handleGenerateAiReport}
+                    disabled={isAiStructuring}
+                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs transition cursor-pointer shadow-md disabled:opacity-50 flex items-center gap-2"
+                  >
+                    {isAiStructuring ? (
+                      <>
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                        <span>Structuring Report with AI...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Sparkles className="w-3.5 h-3.5 text-amber-300" />
+                        <span>Structure Official Report with AI</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              {/* Error Banner if any */}
+              {aiStructureError && (
+                <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{aiStructureError}</span>
+                </div>
+              )}
+
+              {/* Structured AI Report Result Preview */}
+              {aiStructuredReport && (
+                <div className="p-4 rounded-2xl bg-purple-500/[0.04] border border-purple-500/30 space-y-3.5">
+                  {/* Result Header */}
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-500/20 pb-2.5">
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-slate-900 dark:text-white text-xs">
+                          Official Information Report (Section 7(1) RTI Act 2005)
+                        </span>
+                        <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                          {aiStructuredReport.isAiGenerated ? "AI Synthesized" : "Statutory Template"}
+                        </span>
+                      </div>
+                      <p className="text-[11px] text-purple-700 dark:text-purple-300 font-mono mt-0.5">
+                        Dispatch Ref: {aiStructuredReport.dispatchReference} • Date: {aiStructuredReport.dateOfDispatch}
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <button
+                        type="button"
+                        onClick={handleCopyReportText}
+                        className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-[11px] font-semibold transition cursor-pointer flex items-center gap-1"
+                      >
+                        {copiedMemoText ? (
+                          <>
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                            <span>Copied</span>
+                          </>
+                        ) : (
+                          <>
+                            <Copy className="w-3.5 h-3.5" />
+                            <span>Copy Report</span>
+                          </>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleApplyAiReportToMemo}
+                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition cursor-pointer flex items-center gap-1.5 shadow-sm"
+                      >
+                        <FileText className="w-3.5 h-3.5" />
+                        <span>Apply to Memorandum</span>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Point-by-Point Clause Mappings */}
+                  <div className="space-y-2">
+                    <span className="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
+                      Point-by-Point Statutory Disclosures:
+                    </span>
+
+                    <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
+                      {(aiStructuredReport.clauseWiseResponses || []).map((c) => (
+                        <div
+                          key={c.clauseNumber}
+                          className="p-3 rounded-xl bg-white dark:bg-white/5 border border-purple-500/20 space-y-1.5"
+                        >
+                          <div className="flex items-center justify-between text-xs">
+                            <span className="font-bold text-purple-700 dark:text-purple-300 font-mono">
+                              Point No. {c.clauseNumber}
+                            </span>
+                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                              {c.status || "RECORD_ENCLOSED"}
+                            </span>
+                          </div>
+
+                          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                            <strong>Citizen Query:</strong> &ldquo;{c.citizenQuery}&rdquo;
+                          </div>
+
+                          <div className="text-xs text-slate-800 dark:text-slate-200 leading-relaxed font-sans bg-slate-50 dark:bg-white/[0.02] p-2 rounded-lg border border-slate-200/50 dark:border-white/5">
+                            <strong>Official Reply:</strong> {c.officialReply}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Certified Enclosures & Appellate Preview */}
+                  {aiStructuredReport.certifiedEnclosures && aiStructuredReport.certifiedEnclosures.length > 0 && (
+                    <div className="pt-2 border-t border-purple-500/20">
+                      <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+                        Attached Certified Enclosures (Section 2(j)(ii)):
+                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {aiStructuredReport.certifiedEnclosures.map((enc, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 text-[10px] font-mono border border-purple-500/20"
+                          >
+                            📎 {enc}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 1-Click Apply Button */}
+                  <div className="pt-2 flex justify-end">
+                    <button
+                      type="button"
+                      onClick={handleApplyAiReportToMemo}
+                      className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer text-xs"
+                    >
+                      <Check className="w-4 h-4" />
+                      <span>Insert This Full Structured Report into Official Memorandum</span>
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
 

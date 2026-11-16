@@ -44,14 +44,15 @@ export default function ApplicationListTable() {
     };
   }, []);
 
+  const [referenceTime] = useState(() => Date.now());
+
   const enrichedApps = useMemo(() => {
     return applications.map((app) => {
-      const filed = new Date(app.dateFiled || app.createdAt || Date.now());
-      const now = new Date();
+      const filedTime = app.dateFiled ? new Date(app.dateFiled).getTime() : app.createdAt ? new Date(app.createdAt).getTime() : referenceTime;
       const elapsedDays =
         app.daysElapsed !== undefined
           ? app.daysElapsed
-          : Math.max(1, Math.floor((now - filed) / (1000 * 60 * 60 * 24)));
+          : Math.max(1, Math.floor((referenceTime - filedTime) / (1000 * 60 * 60 * 24)));
 
       const isResolved =
         app.status === "RESPONSE_DISPATCHED" ||
@@ -100,7 +101,7 @@ export default function ApplicationListTable() {
         isAppeal,
       };
     });
-  }, [applications]);
+  }, [applications, referenceTime]);
 
   const filteredApps = useMemo(() => {
     return enrichedApps.filter((app) => {
