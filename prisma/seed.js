@@ -91,7 +91,7 @@ async function main() {
   // 2. Admin User
   const adminUser = await prisma.user.create({
     data: {
-      email: "admin@saral-rti.in",
+      email: "admin@saral.gov.in",
       passwordHash: defaultPassword,
       fullName: "SARAL Central Administrator",
       phone: "+91 11-23381000",

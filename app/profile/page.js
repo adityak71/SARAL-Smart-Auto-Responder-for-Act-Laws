@@ -397,7 +397,7 @@ export default function ProfilePage() {
                   {detailsForm.fullName || user?.name || user?.fullName || "Citizen User"}
                 </h3>
                 <p className="text-xs text-purple-700 dark:text-purple-300 font-medium truncate">
-                  {user?.email || (activeRole === "OFFICER" ? "officer@mp.gov.in" : activeRole === "ADMIN" ? "admin@saral-rti.in" : "citizen@saral-rti.in")}
+                  {user?.email || (activeRole === "OFFICER" ? "officer@mp.gov.in" : activeRole === "ADMIN" ? "admin@saral.gov.in" : "citizen@saral-rti.in")}
                 </p>
 
                 <div className="pt-2 flex justify-center">

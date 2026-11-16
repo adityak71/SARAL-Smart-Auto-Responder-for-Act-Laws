@@ -88,7 +88,7 @@ const AUDIT_LOG_FEED = [
     id: "log-5",
     action: "ADMIN_LOGIN",
     entity: "Central Comptroller Console",
-    user: "admin@saral-rti.in",
+    user: "admin@saral.gov.in",
     ip: "127.0.0.1",
     time: "Just now",
     status: "Success",

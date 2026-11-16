@@ -47,7 +47,7 @@ export default function LoginForm() {
       defaultName = "Er. Rameshwar Verma (PIO)";
       defaultAvatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256";
     } else if (roleKey === "ADMIN") {
-      defaultEmail = "admin@saral-rti.in";
+      defaultEmail = "admin@saral.gov.in";
       defaultName = "SARAL Central Administrator";
       defaultAvatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256";
     }
