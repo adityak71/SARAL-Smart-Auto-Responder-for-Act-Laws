@@ -35,11 +35,18 @@ export default function LoginForm() {
     e.preventDefault();
     setLoading(true);
     setAuthError("");
-    
-    // Determine target role and fallback defaults
-    const rawEmail = (loginForm.email || "").trim().toLowerCase();
+
+    const emailToUse = (loginForm.email || "").trim();
+    const passwordToUse = loginForm.password || "";
+
+    if (!emailToUse || !passwordToUse) {
+      setAuthError("Please enter both your email address and password.");
+      setLoading(false);
+      return;
+    }
     
     // Auto-detect role if user typed an admin or official government/officer email
+    const rawEmail = emailToUse.toLowerCase();
     let detectedRole = (selectedRole || "citizen").toUpperCase();
     if (rawEmail === "admin@saral.gov.in" || rawEmail.startsWith("admin@")) {
       detectedRole = "ADMIN";
@@ -53,104 +60,82 @@ export default function LoginForm() {
     }
 
     const roleKey = detectedRole;
-    let defaultEmail = "rahul.sharma@citizen.in";
-    let defaultName = "Citizen User";
-    let defaultAvatar = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256";
 
-    if (roleKey === "OFFICER") {
-      defaultEmail = "er.rameshwar@mp.gov.in";
-      defaultName = "Er. Rameshwar Verma (PIO)";
-      defaultAvatar = "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=256";
-    } else if (roleKey === "ADMIN") {
-      defaultEmail = "admin@saral.gov.in";
-      defaultName = "SARAL Central Administrator";
-      defaultAvatar = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=256";
-    } else if (rawEmail === "rahul.sharma@citizen.in") {
-      defaultName = "Rahul Sharma";
-    }
-
-    const emailToUse = loginForm.email?.trim() || defaultEmail;
-    const passwordToUse = loginForm.password || "Password@123";
-
-    // 1. Attempt Firebase Email/Password Auth if credentials provided
-    if (loginForm.email && loginForm.password) {
-      try {
-        const { signInWithEmailAndPassword } = await import("firebase/auth");
-        const { auth } = await import("@/lib/firebase");
-        const userCredential = await signInWithEmailAndPassword(auth, emailToUse, passwordToUse);
-        if (userCredential?.user) {
-          const res = await fetch("/api/auth/session", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              email: userCredential.user.email,
-              fullName: userCredential.user.displayName || (roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName),
-              avatarUrl: userCredential.user.photoURL || defaultAvatar,
-              role: roleKey,
-              firebaseUid: userCredential.user.uid,
-              isDigiLockerVerified: roleKey !== "CITIZEN",
-            }),
-          });
-          const data = await res.json();
-          const targetUser = data?.user || {
-            id: userCredential.user.uid,
-            email: userCredential.user.email,
-            name: userCredential.user.displayName || defaultName,
-            role: roleKey,
-            avatarUrl: userCredential.user.photoURL || defaultAvatar,
-            isDigiLockerVerified: roleKey !== "CITIZEN",
-          };
-          dispatch(setCredentials(targetUser));
-          const redirectUrl =
-            new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
-          window.location.href = redirectUrl;
-          return;
-        }
-      } catch (fbErr) {
-        console.warn("Firebase Email auth fallback:", fbErr.message);
-      }
-    }
-
-    // 2. Establish server session & HTTP cookie via session bridge
+    // 1. First attempt authentication via secure backend database
     try {
-      const res = await fetch("/api/auth/session", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           email: emailToUse,
-          fullName: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
+          password: passwordToUse,
           role: roleKey,
-          avatarUrl: defaultAvatar,
-          isDigiLockerVerified: roleKey !== "CITIZEN",
         }),
       });
 
       const data = await res.json();
-      if (data?.success && data?.user) {
+      if (res.ok && data?.success && data?.user) {
         dispatch(setCredentials(data.user));
         const redirectUrl =
           new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
         window.location.href = redirectUrl;
         return;
       }
-    } catch (err) {
-      console.warn("Session bridge fallback:", err);
+
+      // If backend says invalid credentials, check if Firebase has it
+      if (data?.error && !data.error.includes("Invalid email or password")) {
+        setAuthError(data.error);
+        setLoading(false);
+        return;
+      }
+    } catch (apiErr) {
+      console.warn("Backend auth attempt error:", apiErr);
     }
 
-    // 3. Fallback credential dispatch
-    dispatch(
-      setCredentials({
-        email: emailToUse,
-        name: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
-        fullName: roleKey === "ADMIN" ? "SARAL Central Administrator" : defaultName,
-        role: roleKey,
-        avatarUrl: defaultAvatar,
-        isDigiLockerVerified: roleKey !== "CITIZEN",
-      })
-    );
-    const redirectUrl =
-      new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
-    window.location.href = redirectUrl;
+    // 2. Attempt Firebase Email/Password Auth
+    try {
+      const { signInWithEmailAndPassword } = await import("firebase/auth");
+      const { auth } = await import("@/lib/firebase");
+      const userCredential = await signInWithEmailAndPassword(auth, emailToUse, passwordToUse);
+      if (userCredential?.user) {
+        const res = await fetch("/api/auth/session", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            email: userCredential.user.email,
+            fullName: userCredential.user.displayName || (roleKey === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
+            avatarUrl: userCredential.user.photoURL || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+            role: roleKey,
+            firebaseUid: userCredential.user.uid,
+            isDigiLockerVerified: roleKey !== "CITIZEN",
+          }),
+        });
+        const data = await res.json();
+        const targetUser = data?.user || {
+          id: userCredential.user.uid,
+          email: userCredential.user.email,
+          name: userCredential.user.displayName || "Citizen User",
+          role: roleKey,
+          avatarUrl: userCredential.user.photoURL || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
+          isDigiLockerVerified: roleKey !== "CITIZEN",
+        };
+        dispatch(setCredentials(targetUser));
+        const redirectUrl =
+          new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
+        window.location.href = redirectUrl;
+        return;
+      }
+    } catch (fbErr) {
+      let msg = "Invalid email or password. Please verify your credentials.";
+      if (fbErr.code === "auth/invalid-credential" || fbErr.code === "auth/user-not-found" || fbErr.code === "auth/wrong-password") {
+        msg = "Invalid email or password. If you don't have an account, please sign up.";
+      } else if (fbErr.code === "auth/too-many-requests") {
+        msg = "Access temporarily disabled due to many failed attempts. Try again later or reset password.";
+      }
+      setAuthError(msg);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleGoogleLogin = async () => {
@@ -169,7 +154,7 @@ export default function LoginForm() {
         googleRole = "OFFICER";
       }
 
-      // 1. Establish session & write saral_session cookie
+      // Establish verified session in database & write saral_session cookie
       const res = await fetch("/api/auth/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -186,59 +171,29 @@ export default function LoginForm() {
       });
 
       const data = await res.json();
-      const userData = data?.user || {
-        id: user.uid,
-        email: user.email,
-        name: user.displayName || (googleRole === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
-        fullName: user.displayName || (googleRole === "ADMIN" ? "SARAL Central Administrator" : "Citizen User"),
-        role: googleRole,
-        avatarUrl:
-          user.photoURL ||
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-        isDigiLockerVerified: googleRole !== "CITIZEN",
-      };
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.error || "Failed to establish server session.");
+      }
 
+      const userData = data.user;
       dispatch(setCredentials(userData));
 
       const redirectUrl =
         new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
       window.location.href = redirectUrl;
     } catch (err) {
-      console.warn("Firebase Google Auth popup error/cancelled:", err.message);
-      // Fallback demo citizen if popup closed or offline
-      try {
-        const res = await fetch("/api/auth/session", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            email: "aditya.citizen@saral-rti.in",
-            fullName: "Aditya Kumar",
-            role: "CITIZEN",
-            avatarUrl:
-              "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-            isDigiLockerVerified: false,
-          }),
-        });
-        const data = await res.json();
-        dispatch(setCredentials(data?.user || {
-          email: "aditya.citizen@saral-rti.in",
-          name: "Aditya Kumar",
-          role: "CITIZEN",
-          isDigiLockerVerified: false,
-        }));
-      } catch (e) {
-        dispatch(
-          setCredentials({
-            email: "aditya.citizen@saral-rti.in",
-            name: "Aditya Kumar",
-            role: "CITIZEN",
-            isDigiLockerVerified: false,
-          })
-        );
+      console.warn("Google Auth popup error/cancelled:", err);
+      let userFriendlyMsg = "Google Sign-In failed. Please try again or sign in with email/password.";
+      if (err.code === "auth/popup-closed-by-user") {
+        userFriendlyMsg = "Google sign-in popup was closed before completing.";
+      } else if (err.code === "auth/unauthorized-domain") {
+        userFriendlyMsg = "This domain or IP is not authorized in Firebase Console. Please access via http://localhost:3000 or use email & password.";
+      } else if (err.code === "auth/popup-blocked") {
+        userFriendlyMsg = "Google popup was blocked by your browser. Please allow popups for this site.";
+      } else if (err.message) {
+        userFriendlyMsg = err.message;
       }
-      const redirectUrl =
-        new URLSearchParams(window.location.search).get("redirect") || "/dashboard";
-      window.location.href = redirectUrl;
+      setAuthError(userFriendlyMsg);
     } finally {
       setGoogleLoading(false);
     }
@@ -300,6 +255,23 @@ export default function LoginForm() {
               </AnimatePresence>
             </div>
           </div>
+
+          {/* Error Notice */}
+          <AnimatePresence>
+            {authError && (
+              <motion.div
+                initial={{ opacity: 0, y: -6, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: "auto" }}
+                exit={{ opacity: 0, y: -6, height: 0 }}
+                className="mb-3.5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs sm:text-[13px] font-medium flex items-start gap-2.5 overflow-hidden"
+              >
+                <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+                <span className="leading-snug">{authError}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Login Form */}
           <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>

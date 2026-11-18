@@ -24,10 +24,14 @@ export default function ProfileDropdown() {
     } catch (err) {
       console.warn("Logout request:", err);
     }
+    try {
+      const { auth } = await import("@/lib/firebase");
+      const { signOut } = await import("firebase/auth");
+      await signOut(auth);
+    } catch (e) {}
     dispatch(logout());
     dispatch(setProfileDropdown(false));
-    router.push("/");
-    router.refresh();
+    window.location.href = "/login";
   };
 
   const userRole = (user?.role || selectedRole || "CITIZEN").toUpperCase();

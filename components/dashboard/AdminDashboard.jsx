@@ -70,9 +70,13 @@ export default function AdminDashboard({ user }) {
     } catch (err) {
       console.warn("Logout error:", err);
     }
+    try {
+      const { auth } = await import("@/lib/firebase");
+      const { signOut } = await import("firebase/auth");
+      await signOut(auth);
+    } catch (e) {}
     dispatch(logout());
-    router.push("/login");
-    router.refresh();
+    window.location.href = "/login";
   };
 
   const handleSelectTab = (tabId) => {

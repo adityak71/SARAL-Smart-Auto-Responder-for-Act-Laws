@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import AuthInput from "./AuthInput";
 import { updateSignupForm, setCredentials } from "@/redux/slices/authSlice";
@@ -14,71 +15,139 @@ export default function SignupForm() {
   const dispatch = useDispatch();
   const signupForm = useSelector((state) => state.auth.signupForm);
   const { showPassword, showConfirmPassword } = useSelector((state) => state.ui);
+  const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
+  const [authError, setAuthError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setAuthError("");
 
-    let targetUid = null;
-    let registeredEmail = signupForm.email?.trim() || "rahul.sharma@citizen.in";
-    let registeredName = signupForm.fullName?.trim() || "Rahul Sharma";
+    const fullName = (signupForm.fullName || "").trim();
+    const email = (signupForm.email || "").trim().toLowerCase();
+    const mobile = (signupForm.mobile || "").trim();
+    const password = signupForm.password || "";
+    const confirmPassword = signupForm.confirmPassword || "";
 
-    if (signupForm.email && signupForm.password) {
+    if (!fullName) {
+      setAuthError("Please enter your full name.");
+      setLoading(false);
+      return;
+    }
+
+    if (!email) {
+      setAuthError("Please enter your email address.");
+      setLoading(false);
+      return;
+    }
+
+    if (!password || password.length < 6) {
+      setAuthError("Password must be at least 6 characters long.");
+      setLoading(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      setAuthError("Passwords do not match. Please re-enter.");
+      setLoading(false);
+      return;
+    }
+
+    if (!signupForm.agreeTerms) {
+      setAuthError("Please accept the Terms of Service and Privacy Policy.");
+      setLoading(false);
+      return;
+    }
+
+    // 1. Primary DB Registration
+    try {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fullName,
+          email,
+          phone: mobile || null,
+          password,
+          role: "CITIZEN",
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.error || "Registration failed. Please try again.");
+      }
+
+      // 2. Sync to Firebase in background if possible
       try {
         const { createUserWithEmailAndPassword, updateProfile } = await import("firebase/auth");
         const { auth } = await import("@/lib/firebase");
-        const userCredential = await createUserWithEmailAndPassword(
-          auth,
-          signupForm.email,
-          signupForm.password
-        );
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         if (userCredential?.user) {
-          targetUid = userCredential.user.uid;
-          registeredEmail = userCredential.user.email;
-          if (signupForm.fullName) {
-            await updateProfile(userCredential.user, { displayName: signupForm.fullName });
-          }
+          await updateProfile(userCredential.user, { displayName: fullName });
         }
-      } catch (err) {
-        console.warn("Firebase Signup fallback to local session:", err.message);
+      } catch (fbErr) {
+        // DB is the primary source of truth; Firebase sync is optional
       }
-    }
 
-    // Establish session and write saral_session cookie
+      dispatch(setCredentials(data.user));
+      window.location.href = "/dashboard";
+      return;
+    } catch (err) {
+      setAuthError(err.message || "Failed to create account. Please try again.");
+      setLoading(false);
+    }
+  };
+
+  const handleGoogleSignup = async () => {
+    setGoogleLoading(true);
+    setAuthError("");
     try {
+      const { signInWithPopup } = await import("firebase/auth");
+      const { auth, googleProvider } = await import("@/lib/firebase");
+      const result = await signInWithPopup(auth, googleProvider);
+      const user = result.user;
+
+      // Provision verified citizen in database with their actual Google identity
       const res = await fetch("/api/auth/session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          email: registeredEmail,
-          fullName: registeredName,
+          email: user.email,
+          fullName: user.displayName || "Citizen User",
+          avatarUrl:
+            user.photoURL ||
+            "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
           role: "CITIZEN",
-          firebaseUid: targetUid,
+          firebaseUid: user.uid,
           isDigiLockerVerified: false,
         }),
       });
 
       const data = await res.json();
-      if (data?.success && data?.user) {
-        dispatch(setCredentials(data.user));
-        window.location.href = "/dashboard";
-        return;
+      if (!res.ok || !data?.success) {
+        throw new Error(data?.error || "Failed to establish citizen session.");
       }
-    } catch (e) {
-      console.warn("Session bridge error on signup:", e);
-    }
 
-    dispatch(
-      setCredentials({
-        name: registeredName,
-        email: registeredEmail,
-        role: "CITIZEN",
-        mobile: signupForm.mobile || "+91 98765 43210",
-        avatarUrl:
-          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256",
-        isDigiLockerVerified: false,
-      })
-    );
-    window.location.href = "/dashboard";
+      dispatch(setCredentials(data.user));
+      window.location.href = "/dashboard";
+    } catch (err) {
+      console.warn("Google Sign-Up Error:", err);
+      let userFriendlyMsg = "Google Sign-Up failed. Please try again or use the form below.";
+      if (err.code === "auth/popup-closed-by-user") {
+        userFriendlyMsg = "Google sign-up popup was closed before completing.";
+      } else if (err.code === "auth/unauthorized-domain") {
+        userFriendlyMsg = "This domain or IP is not authorized in Firebase Console. Please register using the form below or access via http://localhost:3000.";
+      } else if (err.code === "auth/popup-blocked") {
+        userFriendlyMsg = "Google popup was blocked by your browser. Please allow popups for this site.";
+      } else if (err.message) {
+        userFriendlyMsg = err.message;
+      }
+      setAuthError(userFriendlyMsg);
+    } finally {
+      setGoogleLoading(false);
+    }
   };
 
   const handleInputChange = (field, value) => {
@@ -125,6 +194,69 @@ export default function SignupForm() {
               {signupContent.form.subtitle}
             </p>
           </div>
+
+          {/* Social Sign-Up: Google Button */}
+          <div className="mb-3.5">
+            <motion.button
+              type="button"
+              onClick={handleGoogleSignup}
+              disabled={googleLoading || loading}
+              whileHover={{ scale: 1.015, y: -1 }}
+              whileTap={{ scale: 0.985 }}
+              className="w-full min-h-[44px] py-2.5 sm:py-3 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+            >
+              {googleLoading ? (
+                <div className="w-4.5 h-4.5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
+              ) : (
+                <svg className="w-4 h-4 sm:w-4.5 sm:h-4.5 shrink-0" viewBox="0 0 24 24">
+                  <path
+                    d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.66v3.05h3.88c2.27-2.09 3.665-5.17 3.665-9.15Z"
+                    fill="#4285F4"
+                  />
+                  <path
+                    d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.94H1.24v3.15C3.26 21.36 7.34 24 12 24Z"
+                    fill="#34A853"
+                  />
+                  <path
+                    d="M5.28 14.26a7.14 7.14 0 0 1 0-4.52V6.59H1.24a11.97 11.97 0 0 0 0 10.82l4.04-3.15Z"
+                    fill="#FBBC05"
+                  />
+                  <path
+                    d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.24 6.59l4.04 3.15c.95-2.84 3.6-4.99 6.72-4.99Z"
+                    fill="#EA4335"
+                  />
+                </svg>
+              )}
+              <span>{googleLoading ? "Connecting with Google..." : "Continue with Google"}</span>
+            </motion.button>
+          </div>
+
+          {/* Divider */}
+          <div className="relative my-3 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-slate-200 dark:border-white/15" />
+            </div>
+            <span className="relative bg-white dark:bg-[#0f0728] px-3 text-[11px] font-normal text-slate-400 dark:text-slate-400 select-none">
+              or register with email
+            </span>
+          </div>
+
+          {/* Error Notice */}
+          <AnimatePresence>
+            {authError && (
+              <motion.div
+                initial={{ opacity: 0, y: -6, height: 0 }}
+                animate={{ opacity: 1, y: 0, height: "auto" }}
+                exit={{ opacity: 0, y: -6, height: 0 }}
+                className="mb-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium flex items-start gap-2.5 overflow-hidden"
+              >
+                <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                </svg>
+                <span className="leading-snug">{authError}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Registration Form */}
           <form className="space-y-2.5 sm:space-y-3" onSubmit={handleSubmit}>
@@ -175,7 +307,6 @@ export default function SignupForm() {
               id="mobile"
               name="mobile"
               type="tel"
-              required
               value={signupForm.mobile}
               onChange={(e) => handleInputChange("mobile", e.target.value)}
               placeholder={signupContent.form.mobilePlaceholder}
@@ -316,20 +447,27 @@ export default function SignupForm() {
             <div className="pt-1.5 sm:pt-2">
               <motion.button
                 type="submit"
+                disabled={loading || googleLoading}
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-6 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] flex items-center justify-center gap-2.5 cursor-pointer group transition-all duration-200"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-6 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] flex items-center justify-center gap-2.5 cursor-pointer group transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                <span>{signupContent.form.submitButtonText}</span>
-                <motion.svg
-                  className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.2"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
-                </motion.svg>
+                {loading ? (
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                ) : (
+                  <>
+                    <span>{signupContent.form.submitButtonText}</span>
+                    <motion.svg
+                      className="w-4 h-4 sm:w-4.5 sm:h-4.5 transition-transform duration-200 group-hover:translate-x-1"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
+                    </motion.svg>
+                  </>
+                )}
               </motion.button>
             </div>
           </form>

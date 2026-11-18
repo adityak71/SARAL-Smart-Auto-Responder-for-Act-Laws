@@ -26,10 +26,14 @@ export default function Navbar() {
     } catch (err) {
       console.warn("Logout request:", err);
     }
+    try {
+      const { auth } = await import("@/lib/firebase");
+      const { signOut } = await import("firebase/auth");
+      await signOut(auth);
+    } catch (e) {}
     dispatch(logout());
     dispatch(setMobileMenu(false));
-    router.push("/");
-    router.refresh();
+    window.location.href = "/login";
   };
 
   const handleLinkClick = (e, link) => {

@@ -6,11 +6,15 @@ export async function POST() {
     message: "Logged out successfully.",
   });
 
-  // Clear session cookie
+  // Thoroughly clear session cookie across all path and browser variations
+  response.cookies.delete("saral_session");
   response.cookies.set("saral_session", "", {
     httpOnly: true,
-    expires: new Date(0),
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
     path: "/",
+    expires: new Date(0),
+    maxAge: 0,
   });
 
   return response;
