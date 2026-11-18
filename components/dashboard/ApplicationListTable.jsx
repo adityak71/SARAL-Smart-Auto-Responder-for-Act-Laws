@@ -49,6 +49,7 @@ export default function ApplicationListTable() {
   const enrichedApps = useMemo(() => {
     return applications.map((app) => {
       const filedTime = app.dateFiled ? new Date(app.dateFiled).getTime() : app.createdAt ? new Date(app.createdAt).getTime() : referenceTime;
+      const filedDate = new Date(filedTime);
       const elapsedDays =
         app.daysElapsed !== undefined
           ? app.daysElapsed
@@ -83,7 +84,7 @@ export default function ApplicationListTable() {
         };
       }
 
-      const formattedDate = filed.toLocaleDateString("en-IN", {
+      const formattedDate = filedDate.toLocaleDateString("en-IN", {
         day: "2-digit",
         month: "short",
         year: "numeric",
