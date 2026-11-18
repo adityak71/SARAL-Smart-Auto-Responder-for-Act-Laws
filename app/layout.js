@@ -32,7 +32,10 @@ export default function RootLayout({ children }) {
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 transition-colors">
+      <body
+        suppressHydrationWarning
+        className="min-h-full flex flex-col bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 transition-colors"
+      >
         <ReduxProvider>
           <Navbar />
           {children}

@@ -6,6 +6,17 @@ import { mockRtiApplications } from "@/data/trackingData";
 import StatutoryCountdownClock from "@/components/common/StatutoryCountdownClock";
 import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 
+function formatDeterministicDate(val) {
+  if (!val) return "—";
+  const d = new Date(val);
+  if (isNaN(d.getTime())) return String(val);
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const day = String(d.getDate()).padStart(2, "0");
+  const month = months[d.getMonth()];
+  const year = d.getFullYear();
+  return `${day} ${month} ${year}`;
+}
+
 export default function ApplicationListTable() {
   const [filter, setFilter] = useState("all");
   const [searchTerm, setSearchTerm] = useState("");
@@ -84,11 +95,7 @@ export default function ApplicationListTable() {
         };
       }
 
-      const formattedDate = filedDate.toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      });
+      const formattedDate = formatDeterministicDate(filedDate);
 
       return {
         ...app,
@@ -245,7 +252,7 @@ export default function ApplicationListTable() {
                   </td>
 
                   <td className="py-4 pr-3 text-slate-600 dark:text-slate-300 whitespace-nowrap">
-                    {app.formattedDate}
+                    <span suppressHydrationWarning>{app.formattedDate}</span>
                   </td>
 
                   <td className="py-4 pr-3 whitespace-nowrap">
