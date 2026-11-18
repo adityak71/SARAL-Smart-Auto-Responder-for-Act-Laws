@@ -3,6 +3,7 @@ import { ReduxProvider } from "@/redux/provider";
 import Navbar from "@/components/common/Navbar";
 
 export const metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: "SARAL - AI-Powered Right to Information Portal",
   description: "Simplifying Right to Information with AI assistance for Indian citizens.",
 };

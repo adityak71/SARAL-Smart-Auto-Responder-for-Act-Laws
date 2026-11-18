@@ -138,7 +138,9 @@ export default function SignupForm() {
       if (err.code === "auth/popup-closed-by-user") {
         userFriendlyMsg = "Google sign-up popup was closed before completing.";
       } else if (err.code === "auth/unauthorized-domain") {
-        userFriendlyMsg = "This domain or IP is not authorized in Firebase Console. Please register using the form below or access via http://localhost:3000.";
+        const configuredUrl = process.env.NEXT_PUBLIC_APP_URL || "";
+        const currentHost = typeof window !== "undefined" ? window.location.hostname : "";
+        userFriendlyMsg = `Domain "${currentHost}" is not authorized in Firebase Console. Add "${currentHost}" in Firebase Console > Authentication > Settings > Authorized Domains (matching NEXT_PUBLIC_APP_URL), or register with the form below.`;
       } else if (err.code === "auth/popup-blocked") {
         userFriendlyMsg = "Google popup was blocked by your browser. Please allow popups for this site.";
       } else if (err.message) {
