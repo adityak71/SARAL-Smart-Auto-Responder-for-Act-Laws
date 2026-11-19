@@ -1,0 +1,63 @@
+{
+  "name": "SARAL - Smart Auto-Responder for Act Laws",
+  "short_name": "SARAL RTI",
+  "description": "AI-Powered Citizen Right to Information (RTI Act 2005) Copilot, Auto-Mapping, and Statutory Tracking Portal",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#08031d",
+  "theme_color": "#6d28d9",
+  "categories": ["government", "productivity", "utilities"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "File New RTI Petition",
+      "short_name": "File RTI",
+      "description": "Draft and submit a new RTI application with AI guidance",
+      "url": "/file-rti",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Track RTI Dossier",
+      "short_name": "Track Status",
+      "description": "Check statutory 30-day response clock and current status",
+      "url": "/tracking",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Unified Dashboard",
+      "short_name": "Dashboard",
+      "description": "View citizen filings, drafted petitions, and official responses",
+      "url": "/dashboard",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

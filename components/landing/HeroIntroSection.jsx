@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import PwaInstallButton from "@/components/pwa/PwaInstallButton";
 
 export default function HeroIntroSection() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -55,12 +56,12 @@ export default function HeroIntroSection() {
               <strong>SARAL (Smart Auto-Responder for Act Laws)</strong> ek AI-powered citizen portal hai jo aam nagrikon ko bina kisi vakeel ya kanooni jhanjhat ke government departments se information maangne, RTI track karne aur official certified response lene me madad karta hai.
             </motion.p>
 
-            {/* CTA Button Group */}
+            {/* CTA Button Group with PWA Install Now Action */}
             <motion.div
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-2"
+              className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5 w-full pt-2"
             >
               {isAuthenticated ? (
                 <>
@@ -75,7 +76,7 @@ export default function HeroIntroSection() {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M13.5 4.5L21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
 
@@ -96,6 +97,9 @@ export default function HeroIntroSection() {
                     </svg>
                     <span>Track Status</span>
                   </Link>
+
+                  {/* PWA Install Button */}
+                  <PwaInstallButton />
                 </>
               ) : (
                 <>
@@ -110,7 +114,7 @@ export default function HeroIntroSection() {
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
-                      <path d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M13.5 4.5L21 12m0 0-7.5 7.5M21 12H3" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </Link>
 
@@ -124,11 +128,14 @@ export default function HeroIntroSection() {
                     </svg>
                     <span>Track Existing RTI</span>
                   </Link>
+
+                  {/* PWA Install Button */}
+                  <PwaInstallButton />
                 </>
               )}
             </motion.div>
 
-            {/* Trust Pills */}
+            {/* Trust Pills & Device Compatibility Indicator */}
             <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/20 font-semibold">
                 ✓ ₹10 Standard Treasury Fee
@@ -138,6 +145,9 @@ export default function HeroIntroSection() {
               </span>
               <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/20 font-semibold">
                 ✓ DigiLocker Verified
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 font-medium">
+                📱 Android • iOS • Windows • macOS
               </span>
             </div>
           </div>

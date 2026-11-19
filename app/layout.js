@@ -1,17 +1,30 @@
 import "./globals.css";
 import { ReduxProvider } from "@/redux/provider";
 import Navbar from "@/components/common/Navbar";
+import PwaRegistrar from "@/components/pwa/PwaRegistrar";
 
 export const metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   title: "SARAL - AI-Powered Right to Information Portal",
   description: "Simplifying Right to Information with AI assistance for Indian citizens.",
+  manifest: "/manifest.json",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "SARAL RTI",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full antialiased dark">
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+        <meta name="theme-color" content="#6d28d9" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -38,6 +51,7 @@ export default function RootLayout({ children }) {
         className="min-h-full flex flex-col bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 transition-colors"
       >
         <ReduxProvider>
+          <PwaRegistrar />
           <Navbar />
           {children}
         </ReduxProvider>
