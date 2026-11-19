@@ -8,6 +8,18 @@ export const metadata = {
   title: "SARAL - AI-Powered Right to Information Portal",
   description: "Simplifying Right to Information with AI assistance for Indian citizens.",
   manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icons/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    shortcut: "/icons/icon.svg",
+    apple: [
+      { url: "/icons/icon.svg" },
+      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
@@ -19,6 +31,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full antialiased dark">
       <head>
+        <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
+        <link rel="alternate icon" href="/favicon.ico" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
         <meta name="theme-color" content="#6d28d9" />
