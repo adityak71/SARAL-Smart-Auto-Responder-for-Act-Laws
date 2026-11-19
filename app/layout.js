@@ -3,21 +3,26 @@ import { ReduxProvider } from "@/redux/provider";
 import Navbar from "@/components/common/Navbar";
 import PwaRegistrar from "@/components/pwa/PwaRegistrar";
 
+const appBaseUrl =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined);
+
 export const metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
+  ...(appBaseUrl ? { metadataBase: new URL(appBaseUrl) } : {}),
   title: "SARAL - AI-Powered Right to Information Portal",
   description: "Simplifying Right to Information with AI assistance for Indian citizens.",
-  manifest: "/manifest.json",
+  manifest: "/manifest.json?v=5",
   icons: {
     icon: [
-      { url: "/icons/icon.svg", type: "image/svg+xml" },
-      { url: "/favicon.ico" },
-      { url: "/icons/icon-512.png", sizes: "512x512", type: "image/png" },
+      { url: "/icons/icon-512.png?v=5", sizes: "512x512", type: "image/png" },
+      { url: "/icons/icon-192.png?v=5", sizes: "192x192", type: "image/png" },
+      { url: "/favicon.ico?v=5" },
+      { url: "/icons/icon.svg?v=5", type: "image/svg+xml" },
     ],
-    shortcut: "/icons/icon.svg",
+    shortcut: "/favicon.ico?v=5",
     apple: [
-      { url: "/icons/icon.svg" },
-      { url: "/icons/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+      { url: "/icons/apple-touch-icon.png?v=5", sizes: "180x180", type: "image/png" },
+      { url: "/icons/icon-512.png?v=5", sizes: "512x512", type: "image/png" },
     ],
   },
   appleWebApp: {
@@ -31,11 +36,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning className="h-full antialiased dark">
       <head>
-        <link rel="icon" type="image/svg+xml" href="/icons/icon.svg" />
-        <link rel="alternate icon" href="/favicon.ico" />
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
-        <meta name="theme-color" content="#6d28d9" />
+        <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png?v=5" />
+        <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=5" />
+        <link rel="icon" type="image/svg+xml" href="/icons/icon.svg?v=5" />
+        <link rel="alternate icon" href="/favicon.ico?v=5" />
+        <link rel="manifest" href="/manifest.json?v=5" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=5" />
+        <meta name="theme-color" content="#0d062e" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -50,6 +57,18 @@ export default function RootLayout({ children }) {
                   document.documentElement.classList.add('dark');
                 }
               } catch (e) {}
+
+              // Capture PWA install prompt globally as early as possible
+              window.__saralInstallPrompt = null;
+              window.addEventListener('beforeinstallprompt', function(e) {
+                e.preventDefault();
+                window.__saralInstallPrompt = e;
+                window.dispatchEvent(new CustomEvent('saral:prompt-captured'));
+              });
+              window.addEventListener('appinstalled', function() {
+                window.__saralInstallPrompt = null;
+                window.dispatchEvent(new CustomEvent('saral:app-installed'));
+              });
             `,
           }}
         />

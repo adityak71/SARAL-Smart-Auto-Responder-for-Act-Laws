@@ -12,8 +12,8 @@ export default function PwaInstallButton({ className = "" }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    // 1. Check if already running in standalone PWA mode
     if (typeof window !== "undefined") {
+      // 1. Check if already running in standalone PWA mode
       const isStandalone =
         window.matchMedia("(display-mode: standalone)").matches ||
         window.navigator.standalone === true;
@@ -21,46 +21,76 @@ export default function PwaInstallButton({ className = "" }) {
         setIsInstalled(true);
       }
 
-      // 2. Capture Chrome/Edge/Android beforeinstallprompt event
+      // Check if browser already has app installed
+      if (typeof navigator !== "undefined" && "getInstalledRelatedApps" in navigator) {
+        navigator.getInstalledRelatedApps().then((apps) => {
+          if (apps && apps.length > 0) {
+            setIsInstalled(true);
+          }
+        }).catch(() => {});
+      }
+
+      // 2. Check if prompt was captured early by RootLayout head script
+      if (window.__saralInstallPrompt) {
+        setDeferredPrompt(window.__saralInstallPrompt);
+        setIsInstallable(true);
+      }
+
       const handleBeforeInstallPrompt = (e) => {
-        // Prevent default mini-infobar
         e.preventDefault();
+        window.__saralInstallPrompt = e;
         setDeferredPrompt(e);
         setIsInstallable(true);
+      };
+
+      const handlePromptCaptured = () => {
+        if (window.__saralInstallPrompt) {
+          setDeferredPrompt(window.__saralInstallPrompt);
+          setIsInstallable(true);
+        }
       };
 
       const handleAppInstalled = () => {
         setIsInstalled(true);
         setIsInstallable(false);
         setDeferredPrompt(null);
+        window.__saralInstallPrompt = null;
       };
 
       window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+      window.addEventListener("saral:prompt-captured", handlePromptCaptured);
       window.addEventListener("appinstalled", handleAppInstalled);
+      window.addEventListener("saral:app-installed", handleAppInstalled);
 
       return () => {
         window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+        window.removeEventListener("saral:prompt-captured", handlePromptCaptured);
         window.removeEventListener("appinstalled", handleAppInstalled);
+        window.removeEventListener("saral:app-installed", handleAppInstalled);
       };
     }
   }, []);
 
   const handleInstallClick = async () => {
+    const activePrompt =
+      deferredPrompt || (typeof window !== "undefined" ? window.__saralInstallPrompt : null);
+
     // If browser supports direct popup prompt, trigger it directly
-    if (deferredPrompt) {
+    if (activePrompt) {
       try {
-        await deferredPrompt.prompt();
-        const choiceResult = await deferredPrompt.userChoice;
+        await activePrompt.prompt();
+        const choiceResult = await activePrompt.userChoice;
         if (choiceResult?.outcome === "accepted") {
           setIsInstalled(true);
           setDeferredPrompt(null);
+          if (typeof window !== "undefined") window.__saralInstallPrompt = null;
         }
       } catch (err) {
         console.warn("PWA prompt error:", err);
         setIsModalOpen(true);
       }
     } else {
-      // If iOS, macOS Safari, or beforeinstallprompt hasn't fired, show platform guide
+      // If prompt not available (already installed, iOS, or browser held back), show guide
       setIsModalOpen(true);
     }
   };
@@ -114,19 +144,24 @@ export default function PwaInstallButton({ className = "" }) {
       <PwaInstallModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        deferredPrompt={deferredPrompt}
+        deferredPrompt={
+          deferredPrompt || (typeof window !== "undefined" ? window.__saralInstallPrompt : null)
+        }
         onPromptTrigger={async () => {
-          if (deferredPrompt) {
+          const activePrompt =
+            deferredPrompt || (typeof window !== "undefined" ? window.__saralInstallPrompt : null);
+          if (activePrompt) {
             try {
-              await deferredPrompt.prompt();
-              const choiceResult = await deferredPrompt.userChoice;
+              await activePrompt.prompt();
+              const choiceResult = await activePrompt.userChoice;
               if (choiceResult?.outcome === "accepted") {
                 setIsInstalled(true);
                 setDeferredPrompt(null);
+                if (typeof window !== "undefined") window.__saralInstallPrompt = null;
                 setIsModalOpen(false);
               }
             } catch (e) {
-              console.warn(e);
+              console.warn("PWA prompt trigger error:", e);
             }
           }
         }}

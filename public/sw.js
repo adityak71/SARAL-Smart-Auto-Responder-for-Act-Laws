@@ -3,13 +3,18 @@
  * Ensures offline shell availability and satisfies browser installability criteria.
  */
 
-const CACHE_NAME = "saral-pwa-v1";
+const CACHE_NAME = "saral-pwa-v5";
 const PRECACHE_ASSETS = [
   "/",
-  "/manifest.json",
-  "/icons/icon.svg",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
+  "/manifest.json?v=5",
+  "/favicon.ico?v=5",
+  "/icons/icon.svg?v=5",
+  "/icons/icon-48.png?v=5",
+  "/icons/icon-128.png?v=5",
+  "/icons/icon-192.png?v=5",
+  "/icons/icon-256.png?v=5",
+  "/icons/icon-512.png?v=5",
+  "/icons/icon-maskable-512.png?v=5",
 ];
 
 // Install: Pre-cache core app shell assets

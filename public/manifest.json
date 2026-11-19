@@ -1,4 +1,5 @@
 {
+  "id": "/?v=5",
   "name": "SARAL - Smart Auto-Responder for Act Laws",
   "short_name": "SARAL RTI",
   "description": "AI-Powered Citizen Right to Information (RTI Act 2005) Copilot, Auto-Mapping, and Statutory Tracking Portal",
@@ -6,35 +7,53 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
-  "background_color": "#08031d",
-  "theme_color": "#6d28d9",
+  "background_color": "#0d062e",
+  "theme_color": "#0d062e",
   "categories": ["government", "productivity", "utilities"],
   "lang": "en-IN",
   "dir": "ltr",
   "icons": [
     {
-      "src": "/icons/icon-192.png",
+      "src": "/icons/icon-192.png?v=5",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/icons/icon-512.png?v=5",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-maskable-512.png",
+      "src": "/icons/icon-256.png?v=5",
+      "sizes": "256x256",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-128.png?v=5",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-48.png?v=5",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png?v=5",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/icons/icon.svg",
-      "sizes": "any",
+      "src": "/icons/icon.svg?v=5",
+      "sizes": "48x48 72x72 96x96 128x128 256x256 512x512",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
     }
   ],
   "shortcuts": [
