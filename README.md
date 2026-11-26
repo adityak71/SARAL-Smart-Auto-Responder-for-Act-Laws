@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/aditya-kumar-dev/assets/main/saral-banner.png" alt="SARAL Portal Banner" width="100%" style="border-radius: 16px; margin-bottom: 20px;" onerror="this.style.display='none'" />
+  <img src="https://raw.githubusercontent.com/adityak71/public/SARAL_Banner" alt="SARAL Portal Banner" width="100%" style="border-radius: 16px; margin-bottom: 20px;" onerror="this.style.display='none'" />
 
   # ⚖️ SARAL (सरल)
   ### Smart Auto-Responder for Act Laws
@@ -24,11 +24,11 @@
 
   <!-- Quick Action Navigation Links -->
   <p align="center">
-    <a href="https://saral-smart-auto-responder.vercel.app">
+    <a href="https://saral-rti.vercel.app">
       <img src="https://img.shields.io/badge/🌐_Live_Portal-Visit_SARAL-7c3aed?style=flat-square&logo=vercel" alt="Live Portal" />
     </a>
     &nbsp;
-    <a href="https://github.com/aditya-kumar-dev/saral-smart-auto-responder-for-act-laws">
+    <a href="https://github.com/adityak71/SARAL-Smart-Auto-Responder-for-Act-Laws">
       <img src="https://img.shields.io/badge/💻_Source_Code-GitHub_Repository-24292e?style=flat-square&logo=github" alt="GitHub Repository" />
     </a>
     &nbsp;
@@ -403,7 +403,7 @@ Yes. All response documents compiled by SARAL follow the evidentiary standards e
 
 <div align="center">
 
-  <img src="https://avatars.githubusercontent.com/aditya-kumar-dev" alt="Aditya Kumar" width="120" style="border-radius: 50%; border: 3px solid #7c3aed; margin-bottom: 12px;" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256'" />
+  <img src="https://raw.githubusercontent.com/adityak71/portfolio/refs/heads/master/public/assets/profile/profile.png" alt="Aditya Kumar" width="120" style="border-radius: 50%; border: 3px solid #7c3aed; margin-bottom: 12px;" onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=256'" />
 
   ### **Aditya Kumar**
   **Full-Stack Web Architect & AI Systems Developer**  
@@ -414,15 +414,15 @@ Yes. All response documents compiled by SARAL follow the evidentiary standards e
   </p>
 
   <p align="center">
-    <a href="https://github.com/aditya-kumar-dev" target="_blank">
-      <img src="https://img.shields.io/badge/GitHub-aditya--kumar--dev-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+    <a href="https://github.com/adityak71" target="_blank">
+      <img src="https://img.shields.io/badge/GitHub-adityak71-181717?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
     </a>
     &nbsp;
-    <a href="https://www.linkedin.com/in/aditya-kumar-dev" target="_blank">
-      <img src="https://img.shields.io/badge/LinkedIn-Aditya_Kumar-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
+    <a href="https://www.linkedin.com/in/aditya-kumar-lpu" target="_blank">
+      <img src="https://img.shields.io/badge/LinkedIn-Aditya--Kumar--lpu-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn" />
     </a>
     &nbsp;
-    <a href="mailto:contact.aditya.kumar.dev@gmail.com">
+    <a href="mailto:adityak201811@gmail.com">
       <img src="https://img.shields.io/badge/Email-Get_in_Touch-EA4335?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
     </a>
   </p>
