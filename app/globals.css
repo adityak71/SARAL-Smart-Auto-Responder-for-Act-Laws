@@ -149,7 +149,9 @@
   --color-cyan-950: #351000;
 
   /* Neutrals (former slate/gray): cool surfaces → on-surface ink */
-  --color-slate-50: #f5faff;
+  /* 50 is the page ground (every page wrapper uses bg-slate-50): warm parchment-linen, the
+     design system's "base document canvas", so white cards read as sheets on a desk */
+  --color-slate-50: #f2efe8;
   --color-slate-100: #e5eff8;
   --color-slate-200: #d9e4ec;
   --color-slate-300: #c1c7ca;
@@ -172,6 +174,12 @@
   --color-gray-800: var(--color-slate-800);
   --color-gray-900: var(--color-slate-900);
   --color-gray-950: var(--color-slate-950);
+
+  /* Background bands that separate sections by tone (no borders or shadows needed) */
+  --color-linen: #f2efe8;
+  --color-band-mist: #e2eaee;
+  --color-band-sage: #dfe8e4;
+  --color-band-sand: #eae4d8;
 
   /* Stitch surface ramp, for new markup */
   --color-surface: #f5faff;
@@ -197,7 +205,7 @@
   }
 
   html:not(.dark) body {
-    background-color: #f5faff;
+    background-color: #f2efe8;
     color: #131d23;
   }
 
@@ -222,14 +230,35 @@ html.dark {
   --color-petrol-300: #a7c2ca;
 }
 
-/* Section grounds: surface-container steps and the petrol "inverted civic anchor" */
-.ground-sand { background-color: #e5eff8; }
-.ground-mist { background-color: #eaf5fd; }
+/*
+ * Section grounds. The page is linen; sections alternate with muted bands that pick up the
+ * palette: mist (pale blue-grey, petrol family), sage (teal-green, forest family) and sand
+ * (warm, terracotta family). Flat colour only; separation comes from tone, not borders.
+ */
+.ground-sand { background-color: var(--color-band-sand); }
+.ground-sage { background-color: var(--color-band-sage); }
+.ground-mist { background-color: var(--color-band-mist); }
 .ground-ink { background-color: #1e3a42; }
 
-html.dark .ground-sand { background-color: #13232a; }
+html.dark .ground-sand { background-color: #17232a; }
+html.dark .ground-sage { background-color: #12242a; }
 html.dark .ground-mist { background-color: #112027; }
 html.dark .ground-ink { background-color: #0a1a1f; }
+
+/*
+ * Full-bleed band for a section that sits inside a max-width container: the colour extends to
+ * the viewport edges without changing the markup's structure. Pair with a ground-* class.
+ */
+.band-bleed {
+  box-shadow: 0 0 0 100vmax var(--band-color);
+  clip-path: inset(0 -100vmax);
+}
+.band-bleed.ground-mist { --band-color: var(--color-band-mist); }
+.band-bleed.ground-sage { --band-color: var(--color-band-sage); }
+.band-bleed.ground-sand { --band-color: var(--color-band-sand); }
+html.dark .band-bleed.ground-mist { --band-color: #112027; }
+html.dark .band-bleed.ground-sage { --band-color: #12242a; }
+html.dark .band-bleed.ground-sand { --band-color: #17232a; }
 
 /* Legacy surface classes kept by name: white sheets with a hairline outline-variant border */
 html.dark .glass-card,
@@ -306,10 +335,9 @@ html:not(.dark) .glass-pill {
  * primary ink dots at 3.5% opacity every 24px. Class name kept from the previous pass.
  */
 .ledger-ground {
-  background-color: #f5faff;
+  background-color: var(--color-band-mist);
   background-image: radial-gradient(rgb(5 36 44 / 0.07) 1px, transparent 1px);
   background-size: 24px 24px;
-  border-bottom: 1px solid rgb(193 199 202 / 0.4);
 }
 
 html.dark .ledger-ground {

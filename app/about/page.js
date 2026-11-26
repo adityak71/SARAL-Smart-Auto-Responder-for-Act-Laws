@@ -39,7 +39,7 @@ export default function AboutPage() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-16">
         
         {/* About Hero Header */}
-        <section className="text-center max-w-3xl mx-auto space-y-4">
+        <section className="band-bleed ground-mist -mt-10 lg:-mt-16 pt-10 lg:pt-16 pb-12 text-center max-w-3xl mx-auto space-y-4">
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -146,7 +146,7 @@ export default function AboutPage() {
         </section>
 
         {/* Real Citizen Stories Section */}
-        <section className="space-y-8" data-purpose="citizen-stories">
+        <section className="band-bleed ground-sand py-12 lg:py-16 space-y-8" data-purpose="citizen-stories">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="label-caps inline-flex items-center gap-2 text-purple-600 dark:text-purple-300">
               Example cases

@@ -32,7 +32,7 @@ export default function HowSaralWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="ground-sand w-full py-16 lg:py-24 relative overflow-hidden">
+    <section id="how-it-works" className="ground-sage w-full py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">

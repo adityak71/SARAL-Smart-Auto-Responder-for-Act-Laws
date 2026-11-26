@@ -68,7 +68,7 @@ export default function GeneralInfoPage() {
     <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 min-h-screen py-8 sm:py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <div className="band-bleed ground-mist -mt-8 sm:-mt-12 pt-8 sm:pt-12 pb-8 text-center max-w-3xl mx-auto">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -92,7 +92,7 @@ export default function GeneralInfoPage() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.15 }}
-          className="max-w-3xl mx-auto mb-8"
+          className="band-bleed ground-mist max-w-3xl mx-auto pb-10 mb-10"
         >
           <form onSubmit={handleSearchSubmit} className="relative flex items-center">
             <div className="relative w-full">
@@ -147,7 +147,7 @@ export default function GeneralInfoPage() {
                 key={topic.label}
                 type="button"
                 onClick={() => handleTopicClick(topic.query)}
-                className="text-sm px-3 py-1.5 rounded-md bg-slate-100 border border-slate-300/40 text-slate-700 hover:bg-slate-200 hover:text-purple-900 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
+                className="text-sm px-3 py-1.5 rounded-md bg-white dark:bg-white/5 border border-slate-300/50 text-slate-700 hover:bg-slate-200 hover:text-purple-900 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
               >
                 {topic.label}
               </button>

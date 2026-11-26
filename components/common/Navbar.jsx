@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-slate-50/95 dark:bg-[#0f1a1f]/95 shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-300/30 dark:border-white/10 transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-[#faf8f3]/95 dark:bg-[#0f1a1f]/95 shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-300/30 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Identity / Emblem */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
