@@ -19,32 +19,32 @@ export default function CitizenDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner & Quick Actions */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-purple-700 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
+      <div className="p-6 sm:p-8 rounded-3xl bg-purple-700 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-colors">
 
         <div className="space-y-2 z-10">
           {user?.isDigiLockerVerified ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               DigiLocker Verified Citizen • Section 6(1) Authorized
             </div>
           ) : (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
               <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               Citizen Account • Verification Pending
             </div>
           )}
           <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            Namaste, {citizenName}
+            My RTI applications
           </h2>
           <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-            Welcome to your unified Right to Information dashboard. Draft new petitions, monitor statutory 30-day response clocks, and download official certified government memorandums.
+            Signed in as {citizenName}. Draft a new application, check each 30-day deadline and download certified replies.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 shrink-0 z-10">
           <Link
             href="/file-rti"
-            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-lg transition-all transform cursor-pointer flex items-center gap-2"
+            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-lg transition-colors transform cursor-pointer flex items-center gap-2"
           >
             <span>+ File New RTI Petition</span>
           </Link>

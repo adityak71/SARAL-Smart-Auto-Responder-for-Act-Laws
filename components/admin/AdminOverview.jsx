@@ -40,7 +40,7 @@ export default function AdminOverview({ stats, isLoading }) {
               Centralized administrative statistics & platform synchronization
             </p>
           </div>
-          <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+          <span className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
             Admin
           </span>
         </div>
@@ -91,7 +91,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </h3>
 
           {/* Submitted */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">Submitted</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -109,7 +109,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </div>
 
           {/* In Progress */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">In Progress</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -127,7 +127,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </div>
 
           {/* Responded / Closed */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">Responded / Closed</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -144,7 +144,7 @@ export default function AdminOverview({ stats, isLoading }) {
             </div>
           </div>
 
-          <p className="text-xs text-slate-500 dark:text-slate-400 pt-2 italic">
+          <p className="text-xs text-slate-500 dark:text-slate-400 pt-2">
             Live metrics synchronized with PostgreSQL central database.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function AdminOverview({ stats, isLoading }) {
               Filing trends across statutory periods
             </p>
           </div>
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
+          <div className="flex items-center gap-2 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
             <span className="px-2 py-0.5 text-slate-700 dark:text-slate-300 text-xs font-semibold">Live 2026</span>
           </div>
         </div>
@@ -185,7 +185,7 @@ export default function AdminOverview({ stats, isLoading }) {
                 return (
                   <div key={item.month} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
                     {/* Hover Count Tooltip */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono font-bold text-blue-600 dark:text-cyan-300 bg-blue-50 dark:bg-cyan-950/80 px-1.5 py-0.5 rounded border border-blue-200 dark:border-cyan-500/30 shadow-sm">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono font-bold text-blue-600 dark:text-cyan-300 bg-blue-50 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-blue-200 dark:border-cyan-500/30 shadow-sm">
                       {item.count}
                     </div>
 

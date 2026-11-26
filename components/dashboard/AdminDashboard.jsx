@@ -92,7 +92,7 @@ export default function AdminDashboard({ user }) {
       <div className="w-full lg:hidden flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#1a2330] text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-sm">
         <div className="flex items-center gap-2">
           <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">SARAL Admin Panel</span>
-          <span className="px-1.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+          <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
             Admin
           </span>
         </div>
@@ -141,7 +141,7 @@ export default function AdminDashboard({ user }) {
               <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <span className="text-slate-900 dark:text-white font-bold">{breadcrumb.label}</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
               <span>{breadcrumb.label}</span>
               <span className="px-2 py-0.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                 Admin
@@ -150,7 +150,7 @@ export default function AdminDashboard({ user }) {
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/30 text-xs font-medium text-purple-700 dark:text-purple-300">
+            <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/30 text-xs font-medium text-purple-700 dark:text-purple-300">
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Section 6(1) RTI Act 2005 Enforced</span>
             </div>

@@ -76,7 +76,7 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">SARAL</span>
-                <span className="px-1.5 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+                <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                   Admin
                 </span>
               </div>
@@ -103,7 +103,7 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
                       key={item.id}
                       type="button"
                       onClick={() => onSelectTab(item.id)}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl font-medium transition cursor-pointer text-left ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer text-left ${
                         isActive
                           ? "bg-purple-600 text-white font-bold shadow-md "
                           : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -125,7 +125,7 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
         <button
           type="button"
           onClick={onLogout}
-          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer text-left"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer text-left"
         >
           <LogOut className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
           <span>Logout</span>

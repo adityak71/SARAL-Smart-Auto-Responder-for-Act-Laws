@@ -196,7 +196,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       setNotifications([newEntry, ...notifications]);
       setNotifForm({ title: "", message: "", audience: "ALL_CITIZENS", channel: "IN_APP" });
       setSendingNotif(false);
-      showToast("Broadcast notification dispatched successfully!", "success");
+      showToast("Notification sent to all users", "success");
     }, 800);
   };
 
@@ -254,7 +254,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
         <div className="flex items-center gap-2 overflow-x-auto">
           <button
             onClick={() => setActiveSubTab("complaints")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "complaints"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -262,7 +262,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           >
             <LifeBuoy className="w-4 h-4" />
             <span>Citizen Grievances</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
+            <span className={`ml-1 px-2 py-0.5 rounded text-xs ${
               activeSubTab === "complaints" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {complaints.length}
@@ -270,7 +270,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           </button>
           <button
             onClick={() => setActiveSubTab("notifications")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "notifications"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -281,7 +281,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           </button>
           <button
             onClick={() => setActiveSubTab("content")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "content"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -289,7 +289,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           >
             <BookOpen className="w-4 h-4" />
             <span>Content & FAQs</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
+            <span className={`ml-1 px-2 py-0.5 rounded text-xs ${
               activeSubTab === "content" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {faqs.length}
@@ -347,7 +347,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 <button
                   key={f}
                   onClick={() => setComplaintFilter(f)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg text-xs font-semibold transition cursor-pointer ${
                     complaintFilter === f
                       ? "bg-purple-600 text-white font-bold shadow-sm"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -363,42 +363,42 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
               <table className="w-full min-w-[850px] text-left text-sm">
                 <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
-                    <th className="px-5 py-3.5 font-bold">Ticket ID</th>
-                    <th className="px-5 py-3.5 font-bold">Citizen Petitioner</th>
-                    <th className="px-5 py-3.5 font-bold">Grievance Category</th>
-                    <th className="px-5 py-3.5 font-bold">Subject</th>
-                    <th className="px-5 py-3.5 font-bold">Assigned To</th>
-                    <th className="px-5 py-3.5 font-bold">Status</th>
-                    <th className="px-5 py-3.5 font-bold text-right">Action</th>
+                    <th className="px-5 py-4 font-bold">Ticket ID</th>
+                    <th className="px-5 py-4 font-bold">Citizen Petitioner</th>
+                    <th className="px-5 py-4 font-bold">Grievance Category</th>
+                    <th className="px-5 py-4 font-bold">Subject</th>
+                    <th className="px-5 py-4 font-bold">Assigned To</th>
+                    <th className="px-5 py-4 font-bold">Status</th>
+                    <th className="px-5 py-4 font-bold text-right">Action</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-700 dark:text-slate-300">
                   {filteredComplaints.map((c) => (
                     <tr key={c.id} className="hover:bg-slate-50/70 dark:hover:bg-white/[0.03] transition-colors">
-                      <td className="px-5 py-3.5 font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">
+                      <td className="px-5 py-4 font-mono text-xs font-bold text-cyan-600 dark:text-cyan-400 whitespace-nowrap">
                         {c.id}
                       </td>
 
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <p className="font-semibold text-slate-900 dark:text-white">{c.citizenName}</p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">{c.citizenEmail}</p>
                       </td>
 
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <span className="px-2 py-0.5 rounded text-xs font-semibold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300">
                           {c.category}
                         </span>
                       </td>
 
-                      <td className="px-5 py-3.5 max-w-xs truncate text-slate-900 dark:text-white font-medium">
+                      <td className="px-5 py-4 max-w-xs truncate text-slate-900 dark:text-white font-medium">
                         {c.subject}
                       </td>
 
-                      <td className="px-5 py-3.5 text-xs text-slate-600 dark:text-slate-400">
+                      <td className="px-5 py-4 text-xs text-slate-600 dark:text-slate-400">
                         {c.assignedTo}
                       </td>
 
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <span
                           className={`inline-flex items-center px-2 py-0.5 rounded-lg text-xs font-bold ${
                             c.status === "Open"
@@ -412,13 +412,13 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                         </span>
                       </td>
 
-                      <td className="px-5 py-3.5 text-right whitespace-nowrap">
+                      <td className="px-5 py-4 text-right whitespace-nowrap">
                         <button
                           onClick={() => {
                             setSelectedComplaint(c);
                             setInternalNoteInput(c.internalNotes || "");
                           }}
-                          className="px-3 py-1.5 rounded-lg text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 transition cursor-pointer"
+                          className="px-3 py-2 rounded-lg text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 transition cursor-pointer"
                         >
                           Manage Ticket
                         </button>
@@ -523,7 +523,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 >
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold text-slate-900 dark:text-white text-sm">{n.title}</h4>
-                    <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/30">
+                    <span className="text-xs text-emerald-700 dark:text-emerald-400 font-bold bg-emerald-500/10 px-3 py-0.5 rounded-lg border border-emerald-500/30">
                       {n.status}
                     </span>
                   </div>
@@ -557,7 +557,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
             </div>
             <button
               onClick={() => setShowAddFaqModal(true)}
-              className="px-5 py-2.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-md shrink-0"
+              className="px-5 py-3 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-colors flex items-center gap-2 cursor-pointer shadow-md shrink-0"
             >
               <Plus className="w-4 h-4" /> Add Knowledge Item
             </button>
@@ -570,7 +570,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-3"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-lg border border-emerald-500/30">
+                  <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-3 py-0.5 rounded-lg border border-emerald-500/30">
                     {faq.category}
                   </span>
                   <span className="text-xs text-slate-500 dark:text-slate-400">Published</span>
@@ -621,7 +621,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                 <h4 className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400">
                   Citizen Grievance Description
                 </h4>
-                <p className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
+                <p className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-700 dark:text-slate-200 leading-relaxed">
                   {selectedComplaint.description}
                 </p>
               </div>
@@ -648,7 +648,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
                     <button
                       key={s}
                       onClick={() => handleUpdateComplaintStatus(selectedComplaint.id, s)}
-                      className={`py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                      className={`py-2 rounded-full text-xs font-bold transition-colors cursor-pointer ${
                         selectedComplaint.status === s
                           ? "bg-purple-600 text-white shadow-md "
                           : "bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-white/20"
@@ -663,7 +663,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
               <div className="flex justify-end pt-2">
                 <button
                   onClick={() => setSelectedComplaint(null)}
-                  className="px-5 py-2.5 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 cursor-pointer"
+                  className="px-5 py-3 rounded-lg text-xs font-semibold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 cursor-pointer"
                 >
                   Close
                 </button>

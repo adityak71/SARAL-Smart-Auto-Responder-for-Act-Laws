@@ -51,7 +51,7 @@ export default function StatutoryClock({ application }) {
 
         <div className="w-full h-3 rounded-full bg-slate-100 dark:bg-white/10 p-0.5 overflow-hidden border border-slate-200 dark:border-transparent">
           <div
-            className={`h-full rounded-full transition-all duration-500 ${
+            className={`h-full rounded-full transition-colors duration-500 ${
               isOverdue
                 ? " bg-rose-500 "
                 : status === "completed"
@@ -70,7 +70,7 @@ export default function StatutoryClock({ application }) {
 
       {/* Appeal Advisory Banner if overdue */}
       {isOverdue && (
-        <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 flex flex-col gap-2">
+        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 flex flex-col gap-2">
           <div className="flex items-center gap-2 text-rose-700 dark:text-rose-300 font-bold text-xs">
             <span><IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
             <span>Section 19(1) First Appeal Unlocked</span>

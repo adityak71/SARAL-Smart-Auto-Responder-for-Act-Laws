@@ -173,9 +173,9 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   />
                 </div>
                 <div>
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     <span className="text-base font-extrabold tracking-tight">DigiLocker</span>
-                    <span className="px-1.5 py-0.2 rounded text-xs font-bold bg-blue-500/30 border border-blue-400/40 text-blue-200">
+                    <span className="px-2 py-0.2 rounded text-xs font-bold bg-blue-500/30 border border-blue-400/40 text-blue-200">
                       National Gateway
                     </span>
                   </div>
@@ -211,7 +211,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 return (
                   <div key={s.id} className="flex-1 flex flex-col items-center gap-1">
                     <div
-                      className={`h-1.5 w-full rounded-full transition-all duration-300 ${
+                      className={`h-1.5 w-full rounded-full transition-colors duration-300 ${
                         isActive
                           ? "bg-amber-400 "
                           : isPassed
@@ -249,7 +249,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                       setIdentifier("");
                       setErrorMessage("");
                     }}
-                    className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${
                       authMode === "aadhaar"
                         ? "bg-white dark:bg-purple-600 text-slate-900 dark:text-white shadow-sm"
                         : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -264,7 +264,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                       setIdentifier(user?.phone?.replace("+91", "").trim() || "9876543210");
                       setErrorMessage("");
                     }}
-                    className={`flex-1 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                    className={`flex-1 py-2 text-xs font-semibold rounded-lg transition-colors ${
                       authMode === "mobile"
                         ? "bg-white dark:bg-purple-600 text-slate-900 dark:text-white shadow-sm"
                         : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -276,7 +276,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
 
                 {/* Input Field */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     {authMode === "aadhaar" ? "12-Digit Aadhaar Number" : "10-Digit Mobile Number"}
                   </label>
                   <input
@@ -291,7 +291,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     placeholder={
                       authMode === "aadhaar" ? "e.g. 5489 2145 9012" : "e.g. 98765 43210"
                     }
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm font-mono tracking-wider focus:ring-2 focus:ring-indigo-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm font-mono tracking-wider focus:ring-2 focus:ring-indigo-500 outline-none"
                   />
                   <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     {authMode === "aadhaar"
@@ -302,7 +302,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
 
                 {/* 6-Digit DigiLocker PIN */}
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
                     6-Digit DigiLocker Security PIN
                   </label>
                   <input
@@ -311,7 +311,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     value={pin}
                     onChange={(e) => setPin(e.target.value.replace(/\D/g, "").slice(0, 6))}
                     placeholder="••••••"
-                    className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm tracking-widest text-center font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
+                    className="w-full px-4 py-3 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm tracking-widest text-center font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
                   />
                   <p className="text-xs text-slate-400 text-center mt-1">
                     (Sample PIN: <span className="font-mono text-purple-600 dark:text-purple-300">123456</span>)
@@ -325,7 +325,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="w-full py-3 px-4 rounded-xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-lg transition-colors flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                 >
                   {isVerifying ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -394,7 +394,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 </div>
 
                 {/* Helper info pill */}
-                <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-800/40 text-center">
+                <div className="p-3 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-800/40 text-center">
                   <p className="text-xs text-purple-700 dark:text-purple-300">
                     <IcLightbulb className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Test Mode Hint:</strong> Pre-filled with demo OTP <code className="font-bold">123456</code>.
                   </p>
@@ -440,29 +440,29 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 </div>
 
                 {/* Consent Scope Checklist */}
-                <div className="rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 p-4 space-y-2.5 text-xs">
-                  <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
+                <div className="rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 p-4 space-y-3 text-xs">
+                  <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Full Legal Name:</strong>{" "}
                       <span className="font-semibold text-slate-900 dark:text-white">{citizenLegalName}</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
+                  <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Masked Aadhaar:</strong>{" "}
                       <span className="font-mono">XXXX-XXXX-{identifier.slice(-4) || "4210"}</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
+                  <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Verified Citizen Token:</strong>{" "}
                       <span>Section 6(1) Right to Information Eligibility</span>
                     </div>
                   </div>
-                  <div className="flex items-start gap-2.5 text-slate-700 dark:text-slate-300">
+                  <div className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
                     <span className="text-emerald-500 font-bold shrink-0">✓</span>
                     <div>
                       <strong className="text-slate-900 dark:text-white">Communication Address:</strong>{" "}
@@ -526,7 +526,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   Your Indian Citizen status is certified via DigiLocker. You can now file RTI applications with full legal standing under Section 6(1).
                 </p>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
+                  <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
                     <span><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Certified DigiLocker Citizen</span>
                   </span>

@@ -38,7 +38,7 @@ export default function ApplicationTimeline({ application }) {
             >
               {/* Dot Icon Anchor */}
               <div
-                className={`absolute -left-6 sm:-left-8 top-0.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md transition-all ${
+                className={`absolute -left-6 sm:-left-8 top-0.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full flex items-center justify-center text-xs font-bold shadow-md transition-colors ${
                   isCompleted
                     ? "bg-purple-600 text-white ring-4 ring-purple-100 dark:ring-purple-900/40"
                     : isActive

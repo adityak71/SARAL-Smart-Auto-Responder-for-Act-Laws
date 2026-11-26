@@ -93,7 +93,7 @@ export default function AdminProfileView({ user }) {
           {/* Card 1: Central Administrator Particulars */}
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-amber-600/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-300 flex items-center justify-center font-bold text-sm">
                   <IcCrown className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
@@ -110,42 +110,42 @@ export default function AdminProfileView({ user }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Superadmin Identity</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.fullName || adminProfileData.system.fullName}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Comptroller Code</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-amber-700 dark:text-amber-300 font-mono font-bold">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-amber-700 dark:text-amber-300 font-mono font-bold">
                   {adminProfileData.system.employeeId}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Administrative Email</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium truncate">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium truncate">
                   {user?.email || adminProfileData.system.email}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Emergency Operations Desk</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.phone || adminProfileData.system.phone}
                 </div>
               </div>
 
               <div className="sm:col-span-2">
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Statutory Regulatory Directorate</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {adminProfileData.system.authority}
                 </div>
               </div>
 
               <div className="sm:col-span-2">
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Data Engine & Vector Storage</label>
-                <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-500/20 text-purple-800 dark:text-purple-300 font-medium flex items-center justify-between">
+                <div className="p-3 rounded-xl bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-500/20 text-purple-800 dark:text-purple-300 font-medium flex items-center justify-between">
                   <span>{adminProfileData.platformStats.databaseEngine}</span>
                   <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400">● Online</span>
                 </div>
@@ -196,7 +196,7 @@ export default function AdminProfileView({ user }) {
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-3">Admin Master Consoles</h3>
 
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               <Link
                 href="/dashboard"
                 className="w-full flex items-center justify-between p-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs transition shadow-md"

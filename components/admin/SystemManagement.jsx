@@ -117,7 +117,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
         <div className="flex items-center gap-2 overflow-x-auto">
           <button
             onClick={() => setActiveSubTab("analytics")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "analytics"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -128,7 +128,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
           </button>
           <button
             onClick={() => setActiveSubTab("audit")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "audit"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -139,7 +139,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
           </button>
           <button
             onClick={() => setActiveSubTab("settings")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer whitespace-nowrap ${
               activeSubTab === "settings"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -175,7 +175,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                   High-level statutory compliance metrics, user volume trends, and turnaround speeds
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              <span className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                 Admin
               </span>
             </div>
@@ -227,7 +227,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                 { name: "Urban Water Supply & Sanitation", count: Math.max(0, stats?.totalRtis ? Math.floor(stats.totalRtis * 0.1) : 0), pct: 10, color: "bg-amber-500" },
                 { name: "Health & Family Welfare", count: Math.max(0, stats?.totalRtis ? Math.floor(stats.totalRtis * 0.05) : 0), pct: 5, color: "bg-pink-500" },
               ].map((item) => (
-                <div key={item.name} className="space-y-1.5">
+                <div key={item.name} className="space-y-2">
                   <div className="flex justify-between text-xs">
                     <span className="font-semibold text-slate-700 dark:text-slate-200">{item.name}</span>
                     <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -262,12 +262,12 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             <table className="w-full min-w-[850px] text-left text-sm">
               <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                 <tr>
-                  <th className="px-5 py-3.5 font-bold">Action Event</th>
-                  <th className="px-5 py-3.5 font-bold">Target Entity</th>
-                  <th className="px-5 py-3.5 font-bold">Initiator</th>
-                  <th className="px-5 py-3.5 font-bold">Client IP</th>
-                  <th className="px-5 py-3.5 font-bold">Timestamp</th>
-                  <th className="px-5 py-3.5 font-bold text-right">Integrity</th>
+                  <th className="px-5 py-4 font-bold">Action Event</th>
+                  <th className="px-5 py-4 font-bold">Target Entity</th>
+                  <th className="px-5 py-4 font-bold">Initiator</th>
+                  <th className="px-5 py-4 font-bold">Client IP</th>
+                  <th className="px-5 py-4 font-bold">Timestamp</th>
+                  <th className="px-5 py-4 font-bold text-right">Integrity</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-700 dark:text-slate-300">
@@ -287,24 +287,24 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                 ) : (
                   auditLogs.map((log) => (
                     <tr key={log.id} className="hover:bg-slate-50/70 dark:hover:bg-white/[0.03] transition-colors">
-                      <td className="px-5 py-3.5 font-mono text-xs font-bold text-purple-700 dark:text-purple-400">
+                      <td className="px-5 py-4 font-mono text-xs font-bold text-purple-700 dark:text-purple-400">
                         {log.action}
                       </td>
-                      <td className="px-5 py-3.5 text-xs font-semibold text-slate-700 dark:text-slate-200">
+                      <td className="px-5 py-4 text-xs font-semibold text-slate-700 dark:text-slate-200">
                         {log.entityName} ({log.entityId?.slice(0, 8)})
                       </td>
-                      <td className="px-5 py-3.5 text-xs">
+                      <td className="px-5 py-4 text-xs">
                         <p className="font-semibold text-slate-900 dark:text-white">{log.user}</p>
                         <p className="font-mono text-slate-500 dark:text-slate-400 text-xs">{log.userEmail}</p>
                       </td>
-                      <td className="px-5 py-3.5 font-mono text-xs text-slate-500 dark:text-slate-400">{log.ip}</td>
-                      <td className="px-5 py-3.5 text-xs text-slate-500 dark:text-slate-400">
+                      <td className="px-5 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">{log.ip}</td>
+                      <td className="px-5 py-4 text-xs text-slate-500 dark:text-slate-400">
                         {new Date(log.timestamp).toLocaleString("en-IN", {
                           dateStyle: "short",
                           timeStyle: "medium",
                         })}
                       </td>
-                      <td className="px-5 py-3.5 text-right">
+                      <td className="px-5 py-4 text-right">
                         <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                           <CheckCircle2 className="w-3.5 h-3.5" /> Verified
                         </span>
@@ -399,7 +399,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             <div className="flex justify-end pt-2">
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md cursor-pointer"
+                className="px-6 py-3 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md cursor-pointer"
               >
                 Save Settings
               </button>

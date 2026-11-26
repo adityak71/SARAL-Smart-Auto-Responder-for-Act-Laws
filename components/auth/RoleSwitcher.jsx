@@ -29,7 +29,7 @@ export default function RoleSwitcher() {
             role="tab"
             aria-selected={isActive}
             onClick={() => dispatch(setSelectedRole(role.id))}
-            className={`relative flex-1 py-1.5 sm:py-2 px-3 sm:px-4 text-xs sm:text-[13px] rounded-lg text-center transition-colors duration-200 focus:outline-none cursor-pointer select-none ${
+            className={`relative flex-1 py-2 sm:py-2 px-3 sm:px-4 text-xs sm:text-[13px] rounded-lg text-center transition-colors duration-200 focus:outline-none cursor-pointer select-none ${
               isActive
                 ? "font-bold text-white"
                 : "font-medium text-slate-300 hover:text-white"

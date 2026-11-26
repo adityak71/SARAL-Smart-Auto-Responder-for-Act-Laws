@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import { citizenDashboardStats } from "@/data/dashboardData";
-import { Hourglass as IcHourglass, TriangleAlert as IcTriangleAlert, Zap as IcZap } from "lucide-react";
 
 export default function CitizenOverview() {
   const [liveStats, setLiveStats] = useState(null);
@@ -44,7 +43,6 @@ export default function CitizenOverview() {
       value: statsSource.activeFilings ?? 0,
       subtext: "Currently under PIO examination",
       color: "amber",
-      icon: <IcHourglass className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       badgeColor: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
     },
     {
@@ -52,7 +50,6 @@ export default function CitizenOverview() {
       value: statsSource.resolvedFilings ?? 0,
       subtext: "Certified documents available",
       color: "emerald",
-      icon: "✓",
       badgeColor: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
     },
     {
@@ -60,7 +57,6 @@ export default function CitizenOverview() {
       value: statsSource.appealsPending ?? 0,
       subtext: "Section 19(1) window active",
       color: "rose",
-      icon: <IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       badgeColor: "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20",
     },
     {
@@ -68,7 +64,6 @@ export default function CitizenOverview() {
       value: statsSource.averageResponseDays ? `${statsSource.averageResponseDays} Days` : "30-Day Mandate",
       subtext: "Statutory Section 7(1) clock",
       color: "purple",
-      icon: <IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       badgeColor: "bg-purple-500/10 text-purple-600 dark:text-purple-400 border-purple-500/20",
     },
   ];
@@ -86,7 +81,6 @@ export default function CitizenOverview() {
               <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
                 {stat.label}
               </span>
-              <span className="text-base">{stat.icon}</span>
             </div>
             <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
               {isLoading ? (

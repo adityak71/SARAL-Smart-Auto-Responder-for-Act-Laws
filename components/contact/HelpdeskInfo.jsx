@@ -29,7 +29,7 @@ export default function HelpdeskInfo() {
           {helpdeskOffices.map((office) => (
             <div
               key={office.city}
-              className="p-4 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-1.5 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-md transition-colors"
+              className="p-4 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-2 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-md transition-colors"
             >
               <span className="font-bold text-slate-900 dark:text-white block text-sm">
                 {office.city}

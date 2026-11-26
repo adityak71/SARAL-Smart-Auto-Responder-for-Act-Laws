@@ -27,8 +27,8 @@ export const authFeatures = [
 export const loginContent = {
   hero: {
     badgeText: "AI-assisted",
-    headline: "File your RTI online.",
-    highlight: "Track every reply.",
+    headline: "File your RTI online",
+    highlight: "Track every reply",
     description: "Submit RTI applications, track their progress, and receive official responses — all in one place.",
     trackerCard: {
       title: "RTI Application",

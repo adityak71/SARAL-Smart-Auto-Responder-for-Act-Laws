@@ -238,7 +238,7 @@ export default function NotificationDropdown() {
               </div>
 
               {/* Notifications List */}
-              <div className="overflow-y-auto max-h-[380px] p-3 space-y-2.5 divide-y divide-slate-100 dark:divide-slate-800/40">
+              <div className="overflow-y-auto max-h-[380px] p-3 space-y-3 divide-y divide-slate-100 dark:divide-slate-800/40">
                 {displayedNotifications.length === 0 ? (
                   <div className="py-8 text-center text-slate-400 text-xs">
                     <svg
@@ -254,20 +254,20 @@ export default function NotificationDropdown() {
                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span>No unread notifications. You are all caught up!</span>
+                    <span>No unread notifications</span>
                   </div>
                 ) : (
                   displayedNotifications.map((notif) => (
                     <div
                       key={notif.id}
-                      className={`pt-2.5 first:pt-0 rounded-xl p-2.5 transition-colors relative group ${
+                      className={`pt-3 first:pt-0 rounded-xl p-3 transition-colors relative group ${
                         notif.unread
                           ? "bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20"
                           : "bg-slate-50 dark:bg-slate-900/40 hover:bg-slate-100 dark:hover:bg-slate-800/40"
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <div className="flex items-center gap-1.5 flex-wrap">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <span
                             className={`text-xs font-bold px-2 py-0.5 rounded-lg  tracking-wider ${
                               notif.type === "urgent"
@@ -284,7 +284,7 @@ export default function NotificationDropdown() {
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-2">
                           <span className="text-xs text-slate-400 font-medium">
                             {notif.timeAgo}
                           </span>
@@ -319,7 +319,7 @@ export default function NotificationDropdown() {
                             handleMarkAsRead(notif.id);
                             dispatch(setNotificationDropdown(false));
                           }}
-                          className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-100 dark:bg-purple-900/40 hover:bg-purple-200 dark:hover:bg-purple-800/60 px-2.5 py-1 rounded-lg border border-purple-300 dark:border-purple-500/30 transition"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-100 dark:bg-purple-900/40 hover:bg-purple-200 dark:hover:bg-purple-800/60 px-3 py-1 rounded-lg border border-purple-300 dark:border-purple-500/30 transition"
                         >
                           <span>{notif.actionLabel}</span>
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -343,7 +343,7 @@ export default function NotificationDropdown() {
               </div>
 
               {/* Card Footer */}
-              <div className="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 text-center">
+              <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 text-center">
                 <Link
                   href="/tracking"
                   onClick={() => dispatch(setNotificationDropdown(false))}

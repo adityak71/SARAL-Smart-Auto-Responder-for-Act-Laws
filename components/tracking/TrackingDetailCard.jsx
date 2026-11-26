@@ -40,7 +40,7 @@ export default function TrackingDetailCard({ application }) {
           <button
             type="button"
             onClick={() => handleOpenPreview("RECEIPT", "Statutory Filing Receipt")}
-            className="px-3.5 py-1.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/25 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white text-xs font-semibold border border-purple-500/30 transition flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/25 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white text-xs font-semibold border border-purple-500/30 transition flex items-center gap-2 cursor-pointer"
           >
             <span>View Receipt</span>
           </button>
@@ -49,7 +49,7 @@ export default function TrackingDetailCard({ application }) {
             <button
               type="button"
               onClick={() => handleOpenPreview("CERTIFIED_RESPONSE", "Official Response Memorandum")}
-              className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
             >
               <span>View Certified Response</span>
             </button>
@@ -70,18 +70,18 @@ export default function TrackingDetailCard({ application }) {
       </div>
 
       {/* Citizen Raw Speech / Inquiry */}
-      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 space-y-1.5 text-xs">
+      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 space-y-2 text-xs">
         <span className="text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wider block">
           Original Citizen Inquiry (Vernacular Input):
         </span>
-        <blockquote className="italic text-slate-700 dark:text-slate-200 leading-relaxed">
+        <blockquote className="text-slate-700 dark:text-slate-200 leading-relaxed">
           &ldquo;{application.rawPrompt}&rdquo;
         </blockquote>
       </div>
 
       {/* Structured Section 6(1) Statutory Clauses */}
-      <div className="p-4 rounded-2xl bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 space-y-2.5 text-xs">
-        <div className="flex items-center justify-between border-b border-purple-200 dark:border-purple-500/20 pb-1.5">
+      <div className="p-4 rounded-2xl bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 space-y-3 text-xs">
+        <div className="flex items-center justify-between border-b border-purple-200 dark:border-purple-500/20 pb-2">
           <span className="font-bold text-purple-900 dark:text-purple-200 text-xs">
             Formulated Legal Clauses under Section 6(1) of RTI Act, 2005:
           </span>
@@ -90,7 +90,7 @@ export default function TrackingDetailCard({ application }) {
           </span>
         </div>
 
-        <div className="space-y-1.5">
+        <div className="space-y-2">
           {(() => {
             const raw = application.structuredClauses;
             let clauses = [];
@@ -124,7 +124,7 @@ export default function TrackingDetailCard({ application }) {
       </div>
 
       {/* Certified Records & Documents Vault */}
-      <div className="space-y-2.5">
+      <div className="space-y-3">
         <h4 className="text-xs font-bold text-slate-900 dark:text-white tracking-wider">
           Official Certified Documents & Receipts
         </h4>
@@ -133,9 +133,9 @@ export default function TrackingDetailCard({ application }) {
           {application.documents.map((doc) => (
             <div
               key={doc.name}
-              className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 hover:border-purple-400/50 transition-colors flex items-center justify-between gap-3 group"
+              className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 hover:border-purple-400/50 transition-colors flex items-center justify-between gap-3 group"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="w-9 h-9 rounded-xl bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
                   <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
@@ -154,7 +154,7 @@ export default function TrackingDetailCard({ application }) {
               <button
                 type="button"
                 onClick={() => handleOpenPreview("PUBLIC_RECORD", doc.name)}
-                className="px-3 py-1.5 rounded-xl bg-purple-100 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white border border-purple-300 dark:border-purple-500/30 text-xs font-semibold transition shrink-0 cursor-pointer"
+                className="px-3 py-2 rounded-xl bg-purple-100 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white border border-purple-300 dark:border-purple-500/30 text-xs font-semibold transition shrink-0 cursor-pointer"
               >
                 View &amp; Download
               </button>

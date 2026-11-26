@@ -270,7 +270,7 @@ export default function OfficerWorkspace() {
     if (fullText) {
       setDraftText(fullText);
       setStudioTab("memorandum");
-      setActionSuccessMsg("✓ Point-by-point AI Structured Report successfully applied to Official Memorandum!");
+      setActionSuccessMsg("✓ Structured report added to the memorandum");
     }
   };
 
@@ -305,7 +305,7 @@ export default function OfficerWorkspace() {
 
       if (res.ok) {
         setApprovedCaseIds((prev) => [...prev, selectedCase.id]);
-        setActionSuccessMsg("✓ Official RTI Response Digitally Signed with Class 3 PKI & Dispatched to Citizen!");
+        setActionSuccessMsg("✓ Reply signed with Class 3 digital signature and sent to the citizen");
         setIsCertifiedModalOpen(true);
       } else {
         // Fallback simulate local dispatch
@@ -440,7 +440,7 @@ export default function OfficerWorkspace() {
               <p className="text-xs">Loading departmental queue...</p>
             </div>
           ) : (
-            <div className="space-y-2.5 max-h-[540px] overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-[540px] overflow-y-auto pr-1">
               {cases.map((item) => {
                 const isSelected = selectedCase?.id === item.id;
                 const hasBeenApproved = approvedCaseIds.includes(item.id);
@@ -449,7 +449,7 @@ export default function OfficerWorkspace() {
                   <div
                     key={item.id}
                     onClick={() => handleSelectCase(item)}
-                    className={`p-3.5 rounded-2xl border transition-all cursor-pointer ${
+                    className={`p-4 rounded-2xl border transition-colors cursor-pointer ${
                       isSelected
                         ? "bg-purple-50 dark:bg-purple-950/50 border-purple-500 dark:border-purple-400/80 shadow-md"
                         : "bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/5 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
@@ -488,7 +488,7 @@ export default function OfficerWorkspace() {
         {/* Right Officer Verification & Multi-Tab AI Response Studio (7 Cols) */}
         <div className="lg:col-span-7 bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
           {actionSuccessMsg && (
-            <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
               <span>{actionSuccessMsg}</span>
               <button
                 type="button"
@@ -532,11 +532,11 @@ export default function OfficerWorkspace() {
           </div>
 
           {/* Response Studio Tab Navigation */}
-          <div className="flex items-center gap-1.5 p-1 bg-slate-100 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 text-xs overflow-x-auto">
+          <div className="flex items-center gap-2 p-1 bg-slate-100 dark:bg-white/5 rounded-2xl border border-slate-200 dark:border-white/10 text-xs overflow-x-auto">
             <button
               type="button"
               onClick={() => setStudioTab("memorandum")}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl font-semibold transition cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 studioTab === "memorandum"
                   ? "bg-purple-600 text-white shadow-sm"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -549,7 +549,7 @@ export default function OfficerWorkspace() {
             <button
               type="button"
               onClick={() => setStudioTab("ai-report")}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl font-semibold transition cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 studioTab === "ai-report"
                   ? "bg-purple-600 text-white shadow-sm"
                   : "text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/30"
@@ -557,7 +557,7 @@ export default function OfficerWorkspace() {
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               <span>AI Report Structuring</span>
-              <span className="text-xs px-1.5 py-0.5 rounded-lg font-bold bg-purple-500/20 dark:bg-purple-400/20 text-purple-700 dark:text-purple-300">
+              <span className="text-xs px-2 py-0.5 rounded-lg font-bold bg-purple-500/20 dark:bg-purple-400/20 text-purple-700 dark:text-purple-300">
                 Copilot
               </span>
             </button>
@@ -565,7 +565,7 @@ export default function OfficerWorkspace() {
             <button
               type="button"
               onClick={() => setStudioTab("records")}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl font-semibold transition cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 studioTab === "records"
                   ? "bg-purple-600 text-white shadow-sm"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -578,7 +578,7 @@ export default function OfficerWorkspace() {
             <button
               type="button"
               onClick={() => setStudioTab("exemptions")}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl font-semibold transition cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 studioTab === "exemptions"
                   ? "bg-purple-600 text-white shadow-sm"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -591,7 +591,7 @@ export default function OfficerWorkspace() {
             <button
               type="button"
               onClick={() => setStudioTab("precedents")}
-              className={`px-3 py-1.5 rounded-xl font-semibold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
+              className={`px-3 py-2 rounded-xl font-semibold transition cursor-pointer flex items-center gap-2 whitespace-nowrap ${
                 studioTab === "precedents"
                   ? "bg-purple-600 text-white shadow-sm"
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -606,7 +606,7 @@ export default function OfficerWorkspace() {
           {studioTab === "memorandum" && (
             <div className="space-y-3 text-xs">
               {/* Quick AI Report Structuring Banner */}
-              <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+              <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-700 dark:text-purple-300 font-bold shrink-0">
                     <Sparkles className="w-4 h-4 text-amber-500" />
@@ -623,7 +623,7 @@ export default function OfficerWorkspace() {
                 <button
                   type="button"
                   onClick={() => setStudioTab("ai-report")}
-                  className="px-3 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-1.5 shrink-0 shadow-sm"
+                  className="px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-2 shrink-0 shadow-sm"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Launch AI Structuring</span>
@@ -635,7 +635,7 @@ export default function OfficerWorkspace() {
                 <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                   Quick Legal Snippets:
                 </span>
-                <div className="flex items-center gap-1.5 flex-wrap">
+                <div className="flex items-center gap-2 flex-wrap">
                   <button
                     type="button"
                     onClick={() =>
@@ -673,7 +673,7 @@ export default function OfficerWorkspace() {
               </div>
 
               {/* Memorandum Draft Textarea */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="font-bold text-slate-900 dark:text-white">
                     Official Response Text (Section 7 Compliant):
@@ -688,12 +688,12 @@ export default function OfficerWorkspace() {
                   onChange={(e) => setDraftText(e.target.value)}
                   disabled={isApproved}
                   placeholder="Draft official statutory response here..."
-                  className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500 resize-none font-sans"
+                  className="w-full p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white text-xs leading-relaxed focus:outline-none focus:border-purple-500 resize-none font-sans"
                 />
               </div>
 
               {/* Pre-Retrieved Source Files */}
-              <div className="space-y-1.5">
+              <div className="space-y-2">
                 <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
                   Referenced Departmental Records:
                 </span>
@@ -701,7 +701,7 @@ export default function OfficerWorkspace() {
                   {(selectedCase?.suggestedSources || ["PWD_Works_Register.pdf", "Measurement_Book_Vol_IV.pdf"]).map((source) => (
                     <span
                       key={source}
-                      className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-purple-800 dark:text-purple-200 text-xs font-mono"
+                      className="px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-purple-800 dark:text-purple-200 text-xs font-mono"
                     >
                       <IcFileText className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {source}
                     </span>
@@ -715,7 +715,7 @@ export default function OfficerWorkspace() {
           {studioTab === "ai-report" && (
             <div className="space-y-4 text-xs">
               {/* Top Explainer Header */}
-              <div className="p-3.5 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-start gap-3">
+              <div className="p-4 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-start gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
                   <Sparkles className="w-4 h-4 text-amber-300" />
                 </div>
@@ -737,7 +737,7 @@ export default function OfficerWorkspace() {
               {/* Citizen Clauses Under Examination */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span><IcClipboardList className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Citizen Section 6(1) Clauses Under Audit:</span>
                   </label>
@@ -749,7 +749,7 @@ export default function OfficerWorkspace() {
                   {(selectedCase?.structuredClauses || parseClauses(null)).map((clause, idx) => (
                     <div
                       key={idx}
-                      className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-start gap-2.5 text-slate-700 dark:text-slate-300"
+                      className="p-3 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-start gap-3 text-slate-700 dark:text-slate-300"
                     >
                       <span className="w-5 h-5 rounded-lg bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold font-mono text-xs flex items-center justify-center shrink-0">
                         {idx + 1}
@@ -763,7 +763,7 @@ export default function OfficerWorkspace() {
               {/* Officer Raw Findings Input */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
+                  <label className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                     <span><IcSearch className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Officer&apos;s Departmental Findings &amp; Ledger Notes:</span>
                   </label>
@@ -773,7 +773,7 @@ export default function OfficerWorkspace() {
                 </div>
 
                 {/* Quick Presets for Officer */}
-                <div className="flex items-center gap-1.5 flex-wrap">
+                <div className="flex items-center gap-2 flex-wrap">
                   <span className="text-xs font-bold text-slate-400">Quick Remarks:</span>
                   <button
                     type="button"
@@ -872,9 +872,9 @@ export default function OfficerWorkspace() {
 
               {/* Structured AI Report Result Preview */}
               {aiStructuredReport && (
-                <div className="p-4 rounded-2xl bg-purple-500/[0.04] border border-purple-500/30 space-y-3.5">
+                <div className="p-4 rounded-2xl bg-purple-500/[0.04] border border-purple-500/30 space-y-4">
                   {/* Result Header */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-500/20 pb-2.5">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-purple-500/20 pb-3">
                     <div>
                       <div className="flex items-center gap-2">
                         <span className="font-bold text-slate-900 dark:text-white text-xs">
@@ -893,7 +893,7 @@ export default function OfficerWorkspace() {
                       <button
                         type="button"
                         onClick={handleCopyReportText}
-                        className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-xs font-semibold transition cursor-pointer flex items-center gap-1"
+                        className="px-3 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-xs font-semibold transition cursor-pointer flex items-center gap-1"
                       >
                         {copiedMemoText ? (
                           <>
@@ -911,7 +911,7 @@ export default function OfficerWorkspace() {
                       <button
                         type="button"
                         onClick={handleApplyAiReportToMemo}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shadow-sm"
+                        className="px-3 py-2 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition cursor-pointer flex items-center gap-2 shadow-sm"
                       >
                         <FileText className="w-3.5 h-3.5" />
                         <span>Apply to Memorandum</span>
@@ -929,7 +929,7 @@ export default function OfficerWorkspace() {
                       {(aiStructuredReport.clauseWiseResponses || []).map((c) => (
                         <div
                           key={c.clauseNumber}
-                          className="p-3 rounded-xl bg-white dark:bg-white/5 border border-purple-500/20 space-y-1.5"
+                          className="p-3 rounded-xl bg-white dark:bg-white/5 border border-purple-500/20 space-y-2"
                         >
                           <div className="flex items-center justify-between text-xs">
                             <span className="font-bold text-purple-700 dark:text-purple-300 font-mono">
@@ -958,7 +958,7 @@ export default function OfficerWorkspace() {
                       <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block mb-1">
                         Attached Certified Enclosures (Section 2(j)(ii)):
                       </span>
-                      <div className="flex flex-wrap gap-1.5">
+                      <div className="flex flex-wrap gap-2">
                         {aiStructuredReport.certifiedEnclosures.map((enc, idx) => (
                           <span
                             key={idx}
@@ -976,7 +976,7 @@ export default function OfficerWorkspace() {
                     <button
                       type="button"
                       onClick={handleApplyAiReportToMemo}
-                      className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer text-xs"
+                      className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer text-xs"
                     >
                       <Check className="w-4 h-4" />
                       <span>Insert This Full Structured Report into Official Memorandum</span>
@@ -1030,7 +1030,7 @@ export default function OfficerWorkspace() {
                             application: selectedCase,
                           });
                         }}
-                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer"
+                        className="px-3 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer"
                       >
                         Preview & Download
                       </button>
@@ -1059,7 +1059,7 @@ export default function OfficerWorkspace() {
                   type="text"
                   value={faaDesignation}
                   onChange={(e) => setFaaDesignation(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
                 />
               </div>
 
@@ -1071,14 +1071,14 @@ export default function OfficerWorkspace() {
                   type="text"
                   value={faaOffice}
                   onChange={(e) => setFaaOffice(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
                 />
               </div>
 
               <button
                 type="button"
                 onClick={handleInsertAppellateNotice}
-                className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
                 <span><IcPlus className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Inject Section 7(8) Appellate Notice into Memorandum</span>
@@ -1093,11 +1093,11 @@ export default function OfficerWorkspace() {
                 Landmark Central Information Commission &amp; Supreme Court decisions relevant to public works, tenders, and governance:
               </p>
 
-              <div className="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+              <div className="space-y-3 max-h-56 overflow-y-auto pr-1">
                 {precedents.map((prec) => (
                   <div
                     key={prec.citation}
-                    className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5"
+                    className="p-3 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
@@ -1111,12 +1111,12 @@ export default function OfficerWorkspace() {
                       <button
                         type="button"
                         onClick={() => handleInsertPrecedent(prec)}
-                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer whitespace-nowrap"
+                        className="px-3 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer whitespace-nowrap"
                       >
                         + Cite in Memo
                       </button>
                     </div>
-                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                       &ldquo;{prec.ratio}&rdquo;
                     </p>
                   </div>
@@ -1138,7 +1138,7 @@ export default function OfficerWorkspace() {
               <button
                 type="button"
                 onClick={() => setIsCertifiedModalOpen(true)}
-                className="px-3.5 py-2.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-500/30 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
+                className="px-4 py-3 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-500/30 text-xs font-bold transition cursor-pointer flex items-center gap-2 whitespace-nowrap"
               >
                 <span><IcPrinter className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Preview Certified PDF</span>
@@ -1150,7 +1150,7 @@ export default function OfficerWorkspace() {
                     type="button"
                     onClick={handleApprove}
                     disabled={isSubmitting}
-                    className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition cursor-pointer disabled:opacity-50 flex items-center justify-center gap-1.5"
+                    className="w-full sm:w-auto px-5 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -1165,7 +1165,7 @@ export default function OfficerWorkspace() {
                   <button
                     type="button"
                     onClick={() => setShowTransferModal(true)}
-                    className="px-3 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-xs font-semibold transition cursor-pointer whitespace-nowrap"
+                    className="px-3 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-transparent text-xs font-semibold transition cursor-pointer whitespace-nowrap"
                   >
                     Section 6(3) Transfer
                   </button>
@@ -1218,7 +1218,7 @@ export default function OfficerWorkspace() {
                 <select
                   value={selectedDeptId}
                   onChange={(e) => setSelectedDeptId(e.target.value)}
-                  className="w-full p-2.5 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
+                  className="w-full p-3 rounded-xl bg-slate-50 dark:bg-white/10 border border-slate-300 dark:border-white/15 text-slate-900 dark:text-white text-xs focus:outline-none focus:border-purple-500"
                 >
                   {departments.map((dept) => (
                     <option key={dept.id} value={dept.id} className="bg-white dark:bg-slate-900 text-slate-800 dark:text-white">
@@ -1257,7 +1257,7 @@ export default function OfficerWorkspace() {
                 <button
                   type="submit"
                   disabled={isTransferring}
-                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold shadow-md disabled:opacity-50 flex items-center gap-1.5"
+                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold shadow-md disabled:opacity-50 flex items-center gap-2"
                 >
                   {isTransferring ? (
                     <>

@@ -102,7 +102,7 @@ export default function PwaInstallModal({
         >
           {/* Header */}
           <div className="relative px-6 pt-6 pb-4 border-b border-slate-200/80 dark:border-white/10 flex items-start justify-between gap-4 bg-purple-500/5">
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-4">
               <div className="w-11 h-11 rounded-2xl bg-purple-600 p-0.5 shadow-md flex items-center justify-center shrink-0">
                 <div className="w-full h-full bg-[#1a2330] rounded-[14px] flex items-center justify-center text-white">
                   <Download className="w-5 h-5 text-purple-300" />
@@ -150,7 +150,7 @@ export default function PwaInstallModal({
                 onClick={() => {
                   onPromptTrigger();
                 }}
-                className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-white text-purple-900 font-bold text-xs sm:text-sm hover:bg-purple-50 shadow active:scale-95 transition-all shrink-0 cursor-pointer"
+                className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white text-purple-900 font-bold text-xs sm:text-sm hover:bg-purple-50 shadow active:scale-95 transition-colors shrink-0 cursor-pointer"
               >
                 Install Now
               </button>
@@ -158,7 +158,7 @@ export default function PwaInstallModal({
           )}
 
           {isInstalled && (
-            <div className="mx-6 mt-4 p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 dark:text-emerald-300 flex items-center gap-3">
+            <div className="mx-6 mt-4 p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/25 text-emerald-700 dark:text-emerald-300 flex items-center gap-3">
               <CheckCircle2 className="w-5 h-5 shrink-0 text-emerald-600 dark:text-emerald-400" />
               <p className="text-xs font-semibold">
                 SARAL Web App is already installed and ready on this device!
@@ -168,14 +168,14 @@ export default function PwaInstallModal({
 
           {/* OS Platform Switcher Tabs */}
           <div className="px-6 pt-4">
-            <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 overflow-x-auto scrollbar-none">
+            <div className="flex items-center gap-2 p-1 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 overflow-x-auto scrollbar-none">
               {tabs.map((tab) => {
                 const isActive = activeTab === tab.id;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => setActiveTab(tab.id)}
-                    className={`flex-1 min-w-[120px] py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
+                    className={`flex-1 min-w-[120px] py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer ${
                       isActive
                         ? "bg-white dark:bg-[#2a3542] text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200/80 dark:border-white/15"
                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -209,7 +209,7 @@ export default function PwaInstallModal({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
                     <div>
                       <span className="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                         1
@@ -224,7 +224,7 @@ export default function PwaInstallModal({
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
                     <div>
                       <span className="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                         2
@@ -239,7 +239,7 @@ export default function PwaInstallModal({
                     </div>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10 flex flex-col justify-between">
                     <div>
                       <span className="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                         3
@@ -255,7 +255,7 @@ export default function PwaInstallModal({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center gap-2.5 text-xs text-purple-700 dark:text-purple-300">
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center gap-3 text-xs text-purple-700 dark:text-purple-300">
                   <ShieldCheck className="w-4 h-4 shrink-0 text-purple-600 dark:text-purple-400" />
                   <span>
                     No EXE installer required. Runs securely in Chromium sandbox with instant
@@ -283,11 +283,11 @@ export default function PwaInstallModal({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       1
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-1.5">
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
                       <span>Tap Menu</span>
                       <MoreVertical className="w-3.5 h-3.5 text-emerald-600" />
                     </h4>
@@ -297,7 +297,7 @@ export default function PwaInstallModal({
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       2
                     </span>
@@ -310,7 +310,7 @@ export default function PwaInstallModal({
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-emerald-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       3
                     </span>
@@ -324,7 +324,7 @@ export default function PwaInstallModal({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-2.5 text-xs text-emerald-700 dark:text-emerald-300">
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center gap-3 text-xs text-emerald-700 dark:text-emerald-300">
                   <CheckCircle2 className="w-4 h-4 shrink-0 text-emerald-600 dark:text-emerald-400" />
                   <span>
                     Launches full-screen like a native Google Play app with zero browser URL bar!
@@ -351,11 +351,11 @@ export default function PwaInstallModal({
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       1
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-1.5">
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
                       <span>Tap Share Button</span>
                       <Share2 className="w-3.5 h-3.5 text-indigo-500" />
                     </h4>
@@ -365,11 +365,11 @@ export default function PwaInstallModal({
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       2
                     </span>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-1.5">
+                    <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1 flex items-center gap-2">
                       <span>Add to Home Screen</span>
                       <PlusSquare className="w-3.5 h-3.5 text-indigo-500" />
                     </h4>
@@ -379,7 +379,7 @@ export default function PwaInstallModal({
                     </p>
                   </div>
 
-                  <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
+                  <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <span className="w-6 h-6 rounded-full bg-indigo-600 text-white font-bold text-xs flex items-center justify-center mb-2">
                       3
                     </span>
@@ -393,7 +393,7 @@ export default function PwaInstallModal({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-2.5 text-xs text-amber-700 dark:text-amber-300">
+                <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center gap-3 text-xs text-amber-700 dark:text-amber-300">
                   <Apple className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
                   <span>
                     Note: Apple requires Safari for PWA installation on iOS (Chrome on iOS redirects
@@ -420,7 +420,7 @@ export default function PwaInstallModal({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200/80 dark:border-white/10">
                     <div className="flex items-center gap-2 mb-2">
                       <span className="w-6 h-6 rounded-full bg-purple-600 text-white font-bold text-xs flex items-center justify-center">
@@ -430,7 +430,7 @@ export default function PwaInstallModal({
                         Using Safari (macOS Sonoma+)
                       </h4>
                     </div>
-                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
+                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-decimal list-inside leading-relaxed">
                       <li>Open SARAL in Safari.</li>
                       <li>
                         Click <strong>File</strong> in the macOS top menu bar.
@@ -438,7 +438,7 @@ export default function PwaInstallModal({
                       <li>
                         Select <strong>"Add to Dock..."</strong> and click <strong>Add</strong>.
                       </li>
-                      <li>SARAL is now an independent Mac app in your Dock and Launchpad!</li>
+                      <li>SARAL now opens as its own app from the Dock and Launchpad.</li>
                     </ol>
                   </div>
 
@@ -451,7 +451,7 @@ export default function PwaInstallModal({
                         Using Google Chrome or Edge on Mac
                       </h4>
                     </div>
-                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
+                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-2 list-decimal list-inside leading-relaxed">
                       <li>
                         Click the <strong>Install icon (⊕)</strong> on the right side of the address
                         bar.
@@ -464,7 +464,7 @@ export default function PwaInstallModal({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center gap-2.5 text-xs text-purple-700 dark:text-purple-300">
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center gap-3 text-xs text-purple-700 dark:text-purple-300">
                   <Apple className="w-4 h-4 shrink-0 text-purple-600 dark:text-purple-400" />
                   <span>
                     Opens from the Dock, Spotlight and Launchpad like any Mac app

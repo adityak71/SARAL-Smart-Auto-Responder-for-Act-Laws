@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#121821]/90 border-b border-slate-200/80 dark:border-white/10 transition-all">
+    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#121821]/90 border-b border-slate-200/80 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Identity / Emblem */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
@@ -61,11 +61,11 @@ export default function Navbar() {
           </motion.div>
 
           <div className="flex flex-col text-left">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <span className="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight">
                 SARAL
               </span>
-              <span className="px-1.5 py-0.5 rounded text-xs font-bold bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30 hidden xs:inline-block">
+              <span className="px-2 py-0.5 rounded text-xs font-bold bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30 hidden xs:inline-block">
                 RTI AI
               </span>
             </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
         {/* Center Navigation Links (Desktop) */}
         <nav
-          className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-inner"
+          className="hidden md:flex items-center gap-1 p-1 rounded-full bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-inner"
           aria-label="Main Navigation"
         >
           {navigationLinks.map((link) => {
@@ -93,7 +93,7 @@ export default function Navbar() {
                 key={link.id}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className={`relative px-3.5 py-1.5 rounded-lg text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
+                className={`relative px-3 py-2 rounded-lg whitespace-nowrap text-xs sm:text-[13px] font-semibold transition-colors duration-200 cursor-pointer ${
                   isActive
                     ? "text-white bg-purple-600 "
                     : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/10"
@@ -119,14 +119,14 @@ export default function Navbar() {
               type="button"
               whileTap={{ scale: 0.95 }}
               onClick={handleLogout}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-rose-600 dark:text-rose-300 hover:text-white hover:bg-rose-600 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 shadow-sm transition-all duration-200 cursor-pointer"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-rose-600 dark:text-rose-300 hover:text-white hover:bg-rose-600 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 shadow-sm transition-colors duration-200 cursor-pointer"
             >
               Logout
             </motion.button>
           ) : (
             <Link
               href="/login"
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/15 hover:border-purple-400/50 shadow-sm transition-all duration-200 cursor-pointer"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/15 hover:border-purple-400/50 shadow-sm transition-colors duration-200 cursor-pointer"
             >
               Login
             </Link>
@@ -172,7 +172,7 @@ export default function Navbar() {
                   key={link.id}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link)}
-                  className="px-3.5 py-2.5 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-purple-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
+                  className="px-4 py-3 rounded-xl text-sm font-medium text-slate-700 dark:text-slate-200 hover:text-purple-600 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
                 >
                   {link.label}
                 </Link>
@@ -182,7 +182,7 @@ export default function Navbar() {
                 <Link
                   href="/profile"
                   onClick={() => dispatch(setMobileMenu(false))}
-                  className="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 flex items-center justify-between transition"
+                  className="px-4 py-3 rounded-xl text-sm font-semibold text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 flex items-center justify-between transition"
                 >
                   <span>View Your Profile</span>
                   <span className="text-xs">→</span>
@@ -195,7 +195,7 @@ export default function Navbar() {
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="w-full text-center py-2.5 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-700 text-white shadow-md transition cursor-pointer"
+                  className="w-full text-center py-3 rounded-xl font-semibold text-sm bg-rose-600 hover:bg-rose-700 text-white shadow-md transition cursor-pointer"
                 >
                   Log Out
                 </button>
@@ -203,7 +203,7 @@ export default function Navbar() {
                 <Link
                   href="/login"
                   onClick={() => dispatch(setMobileMenu(false))}
-                  className="w-full text-center py-2.5 rounded-xl font-semibold text-sm bg-purple-600 hover:bg-purple-700 text-white shadow-md transition"
+                  className="w-full text-center py-3 rounded-xl font-semibold text-sm bg-purple-600 hover:bg-purple-700 text-white shadow-md transition"
                 >
                   Sign In to Citizen / Officer Portal
                 </Link>

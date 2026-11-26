@@ -22,7 +22,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4 }}
-              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-purple-950/60 border border-purple-500/40 text-purple-200"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-purple-950/60 border border-purple-500/40 text-purple-200"
             >
               <svg className="w-4 h-4 text-purple-300 fill-current" viewBox="0 0 24 24">
                 <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
@@ -65,11 +65,11 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22 }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 w-full sm:w-auto pt-1"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 w-full sm:w-auto pt-1"
             >
               <Link
                 href={heroContent.ctas.primary.href}
-                className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm active:scale-[0.98] transition-all group"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm active:scale-[0.98] transition-colors group"
               >
                 <span>{heroContent.ctas.primary.label}</span>
                 <svg
@@ -84,7 +84,7 @@ export default function HeroSection() {
 
               <Link
                 href={heroContent.ctas.secondary.href}
-                className="inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 hover:text-white border border-white/15 font-semibold text-sm shadow-sm active:scale-[0.98] transition-all"
+                className="inline-flex items-center justify-center gap-2 px-5 py-4 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 hover:text-white border border-white/15 font-semibold text-sm shadow-sm active:scale-[0.98] transition-colors"
               >
                 <svg className="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -100,7 +100,7 @@ export default function HeroSection() {
                 {heroContent.complianceTags.map((tag) => (
                   <span
                     key={tag.label}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 font-medium"
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-300 font-medium"
                   >
                     <svg className="w-3.5 h-3.5 text-emerald-400 fill-current" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -109,7 +109,7 @@ export default function HeroSection() {
                   </span>
                 ))}
               </div>
-              <p className="text-xs text-slate-400 flex items-center gap-1.5">
+              <p className="text-xs text-slate-400 flex items-center gap-2">
                 <svg className="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                 </svg>
@@ -118,9 +118,9 @@ export default function HeroSection() {
             </div>
 
             {/* Interactive Prompt Chips Picker */}
-            <div className="w-full p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col gap-2.5">
+            <div className="w-full p-4 rounded-2xl bg-white/[0.04] border border-white/10 flex flex-col gap-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-bold text-slate-400 tracking-wider flex items-center gap-1.5">
+                <span className="text-xs font-bold text-slate-400 tracking-wider flex items-center gap-2">
                   <span className="text-purple-400"><IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                   {heroContent.promptPromptsHeader}
                 </span>
@@ -137,7 +137,7 @@ export default function HeroSection() {
                       key={item.id}
                       type="button"
                       onClick={() => setSelectedPrompt(item)}
-                      className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all flex items-center gap-1.5 cursor-pointer ${
+                      className={`px-3 py-2 rounded-lg text-xs font-medium transition-colors flex items-center gap-2 cursor-pointer ${
                         isSelected
                           ? "bg-purple-600 text-white shadow-md border border-purple-400"
                           : "bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10"
@@ -157,7 +157,7 @@ export default function HeroSection() {
             {/* Main Glass Workspace Card */}
             <div className="relative rounded-3xl bg-[#1a2330]/90 border border-white/15 p-5 sm:p-7 flex flex-col gap-4 text-slate-100">
               {/* Top Window Bar */}
-              <div className="flex items-center justify-between pb-3 bg-white/[0.04] border border-white/10 px-4 py-2.5 rounded-2xl">
+              <div className="flex items-center justify-between pb-3 bg-white/[0.04] border border-white/10 px-4 py-3 rounded-2xl">
                 <div className="flex items-center gap-2">
                   <div className="w-2.5 h-2.5 rounded-full bg-rose-400" />
                   <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
@@ -170,7 +170,7 @@ export default function HeroSection() {
                     </span>
                   </div>
                 </div>
-                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-400 text-xs">
+                <div className="flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 text-slate-400 text-xs">
                   <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -197,20 +197,20 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold">
                     <span className="w-2 h-2 rounded-full bg-amber-400" />
                     <span>In Review • Day 18 of 30</span>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
                     <span className="text-slate-400 text-xs block">Subject</span>
                     <strong className="text-white truncate block">
                       {selectedPrompt.title}
                     </strong>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
                     <span className="text-slate-400 text-xs block">Target Department</span>
                     <strong className="text-purple-300 truncate block">
                       {selectedPrompt.department}
@@ -297,15 +297,15 @@ export default function HeroSection() {
                   </div>
 
                   {/* Citizen Raw Voice / Text Quote */}
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 text-xs">
                     <span className="text-xs text-slate-400 block mb-0.5">Citizen Prompt (Hindi / Hinglish):</span>
-                    <p className="italic text-slate-200 leading-relaxed">
+                    <p className="text-slate-200 leading-relaxed">
                       “{selectedPrompt.rawText}”
                     </p>
                   </div>
 
                   {/* AI Structured Legal Clauses */}
-                  <div className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/25 space-y-1.5 text-xs">
+                  <div className="p-3 rounded-xl bg-purple-900/20 border border-purple-500/25 space-y-2 text-xs">
                     <div className="flex items-center justify-between pb-1 border-b border-purple-500/20">
                       <span className="font-bold text-purple-200 text-xs">
                         Statutory Clauses under RTI Act 2005:
@@ -316,7 +316,7 @@ export default function HeroSection() {
                     </div>
 
                     {selectedPrompt.clauses.map((clause, idx) => (
-                      <div key={idx} className="flex items-start gap-1.5 text-slate-300 text-xs leading-snug">
+                      <div key={idx} className="flex items-start gap-2 text-slate-300 text-xs leading-snug">
                         <span className="text-purple-400 font-bold">{idx + 1}.</span>
                         <span>{clause}</span>
                       </div>
@@ -327,15 +327,15 @@ export default function HeroSection() {
 
               {/* Mini Quick Stats Counter */}
               <div className="grid grid-cols-3 gap-2 text-center text-xs">
-                <div className="p-2.5 rounded-xl bg-white/[0.03] border border-white/5">
+                <div className="p-3 rounded-xl bg-white/[0.03] border border-white/5">
                   <span className="text-base font-extrabold text-white block">12</span>
                   <span className="text-xs text-slate-400">Total Filings</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
+                <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20">
                   <span className="text-base font-extrabold text-cyan-300 block">3</span>
                   <span className="text-xs text-cyan-200">Active In-Review</span>
                 </div>
-                <div className="p-2.5 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20">
                   <span className="text-base font-extrabold text-purple-300 block">9</span>
                   <span className="text-xs text-purple-200">Responses Recv.</span>
                 </div>
@@ -349,7 +349,7 @@ export default function HeroSection() {
           <div className="rounded-3xl bg-white/[0.03] border border-white/10 p-6 sm:p-7 shadow-lg">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 items-center">
               {heroContent.trustStrip.map((item) => (
-                <div key={item.title} className="flex items-center gap-3.5 group">
+                <div key={item.title} className="flex items-center gap-4 group">
                   <div className="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-300 flex items-center justify-center shrink-0 shadow-sm transition-transform">
                     <svg className="w-5 h-5 fill-current" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />

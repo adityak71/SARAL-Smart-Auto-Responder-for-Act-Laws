@@ -89,7 +89,7 @@ export default function DocumentPreviewModal({
         >
           {/* Top Control Bar (Floating Modal Header) */}
           <div className="p-4 bg-slate-100 dark:bg-purple-950/60 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0 print:hidden">
-            <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center gap-3 min-w-0">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
               <div className="truncate">
                 <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
@@ -109,7 +109,7 @@ export default function DocumentPreviewModal({
               <button
                 type="button"
                 onClick={handleDownload}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
               >
                 <span><IcDownload className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Download PDF</span>
@@ -117,7 +117,7 @@ export default function DocumentPreviewModal({
               <button
                 type="button"
                 onClick={handlePrint}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition cursor-pointer"
+                className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition cursor-pointer"
               >
                 <span><IcPrinter className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Print</span>
@@ -172,14 +172,14 @@ export default function DocumentPreviewModal({
 
               {/* 2-Column Metadata Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                   <div className="text-xs font-bold text-slate-500">Applicant Details</div>
                   <div><strong>Name:</strong> {citizen}</div>
                   <div><strong>Verification:</strong> <span className="text-emerald-700 font-bold">✓ DigiLocker Verified</span></div>
                   <div><strong>Fee Status:</strong> <span className="text-emerald-700 font-bold">{feeStatus}</span></div>
                 </div>
 
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
                   <div className="text-xs font-bold text-slate-500">Jurisdiction & Clock</div>
                   <div><strong>Authority:</strong> {department}</div>
                   <div><strong>Statutory Limit:</strong> <span className={isEmergency ? "text-rose-700 font-bold" : ""}>{statutoryLimit}</span></div>
@@ -190,20 +190,20 @@ export default function DocumentPreviewModal({
               {/* Subject Title */}
               <div className="text-xs space-y-1">
                 <span className="text-xs font-bold text-slate-500 block">Subject Matter:</span>
-                <p className="font-bold text-slate-900 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <p className="font-bold text-slate-900 bg-slate-50 p-3 rounded-xl border border-slate-200">
                   {title}
                 </p>
               </div>
 
               {/* Body Content based on document type */}
               {documentType === "RECEIPT" && (
-                <div className="space-y-2.5 text-xs">
+                <div className="space-y-3 text-xs">
                   <span className="text-xs font-bold text-slate-500 block">
                     Particulars of Information Sought (Section 6(1)):
                   </span>
                   <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
                     {clauses.map((clause, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5">
+                      <div key={idx} className="flex items-start gap-3">
                         <span className="font-mono font-bold text-purple-700 shrink-0">
                           {idx + 1}.
                         </span>
@@ -276,7 +276,7 @@ export default function DocumentPreviewModal({
               {/* Digital Attestation & Verification Stamp */}
               <div className="p-4 rounded-xl border border-emerald-300 bg-emerald-50/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
                 <div>
-                  <div className="flex items-center gap-1.5 text-emerald-800 font-bold">
+                  <div className="flex items-center gap-2 text-emerald-800 font-bold">
                     <span>✓</span>
                     <span>Digitally Authenticated &amp; Sealed</span>
                   </div>
@@ -303,7 +303,7 @@ export default function DocumentPreviewModal({
                 <button
                   type="button"
                   onClick={handleDownload}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <span><IcDownload className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                   <span>Download Clean PDF File</span>

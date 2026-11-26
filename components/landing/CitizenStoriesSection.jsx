@@ -33,18 +33,18 @@ export default function CitizenStoriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="p-6 rounded-3xl bg-[#1a2330]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-all duration-300 group"
+              className="p-6 rounded-3xl bg-[#1a2330]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-colors duration-300 group"
             >
               {/* Top Citizen Header */}
               <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-4">
                   <img
                     src={story.avatar}
                     alt={story.name}
                     className="w-12 h-12 rounded-2xl object-cover ring-2 ring-purple-500/40 shadow-md shrink-0"
                   />
                   <div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-2">
                       <h3 className="font-bold text-base text-white">
                         {story.name}
                       </h3>
@@ -74,12 +74,12 @@ export default function CitizenStoriesSection() {
               </div>
 
               {/* Citizen Quote */}
-              <blockquote className="text-xs sm:text-sm text-slate-200 italic leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5">
+              <blockquote className="text-xs sm:text-sm text-slate-200 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5">
                 {story.quote}
               </blockquote>
 
               {/* Concrete Outcome Strip */}
-              <div className="p-3.5 rounded-2xl bg-purple-950/30 border border-purple-500/20 space-y-1 text-xs">
+              <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/20 space-y-1 text-xs">
                 <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
                   <span>Verified Outcome:</span>
                   <span className="text-purple-300">{story.department}</span>

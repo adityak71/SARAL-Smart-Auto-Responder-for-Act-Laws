@@ -185,7 +185,7 @@ function AppealForm() {
         </div>
 
         <div className="text-center space-y-2">
-          <span className="px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-300 border border-emerald-500/20 text-xs font-bold">
+          <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
             Section 19(1) Statutory Appeal Admitted
           </span>
           <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
@@ -275,7 +275,7 @@ function AppealForm() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
               Your Filed Petitions:
             </label>
             <select
@@ -293,7 +293,7 @@ function AppealForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+            <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-2">
               Or Enter Reference ID Manually:
             </label>
             <input
@@ -342,7 +342,7 @@ function AppealForm() {
               <div
                 key={ground.id}
                 onClick={() => setSelectedGround(ground.id)}
-                className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between gap-2 ${
+                className={`p-4 rounded-2xl border transition-colors cursor-pointer flex flex-col justify-between gap-2 ${
                   isSelected
                     ? "bg-purple-50 dark:bg-purple-950/50 border-purple-500 shadow-md ring-1 ring-purple-500"
                     : "bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/10 hover:border-purple-400"
@@ -388,7 +388,7 @@ function AppealForm() {
           <button
             type="button"
             onClick={handleGenerateStatement}
-            className="px-3.5 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-1.5 cursor-pointer transition"
+            className="px-4 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-2 cursor-pointer transition"
           >
             <span>SARAL AI Auto-Draft</span>
           </button>
@@ -420,7 +420,7 @@ function AppealForm() {
           </div>
         </div>
 
-        <div className="space-y-2.5">
+        <div className="space-y-3">
           {STANDARD_RELIEFS.map((relief) => {
             const isChecked = selectedReliefs.includes(relief);
             return (
@@ -466,7 +466,7 @@ function AppealForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full sm:w-auto px-8 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm shadow-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
         >
           {isSubmitting ? (
             <>
@@ -488,7 +488,7 @@ export default function AppealPage() {
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Page Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-rose-500/10 text-rose-600 dark:text-rose-400 border border-rose-500/20 text-xs font-bold tracking-wide">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-rose-700 dark:text-rose-300">
             <span>Right to Information Act, 2005 • Section 19(1)</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">

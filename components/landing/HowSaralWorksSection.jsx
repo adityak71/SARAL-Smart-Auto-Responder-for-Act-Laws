@@ -36,7 +36,7 @@ export default function HowSaralWorksSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold tracking-wider">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
             <span>How SARAL works • डिजिटल पारदर्शी सेतु</span>
           </div>
 
@@ -60,7 +60,7 @@ export default function HowSaralWorksSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex items-start gap-4"
+                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-colors flex items-start gap-4"
               >
                 <div className="w-10 h-10 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-md">
                   {step.num}
@@ -97,7 +97,7 @@ export default function HowSaralWorksSection() {
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/how-it-works"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-colors"
               >
                 <span>Explore Full 4-Step Architecture →</span>
               </Link>

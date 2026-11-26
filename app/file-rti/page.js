@@ -735,12 +735,12 @@ export default function FileRtiPage() {
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
             {user?.isDigiLockerVerified ? (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span>DigiLocker Verified Citizen</span>
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
                 <span>Verification Pending</span>
               </span>
@@ -764,7 +764,7 @@ export default function FileRtiPage() {
               </div>
 
               <div className="space-y-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-extrabold tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-extrabold tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
                   <span className="w-2 h-2 rounded-full bg-amber-500" />
                   Section 6(1) Citizen Mandate
                 </span>
@@ -778,7 +778,7 @@ export default function FileRtiPage() {
 
               {/* Explanatory Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left pt-2">
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
                   <div className="text-xl">🇮🇳</div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Citizenship Proof</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -786,7 +786,7 @@ export default function FileRtiPage() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
                   <div className="text-xl"><IcMailbox className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Postal Delivery</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -794,7 +794,7 @@ export default function FileRtiPage() {
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
                   <div className="text-xl"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Zero Data Abuse</h4>
                   <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
@@ -808,7 +808,7 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={() => setIsDigiLockerModalOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-xl transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-xl transition-colors flex items-center justify-center gap-3 cursor-pointer"
                 >
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
@@ -820,7 +820,7 @@ export default function FileRtiPage() {
 
                 <Link
                   href="/dashboard"
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition text-center"
+                  className="w-full sm:w-auto px-6 py-4 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition text-center"
                 >
                   Return to Dashboard
                 </Link>
@@ -843,7 +843,7 @@ export default function FileRtiPage() {
                 return (
                   <div key={s.num} className="flex flex-col items-center text-center">
                     <div
-                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-300 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm transition-colors duration-300 ${
                         isCompleted
                           ? "bg-emerald-500 text-white shadow-md "
                           : isActive
@@ -891,7 +891,7 @@ export default function FileRtiPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="p-3.5 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-semibold flex items-center justify-between shadow-md"
+              className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-semibold flex items-center justify-between shadow-md"
             >
               <div className="flex items-center gap-2">
                 <span><IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
@@ -936,13 +936,13 @@ export default function FileRtiPage() {
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
                   Government Tier &amp; Target Jurisdiction
                 </label>
-                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-3">
                   {/* Tier Selection Buttons */}
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, stateOrCentral: "State" })}
-                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                      className={`py-2 px-4 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-2 ${
                         formData.stateOrCentral === "State"
                           ? "bg-purple-600 text-white border-purple-600 shadow-md "
                           : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
@@ -954,7 +954,7 @@ export default function FileRtiPage() {
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, stateOrCentral: "Central" })}
-                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                      className={`py-2 px-4 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-2 ${
                         formData.stateOrCentral === "Central"
                           ? "bg-purple-600 text-white border-purple-600 shadow-md "
                           : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
@@ -966,7 +966,7 @@ export default function FileRtiPage() {
 
                   {/* Dropdown Menu - Aligned just to the side! */}
                   {formData.stateOrCentral === "State" && (
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50/70 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 shadow-xs">
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-50/70 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 shadow-xs">
                       <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0">
                         <span className="text-purple-600 dark:text-purple-400"><IcMapPin className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                         <span>State:</span>
@@ -976,7 +976,7 @@ export default function FileRtiPage() {
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
                         }
-                        className="py-1 px-2.5 rounded-lg bg-white dark:bg-[#1d2733] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
+                        className="py-1 px-3 rounded-lg bg-white dark:bg-[#1d2733] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
                       >
                         <option value="">Select State</option>
                         {INDIAN_STATES.map((st) => (
@@ -1000,7 +1000,7 @@ export default function FileRtiPage() {
               </div>
 
               {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-sm transition-all">
+              <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-sm transition-colors">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs font-bold"><IcTarget className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
@@ -1030,7 +1030,7 @@ export default function FileRtiPage() {
                       }
                     }}
                     placeholder="e.g. broken road in village, drinking water supply, ration card delay, hospital doctor absent..."
-                    className="flex-1 px-3.5 py-2 rounded-xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 shadow-sm"
+                    className="flex-1 px-4 py-2 rounded-xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 shadow-sm"
                   />
                   <button
                     type="button"
@@ -1043,7 +1043,7 @@ export default function FileRtiPage() {
                 </div>
 
                 {/* Quick Topic Chips */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                <div className="flex flex-wrap items-center gap-2 pt-1">
                   <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Quick Topics:</span>
                   {[
                     { label: "Road / Potholes", topic: "village road repair tender delay" },
@@ -1072,10 +1072,10 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-1.5"
+                    className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-2"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+                      <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
                         <span>✓ Mapped to {aiRoutingResult.primary.name}</span>
                         <span className="text-xs px-2 py-0.2 rounded-lg bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-500/30 font-bold">
                           {aiRoutingResult.primary.confidence} Match
@@ -1124,7 +1124,7 @@ export default function FileRtiPage() {
                               targetAuthority: dept.name,
                             })
                           }
-                          className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                          className={`p-4 rounded-2xl border transition-colors cursor-pointer flex flex-col justify-between ${
                             isSelected
                               ? "bg-purple-50 dark:bg-purple-950/40 border-purple-600 dark:border-purple-500 ring-2 ring-purple-500/20 shadow-md"
                               : "bg-white dark:bg-white/5 border-slate-300/80 dark:border-white/10 hover:border-purple-400 hover:shadow-sm"
@@ -1178,9 +1178,9 @@ export default function FileRtiPage() {
               </div>
 
               {/* SARAL AI Vernacular Copilot Card */}
-              <div className="p-5 rounded-3xl bg-purple-50 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-500/30 shadow-md dark:shadow-xl space-y-4 transition-all">
+              <div className="p-5 rounded-3xl bg-purple-50 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-500/30 shadow-md dark:shadow-xl space-y-4 transition-colors">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 flex items-center justify-center text-sm font-bold shadow-inner">
                       <IcSparkles className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                     </div>
@@ -1203,7 +1203,7 @@ export default function FileRtiPage() {
                 </div>
 
                 {/* Quick Vernacular Preset Pills */}
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <span className="text-xs text-purple-800/80 dark:text-purple-300/70 font-semibold block tracking-wider">
                     Quick Sample Vernacular Prompts:
                   </span>
@@ -1215,7 +1215,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
                       Sadak & Thekedar Budget
                     </button>
@@ -1226,7 +1226,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
                       Paani Pipeline Sanction
                     </button>
@@ -1237,7 +1237,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
                       PHC Doctor & Dawai Shortage
                     </button>
@@ -1248,7 +1248,7 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
                       School Mid-Day Meal
                     </button>
@@ -1258,7 +1258,7 @@ export default function FileRtiPage() {
                 {/* Copilot Input Box */}
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between text-xs px-1 gap-2">
-                    <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-1.5">
+                    <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-2">
                       <span><IcMessageSquare className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Apni pareshani type karein ya aawaz se bole:
                     </span>
                     <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl border border-slate-200 dark:border-white/10">
@@ -1266,7 +1266,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("hinglish")}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "hinglish"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
@@ -1278,7 +1278,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("english")}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "english"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
@@ -1290,7 +1290,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("hindi")}
-                        className={`px-2.5 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "hindi"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
@@ -1314,16 +1314,16 @@ export default function FileRtiPage() {
                           ? "हिंदी में बोलें या लिखें: जैसे 'मेरे गांव की सड़क का कितना बजट पास हुआ था और देरी क्यों हुई? ठेकेदार का टेंडर एग्रीमेंट और मेजरमेंट बुक की कॉपी चाहिए...'"
                           : "Hinglish me bole ya likhe: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
                       }
-                      className="w-full p-3.5 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
+                      className="w-full p-4 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
                     />
 
-                    <div className="absolute right-2.5 bottom-3 flex items-center gap-1.5">
+                    <div className="absolute right-2.5 bottom-3 flex items-center gap-2">
                       {/* Voice Mic Button */}
                       <button
                         type="button"
                         onClick={toggleVoiceInput}
                         title={isListening ? "Listening... Click to stop" : "Click to speak"}
-                        className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
+                        className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-md ${
                           isListening
                             ? "bg-rose-600 hover:bg-rose-700 text-white   ring-2 ring-rose-400"
                             : "bg-purple-100 hover:bg-purple-200 dark:bg-purple-900/50 dark:hover:bg-purple-800/60 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-500/30"
@@ -1346,7 +1346,7 @@ export default function FileRtiPage() {
                         type="button"
                         onClick={() => handleAiAnalyze()}
                         disabled={isAnalyzingWithAi}
-                        className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                       >
                         {isAnalyzingWithAi ? (
                           <>
@@ -1367,7 +1367,7 @@ export default function FileRtiPage() {
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-center justify-between"
+                      className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="relative flex h-2.5 w-2.5">
@@ -1418,23 +1418,23 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-2.5"
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-3"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-lg bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-xs font-bold font-mono">
+                        <span className="px-3 py-0.5 rounded-lg bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-xs font-bold font-mono">
                           Mapped: {aiResult.suggestedDepartmentName}
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold">
+                        <span className="px-3 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold">
                           ✓ Section 8 Non-Exempt ({aiResult.section8Compliance?.confidenceScore || "98.7%"})
                         </span>
                         {aiResult.source === "gemini-ai" ? (
-                          <span className="px-2.5 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 text-xs font-bold flex items-center gap-1">
+                          <span className="px-3 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 text-xs font-bold flex items-center gap-1">
                             <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                             AI Powered: Gemini ({aiResult.model || "3.1 Flash-Lite"})
                           </span>
                         ) : (
-                          <span className="px-2.5 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-xs font-bold flex items-center gap-1">
+                          <span className="px-3 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-xs font-bold flex items-center gap-1">
                             SARAL Civic NLP Fallback
                           </span>
                         )}
@@ -1449,7 +1449,7 @@ export default function FileRtiPage() {
                     </p>
 
                     {aiResult.isLifeOrLibertySuggested && (
-                      <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                      <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
                         <span><IcSiren className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                         <span>
                           <strong>Section 7(1) Proviso Triggered:</strong> Query involves life or emergency medical care. 48-Hour statutory clock activated!
@@ -1472,7 +1472,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. Gram Panchayat Pipariya Bitumen Road Construction & Contractor Budget"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
 
@@ -1485,7 +1485,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. FY 2024-2026 or April 2025 to Date"
                     value={formData.yearOrPeriod}
                     onChange={(e) => setFormData({ ...formData, yearOrPeriod: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
 
@@ -1498,14 +1498,14 @@ export default function FileRtiPage() {
                     placeholder="e.g. Ward No. 4, Division II or District"
                     value={formData.locationDivision}
                     onChange={(e) => setFormData({ ...formData, locationDivision: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
 
               {/* Detailed Query Textarea */}
               <div>
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-2">
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
                     Detailed Section 6(1) Enforceable Clauses <span className="text-rose-500">*</span>
                   </label>
@@ -1520,7 +1520,7 @@ export default function FileRtiPage() {
                   placeholder="Apne sawal yahan vistar se likhein ya upar SARAL AI Copilot se auto-generate karein..."
                   value={formData.rawCitizenPrompt}
                   onChange={(e) => setFormData({ ...formData, rawCitizenPrompt: e.target.value })}
-                  className="w-full p-3.5 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 leading-relaxed font-sans"
+                  className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 leading-relaxed font-sans"
                 />
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-2">
                   <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -1530,7 +1530,7 @@ export default function FileRtiPage() {
                     type="button"
                     onClick={() => handleScanSection8()}
                     disabled={isScanningSection8}
-                    className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer disabled:opacity-50"
+                    className="self-start sm:self-auto px-4 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-2 transition cursor-pointer disabled:opacity-50"
                   >
                     <span><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{isScanningSection8 ? "Scanning Exemptions..." : "Scan Section 8 Compliance"}</span>
@@ -1614,7 +1614,7 @@ export default function FileRtiPage() {
 
               {/* Section 7(1) Life & Liberty Emergency Toggle */}
               <div
-                className={`p-5 rounded-2xl border-2 transition-all ${
+                className={`p-5 rounded-2xl border-2 transition-colors ${
                   formData.isLifeOrLiberty
                     ? "bg-rose-500/10 border-rose-500 dark:border-rose-500/60"
                     : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10"
@@ -1656,7 +1656,7 @@ export default function FileRtiPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, lifeLibertyJustification: e.target.value })
                       }
-                      className="w-full p-2.5 rounded-xl bg-white dark:bg-black/40 border border-rose-400 text-xs text-slate-900 dark:text-white focus:outline-none"
+                      className="w-full p-3 rounded-xl bg-white dark:bg-black/40 border border-rose-400 text-xs text-slate-900 dark:text-white focus:outline-none"
                     />
                   </div>
                 )}
@@ -1801,7 +1801,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. BPL-MP-2024-984124"
                     value={formData.bplCardNumber}
                     onChange={(e) => setFormData({ ...formData, bplCardNumber: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-black/30 border border-emerald-500 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-black/30 border border-emerald-500 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none"
                   />
                 </div>
               )}
@@ -1854,7 +1854,7 @@ export default function FileRtiPage() {
 
                 <div>
                   <span className="text-slate-400 block text-xs">Proposed Query / Questions:</span>
-                  <p className="text-slate-700 dark:text-slate-300 italic p-3 rounded-xl bg-white dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
+                  <p className="text-slate-700 dark:text-slate-300 p-3 rounded-xl bg-white dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
                     {formData.rawCitizenPrompt}
                   </p>
                 </div>
@@ -1912,7 +1912,7 @@ export default function FileRtiPage() {
                     Retrieving landmark CIC orders and Supreme Court rulings...
                   </div>
                 ) : (
-                  <div className="space-y-2.5">
+                  <div className="space-y-3">
                     {precedents.map((prec) => (
                       <div
                         key={prec.decisionNumber}
@@ -1930,7 +1930,7 @@ export default function FileRtiPage() {
                         <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                           {prec.rulingSummary}
                         </p>
-                        <p className="text-purple-800 dark:text-purple-200 text-xs italic">
+                        <p className="text-purple-800 dark:text-purple-200 text-xs">
                           Takeaway: {prec.keyLegalTakeaway}
                         </p>
                       </div>
@@ -2034,7 +2034,7 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition cursor-pointer"
+                  className="px-4 py-3 rounded-xl border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition cursor-pointer"
                 >
                   ← Previous Step
                 </button>
@@ -2052,7 +2052,7 @@ export default function FileRtiPage() {
                   whileTap={{ scale: 0.97 }}
                   type="button"
                   onClick={handleNext}
-                  className="px-6 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition cursor-pointer flex items-center gap-1.5"
+                  className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition cursor-pointer flex items-center gap-2"
                 >
                   <span>Continue</span>
                   <span>→</span>
@@ -2063,7 +2063,7 @@ export default function FileRtiPage() {
                   type="button"
                   disabled={submitting}
                   onClick={handleSubmit}
-                  className="px-7 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-bold shadow-lg transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                  className="px-7 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-bold shadow-lg transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
                 >
                   <span>{submitting ? "Encapsulating & Dispatching..." : "File Petition & Settle Fee"}</span>
                   <span><IcSend className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>

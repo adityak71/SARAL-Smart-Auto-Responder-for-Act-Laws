@@ -115,7 +115,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           {/* Card 1: Citizen Particulars */}
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
                   <IcUser className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
@@ -132,7 +132,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Full Legal Name</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.fullName || citizenProfileData.personal.fullName}
                 </div>
               </div>
@@ -144,10 +144,10 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     type="text"
                     value={formData.careOf}
                     onChange={(e) => handleChange("careOf", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   />
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                  <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                     {formData.careOf}
                   </div>
                 )}
@@ -155,7 +155,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Official Email</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium truncate">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium truncate">
                   {user?.email || citizenProfileData.personal.email}
                 </div>
               </div>
@@ -167,10 +167,10 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     type="text"
                     value={formData.phone}
                     onChange={(e) => handleChange("phone", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   />
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                  <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                     {formData.phone}
                   </div>
                 )}
@@ -182,14 +182,14 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                   <select
                     value={formData.preferredLanguage}
                     onChange={(e) => handleChange("preferredLanguage", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#1d2733] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-[#1d2733] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   >
                     <option value="Hindi & Hinglish (हिंदी / हिंग्लिश)">Hindi & Hinglish (हिंदी / हिंग्लिश)</option>
                     <option value="English (Standard Legal)">English (Standard Legal)</option>
                     <option value="Bilingual Hindi-English">Bilingual Hindi-English</option>
                   </select>
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                  <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                     {formData.preferredLanguage}
                   </div>
                 )}
@@ -197,7 +197,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Fee Exemption Category</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {citizenProfileData.personal.bplStatus}
                 </div>
               </div>
@@ -207,7 +207,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           {/* Card 2: Jurisdiction & Postal Address */}
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-cyan-600/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-sm">
                   <IcMapPin className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
@@ -229,10 +229,10 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     type="text"
                     value={formData.addressLine}
                     onChange={(e) => handleChange("addressLine", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   />
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                  <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                     {formData.addressLine}
                   </div>
                 )}
@@ -240,21 +240,21 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Gram Panchayat / Ward</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {formData.panchayat}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">District</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {formData.district}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">State</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {formData.state}
                 </div>
               </div>
@@ -266,10 +266,10 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     type="text"
                     value={formData.pincode}
                     onChange={(e) => handleChange("pincode", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-black/30 border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   />
                 ) : (
-                  <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                  <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                     {formData.pincode}
                   </div>
                 )}
@@ -298,22 +298,22 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">DigiLocker Reference:</span>
                 <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{citizenProfileData.verification.digiLockerId}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Aadhaar (Masked):</span>
                 <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{citizenProfileData.verification.aadhaarMasked}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Voter Card Reference:</span>
                 <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{citizenProfileData.verification.voterId}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Verification Timestamp:</span>
                 <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{citizenProfileData.verification.verifiedOn}</span>
               </div>

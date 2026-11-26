@@ -47,9 +47,9 @@ export default function LiveTrackerWidget() {
             </p>
 
             {/* Quick Search Form */}
-            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-3 pt-2">
               <div className="relative w-full">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -79,7 +79,7 @@ export default function LiveTrackerWidget() {
                   key={app.id}
                   type="button"
                   onClick={() => handleSampleClick(app)}
-                  className={`px-2.5 py-1 rounded-lg border text-xs transition cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg border text-xs transition cursor-pointer ${
                     selectedApp.id === app.id
                       ? "bg-purple-600/30 border-purple-400 text-purple-200 font-bold"
                       : "bg-white/5 border-white/10 text-slate-400 hover:text-white"
@@ -131,13 +131,13 @@ export default function LiveTrackerWidget() {
 
                 {/* Metadata Grid */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
                     <span className="text-xs text-slate-400 block">Department</span>
                     <span className="font-semibold text-white truncate block">
                       {selectedApp.department}
                     </span>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5">
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
                     <span className="text-xs text-slate-400 block">Assigned PIO</span>
                     <span className="font-semibold text-purple-300 truncate block">
                       {selectedApp.pioDetails.name}
@@ -170,7 +170,7 @@ export default function LiveTrackerWidget() {
                   </span>
                   <Link
                     href={`/tracking?id=${selectedApp.id}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition"
                   >
                     <span>Open Full Tracking Dossier</span>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

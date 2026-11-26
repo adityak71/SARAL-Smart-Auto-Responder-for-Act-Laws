@@ -29,15 +29,15 @@ export default function TrackingSearchBar() {
           </p>
         </div>
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold w-fit">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold w-fit">
           <span>● 30-Day Mandatory Statutory Clock Active</span>
         </span>
       </div>
 
       {/* Search Input Form */}
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-2.5">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3">
         <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
             <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -61,7 +61,7 @@ export default function TrackingSearchBar() {
       </form>
 
       {searchStatus === "not_found" && (
-        <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center justify-between">
           <span>No application dossier found matching &ldquo;{searchQuery}&rdquo;. Please verify your reference number format (e.g. SARAL-2026-00000).</span>
         </div>
       )}

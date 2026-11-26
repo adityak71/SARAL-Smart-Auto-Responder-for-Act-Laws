@@ -40,21 +40,21 @@ export default function CertifiedResponseModal({ isOpen, onClose, application, o
             <button
               type="button"
               onClick={() => downloadCertifiedResponse(application, responseText)}
-              className="px-4 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
             >
               <span>Download Certified PDF</span>
             </button>
             <button
               type="button"
               onClick={handlePrint}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition flex items-center gap-1.5 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition flex items-center gap-2 cursor-pointer"
             >
               <span>Print</span>
             </button>
             <button
               type="button"
               onClick={onClose}
-              className="p-1.5 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white transition cursor-pointer"
+              className="p-2 rounded-xl text-slate-500 hover:text-slate-800 dark:hover:text-white transition cursor-pointer"
             >
               ✕
             </button>

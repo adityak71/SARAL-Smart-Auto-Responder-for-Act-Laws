@@ -383,14 +383,14 @@ export default function ProfilePage() {
                         </div>
                       </>
                     ) : (
-                      <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 text-center space-y-2 mt-2">
+                      <div className="p-4 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 text-center space-y-2 mt-2">
                         <p className="text-xs text-amber-800 dark:text-amber-300">
                           Section 6(1) requires DigiLocker citizenship verification before filing an RTI.
                         </p>
                         <button
                           type="button"
                           onClick={() => setIsDigiLockerModalOpen(true)}
-                          className="w-full py-2 px-3 rounded-xl font-bold text-xs text-white bg-blue-700 hover:bg-blue-800 shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-2 px-3 rounded-xl font-bold text-xs text-white bg-blue-700 hover:bg-blue-800 shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
                         >
                           <span>Verify with DigiLocker</span>
                           <span>→</span>
@@ -510,7 +510,7 @@ export default function ProfilePage() {
                       onChange={(e) =>
                         setDetailsForm({ ...detailsForm, fullName: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
                     />
                   </div>
 
@@ -526,7 +526,7 @@ export default function ProfilePage() {
                       onChange={(e) =>
                         setDetailsForm({ ...detailsForm, phone: e.target.value })
                       }
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
                     />
                   </div>
 
@@ -544,7 +544,7 @@ export default function ProfilePage() {
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, addressLine: e.target.value })
                           }
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         />
                       </div>
 
@@ -559,7 +559,7 @@ export default function ProfilePage() {
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, district: e.target.value })
                           }
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         />
                       </div>
 
@@ -575,7 +575,7 @@ export default function ProfilePage() {
                             onChange={(e) =>
                               setDetailsForm({ ...detailsForm, state: e.target.value })
                             }
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                           />
                         </div>
 
@@ -590,7 +590,7 @@ export default function ProfilePage() {
                             onChange={(e) =>
                               setDetailsForm({ ...detailsForm, pincode: e.target.value })
                             }
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                           />
                         </div>
                       </div>
@@ -610,7 +610,7 @@ export default function ProfilePage() {
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, designation: e.target.value })
                           }
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         />
                       </div>
 
@@ -624,7 +624,7 @@ export default function ProfilePage() {
                           onChange={(e) =>
                             setDetailsForm({ ...detailsForm, officeLocation: e.target.value })
                           }
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         />
                       </div>
                     </>
@@ -636,7 +636,7 @@ export default function ProfilePage() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={savingDetails}
-                    className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                    className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-colors duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
                   >
                     <span>{savingDetails ? "Saving..." : "Save Changes"}</span>
                     <span>→</span>
@@ -709,7 +709,7 @@ export default function ProfilePage() {
                           currentPassword: e.target.value,
                         })
                       }
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
                     />
                   </div>
 
@@ -729,7 +729,7 @@ export default function ProfilePage() {
                           newPassword: e.target.value,
                         })
                       }
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
                     />
                   </div>
 
@@ -749,7 +749,7 @@ export default function ProfilePage() {
                           confirmPassword: e.target.value,
                         })
                       }
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-indigo-500"
                     />
                   </div>
                 </div>
@@ -759,7 +759,7 @@ export default function ProfilePage() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={savingPassword}
-                    className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                    className="px-5 py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-colors duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
                   >
                     <span>{savingPassword ? "Updating..." : "Update Password"}</span>
                     <span><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
@@ -794,7 +794,7 @@ export default function ProfilePage() {
                       setDeleteConfirmText("");
                       setIsDeleteModalOpen(true);
                     }}
-                    className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold shadow-md transition-all duration-200 cursor-pointer shrink-0"
+                    className="px-4 py-3 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold shadow-md transition-colors duration-200 cursor-pointer shrink-0"
                   >
                     Delete Account
                   </motion.button>
@@ -837,7 +837,7 @@ export default function ProfilePage() {
                       setDetailsForm({ ...detailsForm, avatarUrl: preset });
                       setIsAvatarModalOpen(false);
                     }}
-                    className={`relative rounded-2xl overflow-hidden ring-2 transition-all p-1  cursor-pointer ${
+                    className={`relative rounded-2xl overflow-hidden ring-2 transition-colors p-1  cursor-pointer ${
                       detailsForm.avatarUrl === preset
                         ? "ring-purple-600"
                         : "ring-transparent hover:ring-slate-300 dark:hover:ring-white/20"
@@ -893,7 +893,7 @@ export default function ProfilePage() {
                 placeholder="Type DELETE"
                 value={deleteConfirmText}
                 onChange={(e) => setDeleteConfirmText(e.target.value)}
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/40 border border-rose-300 dark:border-rose-500/40 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/40 border border-rose-300 dark:border-rose-500/40 text-sm font-mono text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-rose-500"
               />
 
               <div className="flex items-center justify-end gap-2 pt-2">

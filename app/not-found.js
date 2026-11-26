@@ -15,13 +15,13 @@ export default function NotFound() {
       <div className="mt-6 flex flex-wrap gap-3 justify-center">
         <Link
           href="/"
-          className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition"
+          className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition"
         >
           Return to Home
         </Link>
         <Link
           href="/general-info"
-          className="px-5 py-2.5 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white font-semibold text-sm transition"
+          className="px-5 py-3 rounded-xl bg-slate-200 hover:bg-slate-300 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white font-semibold text-sm transition"
         >
           Search Knowledge Hub
         </Link>

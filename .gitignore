@@ -43,3 +43,5 @@ next-env.d.ts
 
 
 reference
+# local MCP config (contains an API key)
+.mcp.json

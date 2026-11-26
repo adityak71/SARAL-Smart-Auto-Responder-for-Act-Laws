@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import PwaInstallButton from "@/components/pwa/PwaInstallButton";
+import DayCounter from "@/components/common/DayCounter";
 
 export default function HeroIntroSection() {
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
@@ -21,9 +22,9 @@ export default function HeroIntroSection() {
               className="space-y-2"
             >
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-semibold text-slate-900 dark:text-white tracking-tight leading-[1.15]">
-                File your RTI application online.
+                File your RTI application online
                 <span className="block text-purple-600 dark:text-purple-300">
-                  Track it until you get a reply.
+                  Track it until you get a reply
                 </span>
               </h1>
               <p className="text-sm sm:text-base font-semibold text-purple-700 dark:text-purple-300 pt-1">
@@ -46,13 +47,13 @@ export default function HeroIntroSection() {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.22 }}
-              className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3.5 w-full pt-2"
+              className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-4 w-full pt-2"
             >
               {isAuthenticated ? (
                 <>
                   <Link
                     href="/dashboard"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm sm:text-base active:scale-[0.98] transition-all group cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm sm:text-base active:scale-[0.98] transition-colors group cursor-pointer"
                   >
                     <span>Go to My Dashboard</span>
                     <svg
@@ -67,14 +68,14 @@ export default function HeroIntroSection() {
 
                   <Link
                     href="/file-rti"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-purple-100 hover:bg-purple-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-purple-900 dark:text-purple-200 border border-purple-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-purple-100 hover:bg-purple-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-purple-900 dark:text-purple-200 border border-purple-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-colors cursor-pointer"
                   >
                     <span>+ File New RTI</span>
                   </Link>
 
                   <Link
                     href="/tracking"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/5 dark:hover:bg-white/10 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-2 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:text-purple-700 dark:hover:text-purple-300 hover:bg-slate-900/5 dark:hover:bg-white/5 font-medium text-sm transition-colors cursor-pointer"
                   >
                     <svg className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -90,7 +91,7 @@ export default function HeroIntroSection() {
                 <>
                   <Link
                     href="/login?redirect=/file-rti"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm sm:text-base active:scale-[0.98] transition-all group cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm sm:text-base active:scale-[0.98] transition-colors group cursor-pointer"
                   >
                     <span>File an RTI Application</span>
                     <svg
@@ -105,7 +106,7 @@ export default function HeroIntroSection() {
 
                   <Link
                     href="/tracking"
-                    className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-all cursor-pointer"
+                    className="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-slate-200 border border-slate-300/80 dark:border-white/15 font-semibold text-sm sm:text-base shadow-sm active:scale-[0.98] transition-colors cursor-pointer"
                   >
                     <svg className="w-4.5 h-4.5 text-cyan-600 dark:text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -120,21 +121,10 @@ export default function HeroIntroSection() {
               )}
             </motion.div>
 
-            {/* Trust Pills & Device Compatibility Indicator */}
-            <div className="flex flex-wrap items-center gap-3 pt-2 text-xs">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/20 font-semibold">
-                ✓ ₹10 Standard Treasury Fee
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-purple-50 dark:bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/20 font-semibold">
-                ✓ 30-Day Mandatory Response Clock
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-cyan-50 dark:bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 border border-cyan-200 dark:border-cyan-500/20 font-semibold">
-                ✓ DigiLocker Verified
-              </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-white/5 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-white/10 font-medium">
-                Android • iOS • Windows • macOS
-              </span>
-            </div>
+            {/* Key facts, one quiet line */}
+            <p className="pt-2 text-sm text-slate-600 dark:text-slate-400">
+              ₹10 treasury fee · Reply due in 30 days · DigiLocker verified · Android, iOS, Windows and macOS
+            </p>
           </div>
 
           {/* Right: a sample of what SARAL produces, a drafted Section 6(1) application (5 Cols) */}
@@ -165,9 +155,9 @@ export default function HeroIntroSection() {
                   <li>Amount paid to date, with measurement book entries</li>
                 </ol>
 
-                <div className="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-dashed border-slate-300 dark:border-white/15 text-xs">
-                  <span className="text-emerald-700 dark:text-emerald-400 font-semibold">Fee ₹10 paid</span>
-                  <span className="text-slate-500 dark:text-slate-400">Reply due within 30 days</span>
+                <div className="flex flex-wrap items-end justify-between gap-4 pt-4 border-t border-dashed border-slate-300 dark:border-white/15">
+                  <span className="text-xs text-emerald-700 dark:text-emerald-400 font-medium">Fee ₹10 paid</span>
+                  <DayCounter current={18} total={30} className="w-44" />
                 </div>
               </div>
 

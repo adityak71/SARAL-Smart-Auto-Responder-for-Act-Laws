@@ -40,7 +40,7 @@ export default function WhyRtiMattersSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wider">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
             <span>RTI Act 2005 • सूचना का अधिकार</span>
           </div>
 
@@ -76,7 +76,7 @@ export default function WhyRtiMattersSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-3 group"
+                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-colors flex flex-col justify-between gap-3 group"
               >
                 <div className="space-y-2">
                   <div>
@@ -106,7 +106,7 @@ export default function WhyRtiMattersSection() {
         <div className="pt-2 text-center">
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/10 shadow-sm transition-all"
+            className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/10 shadow-sm transition-colors"
           >
             <span>Learn more about SARAL Mission &amp; DPDP compliance →</span>
           </Link>

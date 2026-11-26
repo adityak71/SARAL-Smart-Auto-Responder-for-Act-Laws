@@ -25,11 +25,11 @@ export default function CivicFooter() {
       {/* Top Compliance Trust Badges Bar */}
       <div className="border-b border-slate-200 dark:border-white/5 bg-slate-50/80 dark:bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {complianceBadges.map((badge) => (
               <div
                 key={badge.label}
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-none"
+                className="flex items-center gap-2 p-3 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-none"
               >
                 <div className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
@@ -52,7 +52,7 @@ export default function CivicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Column 1: Brand & National Emblem (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-4">
               <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-purple-600 p-0.5 shadow-lg">
                 <div className="w-full h-full bg-[#1a2330] rounded-[14px] flex items-center justify-center">
                   <Emblem className="w-7 h-8 text-white" />

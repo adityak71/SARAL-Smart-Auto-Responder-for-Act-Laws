@@ -145,7 +145,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
         <div className="flex items-center gap-2">
           <button
             onClick={() => setActiveSubTab("users")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
               activeSubTab === "users"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -153,7 +153,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           >
             <Users className="w-4 h-4" />
             <span>Registered Citizens</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
+            <span className={`ml-1 px-2 py-0.5 rounded text-xs ${
               activeSubTab === "users" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {users.length}
@@ -161,7 +161,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           </button>
           <button
             onClick={() => setActiveSubTab("verification")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-colors cursor-pointer ${
               activeSubTab === "verification"
                 ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
@@ -195,7 +195,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                   Directory of registered citizens, verification status, and account security controls
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              <span className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                 Admin
               </span>
             </div>
@@ -242,7 +242,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                 />
               </form>
 
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs w-full sm:w-auto overflow-x-auto">
+              <div className="flex items-center gap-2 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs w-full sm:w-auto overflow-x-auto">
                 {[
                   { id: "all", label: "All Users" },
                   { id: "verified", label: "Verified Only" },
@@ -252,7 +252,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                   <button
                     key={f.id}
                     onClick={() => setFilter(f.id)}
-                    className={`px-3 py-1.5 rounded-lg font-semibold whitespace-nowrap transition cursor-pointer ${
+                    className={`px-3 py-2 rounded-lg font-semibold whitespace-nowrap transition cursor-pointer ${
                       filter === f.id
                         ? "bg-white dark:bg-purple-600 text-purple-700 dark:text-white font-bold shadow-sm"
                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -269,13 +269,13 @@ export default function UserManagement({ initialSubTab = "users" }) {
               <table className="w-full min-w-[850px] text-left text-sm">
                 <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
-                    <th className="px-5 py-3.5 font-bold">Citizen / User</th>
-                    <th className="px-5 py-3.5 font-bold">Role</th>
-                    <th className="px-5 py-3.5 font-bold">Identity Verification</th>
-                    <th className="px-5 py-3.5 font-bold">Firebase UID</th>
-                    <th className="px-5 py-3.5 font-bold">Registered On</th>
-                    <th className="px-5 py-3.5 font-bold">Account Status</th>
-                    <th className="px-5 py-3.5 font-bold text-right">Actions</th>
+                    <th className="px-5 py-4 font-bold">Citizen / User</th>
+                    <th className="px-5 py-4 font-bold">Role</th>
+                    <th className="px-5 py-4 font-bold">Identity Verification</th>
+                    <th className="px-5 py-4 font-bold">Firebase UID</th>
+                    <th className="px-5 py-4 font-bold">Registered On</th>
+                    <th className="px-5 py-4 font-bold">Account Status</th>
+                    <th className="px-5 py-4 font-bold text-right">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-700 dark:text-slate-300">
@@ -298,7 +298,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                         key={u.id}
                         className="hover:bg-slate-50/70 dark:hover:bg-white/[0.03] transition-colors"
                       >
-                        <td className="px-5 py-3.5">
+                        <td className="px-5 py-4">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 rounded-full bg-purple-100 dark:bg-purple-600/30 border border-purple-200 dark:border-purple-500/40 text-purple-700 dark:text-purple-200 flex items-center justify-center font-bold text-xs shrink-0">
                               {u.fullName?.slice(0, 2).toUpperCase() || "CT"}
@@ -314,7 +314,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                           </div>
                         </td>
 
-                        <td className="px-5 py-3.5">
+                        <td className="px-5 py-4">
                           <span
                             className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold  tracking-wider ${
                               u.role === "ADMIN"
@@ -328,25 +328,25 @@ export default function UserManagement({ initialSubTab = "users" }) {
                           </span>
                         </td>
 
-                        <td className="px-5 py-3.5">
+                        <td className="px-5 py-4">
                           {u.isDigiLockerVerified ? (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                            <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               DigiLocker Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                            <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
                               <AlertTriangle className="w-3.5 h-3.5" />
                               Unverified Citizen
                             </span>
                           )}
                         </td>
 
-                        <td className="px-5 py-3.5 font-mono text-xs text-slate-500 dark:text-slate-400">
+                        <td className="px-5 py-4 font-mono text-xs text-slate-500 dark:text-slate-400">
                           {u.firebaseUid}
                         </td>
 
-                        <td className="px-5 py-3.5 text-xs text-slate-500 dark:text-slate-400">
+                        <td className="px-5 py-4 text-xs text-slate-500 dark:text-slate-400">
                           {new Date(u.createdAt).toLocaleDateString("en-IN", {
                             day: "2-digit",
                             month: "short",
@@ -354,25 +354,25 @@ export default function UserManagement({ initialSubTab = "users" }) {
                           })}
                         </td>
 
-                        <td className="px-5 py-3.5">
+                        <td className="px-5 py-4">
                           {u.isActive ? (
-                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                            <span className="inline-flex items-center gap-2 text-xs font-semibold text-emerald-600 dark:text-emerald-400">
                               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
                               Active
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-rose-600 dark:text-rose-400">
+                            <span className="inline-flex items-center gap-2 text-xs font-semibold text-rose-600 dark:text-rose-400">
                               <span className="w-1.5 h-1.5 rounded-full bg-rose-500" />
                               Suspended
                             </span>
                           )}
                         </td>
 
-                        <td className="px-5 py-3.5 text-right">
+                        <td className="px-5 py-4 text-right">
                           <div className="flex items-center justify-end gap-2">
                             <button
                               onClick={() => setSelectedUser(u)}
-                              className="p-1.5 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
+                              className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-lg transition-colors cursor-pointer"
                               title="View User Details"
                             >
                               <Eye className="w-4 h-4" />
@@ -381,7 +381,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                               <button
                                 onClick={() => handleToggleStatus(u)}
                                 disabled={actionLoading}
-                                className={`px-2.5 py-1 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+                                className={`px-3 py-1 rounded-lg text-xs font-bold transition-colors cursor-pointer ${
                                   u.isActive
                                     ? "bg-rose-500/10 dark:bg-rose-500/20 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white"
                                     : "bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white"
@@ -479,48 +479,48 @@ export default function UserManagement({ initialSubTab = "users" }) {
               <table className="w-full min-w-[850px] text-left text-sm">
                 <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
-                    <th className="px-5 py-3.5 font-bold">Petitioner</th>
-                    <th className="px-5 py-3.5 font-bold">DigiLocker Reference ID</th>
-                    <th className="px-5 py-3.5 font-bold">Timestamp</th>
-                    <th className="px-5 py-3.5 font-bold">Gateway Status</th>
-                    <th className="px-5 py-3.5 font-bold">Citizen Region</th>
-                    <th className="px-5 py-3.5 font-bold text-right">Evidence Policy</th>
+                    <th className="px-5 py-4 font-bold">Petitioner</th>
+                    <th className="px-5 py-4 font-bold">DigiLocker Reference ID</th>
+                    <th className="px-5 py-4 font-bold">Timestamp</th>
+                    <th className="px-5 py-4 font-bold">Gateway Status</th>
+                    <th className="px-5 py-4 font-bold">Citizen Region</th>
+                    <th className="px-5 py-4 font-bold text-right">Evidence Policy</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-white/5 text-slate-700 dark:text-slate-300">
                   {users.map((u) => (
                     <tr key={u.id} className="hover:bg-slate-50/70 dark:hover:bg-white/[0.03] transition-colors">
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         <p className="font-semibold text-slate-900 dark:text-white text-sm">
                           {u.fullName}
                         </p>
                         <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">{u.email}</p>
                       </td>
-                      <td className="px-5 py-3.5 font-mono text-xs text-cyan-600 dark:text-cyan-400">
+                      <td className="px-5 py-4 font-mono text-xs text-cyan-600 dark:text-cyan-400">
                         {u.digiLockerId || (u.isDigiLockerVerified ? `DL-VERIFIED-${u.id.slice(0, 8).toUpperCase()}` : "UNVERIFIED_PENDING")}
                       </td>
-                      <td className="px-5 py-3.5 text-xs text-slate-500 dark:text-slate-400">
+                      <td className="px-5 py-4 text-xs text-slate-500 dark:text-slate-400">
                         {new Date(u.createdAt).toLocaleString("en-IN", {
                           dateStyle: "medium",
                           timeStyle: "short",
                         })}
                       </td>
-                      <td className="px-5 py-3.5">
+                      <td className="px-5 py-4">
                         {u.isDigiLockerVerified ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                          <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
                             <CheckCircle2 className="w-3.5 h-3.5" /> Verified & Validated
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                          <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
                             <Clock className="w-3.5 h-3.5" /> Awaiting OTP
                           </span>
                         )}
                       </td>
-                      <td className="px-5 py-3.5 text-xs text-slate-600 dark:text-slate-300">
+                      <td className="px-5 py-4 text-xs text-slate-600 dark:text-slate-300">
                         {u.district !== "—" ? `${u.district}, ${u.state}` : u.state}
                       </td>
-                      <td className="px-5 py-3.5 text-right">
-                        <span className="text-xs text-slate-500 dark:text-slate-400 font-medium italic">
+                      <td className="px-5 py-4 text-right">
+                        <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">
                           Automated (No manual override)
                         </span>
                       </td>
@@ -607,7 +607,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
               </div>
 
               {/* Privacy Warning */}
-              <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+              <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                 Private security parameters (passwords, tokens, and raw Aadhaar credentials) are encrypted and masked under MeitY data governance protocol.
               </div>
 
@@ -616,7 +616,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                   <button
                     onClick={() => handleToggleStatus(selectedUser)}
                     disabled={actionLoading}
-                    className={`flex-1 py-3 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                    className={`flex-1 py-3 rounded-full text-xs font-bold transition-colors cursor-pointer ${
                       selectedUser.isActive
                         ? "bg-rose-600 hover:bg-rose-700 text-white shadow-lg "
                         : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg "

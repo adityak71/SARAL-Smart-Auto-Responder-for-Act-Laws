@@ -16,13 +16,13 @@ export default function OfficerDetailsCard({ application }) {
             Designated Public Information Officer (PIO)
           </h3>
         </div>
-        <span className="text-xs px-2.5 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-semibold">
+        <span className="text-xs px-3 py-0.5 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-300 font-semibold">
           Section 5(1) Gazetted
         </span>
       </div>
 
       {/* Officer Bio Row */}
-      <div className="flex items-center gap-3.5">
+      <div className="flex items-center gap-4">
         <div className="w-12 h-12 rounded-2xl bg-purple-600 flex items-center justify-center text-white text-lg font-bold shadow-md shrink-0">
           {pioDetails.name.charAt(0)}
         </div>

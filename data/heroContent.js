@@ -4,8 +4,8 @@
  */
 export const heroContent = {
   badge: "Right to Information Act, 2005",
-  titlePart1: "File your RTI online.",
-  titlePart2: "Track every reply.",
+  titlePart1: "File your RTI online",
+  titlePart2: "Track every reply",
   hindiSubhead: "सत्यमेव जयते • नागरिकों के लिए सुलभ, पारदर्शी एवं सरल आरटीआई",
   description:
     "Access public information without bureaucratic red tape. SARAL uses intelligent AI to structure your concerns into Section 6(1) legal clauses, identify responsible government departments, and track statutory 30-day response clocks — all through one simple, dignified platform.",

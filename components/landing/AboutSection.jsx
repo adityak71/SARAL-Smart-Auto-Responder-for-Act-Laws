@@ -32,7 +32,7 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold tracking-wider">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
             <span>ABOUT SARAL MISSION</span>
           </div>
 
@@ -95,13 +95,13 @@ export default function AboutSection() {
             <tbody className="divide-y divide-white/5">
               {comparison.map((row) => (
                 <tr key={row.feature} className="hover:bg-white/[0.02]">
-                  <td className="py-3.5 font-bold text-white whitespace-nowrap pr-4">
+                  <td className="py-4 font-bold text-white whitespace-nowrap pr-4">
                     {row.feature}
                   </td>
-                  <td className="py-3.5 text-slate-400 pr-4">
+                  <td className="py-4 text-slate-400 pr-4">
                     {row.traditional}
                   </td>
-                  <td className="py-3.5 text-purple-200 font-medium">
+                  <td className="py-4 text-purple-200 font-medium">
                     ✓ {row.saral}
                   </td>
                 </tr>

@@ -56,9 +56,9 @@ export default function HowItWorksPage() {
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
           >
-            How SARAL Works. <br />
+            How SARAL works <br />
             <span className="text-purple-600 dark:text-purple-300">
-              From your question to an official reply.
+              From your question to an official reply
             </span>
           </motion.h1>
 
@@ -86,8 +86,8 @@ export default function HowItWorksPage() {
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Description (5 Cols) */}
-                <div className="lg:col-span-5 flex flex-col gap-3.5">
-                  <div className="flex items-center gap-2.5">
+                <div className="lg:col-span-5 flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
                     <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                       {step.stepNumber}
                     </span>
@@ -104,16 +104,16 @@ export default function HowItWorksPage() {
                     {step.description}
                   </p>
 
-                  <div className="inline-flex items-center gap-1.5 mt-1 px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
+                  <div className="inline-flex items-center gap-2 mt-1 px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
                     <span><IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{step.badge}</span>
                   </div>
                 </div>
 
                 {/* Right Visual Terminal / Mockup (7 Cols) */}
-                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#121821] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-3.5 font-sans">
+                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#121821] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-4 font-sans">
                   {/* Mockup Header */}
-                  <div className="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
                     <div className="flex items-center gap-2">
                       <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
                       <span className="font-mono text-white text-xs font-semibold">
@@ -134,10 +134,10 @@ export default function HowItWorksPage() {
                         <span className="text-xs text-slate-400 font-bold block mb-1">
                           Raw Citizen Input (Voice or Typing):
                         </span>
-                        <p className="italic text-purple-100">{step.mockup.citizenQuote}</p>
+                        <p className="text-purple-100">{step.mockup.citizenQuote}</p>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1.5">
+                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-purple-200 text-xs">
                             {step.mockup.copilotLabel}
@@ -160,7 +160,7 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "legal" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1.5">
+                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-cyan-300 text-xs">
                             Competent Authority:
@@ -232,7 +232,7 @@ export default function HowItWorksPage() {
         {/* 30-Day Statutory Clock Lifecycle Section */}
         <section className="rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wider">
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
               Statutory Transparency Protection
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -254,14 +254,14 @@ export default function HowItWorksPage() {
                     <span className="text-xs font-extrabold text-purple-600 dark:text-purple-300 font-mono">
                       {stage.day}
                     </span>
-                    <span className="px-1.5 py-0.5 rounded text-xs font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
+                    <span className="px-2 py-0.5 rounded text-xs font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
                       {stage.badge}
                     </span>
                   </div>
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
                     {stage.title}
                   </h3>
-                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
                     {stage.desc}
                   </p>
                 </div>
@@ -288,13 +288,13 @@ export default function HowItWorksPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 pt-2">
             <Link
               href="/login"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-colors"
             >
               File an RTI Petition →
             </Link>
             <Link
               href="/tracking"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
             >
               Track Existing Application
             </Link>

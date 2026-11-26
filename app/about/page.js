@@ -47,7 +47,7 @@ export default function AboutPage() {
           >
             Who runs SARAL and how it handles <br />
             <span className="text-purple-600 dark:text-purple-300">
-              your RTI application.
+              your RTI application
             </span>
           </motion.h1>
 
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
         {/* 3 Core Ethical Pillars */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6" data-purpose="ethical-pillars">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-4 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Intelligent Assistance, Not Hallucination
             </h3>
@@ -72,7 +72,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-4 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Public Authority Officer (PIO) Scrutiny
             </h3>
@@ -81,7 +81,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-4 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Sovereignty & Citizen Privacy
             </h3>
@@ -106,9 +106,9 @@ export default function AboutPage() {
             <table className="w-full text-left text-xs sm:text-sm border-collapse">
               <thead>
                 <tr className="border-b border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400">
-                  <th className="pb-3.5 font-semibold">Aspect</th>
-                  <th className="pb-3.5 font-semibold text-rose-600 dark:text-rose-300">Traditional RTI Process</th>
-                  <th className="pb-3.5 font-semibold text-emerald-600 dark:text-emerald-400">SARAL Digital Platform</th>
+                  <th className="pb-4 font-semibold">Aspect</th>
+                  <th className="pb-4 font-semibold text-rose-600 dark:text-rose-300">Traditional RTI Process</th>
+                  <th className="pb-4 font-semibold text-emerald-600 dark:text-emerald-400">SARAL Digital Platform</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-200/70 dark:divide-white/5">
@@ -118,11 +118,11 @@ export default function AboutPage() {
                       {row.feature}
                     </td>
                     <td className="py-4 text-slate-600 dark:text-slate-300 pr-4">
-                      <span className="text-rose-500 mr-1.5">✕</span>
+                      <span className="text-rose-500 mr-2">✕</span>
                       {row.traditional}
                     </td>
                     <td className="py-4 text-emerald-700 dark:text-emerald-300 font-medium">
-                      <span className="text-emerald-500 mr-1.5">✓</span>
+                      <span className="text-emerald-500 mr-2">✓</span>
                       {row.saral}
                     </td>
                   </tr>
@@ -135,7 +135,7 @@ export default function AboutPage() {
         {/* Real Citizen Stories Section */}
         <section className="space-y-8" data-purpose="citizen-stories">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold tracking-wider">
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
               Example cases
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -160,7 +160,7 @@ export default function AboutPage() {
                     </div>
                   </div>
 
-                  <span className="inline-block px-2.5 py-0.5 rounded-lg text-xs font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                  <span className="inline-block px-3 py-0.5 rounded-lg text-xs font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
                     {story.concern}
                   </span>
 
@@ -200,13 +200,13 @@ export default function AboutPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 pt-2">
             <Link
               href="/contact"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-colors"
             >
               Contact Citizen Helpdesk →
             </Link>
             <Link
               href="/login"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
             >
               File an RTI Petition
             </Link>

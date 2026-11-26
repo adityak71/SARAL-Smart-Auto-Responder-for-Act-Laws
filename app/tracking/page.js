@@ -51,8 +51,8 @@ function TrackingContent() {
           <h3 className="text-xl font-bold text-slate-900 dark:text-white">
             Enter Application Reference ID
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mt-1.5 leading-relaxed">
-            Apna RTI application reference number upar enter karein (jaise <code className="px-1.5 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 font-mono text-purple-700 dark:text-purple-300">SARAL-2026-00000</code>) aur &ldquo;Track Status&rdquo; par click karein.
+          <p className="text-xs text-slate-500 dark:text-slate-400 max-w-md mt-2 leading-relaxed">
+            Apna RTI application reference number upar enter karein (jaise <code className="px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-900/30 font-mono text-purple-700 dark:text-purple-300">SARAL-2026-00000</code>) aur &ldquo;Track Status&rdquo; par click karein.
           </p>
         </div>
       )}

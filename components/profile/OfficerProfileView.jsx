@@ -97,7 +97,7 @@ export default function OfficerProfileView({ user, isEditing }) {
           {/* Card 1: Official Cadre & Public Authority */}
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
                   <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
@@ -114,42 +114,42 @@ export default function OfficerProfileView({ user, isEditing }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Officer Name</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.fullName || officerProfileData.official.fullName}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Government Employee Code</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-purple-700 dark:text-purple-300 font-mono font-bold">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-purple-700 dark:text-purple-300 font-mono font-bold">
                   {user?.officerProfile?.employeeId || officerProfileData.official.employeeId}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Designated Role</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.officerProfile?.designation || officerProfileData.official.designation}
                 </div>
               </div>
 
               <div>
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Public Authority / Department</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.officerProfile?.department?.name || officerProfileData.statutoryRole.publicAuthority}
                 </div>
               </div>
 
               <div className="sm:col-span-2">
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Administrative Ministry</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {officerProfileData.statutoryRole.ministry}
                 </div>
               </div>
 
               <div className="sm:col-span-2">
                 <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1">Nodal Office Location</label>
-                <div className="p-2.5 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
+                <div className="p-3 rounded-xl bg-slate-100/80 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-800 dark:text-slate-200 font-medium">
                   {user?.officerProfile?.officeLocation || officerProfileData.statutoryRole.officeLocation}
                 </div>
               </div>
@@ -159,7 +159,7 @@ export default function OfficerProfileView({ user, isEditing }) {
           {/* Card 2: Jurisdiction & Section 19(1) Appellate Hierarchy */}
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
-              <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-cyan-600/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-sm">
                   <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
@@ -172,8 +172,8 @@ export default function OfficerProfileView({ user, isEditing }) {
 
             <div className="space-y-3 text-xs">
               <div>
-                <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-1.5">Assigned Works & Territorial Jurisdiction</label>
-                <div className="space-y-1.5">
+                <label className="font-semibold text-slate-500 dark:text-slate-400 block mb-2">Assigned Works & Territorial Jurisdiction</label>
+                <div className="space-y-2">
                   {officerProfileData.jurisdictionWards.map((w, idx) => (
                     <div key={idx} className="p-2 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/5 flex items-center gap-2 text-slate-700 dark:text-slate-300">
                       <span className="text-purple-600 dark:text-purple-400 font-bold">✓</span>
@@ -219,22 +219,22 @@ export default function OfficerProfileView({ user, isEditing }) {
             </div>
 
             <div className="space-y-3 text-xs">
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">DSC Certificate ID:</span>
                 <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{officerProfileData.credentials.dscTokenId}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Validation Status:</span>
                 <span className="text-emerald-700 dark:text-emerald-400 font-semibold">{officerProfileData.credentials.dscStatus}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Validity Expiration:</span>
                 <span className="font-semibold text-slate-800 dark:text-slate-200">{officerProfileData.credentials.dscExpiry}</span>
               </div>
 
-              <div className="flex justify-between items-center py-1.5 border-b border-slate-200/60 dark:border-white/5">
+              <div className="flex justify-between items-center py-2 border-b border-slate-200/60 dark:border-white/5">
                 <span className="text-slate-500 dark:text-slate-400">Govt Intranet Subnet:</span>
                 <span className="font-mono text-slate-700 dark:text-slate-300">{officerProfileData.credentials.govIntranetIp}</span>
               </div>
@@ -251,7 +251,7 @@ export default function OfficerProfileView({ user, isEditing }) {
           <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-3">PIO Quick Actions</h3>
 
-            <div className="space-y-2.5">
+            <div className="space-y-3">
               <Link
                 href="/dashboard"
                 className="w-full flex items-center justify-between p-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs transition shadow-md"

@@ -15,9 +15,11 @@
   --font-display: "Red Hat Display", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-display);
 
-  --font-weight-bold: 600;
-  --font-weight-extrabold: 600;
-  --font-weight-black: 700;
+  /* Two working weights (400, 500); semibold 600 stays for rare emphasis.
+     Hierarchy comes from size and colour, not weight. */
+  --font-weight-bold: 500;
+  --font-weight-extrabold: 500;
+  --font-weight-black: 600;
 
   --tracking-wide: 0.01em;
   --tracking-wider: 0.015em;
@@ -146,6 +148,8 @@
   body {
     font-family: var(--font-sans);
     line-height: 1.55;
+    /* Fees, day counts and reference numbers line up in every column */
+    font-variant-numeric: tabular-nums;
   }
 
   html.dark body {

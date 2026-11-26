@@ -94,7 +94,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
         >
           {/* Top Control Bar (Modal Header) */}
           <div className="p-4 sm:px-6 bg-slate-50 dark:bg-purple-950/50 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0">
-            <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30 shrink-0">
                 <IcGlobe className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
               </div>
@@ -119,7 +119,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   href={currentArticle.pageUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer"
+                  className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer"
                   title="Open on Wikipedia in new tab"
                 >
                   <span>Open in Tab</span>
@@ -170,7 +170,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   {currentArticle.title}
                 </h2>
                 {currentArticle.description && (
-                  <p className="text-sm text-purple-700 dark:text-purple-300 font-medium italic mt-1">
+                  <p className="text-sm text-purple-700 dark:text-purple-300 font-medium mt-1">
                     {currentArticle.description}
                   </p>
                 )}
@@ -179,7 +179,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
 
             {/* Description Subtitle if Thumbnail was shown */}
             {currentArticle.thumbnail && currentArticle.description && (
-              <p className="text-sm text-purple-700 dark:text-purple-300 font-medium italic -mt-2">
+              <p className="text-sm text-purple-700 dark:text-purple-300 font-medium -mt-2">
                 {currentArticle.description}
               </p>
             )}
@@ -193,7 +193,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   </p>
                 ))
               ) : (
-                <p className="italic text-slate-400">
+                <p className="text-slate-400">
                   {loadingExtended
                     ? "Retrieving full article text from Wikipedia..."
                     : "No introductory summary available for this topic."}
@@ -210,7 +210,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             )}
 
             {/* Civic & RTI Context Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/90 dark:border-purple-500/30 space-y-2.5">
+            <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/90 dark:border-purple-500/30 space-y-3">
               <div className="flex items-center gap-2">
                 <span className="text-lg"><IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
@@ -224,7 +224,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                 <Link
                   href="/file-rti"
                   onClick={onClose}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition cursor-pointer"
                 >
                   <span>+ File RTI on this Topic</span>
                   <span>→</span>
@@ -233,7 +233,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             </div>
 
             {/* Attribution & Legal Notice */}
-            <div className="p-3.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-xs text-slate-500 dark:text-slate-400 space-y-1">
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-xs text-slate-500 dark:text-slate-400 space-y-1">
               <p>
                 <strong>Source:</strong> Wikipedia (The Free Encyclopedia). Text is licensed under{" "}
                 <a
@@ -257,9 +257,9 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             <button
               type="button"
               onClick={handleCopyLink}
-              className="px-3.5 py-2 rounded-xl bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer flex items-center gap-2"
             >
-              <span>{copied ? "✓ Copied!" : "Copy Link"}</span>
+              <span>{copied ? "✓ Copied" : "Copy Link"}</span>
             </button>
 
             <div className="flex items-center gap-2">

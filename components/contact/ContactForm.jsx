@@ -22,7 +22,7 @@ export default function ContactForm() {
   return (
     <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       <div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 text-xs font-semibold mb-2">
+        <div className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
           <span>Citizen helpdesk and grievance cell</span>
         </div>
         <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -65,7 +65,7 @@ export default function ContactForm() {
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Dr. Rajesh Kumar"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
               />
             </div>
 
@@ -77,19 +77,19 @@ export default function ContactForm() {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="citizen@example.in"
-                className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
               />
             </div>
           </div>
 
           {/* Category Selector Grid */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <label className="text-slate-700 dark:text-slate-300 font-semibold block">Inquiry Category *</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {contactInquiryCategories.map((cat) => (
                 <label
                   key={cat.id}
-                  className={`p-3 rounded-xl border flex items-center gap-2.5 transition cursor-pointer ${
+                  className={`p-3 rounded-xl border flex items-center gap-3 transition cursor-pointer ${
                     formData.category === cat.id
                       ? "bg-purple-50 dark:bg-purple-600/30 border-purple-400 text-purple-950 dark:text-white font-bold"
                       : "bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
@@ -118,13 +118,13 @@ export default function ContactForm() {
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Kindly articulate the statutory reference or platform friction you experienced..."
-              className="w-full p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500 resize-none"
+              className="w-full p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500 resize-none"
             />
           </div>
 
           {/* Bottom Notice & Submit */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-            <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-xs">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs">
               <span><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Submissions encrypted via DPDP Act 2023 protocol</span>
             </div>
