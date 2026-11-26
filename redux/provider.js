@@ -2,6 +2,7 @@
 
 import { useEffect } from "react";
 import { Provider, useDispatch } from "react-redux";
+import { MotionConfig } from "framer-motion";
 import { store } from "./store";
 import { setCredentials } from "./slices/authSlice";
 
@@ -41,7 +42,10 @@ function SessionHydrator({ children }) {
 export function ReduxProvider({ children }) {
   return (
     <Provider store={store}>
-      <SessionHydrator>{children}</SessionHydrator>
+      {/* Calm UI: framer-motion skips transform motion (slides, scaling, floating loops), keeps fades */}
+      <MotionConfig reducedMotion="always">
+        <SessionHydrator>{children}</SessionHydrator>
+      </MotionConfig>
     </Provider>
   );
 }

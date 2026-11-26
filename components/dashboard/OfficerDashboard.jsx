@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import { setCredentials } from "@/redux/slices/authSlice";
 import OfficerWorkspace from "@/components/dashboard/OfficerWorkspace";
+import { Info as IcInfo, Lock as IcLock } from "lucide-react";
 
 export default function OfficerDashboard({ user }) {
   const dispatch = useDispatch();
@@ -77,22 +78,20 @@ export default function OfficerDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Officer Bio & Department Banner */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-700 via-indigo-800 to-slate-900 dark:from-purple-950/80 dark:via-slate-900 dark:to-indigo-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
-        {/* Glow decoration */}
-        <div className="absolute -left-10 -bottom-10 w-48 h-48 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-6 sm:p-8 rounded-3xl bg-purple-700 dark:bg-purple-950/80 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-colors">
 
         <div className="space-y-2 z-10">
           <div className="inline-flex items-center gap-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/15 text-purple-200 border border-purple-500/30 text-xs font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400 animate-ping" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/15 text-purple-200 border border-purple-500/30 text-xs font-bold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400" />
               Public Information Officer (PIO) Portal • Section 5(1) Designated
             </div>
             {isVerified ? (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold">
+              <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-lg bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 text-xs font-bold">
                 <CheckCircle2 className="w-3.5 h-3.5" /> DigiLocker Verified
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold animate-pulse">
+              <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-lg bg-amber-500/20 text-amber-300 border border-amber-500/40 text-xs font-bold">
                 <AlertTriangle className="w-3.5 h-3.5" /> e-KYC Pending
               </span>
             )}
@@ -112,24 +111,24 @@ export default function OfficerDashboard({ user }) {
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-2.5 shrink-0 z-10">
+        <div className="flex flex-wrap items-center gap-3 shrink-0 z-10">
           <Link
             href="/general-info"
-            className="px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-md transition"
+            className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs sm:text-sm shadow-md transition"
           >
             Statutory Rules Catalog
           </Link>
           {isVerified ? (
             <a
               href="#examination-queue"
-              className="px-4 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15 font-semibold text-xs sm:text-sm transition"
+              className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15 font-semibold text-xs sm:text-sm transition"
             >
               Scroll to Queue ↓
             </a>
           ) : (
             <button
               onClick={() => setShowVerifyModal(true)}
-              className="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg transition flex items-center gap-2 cursor-pointer"
+              className="px-5 py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs sm:text-sm shadow-lg transition flex items-center gap-2 cursor-pointer"
             >
               <ShieldCheck className="w-4 h-4 text-slate-950" /> Verify with DigiLocker
             </button>
@@ -160,32 +159,32 @@ export default function OfficerDashboard({ user }) {
             </div>
             <button
               onClick={() => setShowVerifyModal(true)}
-              className="px-6 py-3 rounded-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-md transition flex items-center gap-2 cursor-pointer shrink-0"
+              className="px-6 py-3 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs sm:text-sm shadow-md transition flex items-center gap-2 cursor-pointer shrink-0"
             >
               <KeyRound className="w-4 h-4" /> Authenticate via DigiLocker
             </button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 space-y-1.5 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span className="text-rose-500">🔒</span> Section 6(1) Dossiers Locked
+                <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Section 6(1) Dossiers Locked
               </div>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Citizen petition inspection and confidential public works records cannot be accessed prior to officer e-KYC.
               </p>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 space-y-1.5 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span className="text-rose-500">🔒</span> AI Evidence Matching Blocked
+                <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> AI Evidence Matching Blocked
               </div>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Automated measurement books and municipal voucher cross-referencing tools remain secured.
               </p>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 space-y-1.5 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                <span className="text-rose-500">🔒</span> Disposal Order Issuance
+                <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Disposal Order Issuance
               </div>
               <p className="text-slate-500 dark:text-slate-400 leading-relaxed">
                 Official certified Section 7(1) disposal memorandums require authenticated Aadhaar e-Sign validity.
@@ -196,14 +195,14 @@ export default function OfficerDashboard({ user }) {
       )}
 
       {/* Main Interactive Split Workstation */}
-      <div id="examination-queue" className={`relative ${!isVerified ? "pointer-events-none select-none opacity-50 filter blur-[1px]" : ""}`}>
+      <div id="examination-queue" className={`relative ${!isVerified ? "pointer-events-none select-none opacity-50 filter " : ""}`}>
         <OfficerWorkspace />
       </div>
 
       {/* Statutory Duty Advisory */}
       <div className="p-4 sm:p-5 rounded-2xl bg-slate-100 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-400">
-        <div className="flex items-center gap-2.5">
-          <span className="text-base">ℹ️</span>
+        <div className="flex items-center gap-3">
+          <span className="text-base"><IcInfo className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
           <span>
             <strong>Section 6(3) Transfer Rule:</strong> If requested records concern another public authority, the petition must be transferred within 5 statutory days with citizen intimation.
           </span>
@@ -216,15 +215,15 @@ export default function OfficerDashboard({ user }) {
       {/* DIGILOCKER VERIFICATION MODAL */}
       <AnimatePresence>
         {showVerifyModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#0f0728] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-5 text-slate-900 dark:text-white"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-5 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
-                <div className="flex items-center gap-2.5">
+                <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 shrink-0">
                     <ShieldCheck className="w-6 h-6" />
                   </div>
@@ -232,14 +231,14 @@ export default function OfficerDashboard({ user }) {
                     <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
                       DigiLocker Officer e-KYC
                     </h3>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       MeitY Digital Identity Gateway • GOI
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={() => setShowVerifyModal(false)}
-                  className="p-1.5 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded-lg cursor-pointer"
+                  className="p-2 text-slate-400 hover:text-slate-700 dark:hover:text-white rounded-lg cursor-pointer"
                 >
                   <XCircle className="w-5 h-5" />
                 </button>
@@ -267,7 +266,7 @@ export default function OfficerDashboard({ user }) {
                     </div>
                   </div>
 
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                     A secure 6-digit one-time password (OTP) will be simulated and sent to your registered Aadhaar mobile number to authenticate Section 5(1) public officer credentials.
                   </p>
 
@@ -275,14 +274,14 @@ export default function OfficerDashboard({ user }) {
                     <button
                       type="button"
                       onClick={() => setShowVerifyModal(false)}
-                      className="px-4 py-2.5 rounded-full text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-white cursor-pointer"
+                      className="px-4 py-3 rounded-lg text-xs font-semibold text-slate-500 hover:text-slate-800 dark:hover:text-white cursor-pointer"
                     >
                       Cancel
                     </button>
                     <button
                       type="button"
                       onClick={handleSendOtp}
-                      className="px-6 py-2.5 rounded-full text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md shadow-purple-600/20 flex items-center gap-1.5 cursor-pointer"
+                      className="px-6 py-3 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md flex items-center gap-2 cursor-pointer"
                     >
                       <span>Send Aadhaar OTP</span>
                       <ArrowRight className="w-3.5 h-3.5" />
@@ -294,7 +293,7 @@ export default function OfficerDashboard({ user }) {
               {/* Step 2: Enter OTP */}
               {verifyStep === 2 && (
                 <form onSubmit={handleVerifyOtp} className="space-y-4 text-xs">
-                  <div className="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-800 dark:text-purple-300">
+                  <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 text-purple-800 dark:text-purple-300">
                     OTP sent to Aadhaar-linked mobile (<strong>+91 •••••••821</strong>). For development sandbox verification, enter <strong>482910</strong>.
                   </div>
 
@@ -304,7 +303,7 @@ export default function OfficerDashboard({ user }) {
                     </div>
                   )}
 
-                  <div className="space-y-1.5">
+                  <div className="space-y-2">
                     <label className="block font-bold text-slate-700 dark:text-slate-300">
                       Enter 6-digit Aadhaar OTP
                     </label>
@@ -329,7 +328,7 @@ export default function OfficerDashboard({ user }) {
                     <button
                       type="submit"
                       disabled={verifying}
-                      className="px-6 py-2.5 rounded-full text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition shadow-md shadow-emerald-600/20 flex items-center gap-1.5 cursor-pointer"
+                      className="px-6 py-3 rounded-lg text-xs font-bold bg-emerald-600 hover:bg-emerald-700 text-white transition shadow-md flex items-center gap-2 cursor-pointer"
                     >
                       {verifying ? (
                         <>

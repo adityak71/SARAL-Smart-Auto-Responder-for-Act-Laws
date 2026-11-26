@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SARAL - Know Your Rights &amp; Laws</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts: Source Serif 4 & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            civic: {
+              teal: '#1e3a42',
+              'teal-dark': '#142930',
+              'teal-light': '#2d535e',
+              slate: '#475569',
+              bg: '#f8fafc',
+              surface: '#ffffff',
+              border: '#e2e8f0',
+              accent: '#0d9488',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Dignified Civic Aesthetic -->
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fcfdfd;
+      color: #1e293b;
+    }
+    .headline-font {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen flex flex-col bg-[#fbfdfd] text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Brand & Emblem -->
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 bg-slate-900 rounded-lg flex items-center justify-center text-white shadow-sm border border-slate-800">
+<svg aria-label="National Emblem Icon" class="w-6 h-6 fill-current text-amber-100" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-serif font-bold text-xl tracking-tight text-slate-900 leading-none">SARAL</span>
+<span class="text-xs text-slate-500 font-medium tracking-normal mt-1">Simplifying Right to Information</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav aria-label="Main Navigation" class="hidden lg:flex items-center space-x-1">
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Home</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Dashboard</a>
+<!-- Active Nav Pill -->
+<a class="px-4 py-1.5 rounded-md text-sm font-semibold text-white bg-[#1e3a42] shadow-sm transition-all" href="#">General Info</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">How It Works</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">About</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Contact</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Tracking</a>
+</nav>
+<!-- Right Utility Actions -->
+<div class="flex items-center space-x-3">
+<!-- Theme Toggle -->
+<button aria-label="Toggle Theme" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Notification Bell with Count Badge -->
+<button aria-label="Notifications" class="relative w-9 h-9 flex items-center justify-center rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1 right-1 bg-rose-500 text-white font-semibold text-[10px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">1</span>
+</button>
+<!-- Logout Button -->
+<button class="px-3.5 py-1.5 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-md transition-colors">
+          Logout
+        </button>
+<div class="h-6 w-px bg-slate-200"></div>
+<!-- User Profile Avatar -->
+<button aria-label="User Profile Menu" class="flex items-center space-x-2 p-1 rounded-full hover:bg-slate-50 transition-colors">
+<div class="relative">
+<img alt="Crazy Minds Profile" class="w-8 h-8 rounded-full border border-slate-300 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDukAdRs8VB1mKVuD-KdgqcqkM1lpNv-GvB3O3yMe9KC17COFOAHxqsdCZHSTXD0jrjbemS0D_mLiN0O-tqGJImQbehr-BZplDYhDqfk6_Ymwp5GHwaA-F50Lrcwqr2oYVe319kxsRMTix5z9FtCAfjE50XkqdEoeIAaqAcvQG9bcNkDCD8_isDDmdAkjJJZ_toxq-TF4pWqMm0vjGMixXw--ONbX3NsVMvTHd22A"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroAndSearchSection -->
+<main class="flex-1 pb-16"><div class="flex flex-col w-full">
+<div class="max-w-[1280px] w-full mx-auto px-8 py-12 flex flex-col gap-16">
+<!-- Header & Search Section -->
+<section class="flex flex-col items-center text-center max-w-3xl mx-auto w-full gap-6">
+<div class="flex flex-col gap-3">
+<h1 class="font-display-lg text-display-lg text-on-surface">
+          Know Your <span class="text-primary-container">Rights &amp; Laws</span>
+</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">
+          Plain summaries of the RTI Act, what each section means for you, and contact details for each department’s Public Information Officer.
+        </p>
+</div>
+<!-- Search Bar -->
+<div class="w-full max-w-2xl bg-surface-container-lowest rounded-xl shadow-md p-2 flex items-center gap-2 mt-2">
+<span class="material-symbols-outlined text-on-surface-variant pl-3 select-none">search</span>
+<input class="w-full bg-transparent font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant/70 focus:outline-none py-2 px-1" id="rti-search-input" placeholder="Search any topic: RTI Act, Road tenders, Gram Panchayat budget, PIO..." type="text"/>
+<button class="shrink-0 px-3 py-1.5 rounded-lg bg-surface-container text-on-surface-variant hover:bg-surface-container-high font-body-sm text-body-sm font-medium transition-colors cursor-pointer" id="lang-toggle-btn" type="button">
+          EN ⇄ हिंदी
+        </button>
+<button class="shrink-0 px-5 py-2.5 rounded-lg bg-primary-container text-on-primary hover:bg-primary font-title-md text-title-md transition-colors cursor-pointer shadow-sm" id="rti-search-btn" type="button">
+          Search
+        </button>
+</div>
+<!-- Popular Topic Pills -->
+<div class="flex flex-col items-center gap-2.5 w-full">
+<div class="flex flex-wrap items-center justify-center gap-2">
+<span class="font-body-sm text-body-sm text-on-surface-variant mr-1">Popular:</span>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">RTI Act 2005</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">Public Information Officer</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">Gram Panchayat Road Funds</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">Central Information Commission</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">Section 8 Exemptions</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">First Appeal (Section 19)</button>
+<button class="topic-pill px-3 py-1 rounded-full bg-surface-container text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface font-body-sm text-body-sm transition-colors cursor-pointer" type="button">MGNREGA Muster Rolls</button>
+</div>
+</div>
+</section>
+<!-- Statutory Legal Clauses & RTI Act Rules -->
+<section class="flex flex-col gap-6">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-tertiary-fixed text-on-tertiary-fixed-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">balance</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h2 class="font-headline-md text-headline-md text-on-surface">Statutory Legal Clauses &amp; RTI Act Rules</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Official procedures, turnarounds, and fee structures under Right to Information Act 2005</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Card 1: Section 6(1) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-6 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between gap-3">
+<span class="px-2.5 py-1 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-label-caps text-label-caps uppercase shrink-0">
+                Section 6(1)
+              </span>
+<div class="flex items-center gap-1.5 text-tertiary font-body-sm text-body-sm font-medium text-right">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>30 Days from date of receipt</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">How to File a Valid RTI Application</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                A citizen can make a request in writing or through electronic means in English, Hindi, or the official language of the area. No citizen is required to state the reason for requesting information or personal details except contact address.
+              </p>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl flex items-center justify-between gap-4">
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="text-on-surface-variant">Fee:</span> <strong class="font-semibold">₹10 (Exempted for BPL Cardholders under Section 7(5))</strong>
+</p>
+<a class="shrink-0 font-body-sm text-body-sm font-semibold text-primary-container hover:text-primary transition-colors" href="#">
+              File Petition →
+            </a>
+</div>
+</article>
+<!-- Card 2: Section 7(1) -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-6 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between gap-3">
+<span class="px-2.5 py-1 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-label-caps text-label-caps uppercase shrink-0">
+                Section 7(1)
+              </span>
+<div class="flex items-center gap-1.5 text-tertiary font-body-sm text-body-sm font-medium text-right">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>30 Days (Standard) / 48 Hours (Life or Liberty)</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Statutory 30-Day Turnaround &amp; 48-Hour Emergency Clause</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                The Public Information Officer (PIO) must provide the information or reject the request within 30 days. If the information sought concerns the life or liberty of a person, it MUST be provided within 48 hours of receipt.
+              </p>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl flex items-center justify-between gap-4">
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="text-on-surface-variant">Fee:</span> <strong class="font-semibold">Standard ₹10 application fee</strong>
+</p>
+<a class="shrink-0 font-body-sm text-body-sm font-semibold text-primary-container hover:text-primary transition-colors" href="#">
+              File Petition →
+            </a>
+</div>
+</article>
+<!-- Card 3: Section 8 -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-6 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-4">
+<div class="flex items-start justify-between gap-3">
+<span class="px-2.5 py-1 rounded-lg bg-primary-fixed text-on-primary-fixed-variant font-label-caps text-label-caps uppercase shrink-0">
+                Section 8
+              </span>
+<div class="flex items-center gap-1.5 text-tertiary font-body-sm text-body-sm font-medium text-right">
+<span class="material-symbols-outlined text-base">schedule</span>
+<span>Rejection order must specify reasons within 30 days</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Exemptions from Public Disclosure</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                Information whose disclosure prejudicially affects sovereignty, national security, intellectual property, cabinet papers before decision, or unwarranted invasion of personal privacy is exempt. However, information which cannot be denied to Parliament or State Legislature cannot be denied to any citizen.
+              </p>
+</div>
+</div>
+<div class="pt-4 bg-surface-container-low/50 -mx-6 -mb-6 px-6 py-4 rounded-b-xl flex items-center justify-between gap-4">
+<p class="font-body-sm text-body-sm text-on-surface">
+<span class="text-on-surface-variant">Fee:</span> <strong class="font-semibold">N/A</strong>
+</p>
+<a class="shrink-0 font-body-sm text-body-sm font-semibold text-primary-container hover:text-primary transition-colors" href="#">
+              File Petition →
+            </a>
+</div>
+</article>
+</div>
+</section>
+<!-- Responsible Public Authorities & PIO Directory -->
+<section class="flex flex-col gap-6">
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined">account_balance</span>
+</div>
+<div class="flex flex-col gap-0.5">
+<h2 class="font-headline-md text-headline-md text-on-surface">Responsible Public Authorities &amp; PIO Directory</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Official departments mapped to RTI requests with nodal officer details</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Directory Card 1: PWD_MP -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between gap-2">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                PWD_MP
+              </span>
+<span class="font-body-sm text-body-sm font-semibold text-primary-container">
+                Avg: 18 Days
+              </span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Public Works Department (PWD)</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ministry of Road Transport &amp; State Highways (Madhya Pradesh)</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 flex flex-col gap-1.5">
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Nodal Office:</strong> <span class="text-on-surface-variant">Divisional Works Office, PWD Division II, Pipariya</span>
+</p>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Email:</strong> <a class="text-primary-container hover:underline" href="mailto:pwd.pipariya@mp.gov.in">pwd.pipariya@mp.gov.in</a>
+</p>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Phone:</strong> <span class="text-on-surface-variant">+91 7574-254190</span>
+</p>
+</div>
+</article>
+<!-- Directory Card 2: WATER_SAN -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between gap-2">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                WATER_SAN
+              </span>
+<span class="font-body-sm text-body-sm font-semibold text-primary-container">
+                Avg: 20 Days
+              </span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Urban Water Supply &amp; Sanitation</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ministry of Jal Shakti (State)</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 flex flex-col gap-1.5">
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Nodal Office:</strong> <span class="text-on-surface-variant">Municipal Water Works Division</span>
+</p>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Email:</strong> <a class="text-primary-container hover:underline" href="mailto:waterworks@gov.in">waterworks@gov.in</a>
+</p>
+</div>
+</article>
+<!-- Directory Card 3: CIVIL_SUP -->
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-6 flex flex-col justify-between gap-5 hover:shadow-md transition-shadow">
+<div class="flex flex-col gap-3">
+<div class="flex items-center justify-between gap-2">
+<span class="px-2.5 py-1 rounded-lg bg-surface-container text-on-surface-variant font-label-caps text-label-caps uppercase">
+                CIVIL_SUP
+              </span>
+<span class="font-body-sm text-body-sm font-semibold text-primary-container">
+                Avg: 15 Days
+              </span>
+</div>
+<div class="flex flex-col gap-1">
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Food, Civil Supplies &amp; Consumer Affairs</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Ministry of Consumer Affairs (State)</p>
+</div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-4 flex flex-col gap-1.5">
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Nodal Office:</strong> <span class="text-on-surface-variant">Civil Supplies Bhavan</span>
+</p>
+<p class="font-body-sm text-body-sm text-on-surface">
+<strong class="font-semibold">Email:</strong> <a class="text-primary-container hover:underline" href="mailto:pds.support@gov.in">pds.support@gov.in</a>
+</p>
+</div>
+</article>
+</div>
+</section>
+</div>
+</div>
+<script>
+  (function () {
+    const searchInput = document.getElementById('rti-search-input');
+    const langToggle = document.getElementById('lang-toggle-btn');
+    const pills = document.querySelectorAll('.topic-pill');
+    let isHindi = false;
+
+    if (langToggle && searchInput) {
+      langToggle.addEventListener('click', () => {
+        isHindi = !isHindi;
+        searchInput.placeholder = isHindi
+          ? 'कोई भी विषय खोजें: आरटीआई अधिनियम, सड़क निविदाएं, ग्राम पंचायत बजट...'
+          : 'Search any topic: RTI Act, Road tenders, Gram Panchayat budget, PIO...';
+      });
+    }
+
+    pills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        if (searchInput) {
+          searchInput.value = pill.textContent.trim();
+          searchInput.focus();
+        }
+      });
+    });
+  })();
+</script></main>
+<!-- END: HeroAndSearchSection -->
+<!-- BEGIN: SiteFooter -->
+<footer class="bg-white border-t border-slate-200 mt-auto py-8">
+<div class="max-w-[1320px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+<div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+<span class="font-semibold text-slate-800">Right to Information Act, 2005</span>
+<span class="hidden sm:inline text-slate-300">•</span>
+<span>National Informatics &amp; Transparency Framework</span>
+<span class="hidden sm:inline text-slate-300">•</span>
+<span>DoPT Acknowledged Portal</span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="hover:text-slate-800 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-800 transition-colors" href="#">Terms of Use</a>
+<a class="hover:text-slate-800 transition-colors" href="#">RTI Act Rules</a>
+<span class="text-slate-300">|</span>
+<span class="font-medium text-slate-700">Helpline: 1800-RTI-SARAL</span>
+</div>
+</div>
+</footer>
+<!-- END: SiteFooter -->
+</body></html>

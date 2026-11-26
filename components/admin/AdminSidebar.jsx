@@ -65,7 +65,7 @@ export const ADMIN_SECTIONS = [
 
 export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
   return (
-    <aside className="w-full lg:w-72 bg-white dark:bg-[#070217] border border-slate-200 dark:border-white/10 rounded-3xl p-5 text-slate-800 dark:text-white flex flex-col justify-between shadow-sm dark:shadow-2xl shrink-0">
+    <aside className="w-full lg:w-72 bg-white dark:bg-[#0f1a1f] border border-slate-200 dark:border-white/10 rounded-3xl p-5 text-slate-800 dark:text-white flex flex-col justify-between shadow-sm dark:shadow-2xl shrink-0">
       <div className="space-y-6">
         {/* Brand Header matching Screenshot 3 & 7 */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
@@ -76,11 +76,11 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
             <div>
               <div className="flex items-center gap-2">
                 <span className="font-extrabold text-base tracking-tight text-slate-900 dark:text-white">SARAL</span>
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+                <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                   Admin
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400">Administration Panel</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400">Administration Panel</p>
             </div>
           </div>
         </div>
@@ -90,7 +90,7 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
           {ADMIN_SECTIONS.map((section, idx) => (
             <div key={idx} className="space-y-1">
               {section.category && (
-                <div className="px-3 pt-2 text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                <div className="px-3 pt-2 text-xs font-bold tracking-wider text-slate-400 dark:text-slate-500">
                   {section.category}
                 </div>
               )}
@@ -103,9 +103,9 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
                       key={item.id}
                       type="button"
                       onClick={() => onSelectTab(item.id)}
-                      className={`w-full flex items-center gap-2.5 px-3 py-2 rounded-xl font-medium transition cursor-pointer text-left ${
+                      className={`w-full flex items-center gap-3 px-3 py-2 rounded-xl font-medium transition cursor-pointer text-left ${
                         isActive
-                          ? "bg-purple-600 text-white font-bold shadow-md shadow-purple-600/30"
+                          ? "bg-purple-600 text-white font-bold shadow-md "
                           : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
                       }`}
                     >
@@ -125,7 +125,7 @@ export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
         <button
           type="button"
           onClick={onLogout}
-          className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer text-left"
+          className="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold text-rose-600 dark:text-rose-400 hover:text-rose-700 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition cursor-pointer text-left"
         >
           <LogOut className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
           <span>Logout</span>

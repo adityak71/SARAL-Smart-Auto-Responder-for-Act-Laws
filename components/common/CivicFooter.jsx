@@ -18,23 +18,20 @@ export default function CivicFooter() {
 
   return (
     <footer
-      className="w-full bg-slate-100 dark:bg-[#050117] border-t border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 relative overflow-hidden transition-colors"
+      className="dark w-full bg-[#1e3a42] border-t border-white/10 text-slate-300 relative overflow-hidden transition-colors"
       data-purpose="civic-grand-footer"
     >
-      {/* Subtle Ambient Aura */}
-      <div className="absolute top-0 left-1/4 w-[600px] h-[300px] bg-purple-500/5 dark:bg-purple-900/10 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[600px] h-[300px] bg-indigo-500/5 dark:bg-indigo-900/10 blur-[120px] pointer-events-none" />
 
       {/* Top Compliance Trust Badges Bar */}
       <div className="border-b border-slate-200 dark:border-white/5 bg-slate-50/80 dark:bg-white/[0.02]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3.5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {complianceBadges.map((badge) => (
               <div
                 key={badge.label}
-                className="flex items-center gap-2 p-2.5 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-none"
+                className="flex items-center gap-2 p-3 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/5 text-xs text-slate-700 dark:text-slate-300 shadow-sm dark:shadow-none"
               >
-                <div className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300 flex items-center justify-center shrink-0">
+                <div className="w-6 h-6 rounded-lg bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-200 flex items-center justify-center shrink-0">
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 20 20">
                     <path
                       fillRule="evenodd"
@@ -55,9 +52,9 @@ export default function CivicFooter() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-10">
           {/* Column 1: Brand & National Emblem (4 Cols) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <div className="flex items-center gap-3.5">
-              <div className="flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-0.5 shadow-lg">
-                <div className="w-full h-full bg-[#0d062e] rounded-[14px] flex items-center justify-center">
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center w-12 h-12 rounded-sm bg-white/10 shadow-sm">
+                <div className="w-full h-full flex items-center justify-center">
                   <Emblem className="w-7 h-8 text-white" />
                 </div>
               </div>
@@ -65,21 +62,21 @@ export default function CivicFooter() {
                 <h3 className="font-extrabold text-xl text-slate-900 dark:text-white tracking-tight">
                   {brand.title}
                 </h3>
-                <p className="text-xs text-purple-700 dark:text-purple-300 font-semibold">
+                <p className="text-xs text-purple-700 dark:text-purple-200 font-semibold">
                   {brand.hindiTagline}
                 </p>
               </div>
             </div>
 
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed max-w-sm">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-sm">
               {brand.description}
             </p>
 
             <div className="p-3 rounded-xl bg-white dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs shadow-sm dark:shadow-none">
-              <span className="text-purple-800 dark:text-purple-300 font-bold block mb-0.5">
+              <span className="text-purple-800 dark:text-purple-200 font-bold block mb-0.5">
                 {brand.motto}
               </span>
-              <span className="text-[11px] text-slate-500 dark:text-slate-400">
+              <span className="text-xs text-slate-500 dark:text-slate-300">
                 Department of Personnel and Training (DoPT) & Central Information Commission Guidelines.
               </span>
             </div>
@@ -87,7 +84,7 @@ export default function CivicFooter() {
 
           {/* Column 2: Quick Links (2 Cols) */}
           <div className="lg:col-span-2 flex flex-col gap-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+            <h4 className="text-xs font-bold tracking-wider text-slate-900 dark:text-white">
               Quick Navigation
             </h4>
             <ul className="space-y-2 text-xs">
@@ -95,7 +92,7 @@ export default function CivicFooter() {
                 <li key={link.label}>
                   <Link
                     href={link.href}
-                    className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                    className="inline-block py-1 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -106,7 +103,7 @@ export default function CivicFooter() {
 
           {/* Column 3: Statutory Resources (3 Cols) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+            <h4 className="text-xs font-bold tracking-wider text-slate-900 dark:text-white">
               RTI Act, 2005 Statutory Links
             </h4>
             <ul className="space-y-2 text-xs">
@@ -117,10 +114,10 @@ export default function CivicFooter() {
                       href={item.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors inline-flex items-center gap-1"
+                      className="py-1 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors inline-flex items-center gap-1"
                     >
                       <span>{item.label}</span>
-                      <svg className="w-3 h-3 text-slate-400 dark:text-slate-500" viewBox="0 0 20 20" fill="currentColor">
+                      <svg className="w-3 h-3 text-slate-400 dark:text-slate-300" viewBox="0 0 20 20" fill="currentColor">
                         <path
                           fillRule="evenodd"
                           d="M5.22 14.78a.75.75 0 001.06 0l7.22-7.22v5.69a.75.75 0 001.5 0v-7.5a.75.75 0 00-.75-.75h-7.5a.75.75 0 000 1.5h5.69l-7.22 7.22a.75.75 0 000 1.06z"
@@ -131,7 +128,7 @@ export default function CivicFooter() {
                   ) : (
                     <Link
                       href={item.href}
-                      className="text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white transition-colors"
+                      className="inline-block py-1 text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors"
                     >
                       {item.label}
                     </Link>
@@ -143,18 +140,18 @@ export default function CivicFooter() {
 
           {/* Column 4: Citizen Support & Helpline (3 Cols) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <h4 className="text-xs font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+            <h4 className="text-xs font-bold tracking-wider text-slate-900 dark:text-white">
               Citizen Support & Helpline
             </h4>
-            <div className="space-y-2 text-xs text-slate-600 dark:text-slate-400">
+            <div className="space-y-2 text-xs text-slate-600 dark:text-slate-300">
               <div className="p-3 rounded-xl bg-purple-100/70 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 text-slate-900 dark:text-white">
-                <span className="text-[11px] text-purple-800 dark:text-purple-300 font-semibold block uppercase">
+                <span className="text-xs text-purple-800 dark:text-purple-200 font-semibold block">
                   Toll-Free National Helpline
                 </span>
                 <span className="text-base font-bold text-slate-900 dark:text-white tracking-wide">
                   {citizenSupport.tollFree}
                 </span>
-                <span className="text-[11px] text-slate-500 dark:text-slate-400 block mt-0.5">
+                <span className="text-xs text-slate-500 dark:text-slate-300 block mt-0.5">
                   {citizenSupport.workingHours}
                 </span>
               </div>
@@ -163,7 +160,7 @@ export default function CivicFooter() {
                 <strong className="text-slate-700 dark:text-slate-300 block">Citizen Support Email:</strong>
                 <a
                   href={`mailto:${citizenSupport.email}`}
-                  className="text-purple-700 dark:text-purple-300 hover:underline"
+                  className="text-purple-700 dark:text-purple-200 hover:underline"
                 >
                   {citizenSupport.email}
                 </a>
@@ -171,14 +168,14 @@ export default function CivicFooter() {
 
               <div>
                 <strong className="text-slate-700 dark:text-slate-300 block">Physical Nodal Cell:</strong>
-                <p className="text-[11px] leading-snug">{citizenSupport.address}</p>
+                <p className="text-xs leading-snug">{citizenSupport.address}</p>
               </div>
             </div>
           </div>
         </div>
 
         {/* National Portal Links Grid */}
-        <div className="mt-10 pt-6 border-t border-slate-200 dark:border-white/5 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-400">
+        <div className="mt-10 pt-6 border-t border-slate-200 dark:border-white/5 flex flex-wrap items-center justify-between gap-4 text-xs text-slate-600 dark:text-slate-300">
           <span className="font-semibold text-slate-700 dark:text-slate-300">
             Government of India Digital Initiatives:
           </span>
@@ -198,9 +195,9 @@ export default function CivicFooter() {
         </div>
 
         {/* Bottom Legal Disclaimer & Copyright */}
-        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="mt-8 pt-6 border-t border-slate-200 dark:border-white/10 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-300">
           <p className="max-w-3xl text-left leading-relaxed">{disclaimer}</p>
-          <p className="shrink-0 font-medium text-slate-600 dark:text-slate-400">{copyright}</p>
+          <p className="shrink-0 font-medium text-slate-600 dark:text-slate-300">{copyright}</p>
         </div>
       </div>
     </footer>

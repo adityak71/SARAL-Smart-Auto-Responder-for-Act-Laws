@@ -187,10 +187,10 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
         loadOfficers();
         fetchNextEmployeeId(createForm.departmentId);
       } else {
-        setActionMsg(`❌ ${data.error || "Failed to create officer."}`);
+        setActionMsg(`${data.error || "Failed to create officer."}`);
       }
     } catch {
-      setActionMsg("❌ Network error connecting to Admin Officer API.");
+      setActionMsg("Network error connecting to Admin Officer API.");
     } finally {
       setIsSubmitting(false);
     }
@@ -229,10 +229,10 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
         setActionMsg(`✓ Officer ${officer.fullName} ${nextState ? "reactivated" : "suspended"}.`);
         loadOfficers();
       } else {
-        setActionMsg(`❌ ${data.error}`);
+        setActionMsg(`${data.error}`);
       }
     } catch {
-      setActionMsg("❌ Error updating officer status.");
+      setActionMsg("Error updating officer status.");
     }
   };
 
@@ -254,10 +254,10 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
         setActionMsg(`✓ ${data.message}`);
         loadOfficers();
       } else {
-        setActionMsg(`❌ ${data.error}`);
+        setActionMsg(`${data.error}`);
       }
     } catch {
-      setActionMsg("❌ Error soft-deleting officer.");
+      setActionMsg("Error soft-deleting officer.");
     }
   };
 
@@ -292,13 +292,13 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
             onClick={() => setActiveView("directory")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
               activeView === "directory"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
             <Briefcase className="w-4 h-4" />
             <span>Officer Directory</span>
-            <span className="ml-1 px-1.5 py-0.5 rounded text-[10px] bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 font-mono">
+            <span className="ml-1 px-2 py-0.5 rounded text-xs bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-300 font-mono">
               {officers.length}
             </span>
           </button>
@@ -306,7 +306,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
             onClick={() => setActiveView("permissions")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition cursor-pointer ${
               activeView === "permissions"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/30"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
@@ -327,7 +327,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
       {activeView === "directory" ? (
         <>
           {/* Officer Management Top Card with Dual-Theme */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6 transition-colors">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6 transition-colors">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
@@ -337,7 +337,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                   Designated Public Information Officers (PIO) database & administrative oversight
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-bold">
+              <span className="px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 text-xs font-bold">
                 Admin Only
               </span>
             </div>
@@ -382,7 +382,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                   setShowCreateModal(true);
                   fetchNextEmployeeId(createForm.departmentId || departments[0]?.id);
                 }}
-                className="w-full py-3.5 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm transition shadow-lg shadow-purple-600/25 flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-4 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-extrabold text-sm transition shadow-lg flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Plus className="w-5 h-5 text-white" />
                 <span>+ Create New Officer</span>
@@ -392,7 +392,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
 
           {/* Action Notification Toast */}
           {actionMsg && (
-            <div className="p-3.5 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-200 text-xs font-semibold flex items-center justify-between">
+            <div className="p-4 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-200 text-xs font-semibold flex items-center justify-between">
               <span>{actionMsg}</span>
               <button
                 type="button"
@@ -405,7 +405,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           )}
 
           {/* Officers Table Container with Dual-Theme */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4 transition-colors">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4 transition-colors">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-white/10">
               <div className="relative flex-1 max-w-sm">
                 <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -418,11 +418,11 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                 />
               </div>
 
-              <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
+              <div className="flex items-center gap-2 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
                 <button
                   type="button"
                   onClick={() => setFilterStatus("all")}
-                  className={`px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg font-semibold transition cursor-pointer ${
                     filterStatus === "all"
                       ? "bg-purple-600 text-white font-bold shadow"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -433,7 +433,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                 <button
                   type="button"
                   onClick={() => setFilterStatus("active")}
-                  className={`px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg font-semibold transition cursor-pointer ${
                     filterStatus === "active"
                       ? "bg-purple-600 text-white font-bold shadow"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -444,7 +444,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                 <button
                   type="button"
                   onClick={() => setFilterStatus("suspended")}
-                  className={`px-3 py-1.5 rounded-lg font-semibold transition cursor-pointer ${
+                  className={`px-3 py-2 rounded-lg font-semibold transition cursor-pointer ${
                     filterStatus === "suspended"
                       ? "bg-purple-600 text-white font-bold shadow"
                       : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -472,7 +472,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                       setShowCreateModal(true);
                       fetchNextEmployeeId(createForm.departmentId || departments[0]?.id);
                     }}
-                    className="px-5 py-2.5 rounded-full bg-purple-600 text-white font-bold hover:bg-purple-700 transition cursor-pointer shadow-md"
+                    className="px-5 py-3 rounded-lg bg-purple-600 text-white font-bold hover:bg-purple-700 transition cursor-pointer shadow-md"
                   >
                     + Register First Officer Now
                   </button>
@@ -493,38 +493,38 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                   <tbody className="divide-y divide-slate-100 dark:divide-white/5">
                     {filteredOfficers.map((o) => (
                       <tr key={o.id} className="hover:bg-slate-50 dark:hover:bg-white/[0.03] transition">
-                        <td className="px-4 py-3.5">
+                        <td className="px-4 py-4">
                           <div className="font-bold text-slate-900 dark:text-white text-sm">{o.fullName}</div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">{o.email}</div>
+                          <div className="text-xs text-slate-500 dark:text-slate-400 font-mono">{o.email}</div>
                         </td>
-                        <td className="px-4 py-3.5 font-mono text-purple-600 dark:text-cyan-400 font-semibold">
+                        <td className="px-4 py-4 font-mono text-purple-600 dark:text-cyan-400 font-semibold">
                           {o.employeeId}
                         </td>
-                        <td className="px-4 py-3.5">
+                        <td className="px-4 py-4">
                           <div className="font-medium text-slate-800 dark:text-white">
                             {o.department?.name || "General Department"}
                           </div>
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400">{o.designation}</div>
+                          <div className="text-xs text-slate-500 dark:text-slate-400">{o.designation}</div>
                         </td>
-                        <td className="px-4 py-3.5">
+                        <td className="px-4 py-4">
                           {o.isDigiLockerVerified ? (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400">
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 dark:text-emerald-400">
                               <CheckCircle2 className="w-3.5 h-3.5" /> Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1 text-[11px] font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-full border border-amber-500/20">
-                              ⏳ Pending (Must verify on login)
+                            <span className="inline-flex items-center gap-1 text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-500/10 px-2 py-0.5 rounded-lg border border-amber-500/20">
+                              Pending (Must verify on login)
                             </span>
                           )}
                         </td>
-                        <td className="px-4 py-3.5">
-                          <span className="px-2.5 py-0.5 rounded-full bg-blue-500/15 text-blue-600 dark:text-blue-300 font-mono font-bold text-xs">
+                        <td className="px-4 py-4">
+                          <span className="px-3 py-0.5 rounded-lg bg-blue-500/15 text-blue-600 dark:text-blue-300 font-mono font-bold text-xs">
                             {o.activeCases} Petitions
                           </span>
                         </td>
-                        <td className="px-4 py-3.5">
+                        <td className="px-4 py-4">
                           <span
-                            className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-semibold ${
+                            className={`inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold ${
                               o.isActive
                                 ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30"
                                 : "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30"
@@ -534,12 +534,12 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                             {o.isActive ? "Active" : "Suspended"}
                           </span>
                         </td>
-                        <td className="px-4 py-3.5 text-right whitespace-nowrap">
+                        <td className="px-4 py-4 text-right whitespace-nowrap">
                           <div className="flex items-center justify-end gap-2">
                             <button
                               type="button"
                               onClick={() => handleToggleSuspend(o)}
-                              className={`px-3 py-1 rounded-full text-xs font-bold transition cursor-pointer ${
+                              className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                                 o.isActive
                                   ? "bg-rose-500/15 text-rose-600 dark:text-rose-300 hover:bg-rose-600 hover:text-white"
                                   : "bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 hover:bg-emerald-600 hover:text-white"
@@ -550,7 +550,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                             <button
                               type="button"
                               onClick={() => handleSoftDelete(o)}
-                              className="px-3 py-1 rounded-full text-xs font-bold bg-slate-100 hover:bg-rose-600 dark:bg-white/10 dark:hover:bg-rose-600 text-slate-700 hover:text-white dark:text-slate-300 transition cursor-pointer"
+                              className="px-3 py-1 rounded-lg text-xs font-bold bg-slate-100 hover:bg-rose-600 dark:bg-white/10 dark:hover:bg-rose-600 text-slate-700 hover:text-white dark:text-slate-300 transition cursor-pointer"
                               title="Soft delete officer (preserves historical records)"
                             >
                               Delete
@@ -568,7 +568,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
       ) : (
         /* ROLE HIERARCHY & PERMISSIONS MATRIX */
         <div className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <h3 className="text-lg font-bold">1. Updated Role Hierarchy</h3>
             <div className="flex flex-col items-center max-w-xl mx-auto space-y-4">
               <div className="w-full max-w-md p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-center space-y-1">
@@ -576,7 +576,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <h4 className="text-base font-extrabold">ADMIN</h4>
-                <div className="inline-block px-2.5 py-0.5 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+                <div className="inline-block px-3 py-0.5 rounded-lg text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                   Highest Authority
                 </div>
                 <p className="text-xs text-slate-500 dark:text-slate-400 pt-1">
@@ -603,7 +603,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           </div>
 
           {/* Admin Permissions Table */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-lg font-bold">Admin ke Officer Management Permissions</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs min-w-[500px]">
@@ -627,7 +627,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                     <tr key={action} className="hover:bg-slate-50 dark:hover:bg-white/[0.02]">
                       <td className="px-4 py-3 font-semibold">{action}</td>
                       <td className="px-4 py-3 text-right">
-                        <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+                        <span className="px-3 py-1 rounded-lg text-xs font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                           Allowed
                         </span>
                       </td>
@@ -639,7 +639,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           </div>
 
           {/* Officer Powers Table */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-lg font-bold">Officer ke Powers &amp; Boundaries</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               Officer ko sirf uske assigned department aur responsibilities ke according access milega.
@@ -669,7 +669,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                       <td className="px-4 py-3 font-semibold">{item.module}</td>
                       <td className="px-4 py-3 text-right">
                         <span
-                          className={`px-3 py-1 rounded-full text-xs font-bold ${
+                          className={`px-3 py-1 rounded-lg text-xs font-bold ${
                             item.allowed
                               ? "bg-blue-500/15 text-blue-600 dark:text-blue-300 border border-blue-500/30"
                               : "bg-rose-500/15 text-rose-600 dark:text-rose-400 border border-rose-500/30"
@@ -690,12 +690,12 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
       {/* CREATE NEW OFFICER MODAL - RE-ALIGNED & PROFESSIONAL */}
       <AnimatePresence>
         {showCreateModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm animate-fadeIn">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 animate-fadeIn">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0d0729] border border-slate-200 dark:border-white/15 p-6 sm:p-8 shadow-2xl space-y-6 text-slate-900 dark:text-white transition-colors"
+              className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/15 p-6 sm:p-8 shadow-2xl space-y-6 text-slate-900 dark:text-white transition-colors"
             >
               {createdOfficerSuccess ? (
                 /* SUCCESS CREDENTIALS SLIP FOR ADMIN */
@@ -714,40 +714,40 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
 
                   {/* Credentials Box */}
                   <div className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-3 font-mono text-xs">
-                    <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-white/5">
+                    <div className="flex justify-between py-2 border-b border-slate-200 dark:border-white/5">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">Officer Name:</span>
                       <span className="font-bold text-slate-900 dark:text-white">{createdOfficerSuccess.fullName}</span>
                     </div>
-                    <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-white/5">
+                    <div className="flex justify-between py-2 border-b border-slate-200 dark:border-white/5">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">Employee / Officer ID:</span>
                       <span className="font-bold text-purple-600 dark:text-purple-300">{createdOfficerSuccess.employeeId}</span>
                     </div>
-                    <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-white/5">
+                    <div className="flex justify-between py-2 border-b border-slate-200 dark:border-white/5">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">Official Login Email:</span>
                       <span className="font-bold text-cyan-600 dark:text-cyan-400">{createdOfficerSuccess.email}</span>
                     </div>
-                    <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-white/5">
+                    <div className="flex justify-between py-2 border-b border-slate-200 dark:border-white/5">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">Initial Temporary Password:</span>
                       <span className="font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded">
                         {createdOfficerSuccess.temporaryPassword}
                       </span>
                     </div>
-                    <div className="flex justify-between py-1.5 border-b border-slate-200 dark:border-white/5">
+                    <div className="flex justify-between py-2 border-b border-slate-200 dark:border-white/5">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">Assigned Department:</span>
                       <span className="font-bold text-slate-900 dark:text-white">
                         {createdOfficerSuccess.department?.name || "Designated Department"}
                       </span>
                     </div>
-                    <div className="flex justify-between py-1.5">
+                    <div className="flex justify-between py-2">
                       <span className="text-slate-500 dark:text-slate-400 font-sans">DigiLocker Status:</span>
                       <span className="font-bold text-amber-600 dark:text-amber-400">
-                        ⏳ Verification Required on First Login
+                        Verification Required on First Login
                       </span>
                     </div>
                   </div>
 
                   {/* Mandatory verification note */}
-                  <div className="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-2.5">
+                  <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/20 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-3">
                     <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>
                       <strong>Mandatory Security Gate:</strong> Officer jab login karega, tab unko DigiLocker verification complete karna hoga. Uske bina petition inspection locked rahegi. Officer apna password login ke baad Settings se badal sakta hai.
@@ -759,10 +759,10 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                     <button
                       type="button"
                       onClick={handleCopyCredentials}
-                      className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-purple-600/30 transition cursor-pointer"
+                      className="flex-1 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg transition cursor-pointer"
                     >
                       {copiedCredentials ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                      <span>{copiedCredentials ? "Credentials Copied to Clipboard!" : "Copy Official Credentials"}</span>
+                      <span>{copiedCredentials ? "Credentials copied" : "Copy Official Credentials"}</span>
                     </button>
                     <button
                       type="button"
@@ -791,7 +791,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                     <button
                       type="button"
                       onClick={() => setShowCreateModal(false)}
-                      className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer"
+                      className="p-2 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-white cursor-pointer"
                     >
                       <XCircle className="w-5 h-5" />
                     </button>
@@ -810,7 +810,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.fullName}
                           onChange={(e) => setCreateForm({ ...createForm, fullName: e.target.value })}
                           placeholder="e.g. Er. Rameshwar Verma"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                         />
                       </div>
                       <div>
@@ -823,7 +823,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.designation}
                           onChange={(e) => setCreateForm({ ...createForm, designation: e.target.value })}
                           placeholder="e.g. Executive Engineer & Designated PIO"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                         />
                       </div>
                     </div>
@@ -840,7 +840,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.email}
                           onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
                           placeholder="e.g. officer.pwd@mp.gov.in"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
                         />
                       </div>
                       <div>
@@ -852,7 +852,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.personalEmail}
                           onChange={(e) => setCreateForm({ ...createForm, personalEmail: e.target.value })}
                           placeholder="e.g. rameshwar.personal@gmail.com"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
                         />
                       </div>
                     </div>
@@ -861,16 +861,16 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                       <div>
                         <div className="flex items-center justify-between mb-1">
-                          <label className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                          <label className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-2">
                             <span>Employee / Service ID *</span>
-                            <span className="text-purple-600 dark:text-cyan-400 text-[10px] font-bold px-1.5 py-0.5 rounded bg-purple-500/10 dark:bg-cyan-500/20 border border-purple-500/20">
+                            <span className="text-purple-600 dark:text-cyan-400 text-xs font-bold px-2 py-0.5 rounded bg-purple-500/10 dark:bg-cyan-500/20 border border-purple-500/20">
                               Auto-Incremented
                             </span>
                           </label>
                           <button
                             type="button"
                             onClick={() => fetchNextEmployeeId(createForm.departmentId)}
-                            className="text-[11px] text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-xs text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 cursor-pointer"
                             title="Regenerate next unique sequential ID"
                           >
                             <RefreshCw className="w-3 h-3" />
@@ -884,14 +884,14 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                             readOnly
                             value={createForm.employeeId}
                             placeholder="Calculating next unique ID..."
-                            className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-purple-700 dark:text-cyan-300 font-mono font-bold tracking-wide cursor-not-allowed select-all"
+                            className="w-full px-4 py-3 rounded-xl bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/10 text-purple-700 dark:text-cyan-300 font-mono font-bold tracking-wide cursor-not-allowed select-all"
                           />
-                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] text-slate-400 dark:text-slate-500 flex items-center gap-1">
+                          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 dark:text-slate-500 flex items-center gap-1">
                             <Lock className="w-3.5 h-3.5" />
                             <span>System Lock</span>
                           </span>
                         </div>
-                        <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                           Vibhag code ke aadhar par unique sequential number automatically assign hota hai.
                         </p>
                       </div>
@@ -904,7 +904,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.phone}
                           onChange={(e) => setCreateForm({ ...createForm, phone: e.target.value })}
                           placeholder="e.g. +91 98765 43210"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                         />
                       </div>
                     </div>
@@ -921,7 +921,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.aadhaarNumber}
                           onChange={(e) => setCreateForm({ ...createForm, aadhaarNumber: e.target.value })}
                           placeholder="XXXX XXXX XXXX"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
                         />
                       </div>
                       <div>
@@ -931,7 +931,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                         <select
                           value={createForm.departmentId}
                           onChange={(e) => handleDepartmentChange(e.target.value)}
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-[#11092a] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         >
                           {departments.map((dept) => (
                             <option key={dept.id} value={dept.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">
@@ -953,7 +953,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           value={createForm.officeLocation}
                           onChange={(e) => setCreateForm({ ...createForm, officeLocation: e.target.value })}
                           placeholder="e.g. Bhopal Division HQ, MP"
-                          className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500"
                         />
                       </div>
                       <div>
@@ -964,7 +964,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                           <button
                             type="button"
                             onClick={generateRandomPassword}
-                            className="text-[11px] text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 cursor-pointer"
+                            className="text-xs text-purple-600 dark:text-purple-400 hover:underline flex items-center gap-1 cursor-pointer"
                           >
                             <KeyRound className="w-3 h-3" /> Auto-Generate
                           </button>
@@ -975,7 +975,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                             required
                             value={createForm.password}
                             onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
-                            className="w-full pl-3.5 pr-10 py-2.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
+                            className="w-full pl-4 pr-10 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-500 font-mono"
                           />
                           <button
                             type="button"
@@ -1016,7 +1016,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                     </div>
 
                     {/* Professional Security Notice */}
-                    <div className="p-3.5 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-700 dark:text-purple-300 flex items-start gap-2.5 leading-relaxed">
+                    <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 text-xs text-purple-700 dark:text-purple-300 flex items-start gap-3 leading-relaxed">
                       <Lock className="w-4 h-4 shrink-0 mt-0.5" />
                       <span>
                         <strong>Mandatory Officer Authentication Protocol:</strong> When this officer logs in for the first time, they will be required to authenticate via DigiLocker. All case files and RTI actions remain strictly locked until identity verification is completed.
@@ -1028,14 +1028,14 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                       <button
                         type="button"
                         onClick={() => setShowCreateModal(false)}
-                        className="px-5 py-2.5 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition cursor-pointer"
+                        className="px-5 py-3 rounded-xl text-xs font-semibold bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-200 transition cursor-pointer"
                       >
                         Cancel
                       </button>
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="px-6 py-2.5 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white shadow-lg shadow-purple-600/30 transition cursor-pointer flex items-center gap-2"
+                        className="px-6 py-3 rounded-xl text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white shadow-lg transition cursor-pointer flex items-center gap-2"
                       >
                         {isSubmitting ? (
                           <>

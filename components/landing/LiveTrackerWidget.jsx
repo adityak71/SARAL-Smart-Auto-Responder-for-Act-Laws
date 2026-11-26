@@ -29,13 +29,13 @@ export default function LiveTrackerWidget() {
   };
 
   return (
-    <section className="w-full py-12 lg:py-16 bg-[#090321]/70 border-y border-white/5 relative">
+    <section className="w-full py-12 lg:py-16 bg-[#16262d]/70 border-y border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Text & Search Input */}
           <div className="w-full lg:w-1/2 flex flex-col gap-4 text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-bold w-fit">
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-300 text-xs font-bold w-fit">
+              <span className="w-2 h-2 rounded-full bg-cyan-400" />
               <span>LIVE RTI TRACKING TERMINAL</span>
             </div>
 
@@ -47,9 +47,9 @@ export default function LiveTrackerWidget() {
             </p>
 
             {/* Quick Search Form */}
-            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-2.5 pt-2">
+            <form onSubmit={handleSearch} className="flex flex-col sm:flex-row items-center gap-3 pt-2">
               <div className="relative w-full">
-                <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
                   <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
@@ -65,7 +65,7 @@ export default function LiveTrackerWidget() {
 
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer"
               >
                 Inspect Status
               </button>
@@ -79,7 +79,7 @@ export default function LiveTrackerWidget() {
                   key={app.id}
                   type="button"
                   onClick={() => handleSampleClick(app)}
-                  className={`px-2.5 py-1 rounded-lg border text-xs transition cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg border text-xs transition cursor-pointer ${
                     selectedApp.id === app.id
                       ? "bg-purple-600/30 border-purple-400 text-purple-200 font-bold"
                       : "bg-white/5 border-white/10 text-slate-400 hover:text-white"
@@ -100,12 +100,12 @@ export default function LiveTrackerWidget() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.25 }}
-                className="p-5 sm:p-6 rounded-2xl bg-[#110833] border border-purple-500/25 shadow-xl flex flex-col gap-4 text-slate-100"
+                className="p-5 sm:p-6 rounded-2xl bg-[#1c2e36] border border-purple-500/25 shadow-xl flex flex-col gap-4 text-slate-100"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <span className="text-[11px] font-mono text-purple-300 font-bold">
+                    <span className="text-xs font-mono text-purple-300 font-bold">
                       {selectedApp.id}
                     </span>
                     <h3 className="text-base font-bold text-white mt-0.5 leading-snug">
@@ -117,7 +117,7 @@ export default function LiveTrackerWidget() {
                   </div>
 
                   <span
-                    className={`px-3 py-1 rounded-full text-xs font-bold shrink-0 ${
+                    className={`px-3 py-1 rounded-lg text-xs font-bold shrink-0 ${
                       selectedApp.status === "completed"
                         ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                         : selectedApp.status === "appeal_open"
@@ -131,14 +131,14 @@ export default function LiveTrackerWidget() {
 
                 {/* Metadata Grid */}
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5">
-                    <span className="text-[10px] text-slate-400 block">Department</span>
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                    <span className="text-xs text-slate-400 block">Department</span>
                     <span className="font-semibold text-white truncate block">
                       {selectedApp.department}
                     </span>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-white/[0.04] border border-white/5">
-                    <span className="text-[10px] text-slate-400 block">Assigned PIO</span>
+                  <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
+                    <span className="text-xs text-slate-400 block">Assigned PIO</span>
                     <span className="font-semibold text-purple-300 truncate block">
                       {selectedApp.pioDetails.name}
                     </span>
@@ -147,7 +147,7 @@ export default function LiveTrackerWidget() {
 
                 {/* Mini Progress Bar */}
                 <div className="space-y-1 text-xs">
-                  <div className="flex justify-between text-slate-400 text-[11px]">
+                  <div className="flex justify-between text-slate-400 text-xs">
                     <span>Statutory 30-Day Window</span>
                     <span className="text-purple-300 font-bold">
                       Day {selectedApp.daysElapsed} of {selectedApp.totalDaysAllowed}
@@ -155,7 +155,7 @@ export default function LiveTrackerWidget() {
                   </div>
                   <div className="w-full h-2 rounded-full bg-white/10 overflow-hidden">
                     <div
-                      className="h-full bg-gradient-to-r from-purple-500 to-cyan-400 rounded-full"
+                      className="h-full bg-purple-500 rounded-full"
                       style={{
                         width: `${Math.min(100, (selectedApp.daysElapsed / selectedApp.totalDaysAllowed) * 100)}%`,
                       }}
@@ -165,12 +165,12 @@ export default function LiveTrackerWidget() {
 
                 {/* Action button */}
                 <div className="pt-1 flex items-center justify-between">
-                  <span className="text-[11px] text-slate-400">
+                  <span className="text-xs text-slate-400">
                     Filed on {selectedApp.dateFiled}
                   </span>
                   <Link
                     href={`/tracking?id=${selectedApp.id}`}
-                    className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition"
                   >
                     <span>Open Full Tracking Dossier</span>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

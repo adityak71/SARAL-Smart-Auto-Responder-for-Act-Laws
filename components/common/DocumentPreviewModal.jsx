@@ -6,6 +6,7 @@ import {
   downloadCertifiedResponse,
   downloadPublicRecordDoc,
 } from "@/lib/services/pdfGenerator";
+import { Download as IcDownload, Landmark as IcLandmark, Printer as IcPrinter, Scale as IcScale } from "lucide-react";
 
 export default function DocumentPreviewModal({
   isOpen,
@@ -78,18 +79,18 @@ export default function DocumentPreviewModal({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="bg-white dark:bg-[#0c0524] border border-slate-300 dark:border-purple-500/30 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none flex flex-col max-h-[92vh]"
+          className="bg-white dark:bg-[#16262d] border border-slate-300 dark:border-purple-500/30 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none flex flex-col max-h-[92vh]"
         >
           {/* Top Control Bar (Floating Modal Header) */}
           <div className="p-4 bg-slate-100 dark:bg-purple-950/60 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0 print:hidden">
-            <div className="flex items-center gap-2.5 min-w-0">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
+            <div className="flex items-center gap-3 min-w-0">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0" />
               <div className="truncate">
                 <h3 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white truncate">
                   {documentType === "RECEIPT"
@@ -98,7 +99,7 @@ export default function DocumentPreviewModal({
                     ? "Official Certified Response Memorandum (Class 3 PKI)"
                     : `Certified Public Document: ${docName || "Measurement Book Extract"}`}
                 </h3>
-                <span className="text-[10px] sm:text-xs font-mono text-purple-700 dark:text-purple-300">
+                <span className="text-xs sm:text-xs font-mono text-purple-700 dark:text-purple-300">
                   {appNumber} • Preview Mode
                 </span>
               </div>
@@ -108,17 +109,17 @@ export default function DocumentPreviewModal({
               <button
                 type="button"
                 onClick={handleDownload}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md shadow-purple-600/30 transition flex items-center gap-1.5 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
               >
-                <span>📥</span>
+                <span><IcDownload className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Download PDF</span>
               </button>
               <button
                 type="button"
                 onClick={handlePrint}
-                className="hidden sm:inline-flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition cursor-pointer"
+                className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-200 dark:bg-white/10 hover:bg-slate-300 dark:hover:bg-white/15 text-slate-800 dark:text-white text-xs font-semibold transition cursor-pointer"
               >
-                <span>🖨️</span>
+                <span><IcPrinter className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Print</span>
               </button>
               <button
@@ -133,26 +134,26 @@ export default function DocumentPreviewModal({
           </div>
 
           {/* Document Preview Sheet (Clean, Simple, Perfectly Aligned) */}
-          <div className="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-100 dark:bg-[#070218]">
+          <div className="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-100 dark:bg-[#0f1a1f]">
             <div className="max-w-2xl mx-auto bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-300 p-6 sm:p-10 space-y-6 font-sans">
               
               {/* Sovereign Letterhead */}
               <div className="text-center border-b-2 border-slate-900 pb-5 space-y-1">
-                <div className="text-2xl mb-1">🏛️</div>
-                <div className="text-[11px] font-bold text-slate-600 uppercase tracking-widest">
+                <div className="text-2xl mb-1"><IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
+                <div className="text-xs font-bold text-slate-600 tracking-widest">
                   सत्यमेव जयते • Government of India
                 </div>
-                <h1 className="text-base sm:text-lg font-black uppercase text-slate-900 tracking-tight">
+                <h1 className="text-base sm:text-lg font-black text-slate-900 tracking-tight">
                   Right to Information Act, 2005
                 </h1>
-                <div className="text-xs font-semibold text-purple-700 uppercase">
+                <div className="text-xs font-semibold text-purple-700">
                   {documentType === "RECEIPT"
                     ? "Statutory Application Filing Receipt & Acknowledgment"
                     : documentType === "CERTIFIED_RESPONSE"
                     ? "Official Response & Information Disclosure Memorandum"
                     : "Certified True Extract of Departmental Records"}
                 </div>
-                <div className="text-[10px] text-slate-500 font-mono">
+                <div className="text-xs text-slate-500 font-mono">
                   SARAL National RTI Portal • Public Infrastructure Verification Service
                 </div>
               </div>
@@ -171,15 +172,15 @@ export default function DocumentPreviewModal({
 
               {/* 2-Column Metadata Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase">Applicant Details</div>
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                  <div className="text-xs font-bold text-slate-500">Applicant Details</div>
                   <div><strong>Name:</strong> {citizen}</div>
                   <div><strong>Verification:</strong> <span className="text-emerald-700 font-bold">✓ DigiLocker Verified</span></div>
                   <div><strong>Fee Status:</strong> <span className="text-emerald-700 font-bold">{feeStatus}</span></div>
                 </div>
 
-                <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase">Jurisdiction & Clock</div>
+                <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+                  <div className="text-xs font-bold text-slate-500">Jurisdiction & Clock</div>
                   <div><strong>Authority:</strong> {department}</div>
                   <div><strong>Statutory Limit:</strong> <span className={isEmergency ? "text-rose-700 font-bold" : ""}>{statutoryLimit}</span></div>
                   <div><strong>Filing Section:</strong> Section 6(1) Direct Submission</div>
@@ -188,21 +189,21 @@ export default function DocumentPreviewModal({
 
               {/* Subject Title */}
               <div className="text-xs space-y-1">
-                <span className="text-[10px] font-bold text-slate-500 uppercase block">Subject Matter:</span>
-                <p className="font-bold text-slate-900 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                <span className="text-xs font-bold text-slate-500 block">Subject Matter:</span>
+                <p className="font-bold text-slate-900 bg-slate-50 p-3 rounded-xl border border-slate-200">
                   {title}
                 </p>
               </div>
 
               {/* Body Content based on document type */}
               {documentType === "RECEIPT" && (
-                <div className="space-y-2.5 text-xs">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase block">
+                <div className="space-y-3 text-xs">
+                  <span className="text-xs font-bold text-slate-500 block">
                     Particulars of Information Sought (Section 6(1)):
                   </span>
                   <div className="space-y-2 bg-slate-50 p-4 rounded-xl border border-slate-200">
                     {clauses.map((clause, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5">
+                      <div key={idx} className="flex items-start gap-3">
                         <span className="font-mono font-bold text-purple-700 shrink-0">
                           {idx + 1}.
                         </span>
@@ -211,30 +212,30 @@ export default function DocumentPreviewModal({
                     ))}
                   </div>
 
-                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-[11px] leading-relaxed">
-                    ⚖ <strong>Statutory Mandate:</strong> Under Section 7(1) of the RTI Act 2005, the Public Information Officer must furnish the information within 30 days. If not provided within this timeline, the request shall be deemed to have been refused under Section 7(2).
+                  <div className="p-3 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs leading-relaxed">
+                    <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Statutory Mandate:</strong> Under Section 7(1) of the RTI Act 2005, the Public Information Officer must furnish the information within 30 days. If not provided within this timeline, the request shall be deemed to have been refused under Section 7(2).
                   </div>
                 </div>
               )}
 
               {documentType === "CERTIFIED_RESPONSE" && (
                 <div className="space-y-3 text-xs">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase block">
+                  <span className="text-xs font-bold text-slate-500 block">
                     Official Statutory Disclosure &amp; Findings:
                   </span>
                   <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2 text-slate-800 leading-relaxed">
                     <p>{responseText}</p>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-[11px] leading-relaxed">
-                    ⚖ <strong>Appellate Advisory (Section 7(8)):</strong> If aggrieved by this decision, an appeal may be preferred under Section 19(1) of the RTI Act within 30 days to the designated First Appellate Authority (FAA).
+                  <div className="p-3 rounded-xl bg-rose-50 border border-rose-200 text-rose-900 text-xs leading-relaxed">
+                    <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Appellate Advisory (Section 7(8)):</strong> If aggrieved by this decision, an appeal may be preferred under Section 19(1) of the RTI Act within 30 days to the designated First Appellate Authority (FAA).
                   </div>
                 </div>
               )}
 
               {documentType === "PUBLIC_RECORD" && (
                 <div className="space-y-3 text-xs">
-                  <span className="text-[10px] font-bold text-slate-500 uppercase block">
+                  <span className="text-xs font-bold text-slate-500 block">
                     Certified Public Register Extract (Section 2(j)(ii)):
                   </span>
                   <div className="border border-slate-200 rounded-xl overflow-hidden">
@@ -247,7 +248,7 @@ export default function DocumentPreviewModal({
                           <th className="p-2">Sanction</th>
                         </tr>
                       </thead>
-                      <tbody className="divide-y divide-slate-200 text-[11px]">
+                      <tbody className="divide-y divide-slate-200 text-xs">
                         <tr>
                           <td className="p-2 font-mono font-bold text-purple-700">MB-01</td>
                           <td className="p-2">Roadway excavation in soil &amp; morrum</td>
@@ -275,36 +276,36 @@ export default function DocumentPreviewModal({
               {/* Digital Attestation & Verification Stamp */}
               <div className="p-4 rounded-xl border border-emerald-300 bg-emerald-50/60 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs">
                 <div>
-                  <div className="flex items-center gap-1.5 text-emerald-800 font-bold">
+                  <div className="flex items-center gap-2 text-emerald-800 font-bold">
                     <span>✓</span>
                     <span>Digitally Authenticated &amp; Sealed</span>
                   </div>
-                  <div className="text-[10px] text-slate-600 mt-0.5">
+                  <div className="text-xs text-slate-600 mt-0.5">
                     Affixed under Section 4 of Information Technology Act, 2000
                   </div>
-                  <div className="text-[10px] font-mono text-slate-500 mt-1">
+                  <div className="text-xs font-mono text-slate-500 mt-1">
                     FINGERPRINT: SHA256:7f8a9b4c8e9f0a1b2c3d4e5f
                   </div>
                 </div>
 
                 <div className="text-right sm:text-right shrink-0">
-                  <div className="text-[10px] font-bold text-slate-500 uppercase">Status</div>
-                  <div className="font-bold text-emerald-700 font-mono">DIGILOCKER VERIFIED</div>
+                  <div className="text-xs font-bold text-slate-500">Status</div>
+                  <div className="font-bold text-emerald-700 font-mono">DigiLocker verified</div>
                 </div>
               </div>
 
               {/* Bottom Action inside modal */}
               <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3 border-t border-slate-200">
-                <span className="text-[10px] text-slate-500">
+                <span className="text-xs text-slate-500">
                   Standard A4 Printable Format • Valid for all statutory and appellate proceedings
                 </span>
 
                 <button
                   type="button"
                   onClick={handleDownload}
-                  className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
+                  className="w-full sm:w-auto px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <span>📥</span>
+                  <span><IcDownload className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                   <span>Download Clean PDF File</span>
                 </button>
               </div>

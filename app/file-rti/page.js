@@ -9,6 +9,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { downloadRtiReceipt } from "@/lib/services/pdfGenerator";
 import DocumentPreviewModal from "@/components/common/DocumentPreviewModal";
 import DigiLockerModal from "@/components/common/DigiLockerModal";
+import { Landmark as IcLandmark, Lock as IcLock, Mailbox as IcMailbox, MapPin as IcMapPin, MessageSquare as IcMessageSquare, Mic as IcMic, RefreshCw as IcRefreshCw, Scale as IcScale, Send as IcSend, Shield as IcShield, Siren as IcSiren, Sparkles as IcSparkles, Target as IcTarget, TriangleAlert as IcTriangleAlert } from "lucide-react";
 
 const INDIAN_STATES = [
   "Andaman and Nicobar Islands",
@@ -539,11 +540,11 @@ export default function FileRtiPage() {
         setAiResult(data.analysis);
         if (data.analysis.source === "gemini-ai") {
           setAiSuccessToast(
-            `✨ Structured with Google Gemini AI (${data.analysis.model || "3.1 Flash-Lite"})! Clauses tailored specifically to your prompt.`
+            `Structured with Google Gemini AI (${data.analysis.model || "3.1 Flash-Lite"})! Clauses tailored specifically to your prompt.`
           );
         } else {
           setAiSuccessToast(
-            "⚡ Structured with SARAL Civic Engine (Rule-based fallback)"
+            "Structured with SARAL Civic Engine (Rule-based fallback)"
           );
         }
       } else {
@@ -709,7 +710,7 @@ export default function FileRtiPage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5">
@@ -734,13 +735,13 @@ export default function FileRtiPage() {
 
           <div className="flex items-center gap-2 self-start sm:self-auto">
             {user?.isDigiLockerVerified ? (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-emerald-500" />
                 <span>DigiLocker Verified Citizen</span>
               </span>
             ) : (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
+                <span className="w-2 h-2 rounded-full bg-amber-500" />
                 <span>Verification Pending</span>
               </span>
             )}
@@ -754,19 +755,17 @@ export default function FileRtiPage() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-3xl bg-white dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden"
+            className="rounded-3xl bg-white dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden"
           >
-            {/* Top Tricolor Accent Line */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-orange-500 via-white to-emerald-500" />
 
             <div className="max-w-2xl mx-auto text-center space-y-6 pt-2">
-              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl bg-gradient-to-tr from-amber-500/20 via-purple-500/20 to-indigo-500/20 border border-amber-500/30 flex items-center justify-center text-4xl sm:text-5xl shadow-xl shadow-amber-500/10">
-                🛡️
+              <div className="w-20 h-20 sm:w-24 sm:h-24 mx-auto rounded-3xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-4xl sm:text-5xl shadow-xl">
+                <IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
               </div>
 
               <div className="space-y-2">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-extrabold uppercase tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
-                  <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-extrabold tracking-wider bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
+                  <span className="w-2 h-2 rounded-full bg-amber-500" />
                   Section 6(1) Citizen Mandate
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -779,26 +778,26 @@ export default function FileRtiPage() {
 
               {/* Explanatory Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-left pt-2">
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
                   <div className="text-xl">🇮🇳</div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Citizenship Proof</h4>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                     Certifies your statutory eligibility to demand records from government departments.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
-                  <div className="text-xl">📬</div>
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
+                  <div className="text-xl"><IcMailbox className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Postal Delivery</h4>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                     Ensures certified physical records and notices reach your verified address.
                   </p>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-1.5">
-                  <div className="text-xl">🔒</div>
+                <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 space-y-2">
+                  <div className="text-xl"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
                   <h4 className="text-xs font-bold text-slate-900 dark:text-white">Zero Data Abuse</h4>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
                     Protected under DPDP Act 2023. Aadhaar is securely masked (XXXX-XXXX-4210).
                   </p>
                 </div>
@@ -809,7 +808,7 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={() => setIsDigiLockerModalOpen(true)}
-                  className="w-full sm:w-auto px-8 py-3.5 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 hover:from-blue-800 hover:to-purple-700 shadow-xl shadow-indigo-500/25 transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                  className="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-xl transition-colors flex items-center justify-center gap-3 cursor-pointer"
                 >
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
@@ -821,7 +820,7 @@ export default function FileRtiPage() {
 
                 <Link
                   href="/dashboard"
-                  className="w-full sm:w-auto px-6 py-3.5 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition text-center"
+                  className="w-full sm:w-auto px-6 py-4 rounded-2xl font-semibold text-xs text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition text-center"
                 >
                   Return to Dashboard
                 </Link>
@@ -835,7 +834,7 @@ export default function FileRtiPage() {
         {/* PROGRESS STEPPER (Steps 1 to 5)                           */}
         {/* ========================================================= */}
         {currentStep <= 5 && (
-          <div className="rounded-2xl bg-white dark:bg-[#120930]/90 border border-slate-200 dark:border-white/10 p-4 sm:p-6 shadow-md">
+          <div className="rounded-2xl bg-white dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-4 sm:p-6 shadow-md">
             <div className="grid grid-cols-5 gap-2 sm:gap-4">
               {stepsConfig.map((s) => {
                 const isActive = currentStep === s.num;
@@ -844,18 +843,18 @@ export default function FileRtiPage() {
                 return (
                   <div key={s.num} className="flex flex-col items-center text-center">
                     <div
-                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm transition-all duration-300 ${
+                      className={`w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center font-bold text-xs sm:text-sm transition-colors duration-300 ${
                         isCompleted
-                          ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
+                          ? "bg-emerald-500 text-white shadow-md "
                           : isActive
-                          ? "bg-purple-600 text-white ring-4 ring-purple-500/20 shadow-lg shadow-purple-600/30"
+                          ? "bg-purple-600 text-white ring-4 ring-purple-500/20 shadow-lg "
                           : "bg-slate-100 dark:bg-white/5 text-slate-400 dark:text-slate-500 border border-slate-200 dark:border-white/10"
                       }`}
                     >
                       {isCompleted ? "✓" : s.num}
                     </div>
                     <span
-                      className={`mt-2 text-[11px] sm:text-xs font-bold hidden sm:block ${
+                      className={`mt-2 text-xs sm:text-xs font-bold hidden sm:block ${
                         isActive
                           ? "text-purple-600 dark:text-purple-400"
                           : isCompleted
@@ -865,7 +864,7 @@ export default function FileRtiPage() {
                     >
                       {s.label}
                     </span>
-                    <span className="text-[10px] text-slate-400 hidden md:block">
+                    <span className="text-xs text-slate-400 hidden md:block">
                       {s.desc}
                     </span>
                   </div>
@@ -876,7 +875,7 @@ export default function FileRtiPage() {
             {/* Stepper progress bar line */}
             <div className="mt-4 w-full bg-slate-100 dark:bg-white/5 h-1.5 rounded-full overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500"
+                className="h-full bg-purple-600"
                 initial={{ width: "20%" }}
                 animate={{ width: `${(currentStep / 5) * 100}%` }}
                 transition={{ duration: 0.3 }}
@@ -892,10 +891,10 @@ export default function FileRtiPage() {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
-              className="p-3.5 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-semibold flex items-center justify-between shadow-md"
+              className="p-4 rounded-2xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-semibold flex items-center justify-between shadow-md"
             >
               <div className="flex items-center gap-2">
-                <span>⚠️</span>
+                <span><IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>{errorMsg}</span>
               </div>
               <button
@@ -912,7 +911,7 @@ export default function FileRtiPage() {
         {/* ========================================================= */}
         {/* STEPPER CONTENT CARDS                                     */}
         {/* ========================================================= */}
-        <div className="rounded-3xl bg-white/90 dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+        <div className="rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
           {/* ------------------------------------------------------- */}
           {/* STEP 1: JURISDICTION & TARGET PUBLIC AUTHORITY          */}
           {/* ------------------------------------------------------- */}
@@ -937,27 +936,27 @@ export default function FileRtiPage() {
                 <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-2">
                   Government Tier &amp; Target Jurisdiction
                 </label>
-                <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-3">
                   {/* Tier Selection Buttons */}
                   <div className="flex items-center gap-2">
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, stateOrCentral: "State" })}
-                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                      className={`py-2 px-4 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-2 ${
                         formData.stateOrCentral === "State"
-                          ? "bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-600/30"
+                          ? "bg-purple-600 text-white border-purple-600 shadow-md "
                           : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
                       }`}
                     >
-                      <span>🏛️ State Government</span>
+                      <span>State Government</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, stateOrCentral: "Central" })}
-                      className={`py-2 px-3.5 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-1.5 ${
+                      className={`py-2 px-4 sm:px-4 rounded-xl text-xs font-bold border transition cursor-pointer flex items-center justify-center gap-2 ${
                         formData.stateOrCentral === "Central"
-                          ? "bg-purple-600 text-white border-purple-600 shadow-md shadow-purple-600/30"
+                          ? "bg-purple-600 text-white border-purple-600 shadow-md "
                           : "bg-white dark:bg-white/5 text-slate-700 dark:text-slate-300 border-slate-300 dark:border-white/10 hover:bg-slate-50 dark:hover:bg-white/10 shadow-xs"
                       }`}
                     >
@@ -967,9 +966,9 @@ export default function FileRtiPage() {
 
                   {/* Dropdown Menu - Aligned just to the side! */}
                   {formData.stateOrCentral === "State" && (
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-50/70 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 shadow-xs">
+                    <div className="flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-50/70 dark:bg-white/5 border border-purple-200 dark:border-purple-500/30 shadow-xs">
                       <span className="text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center gap-1 shrink-0">
-                        <span className="text-purple-600 dark:text-purple-400">📍</span>
+                        <span className="text-purple-600 dark:text-purple-400"><IcMapPin className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                         <span>State:</span>
                       </span>
                       <select
@@ -977,7 +976,7 @@ export default function FileRtiPage() {
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
                         }
-                        className="py-1 px-2.5 rounded-lg bg-white dark:bg-[#1a0f37] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
+                        className="py-1 px-3 rounded-lg bg-white dark:bg-[#1c2e36] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
                       >
                         <option value="">Select State</option>
                         {INDIAN_STATES.map((st) => (
@@ -991,7 +990,7 @@ export default function FileRtiPage() {
                         ))}
                       </select>
                       {userProfileState && activeState === userProfileState && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 font-semibold hidden md:inline">
+                        <span className="text-xs px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-800 dark:text-emerald-300 border border-emerald-500/30 font-semibold hidden md:inline">
                           Profile Synced
                         </span>
                       )}
@@ -1001,18 +1000,18 @@ export default function FileRtiPage() {
               </div>
 
               {/* AI Smart Authority Matcher Widget (Sprint 2.2) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-purple-50 via-indigo-50/60 to-slate-50 dark:from-purple-950/40 dark:via-indigo-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-sm transition-all">
+              <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-sm transition-colors">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs font-bold">🎯</span>
+                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs font-bold"><IcTarget className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <div>
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>AI Smart Authority Router</span>
-                        <span className="px-2 py-0.2 rounded-full bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 text-[10px] font-mono font-bold">
+                        <span className="px-2 py-0.2 rounded-lg bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 text-xs font-mono font-bold">
                           Section 5(1) Direct Mapping
                         </span>
                       </h4>
-                      <p className="text-[11px] text-purple-800/80 dark:text-purple-200/70">
+                      <p className="text-xs text-purple-800/80 dark:text-purple-200/70">
                         Enter a short topic to auto-detect the exact competent authority and designated PIO.
                       </p>
                     </div>
@@ -1031,28 +1030,28 @@ export default function FileRtiPage() {
                       }
                     }}
                     placeholder="e.g. broken road in village, drinking water supply, ration card delay, hospital doctor absent..."
-                    className="flex-1 px-3.5 py-2 rounded-xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 shadow-sm"
+                    className="flex-1 px-4 py-2 rounded-xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 shadow-sm"
                   />
                   <button
                     type="button"
                     onClick={() => handleAutoRoute()}
                     disabled={isRoutingAi}
-                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 shrink-0 cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition disabled:opacity-50 shrink-0 cursor-pointer"
                   >
                     {isRoutingAi ? "Routing..." : "Auto-Detect →"}
                   </button>
                 </div>
 
                 {/* Quick Topic Chips */}
-                <div className="flex flex-wrap items-center gap-1.5 pt-1">
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold">Quick Topics:</span>
+                <div className="flex flex-wrap items-center gap-2 pt-1">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold">Quick Topics:</span>
                   {[
-                    { label: "🚧 Road / Potholes", topic: "village road repair tender delay" },
-                    { label: "💧 Drinking Water", topic: "water pipeline and tanki connection" },
-                    { label: "🌾 Gram Panchayat", topic: "panchayat development funds and MGNREGA" },
-                    { label: "🏥 PHC Hospital", topic: "doctor duty roster and medicine availability" },
-                    { label: "🏫 School", topic: "mid day meal and teacher vacancy" },
-                    { label: "🍚 Ration / PDS", topic: "ration card grain distribution" },
+                    { label: "Road / Potholes", topic: "village road repair tender delay" },
+                    { label: "Drinking Water", topic: "water pipeline and tanki connection" },
+                    { label: "Gram Panchayat", topic: "panchayat development funds and MGNREGA" },
+                    { label: "PHC Hospital", topic: "doctor duty roster and medicine availability" },
+                    { label: "School", topic: "mid day meal and teacher vacancy" },
+                    { label: "Ration / PDS", topic: "ration card grain distribution" },
                   ].map((chip) => (
                     <button
                       key={chip.label}
@@ -1061,7 +1060,7 @@ export default function FileRtiPage() {
                         setRoutingTopic(chip.topic);
                         handleAutoRoute(chip.topic);
                       }}
-                      className="px-2 py-0.5 rounded-lg bg-white dark:bg-white/5 hover:bg-purple-50 dark:hover:bg-white/10 text-purple-700 dark:text-purple-200 text-[10px] border border-purple-200 dark:border-white/10 transition cursor-pointer shadow-xs"
+                      className="px-2 py-0.5 rounded-lg bg-white dark:bg-white/5 hover:bg-purple-50 dark:hover:bg-white/10 text-purple-700 dark:text-purple-200 text-xs border border-purple-200 dark:border-white/10 transition cursor-pointer shadow-xs"
                     >
                       {chip.label}
                     </button>
@@ -1073,28 +1072,28 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-1.5"
+                    className="p-3 rounded-xl bg-emerald-500/10 dark:bg-emerald-500/15 border border-emerald-500/30 text-xs space-y-2"
                   >
                     <div className="flex items-center justify-between">
-                      <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-1.5">
+                      <span className="font-bold text-emerald-800 dark:text-emerald-300 flex items-center gap-2">
                         <span>✓ Mapped to {aiRoutingResult.primary.name}</span>
-                        <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-500/30 font-bold">
+                        <span className="text-xs px-2 py-0.2 rounded-lg bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 border border-emerald-500/30 font-bold">
                           {aiRoutingResult.primary.confidence} Match
                         </span>
                       </span>
-                      <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-mono font-semibold">
+                      <span className="text-xs text-emerald-700 dark:text-emerald-400 font-mono font-semibold">
                         Avg: {aiRoutingResult.primary.avgResponseDays} Days
                       </span>
                     </div>
 
-                    <div className="text-[11px] text-slate-700 dark:text-slate-300 flex flex-wrap gap-x-4 gap-y-1">
+                    <div className="text-xs text-slate-700 dark:text-slate-300 flex flex-wrap gap-x-4 gap-y-1">
                       <span><strong>Designated PIO:</strong> {aiRoutingResult.primary.pioName}</span>
                       <span><strong>Nodal Office:</strong> {aiRoutingResult.primary.nodalOffice}</span>
                     </div>
 
                     {aiRoutingResult.secondary && (
-                      <p className="text-[10px] text-slate-400 border-t border-emerald-500/20 pt-1 mt-1">
-                        🔄 <em>Secondary Jurisdiction:</em> {aiRoutingResult.secondary.name} ({aiRoutingResult.secondary.confidence} match)
+                      <p className="text-xs text-slate-400 border-t border-emerald-500/20 pt-1 mt-1">
+                        <IcRefreshCw className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <em>Secondary Jurisdiction:</em> {aiRoutingResult.secondary.name} ({aiRoutingResult.secondary.confidence} match)
                       </p>
                     )}
                   </motion.div>
@@ -1125,7 +1124,7 @@ export default function FileRtiPage() {
                               targetAuthority: dept.name,
                             })
                           }
-                          className={`p-4 rounded-2xl border transition-all cursor-pointer flex flex-col justify-between ${
+                          className={`p-4 rounded-2xl border transition-colors cursor-pointer flex flex-col justify-between ${
                             isSelected
                               ? "bg-purple-50 dark:bg-purple-950/40 border-purple-600 dark:border-purple-500 ring-2 ring-purple-500/20 shadow-md"
                               : "bg-white dark:bg-white/5 border-slate-300/80 dark:border-white/10 hover:border-purple-400 hover:shadow-sm"
@@ -1133,7 +1132,7 @@ export default function FileRtiPage() {
                         >
                           <div>
                             <div className="flex items-center justify-between mb-1">
-                              <span className="font-mono text-[10px] font-bold text-purple-600 dark:text-purple-400">
+                              <span className="font-mono text-xs font-bold text-purple-600 dark:text-purple-400">
                                 {dept.code}
                               </span>
                               {isSelected && <span className="text-purple-600 text-sm font-bold">✓</span>}
@@ -1141,12 +1140,12 @@ export default function FileRtiPage() {
                             <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white leading-snug">
                               {dept.name}
                             </h4>
-                            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                            <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                               {dept.ministry}
                             </p>
                           </div>
 
-                          <div className="mt-3 pt-2 border-t border-slate-200/60 dark:border-white/5 text-[10px] text-slate-400 flex items-center justify-between">
+                          <div className="mt-3 pt-2 border-t border-slate-200/60 dark:border-white/5 text-xs text-slate-400 flex items-center justify-between">
                             <span>Nodal: {dept.nodalOffice?.slice(0, 32)}...</span>
                             <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Active PIO</span>
                           </div>
@@ -1179,33 +1178,33 @@ export default function FileRtiPage() {
               </div>
 
               {/* SARAL AI Vernacular Copilot Card */}
-              <div className="p-5 rounded-3xl bg-gradient-to-br from-purple-50 via-indigo-50/60 to-slate-50 dark:from-purple-950/70 dark:via-indigo-950/50 dark:to-slate-900 border border-purple-200 dark:border-purple-500/30 shadow-md dark:shadow-xl space-y-4 transition-all">
+              <div className="p-5 rounded-3xl bg-purple-50 dark:bg-purple-950/70 border border-purple-200 dark:border-purple-500/30 shadow-md dark:shadow-xl space-y-4 transition-colors">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     <div className="w-8 h-8 rounded-xl bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 flex items-center justify-center text-sm font-bold shadow-inner">
-                      ✨
+                      <IcSparkles className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                     </div>
                     <div>
                       <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                         <span>SARAL AI Vernacular Copilot</span>
-                        <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-800 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                           Hindi • Hinglish • English
                         </span>
                       </h3>
-                      <p className="text-[11px] text-purple-900/80 dark:text-purple-200/80">
+                      <p className="text-xs text-purple-900/80 dark:text-purple-200/80">
                         Apni aam bolchaal me likhein — Copilot isko Section 6(1) legal clauses me structure karega.
                       </p>
                     </div>
                   </div>
 
-                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-mono self-start sm:self-center font-medium">
+                  <span className="text-xs text-purple-700 dark:text-purple-300 font-mono self-start sm:self-center font-medium">
                     Powered by Google Gemini & Civic NLP
                   </span>
                 </div>
 
                 {/* Quick Vernacular Preset Pills */}
-                <div className="space-y-1.5">
-                  <span className="text-[10px] text-purple-800/80 dark:text-purple-300/70 font-semibold block uppercase tracking-wider">
+                <div className="space-y-2">
+                  <span className="text-xs text-purple-800/80 dark:text-purple-300/70 font-semibold block tracking-wider">
                     Quick Sample Vernacular Prompts:
                   </span>
                   <div className="flex flex-wrap gap-2">
@@ -1216,9 +1215,9 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
-                      🚧 Sadak & Thekedar Budget
+                      Sadak & Thekedar Budget
                     </button>
                     <button
                       type="button"
@@ -1227,9 +1226,9 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
-                      💧 Paani Pipeline Sanction
+                      Paani Pipeline Sanction
                     </button>
                     <button
                       type="button"
@@ -1238,9 +1237,9 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
-                      🏥 PHC Doctor & Dawai Shortage
+                      PHC Doctor & Dawai Shortage
                     </button>
                     <button
                       type="button"
@@ -1249,9 +1248,9 @@ export default function FileRtiPage() {
                         setAiInputPrompt(sample);
                         handleAiAnalyze(sample);
                       }}
-                      className="px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-[11px] transition cursor-pointer shadow-xs"
+                      className="px-3 py-1 rounded-lg bg-white dark:bg-white/10 hover:bg-purple-100 dark:hover:bg-purple-600/30 text-purple-800 dark:text-purple-200 border border-purple-200 dark:border-white/15 text-xs transition cursor-pointer shadow-xs"
                     >
-                      🏫 School Mid-Day Meal
+                      School Mid-Day Meal
                     </button>
                   </div>
                 </div>
@@ -1259,27 +1258,27 @@ export default function FileRtiPage() {
                 {/* Copilot Input Box */}
                 <div className="space-y-2">
                   <div className="flex flex-wrap items-center justify-between text-xs px-1 gap-2">
-                    <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-1.5">
-                      <span>💬</span> Apni pareshani type karein ya aawaz se bole:
+                    <span className="text-slate-600 dark:text-purple-300 font-medium flex items-center gap-2">
+                      <span><IcMessageSquare className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Apni pareshani type karein ya aawaz se bole:
                     </span>
                     <div className="flex items-center gap-1 bg-slate-100 dark:bg-white/5 p-1 rounded-xl border border-slate-200 dark:border-white/10">
-                      <span className="text-[10px] text-slate-500 dark:text-slate-400 font-semibold px-1">Aawaz Mode:</span>
+                      <span className="text-xs text-slate-500 dark:text-slate-400 font-semibold px-1">Aawaz Mode:</span>
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("hinglish")}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "hinglish"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
                         }`}
                         title="Bole Hindi/Hinglish me, likhe Roman Hinglish (A-Z) me"
                       >
-                        🔤 Hinglish (A-Z)
+                        Hinglish (A-Z)
                       </button>
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("english")}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "english"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
@@ -1291,7 +1290,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={() => handleSwitchSpeechMode("hindi")}
-                        className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition cursor-pointer ${
+                        className={`px-3 py-1 rounded-lg text-xs font-bold transition cursor-pointer ${
                           speechMode === "hindi"
                             ? "bg-purple-600 text-white shadow-xs"
                             : "text-slate-600 dark:text-slate-300 hover:bg-purple-100 dark:hover:bg-purple-900/30"
@@ -1315,29 +1314,29 @@ export default function FileRtiPage() {
                           ? "हिंदी में बोलें या लिखें: जैसे 'मेरे गांव की सड़क का कितना बजट पास हुआ था और देरी क्यों हुई? ठेकेदार का टेंडर एग्रीमेंट और मेजरमेंट बुक की कॉपी चाहिए...'"
                           : "Hinglish me bole ya likhe: jaise 'Gaon ki sadak kitne me bani thi aur delay kyun hua? Thekedar ka agreement aur measurement book ki copy chahiye...'"
                       }
-                      className="w-full p-3.5 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
+                      className="w-full p-4 pr-48 rounded-2xl bg-white dark:bg-black/40 border border-purple-200 dark:border-purple-500/30 text-slate-900 dark:text-white text-xs leading-relaxed placeholder-slate-400 dark:placeholder-purple-300/40 focus:outline-none focus:border-purple-500 resize-none font-sans shadow-sm"
                     />
 
-                    <div className="absolute right-2.5 bottom-3 flex items-center gap-1.5">
+                    <div className="absolute right-2.5 bottom-3 flex items-center gap-2">
                       {/* Voice Mic Button */}
                       <button
                         type="button"
                         onClick={toggleVoiceInput}
                         title={isListening ? "Listening... Click to stop" : "Click to speak"}
-                        className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-1.5 cursor-pointer shadow-md ${
+                        className={`px-3 py-2 rounded-xl text-xs font-bold transition flex items-center gap-2 cursor-pointer shadow-md ${
                           isListening
-                            ? "bg-rose-600 hover:bg-rose-700 text-white animate-pulse shadow-rose-500/30 ring-2 ring-rose-400"
+                            ? "bg-rose-600 hover:bg-rose-700 text-white   ring-2 ring-rose-400"
                             : "bg-purple-100 hover:bg-purple-200 dark:bg-purple-900/50 dark:hover:bg-purple-800/60 text-purple-800 dark:text-purple-200 border border-purple-300 dark:border-purple-500/30"
                         }`}
                       >
                         {isListening ? (
                           <>
-                            <span className="w-2 h-2 rounded-full bg-white animate-ping" />
-                            <span>Stop ⏹️</span>
+                            <span className="w-2 h-2 rounded-full bg-white" />
+                            <span>Stop</span>
                           </>
                         ) : (
                           <>
-                            <span>🎙️ Mic</span>
+                            <span>Mic</span>
                           </>
                         )}
                       </button>
@@ -1347,7 +1346,7 @@ export default function FileRtiPage() {
                         type="button"
                         onClick={() => handleAiAnalyze()}
                         disabled={isAnalyzingWithAi}
-                        className="px-3.5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-1.5 cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                       >
                         {isAnalyzingWithAi ? (
                           <>
@@ -1356,7 +1355,7 @@ export default function FileRtiPage() {
                           </>
                         ) : (
                           <>
-                            <span>✨ Structure AI</span>
+                            <span>Structure AI</span>
                           </>
                         )}
                       </button>
@@ -1368,15 +1367,15 @@ export default function FileRtiPage() {
                     <motion.div
                       initial={{ opacity: 0, y: -4 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-center justify-between"
+                      className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs font-medium flex items-center justify-between"
                     >
                       <div className="flex items-center gap-2">
                         <span className="relative flex h-2.5 w-2.5">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                          <span className="absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
                           <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-rose-500"></span>
                         </span>
                         <span>
-                          🎙️ <strong>Sun rahe hain (
+                          <IcMic className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Sun rahe hain (
                             {speechMode === "hinglish"
                               ? "Hinglish: Bole Hindi me, likhega A-Z me"
                               : speechMode === "english"
@@ -1388,7 +1387,7 @@ export default function FileRtiPage() {
                       <button
                         type="button"
                         onClick={toggleVoiceInput}
-                        className="text-rose-700 dark:text-rose-400 hover:underline text-[11px] font-bold cursor-pointer"
+                        className="text-rose-700 dark:text-rose-400 hover:underline text-xs font-bold cursor-pointer"
                       >
                         Band karein ✕
                       </button>
@@ -1419,39 +1418,39 @@ export default function FileRtiPage() {
                   <motion.div
                     initial={{ opacity: 0, y: 5 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-2.5"
+                    className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-xs space-y-3"
                   >
                     <div className="flex flex-wrap items-center justify-between gap-2">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span className="px-2.5 py-0.5 rounded-full bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[10px] font-bold font-mono">
+                        <span className="px-3 py-0.5 rounded-lg bg-purple-100 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-xs font-bold font-mono">
                           Mapped: {aiResult.suggestedDepartmentName}
                         </span>
-                        <span className="px-2.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[10px] font-bold">
+                        <span className="px-3 py-0.5 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold">
                           ✓ Section 8 Non-Exempt ({aiResult.section8Compliance?.confidenceScore || "98.7%"})
                         </span>
                         {aiResult.source === "gemini-ai" ? (
-                          <span className="px-2.5 py-0.5 rounded-full bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 text-[10px] font-bold flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse"></span>
+                          <span className="px-3 py-0.5 rounded-lg bg-blue-100 dark:bg-blue-500/20 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-500/30 text-xs font-bold flex items-center gap-1">
+                            <span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
                             AI Powered: Gemini ({aiResult.model || "3.1 Flash-Lite"})
                           </span>
                         ) : (
-                          <span className="px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-[10px] font-bold flex items-center gap-1">
-                            🛡️ SARAL Civic NLP Fallback
+                          <span className="px-3 py-0.5 rounded-lg bg-amber-100 dark:bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-500/30 text-xs font-bold flex items-center gap-1">
+                            SARAL Civic NLP Fallback
                           </span>
                         )}
                       </div>
-                      <span className="text-[10px] text-purple-700 dark:text-purple-300/80 font-medium">
+                      <span className="text-xs text-purple-700 dark:text-purple-300/80 font-medium">
                         {aiResult.structuredClauses?.length || 4} Enforceable Clauses Generated
                       </span>
                     </div>
 
-                    <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-relaxed">
-                      ⚖ <strong>Citizen Right (Sec 6(2)):</strong> {aiResult.citizenLegalTip}
+                    <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                      <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Citizen Right (Sec 6(2)):</strong> {aiResult.citizenLegalTip}
                     </p>
 
                     {aiResult.isLifeOrLibertySuggested && (
-                      <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-[11px] flex items-center gap-2">
-                        <span>🚨</span>
+                      <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-800 dark:text-rose-300 text-xs flex items-center gap-2">
+                        <span><IcSiren className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                         <span>
                           <strong>Section 7(1) Proviso Triggered:</strong> Query involves life or emergency medical care. 48-Hour statutory clock activated!
                         </span>
@@ -1473,7 +1472,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. Gram Panchayat Pipariya Bitumen Road Construction & Contractor Budget"
                     value={formData.title}
                     onChange={(e) => setFormData({ ...formData, title: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
 
@@ -1486,7 +1485,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. FY 2024-2026 or April 2025 to Date"
                     value={formData.yearOrPeriod}
                     onChange={(e) => setFormData({ ...formData, yearOrPeriod: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
 
@@ -1499,18 +1498,18 @@ export default function FileRtiPage() {
                     placeholder="e.g. Ward No. 4, Division II or District"
                     value={formData.locationDivision}
                     onChange={(e) => setFormData({ ...formData, locationDivision: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                    className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                   />
                 </div>
               </div>
 
               {/* Detailed Query Textarea */}
               <div>
-                <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center justify-between mb-2">
                   <label className="block text-xs font-bold text-slate-700 dark:text-slate-300">
                     Detailed Section 6(1) Enforceable Clauses <span className="text-rose-500">*</span>
                   </label>
-                  <span className="text-[11px] text-purple-600 dark:text-purple-400 font-semibold">
+                  <span className="text-xs text-purple-600 dark:text-purple-400 font-semibold">
                     AI Formatted / User Editable
                   </span>
                 </div>
@@ -1521,19 +1520,19 @@ export default function FileRtiPage() {
                   placeholder="Apne sawal yahan vistar se likhein ya upar SARAL AI Copilot se auto-generate karein..."
                   value={formData.rawCitizenPrompt}
                   onChange={(e) => setFormData({ ...formData, rawCitizenPrompt: e.target.value })}
-                  className="w-full p-3.5 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 leading-relaxed font-sans"
+                  className="w-full p-4 rounded-2xl bg-slate-50 dark:bg-black/30 border border-slate-300 dark:border-white/10 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none focus:border-purple-500 leading-relaxed font-sans"
                 />
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mt-2">
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                    💡 Tip: Factual records (Sanction orders, bills, muster rolls, inspection reports) maangne se RTI reject nahi hoti.
+                  <p className="text-xs text-slate-500 dark:text-slate-400">
+                    Tip: Factual records (Sanction orders, bills, muster rolls, inspection reports) maangne se RTI reject nahi hoti.
                   </p>
                   <button
                     type="button"
                     onClick={() => handleScanSection8()}
                     disabled={isScanningSection8}
-                    className="self-start sm:self-auto px-3.5 py-1.5 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer disabled:opacity-50"
+                    className="self-start sm:self-auto px-4 py-2 rounded-xl bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-semibold flex items-center gap-2 transition cursor-pointer disabled:opacity-50"
                   >
-                    <span>🛡️</span>
+                    <span><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{isScanningSection8 ? "Scanning Exemptions..." : "Scan Section 8 Compliance"}</span>
                   </button>
                 </div>
@@ -1557,30 +1556,30 @@ export default function FileRtiPage() {
                           {section8ScanResult.overallStatus === "SAFE"
                             ? "✓ Section 8 Safety Verified (Non-Exempt)"
                             : section8ScanResult.overallStatus === "CAUTION"
-                            ? "⚠️ Section 8 Cautionary Touchpoint"
-                            : "🚫 Section 8 Statutory Exemption Risk"}
+                            ? "Section 8 Cautionary Touchpoint"
+                            : "Section 8 Statutory Exemption Risk"}
                         </span>
-                        <span className="px-2 py-0.2 rounded-full bg-white/20 text-[10px] font-mono font-bold">
+                        <span className="px-2 py-0.2 rounded-lg bg-white/20 text-xs font-mono font-bold">
                           {section8ScanResult.confidenceScore} Accuracy
                         </span>
                       </div>
-                      <span className="text-[11px] font-semibold">
+                      <span className="text-xs font-semibold">
                         Risk Level: {section8ScanResult.riskLevel}
                       </span>
                     </div>
 
-                    <p className="text-[11px] leading-relaxed">
+                    <p className="text-xs leading-relaxed">
                       {section8ScanResult.summary}
                     </p>
 
                     {section8ScanResult.touchpoints?.map((tp, idx) => (
                       <div
                         key={idx}
-                        className="p-3 rounded-xl bg-slate-100/90 dark:bg-black/20 border border-slate-200 dark:border-white/10 space-y-1 text-[11px]"
+                        className="p-3 rounded-xl bg-slate-100/90 dark:bg-black/20 border border-slate-200 dark:border-white/10 space-y-1 text-xs"
                       >
                         <div className="flex items-center justify-between font-bold">
                           <span>{tp.section}: {tp.title}</span>
-                          <span className="text-[10px] uppercase text-rose-600 dark:text-rose-400 font-bold">{tp.severity} Severity</span>
+                          <span className="text-xs text-rose-600 dark:text-rose-400 font-bold">{tp.severity} Severity</span>
                         </div>
                         <p className="text-slate-700 dark:text-slate-300">{tp.advice}</p>
                         <p className="text-emerald-700 dark:text-emerald-300">
@@ -1615,7 +1614,7 @@ export default function FileRtiPage() {
 
               {/* Section 7(1) Life & Liberty Emergency Toggle */}
               <div
-                className={`p-5 rounded-2xl border-2 transition-all ${
+                className={`p-5 rounded-2xl border-2 transition-colors ${
                   formData.isLifeOrLiberty
                     ? "bg-rose-500/10 border-rose-500 dark:border-rose-500/60"
                     : "bg-slate-50 dark:bg-white/5 border-slate-200 dark:border-white/10"
@@ -1657,7 +1656,7 @@ export default function FileRtiPage() {
                       onChange={(e) =>
                         setFormData({ ...formData, lifeLibertyJustification: e.target.value })
                       }
-                      className="w-full p-2.5 rounded-xl bg-white dark:bg-black/40 border border-rose-400 text-xs text-slate-900 dark:text-white focus:outline-none"
+                      className="w-full p-3 rounded-xl bg-white dark:bg-black/40 border border-rose-400 text-xs text-slate-900 dark:text-white focus:outline-none"
                     />
                   </div>
                 )}
@@ -1696,11 +1695,11 @@ export default function FileRtiPage() {
                         <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
                           {mode.title}
                         </h4>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                           {mode.desc}
                         </p>
                       </div>
-                      <span className="mt-3 text-[10px] font-bold text-cyan-600 dark:text-cyan-400">
+                      <span className="mt-3 text-xs font-bold text-cyan-600 dark:text-cyan-400">
                         {mode.badge}
                       </span>
                     </div>
@@ -1743,7 +1742,7 @@ export default function FileRtiPage() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xl font-black text-purple-600 dark:text-purple-400">₹10.00</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300">
+                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300">
                         Standard Fee
                       </span>
                     </div>
@@ -1756,7 +1755,7 @@ export default function FileRtiPage() {
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-white/10 flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
-                    <span>⚡ Instant Acknowledgement Receipt</span>
+                    <span>Instant Acknowledgement Receipt</span>
                   </div>
                 </div>
 
@@ -1772,7 +1771,7 @@ export default function FileRtiPage() {
                   <div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="text-xl font-black text-emerald-600 dark:text-emerald-400">₹0.00 (Exempt)</span>
-                      <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300">
+                      <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-100 dark:bg-emerald-900/50 text-emerald-700 dark:text-emerald-300">
                         Section 7(5) Proviso
                       </span>
                     </div>
@@ -1785,7 +1784,7 @@ export default function FileRtiPage() {
                   </div>
 
                   <div className="mt-4 pt-3 border-t border-slate-200/60 dark:border-white/10 flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300">
-                    <span>🛡️ Requires BPL Ration Card ID</span>
+                    <span>Requires BPL Ration Card ID</span>
                   </div>
                 </div>
               </div>
@@ -1802,7 +1801,7 @@ export default function FileRtiPage() {
                     placeholder="e.g. BPL-MP-2024-984124"
                     value={formData.bplCardNumber}
                     onChange={(e) => setFormData({ ...formData, bplCardNumber: e.target.value })}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-black/30 border border-emerald-500 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full px-4 py-3 rounded-xl bg-white dark:bg-black/30 border border-emerald-500 text-xs sm:text-sm text-slate-900 dark:text-white focus:outline-none"
                   />
                 </div>
               )}
@@ -1832,58 +1831,58 @@ export default function FileRtiPage() {
               <div className="p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 space-y-4 text-xs">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pb-3 border-b border-slate-200 dark:border-white/10">
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Applicant:</span>
+                    <span className="text-slate-400 block text-xs">Applicant:</span>
                     <strong className="text-slate-900 dark:text-white text-sm">
                       {user?.fullName || user?.name || (user?.email ? user.email.split("@")[0].replace(/[._]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()) : "Citizen Applicant")}
                     </strong>
-                    <span className="text-emerald-600 dark:text-emerald-400 block text-[10px]">DigiLocker Verified Citizen</span>
+                    <span className="text-emerald-600 dark:text-emerald-400 block text-xs">DigiLocker Verified Citizen</span>
                   </div>
 
                   <div>
-                    <span className="text-slate-400 block text-[11px]">Target Public Authority:</span>
+                    <span className="text-slate-400 block text-xs">Target Public Authority:</span>
                     <strong className="text-purple-600 dark:text-purple-400 text-sm">{selectedDepartment?.name}</strong>
-                    <span className="text-slate-500 text-[10px] block">
+                    <span className="text-slate-500 text-xs block">
                       {selectedDepartment?.ministry} • {formData.stateOrCentral === "State" ? `State Government (${activeState})` : "Central Government (GoI)"}
                     </span>
                   </div>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-[11px]">Application Title:</span>
+                  <span className="text-slate-400 block text-xs">Application Title:</span>
                   <p className="text-slate-800 dark:text-slate-100 font-semibold text-sm">{formData.title}</p>
                 </div>
 
                 <div>
-                  <span className="text-slate-400 block text-[11px]">Proposed Query / Questions:</span>
-                  <p className="text-slate-700 dark:text-slate-300 italic p-3 rounded-xl bg-white dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
+                  <span className="text-slate-400 block text-xs">Proposed Query / Questions:</span>
+                  <p className="text-slate-700 dark:text-slate-300 p-3 rounded-xl bg-white dark:bg-black/30 border border-slate-200/60 dark:border-white/5">
                     {formData.rawCitizenPrompt}
                   </p>
                 </div>
 
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Statutory Clock:</span>
+                    <span className="text-slate-400 block text-xs">Statutory Clock:</span>
                     <strong className={formData.isLifeOrLiberty ? "text-rose-500" : "text-emerald-500"}>
                       {formData.isLifeOrLiberty ? "48 Hours (Emergency)" : "30 Calendar Days"}
                     </strong>
                   </div>
 
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Fee Status:</span>
+                    <span className="text-slate-400 block text-xs">Fee Status:</span>
                     <strong className="text-purple-600 dark:text-purple-400">
                       {formData.feeOption === "BPL_EXEMPTION" ? "₹0 (BPL Exempt)" : "₹10 Paid (Treasury)"}
                     </strong>
                   </div>
 
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Response Mode:</span>
+                    <span className="text-slate-400 block text-xs">Response Mode:</span>
                     <strong className="text-slate-800 dark:text-slate-200">
                       {formData.deliveryMode === "DIGITAL" ? "Certified PDF" : "Speed Post"}
                     </strong>
                   </div>
 
                   <div>
-                    <span className="text-slate-400 block text-[10px]">Location:</span>
+                    <span className="text-slate-400 block text-xs">Location:</span>
                     <strong className="text-slate-800 dark:text-slate-200 truncate block">
                       {formData.locationDivision || (activeState !== "Select State" ? activeState : "Jurisdiction Designated")}
                     </strong>
@@ -1892,18 +1891,18 @@ export default function FileRtiPage() {
               </div>
 
               {/* Landmark CIC Precedents Card (Sprint 2.4 - RAG) */}
-              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-purple-50/80 via-indigo-50/50 to-slate-50 dark:from-indigo-950/40 dark:via-purple-950/30 dark:to-slate-900 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-xs">
+              <div className="p-4 sm:p-5 rounded-2xl bg-purple-50/80 dark:bg-indigo-950/40 border border-purple-200 dark:border-purple-500/25 space-y-3 shadow-xs">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs">🏛️</span>
+                    <span className="p-1 rounded-lg bg-purple-100 text-purple-700 dark:bg-purple-600/30 dark:text-purple-300 text-xs"><IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
                       <span>Landmark CIC Legal Precedents Supporting Your Petition</span>
-                      <span className="px-2 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[10px] font-bold">
+                      <span className="px-2 py-0.2 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold">
                         RAG Knowledge
                       </span>
                     </h4>
                   </div>
-                  <span className="text-[10px] text-purple-600 dark:text-purple-300/70 font-mono hidden sm:inline font-medium">
+                  <span className="text-xs text-purple-600 dark:text-purple-300/70 font-mono hidden sm:inline font-medium">
                     Supabase pgvector
                   </span>
                 </div>
@@ -1913,26 +1912,26 @@ export default function FileRtiPage() {
                     Retrieving landmark CIC orders and Supreme Court rulings...
                   </div>
                 ) : (
-                  <div className="space-y-2.5">
+                  <div className="space-y-3">
                     {precedents.map((prec) => (
                       <div
                         key={prec.decisionNumber}
                         className="p-3 rounded-xl bg-white dark:bg-white/[0.04] border border-purple-100 dark:border-white/10 space-y-1 text-xs shadow-xs"
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-mono font-bold text-purple-700 dark:text-purple-300 text-[11px]">
+                          <span className="font-mono font-bold text-purple-700 dark:text-purple-300 text-xs">
                             {prec.decisionNumber} • {prec.citation}
                           </span>
-                          <span className="text-[10px] px-2 py-0.2 rounded-full bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-500/30">
+                          <span className="text-xs px-2 py-0.2 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-300 font-bold border border-emerald-200 dark:border-emerald-500/30">
                             {prec.relevancePercentage} Relevant
                           </span>
                         </div>
                         <h5 className="font-bold text-slate-900 dark:text-white text-xs">{prec.title}</h5>
-                        <p className="text-slate-600 dark:text-slate-300 text-[11px] leading-relaxed">
+                        <p className="text-slate-600 dark:text-slate-300 text-xs leading-relaxed">
                           {prec.rulingSummary}
                         </p>
-                        <p className="text-purple-800 dark:text-purple-200 text-[10px] italic">
-                          ⚖ Takeaway: {prec.keyLegalTakeaway}
+                        <p className="text-purple-800 dark:text-purple-200 text-xs">
+                          Takeaway: {prec.keyLegalTakeaway}
                         </p>
                       </div>
                     ))}
@@ -1972,12 +1971,12 @@ export default function FileRtiPage() {
               animate={{ opacity: 1, scale: 1 }}
               className="text-center py-8 space-y-6"
             >
-              <div className="w-20 h-20 mx-auto rounded-3xl bg-emerald-500/15 border-2 border-emerald-500 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-4xl shadow-xl shadow-emerald-500/20 animate-bounce">
+              <div className="w-20 h-20 mx-auto rounded-3xl bg-emerald-500/15 border-2 border-emerald-500 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-4xl shadow-xl">
                 ✓
               </div>
 
               <div className="space-y-2">
-                <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                <span className="px-3 py-1 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                   Statutory Submission Confirmed • Section 6(1)
                 </span>
                 <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">
@@ -1990,13 +1989,13 @@ export default function FileRtiPage() {
 
               {/* Reference ID Pill */}
               <div className="p-4 max-w-md mx-auto rounded-2xl bg-purple-50 dark:bg-purple-950/30 border border-purple-500/30 text-center space-y-1">
-                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                <span className="label-caps text-slate-500 dark:text-slate-400 block">
                   Sovereign Application Number
                 </span>
                 <span className="font-mono text-xl sm:text-2xl font-black text-purple-600 dark:text-purple-400">
                   {submittedApplication.applicationNumber}
                 </span>
-                <span className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold block">
+                <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold block">
                   ● 30-Day Mandatory Clock Active
                 </span>
               </div>
@@ -2005,7 +2004,7 @@ export default function FileRtiPage() {
               <div className="flex flex-wrap items-center justify-center gap-3 pt-4">
                 <Link
                   href={`/tracking?id=${submittedApplication.applicationNumber}`}
-                  className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-purple-600/30 transition cursor-pointer"
+                  className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs sm:text-sm shadow-lg transition cursor-pointer"
                 >
                   Track Application Dossier →
                 </Link>
@@ -2013,9 +2012,9 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={() => setIsPreviewModalOpen(true)}
-                  className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
+                  className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
                 >
-                  <span>📄 View &amp; Download Statutory Receipt</span>
+                  <span>View &amp; Download Statutory Receipt</span>
                 </button>
 
                 <Link
@@ -2035,7 +2034,7 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={handlePrev}
-                  className="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition cursor-pointer"
+                  className="px-4 py-3 rounded-xl border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/10 transition cursor-pointer"
                 >
                   ← Previous Step
                 </button>
@@ -2053,7 +2052,7 @@ export default function FileRtiPage() {
                   whileTap={{ scale: 0.97 }}
                   type="button"
                   onClick={handleNext}
-                  className="px-6 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-purple-600/30 transition cursor-pointer flex items-center gap-1.5"
+                  className="px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition cursor-pointer flex items-center gap-2"
                 >
                   <span>Continue</span>
                   <span>→</span>
@@ -2064,10 +2063,10 @@ export default function FileRtiPage() {
                   type="button"
                   disabled={submitting}
                   onClick={handleSubmit}
-                  className="px-7 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs sm:text-sm font-bold shadow-lg shadow-purple-600/30 transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                  className="px-7 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-bold shadow-lg transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
                 >
                   <span>{submitting ? "Encapsulating & Dispatching..." : "File Petition & Settle Fee"}</span>
-                  <span>🚀</span>
+                  <span><IcSend className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 </motion.button>
               )}
             </div>

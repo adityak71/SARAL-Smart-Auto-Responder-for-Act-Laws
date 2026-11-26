@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { FileText as IcFileText, Shield as IcShield, Timer as IcTimer, Users as IcUsers } from "lucide-react";
 
 export default function AdminOverview({ stats, isLoading }) {
   const currentStats = stats || {
@@ -29,7 +30,7 @@ export default function AdminOverview({ stats, isLoading }) {
   return (
     <div className="space-y-6 w-full animate-fadeIn">
       {/* 1. Main Admin Overview Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -39,7 +40,7 @@ export default function AdminOverview({ stats, isLoading }) {
               Centralized administrative statistics & platform synchronization
             </p>
           </div>
-          <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+          <span className="px-3 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
             Admin
           </span>
         </div>
@@ -48,7 +49,7 @@ export default function AdminOverview({ stats, isLoading }) {
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 pt-2">
           {/* Total Users */}
           <div className="space-y-2">
-            <div className="text-slate-400 text-lg">👥</div>
+            <div className="text-slate-400 text-lg"><IcUsers className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
             <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-mono">
               {currentStats.totalUsers.toLocaleString()}
             </div>
@@ -57,7 +58,7 @@ export default function AdminOverview({ stats, isLoading }) {
 
           {/* Total RTI Applications */}
           <div className="space-y-2">
-            <div className="text-slate-400 text-lg">📄</div>
+            <div className="text-slate-400 text-lg"><IcFileText className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
             <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-mono">
               {currentStats.totalRtis.toLocaleString()}
             </div>
@@ -66,7 +67,7 @@ export default function AdminOverview({ stats, isLoading }) {
 
           {/* Verified Users */}
           <div className="space-y-2">
-            <div className="text-slate-400 text-lg">🛡️</div>
+            <div className="text-slate-400 text-lg"><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
             <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400 font-mono">
               {currentStats.verifiedUsers.toLocaleString()}
             </div>
@@ -75,7 +76,7 @@ export default function AdminOverview({ stats, isLoading }) {
 
           {/* Pending Requests */}
           <div className="space-y-2">
-            <div className="text-slate-400 text-lg">⏱️</div>
+            <div className="text-slate-400 text-lg"><IcTimer className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></div>
             <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-amber-600 dark:text-amber-400 font-mono">
               {currentStats.pendingRequests.toLocaleString()}
             </div>
@@ -90,7 +91,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </h3>
 
           {/* Submitted */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">Submitted</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -108,7 +109,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </div>
 
           {/* In Progress */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">In Progress</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -126,7 +127,7 @@ export default function AdminOverview({ stats, isLoading }) {
           </div>
 
           {/* Responded / Closed */}
-          <div className="space-y-1.5">
+          <div className="space-y-2">
             <div className="flex items-center justify-between text-xs">
               <span className="text-slate-600 dark:text-slate-300 font-medium">Responded / Closed</span>
               <span className="font-mono font-bold text-slate-900 dark:text-white">
@@ -143,14 +144,14 @@ export default function AdminOverview({ stats, isLoading }) {
             </div>
           </div>
 
-          <p className="text-[11px] text-slate-500 dark:text-slate-400 pt-2 italic">
+          <p className="text-xs text-slate-500 dark:text-slate-400 pt-2">
             Live metrics synchronized with PostgreSQL central database.
           </p>
         </div>
       </div>
 
       {/* 2. Monthly RTI Applications Bar Chart */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">
@@ -160,8 +161,8 @@ export default function AdminOverview({ stats, isLoading }) {
               Filing trends across statutory periods
             </p>
           </div>
-          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
-            <span className="px-2 py-0.5 text-slate-700 dark:text-slate-300 text-[11px] font-semibold">Live 2026</span>
+          <div className="flex items-center gap-2 p-1 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs">
+            <span className="px-2 py-0.5 text-slate-700 dark:text-slate-300 text-xs font-semibold">Live 2026</span>
           </div>
         </div>
 
@@ -169,7 +170,7 @@ export default function AdminOverview({ stats, isLoading }) {
         <div className="pt-4">
           <div className="relative h-64 w-full flex items-end gap-3 sm:gap-6 border-b border-slate-200 dark:border-white/10 pb-2">
             {/* Y-Axis Guide Lines */}
-            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-[10px] text-slate-400 dark:text-slate-500 font-mono pr-2">
+            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none text-xs text-slate-400 dark:text-slate-500 font-mono pr-2">
               <div className="border-b border-slate-100 dark:border-white/5 w-full flex justify-between"><span>{maxMonthly}</span></div>
               <div className="border-b border-slate-100 dark:border-white/5 w-full flex justify-between"><span>{Math.round(maxMonthly * 0.75)}</span></div>
               <div className="border-b border-slate-100 dark:border-white/5 w-full flex justify-between"><span>{Math.round(maxMonthly * 0.5)}</span></div>
@@ -184,7 +185,7 @@ export default function AdminOverview({ stats, isLoading }) {
                 return (
                   <div key={item.month} className="flex-1 flex flex-col items-center gap-2 group h-full justify-end">
                     {/* Hover Count Tooltip */}
-                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-[11px] font-mono font-bold text-blue-600 dark:text-cyan-300 bg-blue-50 dark:bg-cyan-950/80 px-1.5 py-0.5 rounded border border-blue-200 dark:border-cyan-500/30 shadow-sm">
+                    <div className="opacity-0 group-hover:opacity-100 transition-opacity text-xs font-mono font-bold text-blue-600 dark:text-cyan-300 bg-blue-50 dark:bg-cyan-950/80 px-2 py-0.5 rounded border border-blue-200 dark:border-cyan-500/30 shadow-sm">
                       {item.count}
                     </div>
 

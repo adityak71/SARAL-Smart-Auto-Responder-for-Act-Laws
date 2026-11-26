@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SARAL - Send a Statutory Inquiry or Support Request</title>
+<!-- Tailwind CSS v3 CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Source Serif 4 & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Configuration -->
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            saral: {
+              petrol: '#1e3a42',
+              petrolDark: '#152930',
+              petrolLight: '#2c535e',
+              bgLight: '#f4f8f7',
+              cardBg: '#ffffff',
+              bone: '#f9fbfb',
+              accentBlue: '#eaf4f7',
+              accentBorder: '#cce1e8',
+              textMain: '#1d2a30',
+              textMuted: '#586b73',
+              subtleBg: '#f7faf9'
+            }
+          },
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Typography & Specific Overrides -->
+<style data-purpose="custom-styling">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f3f7f5;
+      color: #1d2a30;
+      -webkit-font-smoothing: antialiased;
+    }
+    .font-serif-heading {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+<!-- BEGIN: MainHeader -->
+<header class="w-full bg-[#fbfdfc] border-b border-[#e2eae8] sticky top-0 z-50">
+<div class="max-w-[1440px] mx-auto px-8 h-20 flex items-center justify-between">
+<!-- Brand & Emblem -->
+<div class="flex items-center gap-3.5" data-purpose="brand-identity">
+<div class="w-11 h-11 bg-[#1e3a42] rounded-lg flex items-center justify-center text-white shadow-sm ring-1 ring-black/5">
+<!-- Ashoka Lion Emblem / Statutory Pillar Representation -->
+<svg class="w-6 h-6 fill-current text-[#e7f0ed]" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3 0 1.25-.76 2.32-1.84 2.76.54.43.84 1.1.84 1.84 0 1.38-1.12 2.5-2.5 2.5H11v3H9.5v-3.5c0-.83.67-1.5 1.5-1.5h.5c.55 0 1-.45 1-1s-.45-1-1-1H9.5V8h2c.83 0 1.5-.67 1.5-1.5S12.33 5 11.5 5H9.5V3.5h2.5c.83 0 1.5-.67 1.5-1.5zM7 19.5v-1h10v1H7z"></path>
+</svg>
+</div>
+<div>
+<h1 class="font-serif-heading font-bold text-xl tracking-tight text-[#162930] leading-none mb-1">SARAL</h1>
+<p class="text-xs text-[#5e747d] tracking-normal font-normal">Simplifying Right to Information</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex items-center gap-1.5 text-[14px] font-medium text-[#465b63]" data-purpose="primary-navigation">
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">Home</a>
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">Dashboard</a>
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">General Info</a>
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">How It Works</a>
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">About</a>
+<a class="px-4 py-1.5 rounded-md bg-[#1e3a42] text-white font-medium shadow-sm" href="#">Contact</a>
+<a class="px-3.5 py-1.5 rounded-md hover:text-[#1e3a42] transition-colors" href="#">Tracking</a>
+</nav>
+<!-- Right Utility Actions -->
+<div class="flex items-center gap-4" data-purpose="user-utilities">
+<!-- Theme Toggle Button -->
+<button aria-label="Toggle dark mode" class="w-9 h-9 rounded-full flex items-center justify-center text-[#556972] hover:bg-[#edf3f2] transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Notification Bell with Counter -->
+<div class="relative">
+<button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center text-[#556972] hover:bg-[#edf3f2] transition-colors" type="button">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<span class="absolute top-1 right-1 w-4 h-4 bg-[#e53935] text-white text-[10px] font-bold rounded-full flex items-center justify-center ring-2 ring-white">1</span>
+</div>
+<!-- Logout Action Button -->
+<button class="px-3.5 py-1 text-sm font-medium text-[#e53935] bg-[#fff0f0] border border-[#ffcdd2] rounded-md hover:bg-[#ffebee] transition-colors" type="button">
+          Logout
+        </button>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-2 pl-1 cursor-pointer">
+<div class="relative">
+<img alt="Crazy Minds Profile" class="w-9 h-9 rounded-full ring-2 ring-[#e0ece8] object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi2flBC1Bvit4yF7aQqA8SPeQaVgRkpQfuxo1lkhvmXbGZ_iiX7msd3m4mZdVFy7GNaPm32YgOb_lMy0vqmqGOvwRaxb-Z386w-ayDCVpMKfJfUWfO2gOzLe3oWx4DKlVT0Sy-CjaFNyP0-Is24C82fYOnC2Y7WOuiHRpLOTMPhju0AKWyCBz7qbkevvR3Zkz2_ZaMNyDQNLdnmhNLDGGffNRRe83v83qNY9nSDA"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white"></span>
+</div>
+<svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: MainContent -->
+<main class="flex-grow max-w-[1440px] w-full mx-auto px-8 py-9">
+<div class="grid grid-cols-12 gap-8 items-start">
+<!-- Left Column: Citizen Helpdesk Form Container -->
+<section class="col-span-12 lg:col-span-7 bg-white rounded-xl p-8 border border-[#e1e9e7] shadow-[0_2px_12px_rgba(25,48,54,0.04)]" data-purpose="grievance-form-container">
+<!-- Header Text Block -->
+<div class="mb-6">
+<span class="text-xs font-semibold uppercase tracking-wider text-[#2d6270]">Citizen helpdesk and grievance cell</span>
+<h2 class="font-serif-heading text-[29px] leading-tight font-bold text-[#14262c] mt-1.5 mb-2">Send a Statutory Inquiry or Support Request</h2>
+<p class="text-sm text-[#5d737c] leading-relaxed">
+            Have questions regarding the Right to Information Act, jurisdictional mapping, or technical filing? Reach out to our facilitation cell.
+          </p>
+</div>
+<!-- Inquiry Form -->
+<form action="#" class="space-y-6" data-purpose="statutory-inquiry-form" method="POST">
+<!-- Name & Email Two-Column Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div data-purpose="input-fullname">
+<label class="block text-xs font-semibold text-[#243940] mb-1.5" for="full-name">Full Name *</label>
+<input class="w-full text-sm px-3.5 py-2.5 bg-[#fbfdfd] border border-[#d6e3e1] rounded-lg text-[#1e3a42] placeholder-[#90a2a8] focus:bg-white focus:ring-1 focus:ring-[#1e3a42] focus:border-[#1e3a42] transition-colors" id="full-name" name="full_name" placeholder="e.g. Dr. Rajesh Kumar" required="" type="text"/>
+</div>
+<div data-purpose="input-email">
+<label class="block text-xs font-semibold text-[#243940] mb-1.5" for="email-address">Email Address *</label>
+<input class="w-full text-sm px-3.5 py-2.5 bg-[#fbfdfd] border border-[#d6e3e1] rounded-lg text-[#1e3a42] placeholder-[#90a2a8] focus:bg-white focus:ring-1 focus:ring-[#1e3a42] focus:border-[#1e3a42] transition-colors" id="email-address" name="email_address" placeholder="citizen@example.in" required="" type="email"/>
+</div>
+</div>
+<!-- Category Selection -->
+<fieldset data-purpose="category-radios">
+<legend class="block text-xs font-semibold text-[#243940] mb-2.5">Inquiry Category *</legend>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<!-- Option 1 (Selected) -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#1e3a42] bg-[#f0f6f8] cursor-pointer hover:border-[#1e3a42] transition-all">
+<input checked="" class="w-4 h-4 text-[#1e3a42] border-[#24454f] focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="rti_assistance"/>
+<span class="text-xs font-medium text-[#162d34]">RTI Filing Assistance</span>
+</label>
+<!-- Option 2 -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#d8e5e3] bg-[#fdfefe] cursor-pointer hover:border-[#9dbfc6] hover:bg-[#f8fbfb] transition-all">
+<input class="w-4 h-4 text-[#1e3a42] border-gray-300 focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="mapping_issue"/>
+<span class="text-xs font-medium text-[#3b515a]">Department Mapping Issue</span>
+</label>
+<!-- Option 3 -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#d8e5e3] bg-[#fdfefe] cursor-pointer hover:border-[#9dbfc6] hover:bg-[#f8fbfb] transition-all">
+<input class="w-4 h-4 text-[#1e3a42] border-gray-300 focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="portal_support"/>
+<span class="text-xs font-medium text-[#3b515a]">Portal &amp; Gateway Support</span>
+</label>
+<!-- Option 4 -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#d8e5e3] bg-[#fdfefe] cursor-pointer hover:border-[#9dbfc6] hover:bg-[#f8fbfb] transition-all">
+<input class="w-4 h-4 text-[#1e3a42] border-gray-300 focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="first_appeal"/>
+<span class="text-xs font-medium text-[#3b515a]">Section 19(1) First Appeal</span>
+</label>
+<!-- Option 5 -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#d8e5e3] bg-[#fdfefe] cursor-pointer hover:border-[#9dbfc6] hover:bg-[#f8fbfb] transition-all">
+<input class="w-4 h-4 text-[#1e3a42] border-gray-300 focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="officer_desk"/>
+<span class="text-xs font-medium text-[#3b515a]">Officer Desk Onboarding</span>
+</label>
+<!-- Option 6 -->
+<label class="flex items-center gap-3 p-3 rounded-lg border border-[#d8e5e3] bg-[#fdfefe] cursor-pointer hover:border-[#9dbfc6] hover:bg-[#f8fbfb] transition-all">
+<input class="w-4 h-4 text-[#1e3a42] border-gray-300 focus:ring-0 focus:ring-offset-0" name="inquiry_category" type="radio" value="administrative_query"/>
+<span class="text-xs font-medium text-[#3b515a]">General Administrative Query</span>
+</label>
+</div>
+</fieldset>
+<!-- Inquiry Details Textarea -->
+<div data-purpose="input-message">
+<label class="block text-xs font-semibold text-[#243940] mb-1.5" for="message-details">Message / Inquiry Details *</label>
+<textarea class="w-full text-sm p-3.5 bg-[#fbfdfd] border border-[#d6e3e1] rounded-lg text-[#1e3a42] placeholder-[#90a2a8] focus:bg-white focus:ring-1 focus:ring-[#1e3a42] focus:border-[#1e3a42] transition-colors resize-y leading-relaxed" id="message-details" name="message" placeholder="Kindly articulate the statutory reference or platform friction you experienced..." required="" rows="5"></textarea>
+</div>
+<!-- Bottom Actions & Security Disclaimer -->
+<div class="pt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-t border-[#edf3f2]">
+<!-- DPDP Act Security Note -->
+<div class="flex items-center gap-2 text-[12px] text-[#637a83]" data-purpose="security-badge">
+<svg class="w-4 h-4 text-[#39626e] shrink-0" fill="none" stroke="currentColor" stroke-width="1.8" viewbox="0 0 24 24">
+<path d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span>Submissions encrypted via DPDP Act 2023 protocol</span>
+</div>
+<!-- Submit Button -->
+<button class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-[#1e3a42] hover:bg-[#162b31] active:bg-[#112126] text-white text-xs font-medium rounded-lg shadow-sm tracking-wide transition-colors" type="submit">
+<span>Submit Support Query</span>
+<span class="text-sm">→</span>
+</button>
+</div>
+</form>
+</section>
+<!-- Right Column: Statutory Helpline & Physical Regional Cells -->
+<aside class="col-span-12 lg:col-span-5 space-y-6" data-purpose="helpline-directory">
+<!-- National Helpline Highlight Card -->
+<div class="bg-[#eaf4f8] rounded-xl p-6 border border-[#cbe0e8] relative overflow-hidden" data-purpose="helpline-tollfree-card">
+<p class="text-xs font-semibold text-[#24505c] tracking-wide mb-1">National Toll-Free Facilitation Helpline</p>
+<div class="font-serif-heading text-4xl font-bold tracking-tight text-[#112a32] my-2">
+            1800-11-7272
+          </div>
+<p class="text-[12px] text-[#48636e] leading-relaxed">
+            Toll-free helpline operating Mon – Sat, 09:30 AM to 06:00 PM IST across all states and union territories.
+          </p>
+</div>
+<!-- Physical RTI Facilitation Cells Section -->
+<div class="space-y-4">
+<h3 class="text-sm font-semibold text-[#1e3a42] px-1 tracking-tight">Physical RTI Facilitation Cells</h3>
+<!-- Location 1: New Delhi (HQ) -->
+<article class="bg-white rounded-xl p-5 border border-[#e1e9e7] shadow-[0_1px_4px_rgba(0,0,0,0.02)] hover:border-[#c5d8d4] transition-colors" data-purpose="location-delhi">
+<h4 class="font-serif-heading font-bold text-base text-[#152a31]">New Delhi (Headquarters)</h4>
+<p class="text-xs font-medium text-[#2d6473] mt-0.5 mb-1.5">Central Citizen Support &amp; RTI Innovation Cell</p>
+<p class="text-xs text-[#526972] leading-relaxed mb-3">Room 402, 4th Floor, CGO Complex, Lodhi Road, New Delhi – 110003</p>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#3d555e] pt-2 border-t border-[#f0f4f3]">
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">📞</span> +91 11 2436 7890 / 1800-11-7272
+              </span>
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">✉</span> helpdesk@saral-rti.gov.in
+              </span>
+</div>
+</article>
+<!-- Location 2: Bhopal -->
+<article class="bg-white rounded-xl p-5 border border-[#e1e9e7] shadow-[0_1px_4px_rgba(0,0,0,0.02)] hover:border-[#c5d8d4] transition-colors" data-purpose="location-bhopal">
+<h4 class="font-serif-heading font-bold text-base text-[#152a31]">Bhopal (Central Regional Cell)</h4>
+<p class="text-xs font-medium text-[#2d6473] mt-0.5 mb-1.5">Madhya Pradesh &amp; Central State Nodal Desk</p>
+<p class="text-xs text-[#526972] leading-relaxed mb-3">Vallabh Bhavan Extension, Arera Hills, Bhopal, MP – 462004</p>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#3d555e] pt-2 border-t border-[#f0f4f3]">
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">📞</span> +91 755 277 4100
+              </span>
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">✉</span> centraldesk@saral-rti.gov.in
+              </span>
+</div>
+</article>
+<!-- Location 3: Chennai -->
+<article class="bg-white rounded-xl p-5 border border-[#e1e9e7] shadow-[0_1px_4px_rgba(0,0,0,0.02)] hover:border-[#c5d8d4] transition-colors" data-purpose="location-chennai">
+<h4 class="font-serif-heading font-bold text-base text-[#152a31]">Chennai (Southern Regional Cell)</h4>
+<p class="text-xs font-medium text-[#2d6473] mt-0.5 mb-1.5">South Zone Transparency Facilitation Desk</p>
+<p class="text-xs text-[#526972] leading-relaxed mb-3">Rajaji Bhavan, Besant Nagar, Chennai, Tamil Nadu – 600090</p>
+<div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#3d555e] pt-2 border-t border-[#f0f4f3]">
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">📞</span> +91 44 2491 5520
+              </span>
+<span class="inline-flex items-center gap-1.5">
+<span class="text-[11px]">✉</span> southdesk@saral-rti.gov.in
+              </span>
+</div>
+</article>
+</div>
+</aside>
+</div>
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: CivicFooter -->
+<footer class="w-full bg-[#182e34] text-[#cfdcde] text-xs py-7 border-t border-[#25464f] mt-12" data-purpose="civic-footer">
+<div class="max-w-[1440px] mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-3">
+<span class="font-serif-heading font-semibold text-white tracking-wider">SARAL</span>
+<span class="text-gray-400">|</span>
+<span class="text-[12px] text-[#97adb5]">Department of Personnel &amp; Training, Ministry of Personnel, Public Grievances and Pensions</span>
+</div>
+<div class="flex items-center gap-6 text-[12px] text-[#97adb5]">
+<a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-white transition-colors" href="#">Terms of Compliance</a>
+<a class="hover:text-white transition-colors" href="#">Hyperlinking Policy</a>
+<a class="hover:text-white transition-colors" href="#">Accessibility Statement</a>
+</div>
+</div>
+</footer>
+<!-- END: CivicFooter -->
+</body></html>

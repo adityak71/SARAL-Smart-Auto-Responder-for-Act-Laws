@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { citizenStories } from "@/data/citizenStoriesData";
+import { MapPin as IcMapPin } from "lucide-react";
 
 export default function CitizenStoriesSection() {
   return (
@@ -9,7 +10,7 @@ export default function CitizenStoriesSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs font-bold tracking-wider">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span>REAL CITIZEN IMPACT • ज़मीनी बदलाव</span>
           </div>
@@ -32,18 +33,18 @@ export default function CitizenStoriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="p-6 rounded-3xl bg-[#0f072d]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-all duration-300 hover:-translate-y-1 group"
+              className="p-6 rounded-3xl bg-[#16262d]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-colors duration-300 group"
             >
               {/* Top Citizen Header */}
               <div className="flex items-start justify-between gap-3">
-                <div className="flex items-center gap-3.5">
+                <div className="flex items-center gap-4">
                   <img
                     src={story.avatar}
                     alt={story.name}
                     className="w-12 h-12 rounded-2xl object-cover ring-2 ring-purple-500/40 shadow-md shrink-0"
                   />
                   <div>
-                    <div className="flex items-center gap-1.5">
+                    <div className="flex items-center gap-2">
                       <h3 className="font-bold text-base text-white">
                         {story.name}
                       </h3>
@@ -56,30 +57,30 @@ export default function CitizenStoriesSection() {
                     <p className="text-xs text-purple-300 font-medium">
                       {story.role}
                     </p>
-                    <p className="text-[11px] text-slate-400">
-                      📍 {story.location}
+                    <p className="text-xs text-slate-400">
+                      <IcMapPin className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {story.location}
                     </p>
                   </div>
                 </div>
 
                 <div className="text-right shrink-0">
-                  <span className="text-[11px] font-mono text-purple-300/80 font-bold block">
+                  <span className="text-xs font-mono text-purple-300/80 font-bold block">
                     {story.appId}
                   </span>
-                  <span className="text-[10px] text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-full font-bold">
+                  <span className="text-xs text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-lg font-bold">
                     {story.statutoryDays}
                   </span>
                 </div>
               </div>
 
               {/* Citizen Quote */}
-              <blockquote className="text-xs sm:text-sm text-slate-200 italic leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5">
+              <blockquote className="text-xs sm:text-sm text-slate-200 leading-relaxed bg-white/[0.03] p-4 rounded-2xl border border-white/5">
                 {story.quote}
               </blockquote>
 
               {/* Concrete Outcome Strip */}
-              <div className="p-3.5 rounded-2xl bg-purple-950/30 border border-purple-500/20 space-y-1 text-xs">
-                <div className="flex items-center justify-between text-[11px] text-slate-400 font-semibold">
+              <div className="p-4 rounded-2xl bg-purple-950/30 border border-purple-500/20 space-y-1 text-xs">
+                <div className="flex items-center justify-between text-xs text-slate-400 font-semibold">
                   <span>Verified Outcome:</span>
                   <span className="text-purple-300">{story.department}</span>
                 </div>

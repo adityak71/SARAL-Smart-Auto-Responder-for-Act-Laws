@@ -11,12 +11,12 @@ export default function FaqAccordion() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="border-b border-slate-200 dark:border-white/10 pb-4">
-        <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+        <span className="label-caps text-slate-500 dark:text-slate-400 block">
           Citizen Legal Knowledge Base
         </span>
-        <h3 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight mt-0.5">
+        <h3 className="font-display text-2xl leading-8 font-semibold text-purple-900 dark:text-white mt-0.5">
           Right to Information Act, 2005 — Frequently Asked Questions
         </h3>
       </div>

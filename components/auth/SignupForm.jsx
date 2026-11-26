@@ -167,7 +167,7 @@ export default function SignupForm() {
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white dark:bg-[#0f0728]/95 backdrop-blur-xl rounded-[24px] sm:rounded-[26px] p-5 sm:p-6 sm:px-7 shadow-card-lift dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_25px_rgba(139,92,246,0.15)] border border-slate-200/90 dark:border-white/15 relative text-slate-800 dark:text-slate-100 pt-7 sm:pt-8 transition-colors"
+          className="w-full bg-white dark:bg-[#16262d]/95 rounded-2xl sm:rounded-2xl p-5 sm:p-6 sm:px-7 shadow-card-lift border border-slate-200/90 dark:border-white/15 relative text-slate-800 dark:text-slate-100 pt-7 sm:pt-8 transition-colors"
         >
           {/* Floating Citizen Icon Header Badge */}
           <motion.div
@@ -175,7 +175,7 @@ export default function SignupForm() {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 350, damping: 22, delay: 0.15 }}
             whileHover={{ scale: 1.08, rotate: [0, -5, 5, 0] }}
-            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 dark:bg-[#190d3e] rounded-2xl shadow-md border border-indigo-100 dark:border-white/20 flex items-center justify-center text-indigo-600 dark:text-purple-300 cursor-pointer"
+            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 dark:bg-[#1c2e36] rounded-2xl shadow-md border border-indigo-100 dark:border-white/20 flex items-center justify-center text-indigo-600 dark:text-purple-300 cursor-pointer"
             data-purpose="citizen-badge"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -188,7 +188,7 @@ export default function SignupForm() {
           </motion.div>
 
           {/* Card Title & Subtitle */}
-          <div className="text-center pt-1 pb-3 sm:pb-3.5">
+          <div className="text-center pt-1 pb-3 sm:pb-4">
             <h2 className="text-xl sm:text-[22px] font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
               {signupContent.form.title}
             </h2>
@@ -198,14 +198,14 @@ export default function SignupForm() {
           </div>
 
           {/* Social Sign-Up: Google Button */}
-          <div className="mb-3.5">
+          <div className="mb-4">
             <motion.button
               type="button"
               onClick={handleGoogleSignup}
               disabled={googleLoading || loading}
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full min-h-[44px] py-2.5 sm:py-3 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-2.5 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full min-h-[44px] py-3 sm:py-3 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-colors duration-200 flex items-center justify-center gap-3 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {googleLoading ? (
                 <div className="w-4.5 h-4.5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
@@ -238,7 +238,7 @@ export default function SignupForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white dark:bg-[#0f0728] px-3 text-[11px] font-normal text-slate-400 dark:text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#16262d] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               or register with email
             </span>
           </div>
@@ -250,7 +250,7 @@ export default function SignupForm() {
                 initial={{ opacity: 0, y: -6, height: 0 }}
                 animate={{ opacity: 1, y: 0, height: "auto" }}
                 exit={{ opacity: 0, y: -6, height: 0 }}
-                className="mb-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium flex items-start gap-2.5 overflow-hidden"
+                className="mb-3 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs font-medium flex items-start gap-3 overflow-hidden"
               >
                 <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
@@ -261,7 +261,7 @@ export default function SignupForm() {
           </AnimatePresence>
 
           {/* Registration Form */}
-          <form className="space-y-2.5 sm:space-y-3" onSubmit={handleSubmit}>
+          <form className="space-y-3 sm:space-y-3" onSubmit={handleSubmit}>
             {/* Full Name Input */}
             <AuthInput
               id="fullName"
@@ -349,7 +349,7 @@ export default function SignupForm() {
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
+                  className="p-2 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -398,7 +398,7 @@ export default function SignupForm() {
                   aria-label="Toggle confirm password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowConfirmPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
+                  className="p-2 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showConfirmPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -431,28 +431,28 @@ export default function SignupForm() {
                 required
                 checked={signupForm.agreeTerms}
                 onChange={(e) => handleInputChange("agreeTerms", e.target.checked)}
-                className="w-4 h-4 rounded text-[#592ee0] border-slate-300 dark:border-white/20 focus:ring-[#592ee0] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#592ee0]"
+                className="w-4 h-4 rounded text-[#1e3a42] border-slate-300 dark:border-white/20 focus:ring-[#1e3a42] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#1e3a42]"
               />
-              <label htmlFor="terms" className="text-[11px] sm:text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer leading-tight">
+              <label htmlFor="terms" className="text-xs sm:text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer leading-tight">
                 {signupContent.form.termsText}{" "}
-                <a href="#" className="font-semibold text-[#592ee0] dark:text-purple-300 hover:underline">
+                <a href="#" className="font-semibold text-[#1e3a42] dark:text-purple-300 hover:underline">
                   {signupContent.form.termsLink}
                 </a>{" "}
                 {signupContent.form.andText}{" "}
-                <a href="#" className="font-semibold text-[#592ee0] dark:text-purple-300 hover:underline">
+                <a href="#" className="font-semibold text-[#1e3a42] dark:text-purple-300 hover:underline">
                   {signupContent.form.privacyLink}
                 </a>
               </label>
             </div>
 
             {/* Primary Create Account Button */}
-            <div className="pt-1.5 sm:pt-2">
+            <div className="pt-2 sm:pt-2">
               <motion.button
                 type="submit"
                 disabled={loading || googleLoading}
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-6 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] flex items-center justify-center gap-2.5 cursor-pointer group transition-all duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-4 px-6 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-3 cursor-pointer group transition-colors duration-200 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -475,16 +475,16 @@ export default function SignupForm() {
           </form>
 
           {/* Divider & Secondary Sign In Link */}
-          <div className="mt-3.5 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500 dark:text-slate-400">
+          <div className="mt-4 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500 dark:text-slate-400">
             <span>{signupContent.form.haveAccountText}</span>
-            <Link href="/login" className="font-bold text-[#592ee0] dark:text-purple-300 hover:text-[#4922b9] dark:hover:text-purple-200 ml-1 hover:underline">
+            <Link href="/login" className="font-bold text-[#1e3a42] dark:text-purple-300 hover:text-[#1e3a42] dark:hover:text-purple-200 ml-1 hover:underline">
               {signupContent.form.signinLinkText}
             </Link>
           </div>
 
           {/* Bottom Officer Advisory Notice Box */}
           <motion.div whileHover={{ scale: 1.01 }} className="mt-3 pt-0.5">
-            <div className="bg-indigo-50/70 dark:bg-purple-950/40 border border-indigo-100 dark:border-purple-500/30 rounded-xl p-2 sm:p-2.5 flex items-center gap-2 text-[11px] sm:text-xs text-slate-700 dark:text-purple-200">
+            <div className="bg-indigo-50/70 dark:bg-purple-950/40 border border-indigo-100 dark:border-purple-500/30 rounded-xl p-2 sm:p-3 flex items-center gap-2 text-xs sm:text-xs text-slate-700 dark:text-purple-200">
               <div className="text-indigo-600 dark:text-purple-300 shrink-0">
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path

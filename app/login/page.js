@@ -4,7 +4,7 @@ import LoginForm from "@/components/auth/LoginForm";
 
 export const metadata = {
   title: "RTI Portal - Sign In",
-  description: "Sign in to your Citizen or Officer account on the AI-Powered RTI Portal.",
+  description: "Sign in to your Citizen or Officer account on SARAL, the RTI filing portal.",
 };
 
 export default function LoginPage() {

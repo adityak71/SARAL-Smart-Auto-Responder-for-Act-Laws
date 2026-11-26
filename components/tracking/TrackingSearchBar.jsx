@@ -18,10 +18,10 @@ export default function TrackingSearchBar() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="font-display text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
             Track RTI Application Lifecycle
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -29,15 +29,15 @@ export default function TrackingSearchBar() {
           </p>
         </div>
 
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold w-fit">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-semibold w-fit">
           <span>● 30-Day Mandatory Statutory Clock Active</span>
         </span>
       </div>
 
       {/* Search Input Form */}
-      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-2.5">
+      <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row items-center gap-3">
         <div className="relative w-full">
-          <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+          <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400">
             <svg className="w-4.5 h-4.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
             </svg>
@@ -54,14 +54,14 @@ export default function TrackingSearchBar() {
         <button
           type="submit"
           disabled={searchStatus === "loading"}
-          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer disabled:opacity-50"
         >
           {searchStatus === "loading" ? "Tracking..." : "Track Status"}
         </button>
       </form>
 
       {searchStatus === "not_found" && (
-        <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center justify-between">
+        <div className="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-700 dark:text-rose-300 text-xs flex items-center justify-between">
           <span>No application dossier found matching &ldquo;{searchQuery}&rdquo;. Please verify your reference number format (e.g. SARAL-2026-00000).</span>
         </div>
       )}

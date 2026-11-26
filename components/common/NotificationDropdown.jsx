@@ -145,7 +145,7 @@ export default function NotificationDropdown() {
 
         {/* Live Unread Counter Badge */}
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-rose-500 text-white text-[10px] font-extrabold shadow-[0_0_12px_rgba(244,63,94,0.6)] ring-2 ring-white dark:ring-[#08031d] animate-pulse">
+          <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-rose-700 text-white text-xs font-bold ring-2 ring-white dark:ring-[#0f1a1f]">
             {unreadCount}
           </span>
         )}
@@ -166,7 +166,7 @@ export default function NotificationDropdown() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 mt-3 w-[340px] sm:w-[420px] max-h-[540px] rounded-2xl bg-white dark:bg-[#120930]/95 backdrop-blur-2xl border border-slate-200 dark:border-purple-500/25 shadow-[0_20px_50px_rgba(0,0,0,0.15)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)] z-50 flex flex-col overflow-hidden text-slate-800 dark:text-slate-100"
+              className="absolute right-0 mt-3 w-[340px] sm:w-[420px] max-h-[540px] rounded-2xl bg-white dark:bg-[#1c2e36]/95 border border-slate-200 dark:border-purple-500/25 z-50 flex flex-col overflow-hidden text-slate-800 dark:text-slate-100"
             >
               {/* Card Header */}
               <div className="p-4 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-slate-950/60">
@@ -179,7 +179,7 @@ export default function NotificationDropdown() {
                       : "Notifications"}
                   </span>
                   {unreadCount > 0 && (
-                    <span className="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-600 dark:bg-rose-500/20 dark:text-rose-300 text-[11px] font-bold border border-rose-500/30">
+                    <span className="px-2 py-0.5 rounded-lg bg-rose-500/15 text-rose-600 dark:bg-rose-500/20 dark:text-rose-300 text-xs font-bold border border-rose-500/30">
                       {unreadCount} Unread
                     </span>
                   )}
@@ -190,7 +190,7 @@ export default function NotificationDropdown() {
                     <button
                       type="button"
                       onClick={handleMarkAllAsRead}
-                      className="text-[11px] text-purple-600 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 font-medium hover:underline cursor-pointer"
+                      className="text-xs text-purple-600 dark:text-purple-300 hover:text-purple-800 dark:hover:text-purple-200 font-medium hover:underline cursor-pointer"
                     >
                       Mark all read
                     </button>
@@ -216,7 +216,7 @@ export default function NotificationDropdown() {
                 <button
                   type="button"
                   onClick={() => dispatch(setNotificationFilter("all"))}
-                  className={`px-3 py-1 rounded-full font-medium transition cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
                     filter === "all"
                       ? "bg-purple-600 text-white font-semibold"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -227,7 +227,7 @@ export default function NotificationDropdown() {
                 <button
                   type="button"
                   onClick={() => dispatch(setNotificationFilter("unread"))}
-                  className={`px-3 py-1 rounded-full font-medium transition cursor-pointer ${
+                  className={`px-3 py-1 rounded-lg font-medium transition cursor-pointer ${
                     filter === "unread"
                       ? "bg-purple-600 text-white font-semibold"
                       : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
@@ -238,7 +238,7 @@ export default function NotificationDropdown() {
               </div>
 
               {/* Notifications List */}
-              <div className="overflow-y-auto max-h-[380px] p-3 space-y-2.5 divide-y divide-slate-100 dark:divide-slate-800/40">
+              <div className="overflow-y-auto max-h-[380px] p-3 space-y-3 divide-y divide-slate-100 dark:divide-slate-800/40">
                 {displayedNotifications.length === 0 ? (
                   <div className="py-8 text-center text-slate-400 text-xs">
                     <svg
@@ -254,22 +254,22 @@ export default function NotificationDropdown() {
                         d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                       />
                     </svg>
-                    <span>No unread notifications. You are all caught up!</span>
+                    <span>No unread notifications</span>
                   </div>
                 ) : (
                   displayedNotifications.map((notif) => (
                     <div
                       key={notif.id}
-                      className={`pt-2.5 first:pt-0 rounded-xl p-2.5 transition-colors relative group ${
+                      className={`pt-3 first:pt-0 rounded-xl p-3 transition-colors relative group ${
                         notif.unread
                           ? "bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20"
                           : "bg-slate-50 dark:bg-slate-900/40 hover:bg-slate-100 dark:hover:bg-slate-800/40"
                       }`}
                     >
                       <div className="flex items-start justify-between gap-2 mb-1">
-                        <div className="flex items-center gap-1.5 flex-wrap">
+                        <div className="flex items-center gap-2 flex-wrap">
                           <span
-                            className={`text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider ${
+                            className={`text-xs font-bold px-2 py-0.5 rounded-lg  tracking-wider ${
                               notif.type === "urgent"
                                 ? "bg-rose-500/15 text-rose-600 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
                                 : notif.type === "milestone"
@@ -279,13 +279,13 @@ export default function NotificationDropdown() {
                           >
                             {notif.category}
                           </span>
-                          <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300/80 font-semibold">
+                          <span className="text-xs font-mono text-purple-700 dark:text-purple-300/80 font-semibold">
                             {notif.appId}
                           </span>
                         </div>
 
-                        <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] text-slate-400 font-medium">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-slate-400 font-medium">
                             {notif.timeAgo}
                           </span>
                           <button
@@ -308,7 +308,7 @@ export default function NotificationDropdown() {
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
                         {notif.title}
                       </h4>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-300/90 mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-300/90 mt-1 leading-relaxed">
                         {notif.message}
                       </p>
 
@@ -319,7 +319,7 @@ export default function NotificationDropdown() {
                             handleMarkAsRead(notif.id);
                             dispatch(setNotificationDropdown(false));
                           }}
-                          className="inline-flex items-center gap-1 text-[11px] font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-100 dark:bg-purple-900/40 hover:bg-purple-200 dark:hover:bg-purple-800/60 px-2.5 py-1 rounded-lg border border-purple-300 dark:border-purple-500/30 transition"
+                          className="inline-flex items-center gap-1 text-xs font-semibold text-purple-700 dark:text-purple-300 hover:text-purple-900 dark:hover:text-white bg-purple-100 dark:bg-purple-900/40 hover:bg-purple-200 dark:hover:bg-purple-800/60 px-3 py-1 rounded-lg border border-purple-300 dark:border-purple-500/30 transition"
                         >
                           <span>{notif.actionLabel}</span>
                           <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -331,7 +331,7 @@ export default function NotificationDropdown() {
                           <button
                             type="button"
                             onClick={() => handleMarkAsRead(notif.id)}
-                            className="text-[10px] text-slate-400 hover:text-slate-700 dark:hover:text-white transition cursor-pointer"
+                            className="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-white transition cursor-pointer"
                           >
                             Mark as read
                           </button>
@@ -343,7 +343,7 @@ export default function NotificationDropdown() {
               </div>
 
               {/* Card Footer */}
-              <div className="p-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 text-center">
+              <div className="p-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/80 text-center">
                 <Link
                   href="/tracking"
                   onClick={() => dispatch(setNotificationDropdown(false))}

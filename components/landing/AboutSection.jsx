@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { Scale as IcScale, Shield as IcShield, Target as IcTarget } from "lucide-react";
 
 export default function AboutSection() {
   const comparison = [
@@ -31,7 +32,7 @@ export default function AboutSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-300 text-xs font-bold uppercase tracking-wider">
+          <div className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
             <span>ABOUT SARAL MISSION</span>
           </div>
 
@@ -48,7 +49,7 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-3">
             <div className="w-10 h-10 rounded-2xl bg-purple-600/20 border border-purple-500/30 text-purple-300 flex items-center justify-center font-bold text-lg">
-              🎯
+              <IcTarget className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
             </div>
             <h3 className="font-bold text-base text-white">Intelligent Assistance, Not Hallucination</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -58,7 +59,7 @@ export default function AboutSection() {
 
           <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-3">
             <div className="w-10 h-10 rounded-2xl bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 flex items-center justify-center font-bold text-lg">
-              ⚖️
+              <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
             </div>
             <h3 className="font-bold text-base text-white">Public Authority Scrutiny (PIO)</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -68,7 +69,7 @@ export default function AboutSection() {
 
           <div className="p-6 rounded-3xl bg-white/[0.03] border border-white/10 space-y-3">
             <div className="w-10 h-10 rounded-2xl bg-cyan-600/20 border border-cyan-500/30 text-cyan-300 flex items-center justify-center font-bold text-lg">
-              🛡️
+              <IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
             </div>
             <h3 className="font-bold text-base text-white">Sovereignty & Citizen Privacy</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -78,7 +79,7 @@ export default function AboutSection() {
         </div>
 
         {/* Traditional RTI vs SARAL Comparison Table */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#0e072b] border border-purple-500/20 shadow-xl overflow-x-auto">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#16262d] border border-purple-500/20 shadow-xl overflow-x-auto">
           <h3 className="text-lg font-bold text-white mb-4">
             Traditional RTI vs. SARAL AI Portal
           </h3>
@@ -94,13 +95,13 @@ export default function AboutSection() {
             <tbody className="divide-y divide-white/5">
               {comparison.map((row) => (
                 <tr key={row.feature} className="hover:bg-white/[0.02]">
-                  <td className="py-3.5 font-bold text-white whitespace-nowrap pr-4">
+                  <td className="py-4 font-bold text-white whitespace-nowrap pr-4">
                     {row.feature}
                   </td>
-                  <td className="py-3.5 text-slate-400 pr-4">
+                  <td className="py-4 text-slate-400 pr-4">
                     {row.traditional}
                   </td>
-                  <td className="py-3.5 text-purple-200 font-medium">
+                  <td className="py-4 text-purple-200 font-medium">
                     ✓ {row.saral}
                   </td>
                 </tr>

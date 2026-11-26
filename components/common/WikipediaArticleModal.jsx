@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Globe as IcGlobe, Landmark as IcLandmark } from "lucide-react";
 
 export default function WikipediaArticleModal({ isOpen, onClose, article }) {
   const [copied, setCopied] = useState(false);
@@ -83,26 +84,26 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/75 overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: 15 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-purple-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto flex flex-col max-h-[90vh] text-slate-800 dark:text-slate-100"
+          className="relative w-full max-w-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-purple-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto flex flex-col max-h-[90vh] text-slate-800 dark:text-slate-100"
         >
           {/* Top Control Bar (Modal Header) */}
           <div className="p-4 sm:px-6 bg-slate-50 dark:bg-purple-950/50 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0">
-            <div className="flex items-center gap-2.5 min-w-0">
+            <div className="flex items-center gap-3 min-w-0">
               <div className="w-8 h-8 rounded-xl bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30 shrink-0">
-                🌐
+                <IcGlobe className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
               </div>
               <div className="truncate">
                 <div className="flex items-center gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-700/50">
+                  <span className="text-xs font-bold tracking-wider px-2 py-0.5 rounded bg-blue-100 text-blue-800 dark:bg-blue-900/40 dark:text-blue-300 border border-blue-200 dark:border-blue-700/50">
                     Wikipedia In-App Reader
                   </span>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono hidden sm:inline">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-mono hidden sm:inline">
                     {currentArticle.lang === "hi" ? "हिंदी (hi)" : "English (en)"}
                   </span>
                 </div>
@@ -118,7 +119,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   href={currentArticle.pageUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer"
+                  className="hidden sm:inline-flex items-center gap-2 px-3 py-2 rounded-xl bg-slate-100 dark:bg-white/10 hover:bg-slate-200 dark:hover:bg-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer"
                   title="Open on Wikipedia in new tab"
                 >
                   <span>Open in Tab</span>
@@ -149,12 +150,12 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   alt={currentArticle.title}
                   className="w-full h-full object-contain sm:object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end p-4 sm:p-6 pointer-events-none">
-                  <div>
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-white/80 bg-black/40 px-2 py-0.5 rounded backdrop-blur-xs">
+                <div className="absolute inset-0 flex items-end p-4 sm:p-6 pointer-events-none">
+                  <div className="bg-black/70 rounded-lg px-3 py-2">
+                    <span className="text-xs font-bold tracking-wider text-white/80 bg-black/40 px-2 py-0.5 rounded">
                       Public Encyclopedia Record
                     </span>
-                    <h2 className="text-xl sm:text-2xl font-black text-white drop-shadow-md">
+                    <h2 className="text-xl sm:text-2xl font-black text-white">
                       {currentArticle.title}
                     </h2>
                   </div>
@@ -169,7 +170,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   {currentArticle.title}
                 </h2>
                 {currentArticle.description && (
-                  <p className="text-sm text-purple-700 dark:text-purple-300 font-medium italic mt-1">
+                  <p className="text-sm text-purple-700 dark:text-purple-300 font-medium mt-1">
                     {currentArticle.description}
                   </p>
                 )}
@@ -178,7 +179,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
 
             {/* Description Subtitle if Thumbnail was shown */}
             {currentArticle.thumbnail && currentArticle.description && (
-              <p className="text-sm text-purple-700 dark:text-purple-300 font-medium italic -mt-2">
+              <p className="text-sm text-purple-700 dark:text-purple-300 font-medium -mt-2">
                 {currentArticle.description}
               </p>
             )}
@@ -192,7 +193,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                   </p>
                 ))
               ) : (
-                <p className="italic text-slate-400">
+                <p className="text-slate-400">
                   {loadingExtended
                     ? "Retrieving full article text from Wikipedia..."
                     : "No introductory summary available for this topic."}
@@ -209,9 +210,9 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             )}
 
             {/* Civic & RTI Context Box */}
-            <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-br from-purple-50 via-indigo-50/50 to-slate-50 dark:from-purple-950/40 dark:via-[#150a36] dark:to-slate-900/60 border border-purple-200/90 dark:border-purple-500/30 space-y-2.5">
+            <div className="p-4 sm:p-5 rounded-2xl bg-purple-50 dark:bg-purple-950/40 border border-purple-200/90 dark:border-purple-500/30 space-y-3">
               <div className="flex items-center gap-2">
-                <span className="text-lg">🏛️</span>
+                <span className="text-lg"><IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <h4 className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
                   Right to Information (RTI) Relevance
                 </h4>
@@ -223,7 +224,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                 <Link
                   href="/file-rti"
                   onClick={onClose}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md shadow-purple-600/30 transition cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition cursor-pointer"
                 >
                   <span>+ File RTI on this Topic</span>
                   <span>→</span>
@@ -232,7 +233,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             </div>
 
             {/* Attribution & Legal Notice */}
-            <div className="p-3.5 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-[11px] text-slate-500 dark:text-slate-400 space-y-1">
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-white/[0.04] border border-slate-200/80 dark:border-white/5 text-xs text-slate-500 dark:text-slate-400 space-y-1">
               <p>
                 <strong>Source:</strong> Wikipedia (The Free Encyclopedia). Text is licensed under{" "}
                 <a
@@ -256,9 +257,9 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
             <button
               type="button"
               onClick={handleCopyLink}
-              className="px-3.5 py-2 rounded-xl bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer flex items-center gap-1.5"
+              className="px-4 py-2 rounded-xl bg-white dark:bg-white/10 hover:bg-slate-100 dark:hover:bg-white/15 border border-slate-200 dark:border-white/15 text-slate-700 dark:text-white text-xs font-semibold transition cursor-pointer flex items-center gap-2"
             >
-              <span>{copied ? "✓ Copied!" : "📋 Copy Link"}</span>
+              <span>{copied ? "✓ Copied" : "Copy Link"}</span>
             </button>
 
             <div className="flex items-center gap-2">
@@ -275,7 +276,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md shadow-purple-600/30 transition cursor-pointer"
+                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition cursor-pointer"
               >
                 Close
               </button>

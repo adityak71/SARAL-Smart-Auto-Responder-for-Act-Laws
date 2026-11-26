@@ -224,7 +224,7 @@ export default function LoginForm() {
           initial={{ opacity: 0, scale: 0.98, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white dark:bg-[#0f0728]/95 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_25px_rgba(139,92,246,0.15)] border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
+          className="w-full bg-white dark:bg-[#16262d]/95 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
           data-purpose="login-form-card"
         >
           {/* Heading */}
@@ -233,7 +233,7 @@ export default function LoginForm() {
               {loginContent.form.title}{" "}
               <span
                 style={{ fontFamily: "var(--font-serif)" }}
-                className="italic font-normal text-[#582fe0] dark:text-[#a78bfa] tracking-normal text-[29px] sm:text-[33px]"
+                className="font-normal text-[#1e3a42] dark:text-[#87a4ad] tracking-normal text-[29px] sm:text-[33px]"
               >
                 {loginContent.form.titleItalic}
               </span>
@@ -265,7 +265,7 @@ export default function LoginForm() {
                 initial={{ opacity: 0, y: -6, height: 0 }}
                 animate={{ opacity: 1, y: 0, height: "auto" }}
                 exit={{ opacity: 0, y: -6, height: 0 }}
-                className="mb-3.5 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs sm:text-[13px] font-medium flex items-start gap-2.5 overflow-hidden"
+                className="mb-4 p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-600 dark:text-rose-400 text-xs sm:text-[13px] font-medium flex items-start gap-3 overflow-hidden"
               >
                 <svg className="w-4 h-4 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
@@ -276,7 +276,7 @@ export default function LoginForm() {
           </AnimatePresence>
 
           {/* Login Form */}
-          <form className="space-y-3 sm:space-y-3.5" onSubmit={handleSubmit}>
+          <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
             {/* Email Input with hover scale & shadow */}
             <AuthInput
               id="email"
@@ -323,7 +323,7 @@ export default function LoginForm() {
                   aria-label="Toggle password visibility"
                   whileTap={{ scale: 0.85, rotate: 10 }}
                   onClick={() => dispatch(toggleShowPassword())}
-                  className="p-1.5 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
+                  className="p-2 rounded-lg text-slate-400 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-300 hover:bg-purple-50/60 dark:hover:bg-white/10 focus:outline-none cursor-pointer transition-colors"
                 >
                   {showPassword ? (
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.7" viewBox="0 0 24 24">
@@ -351,19 +351,19 @@ export default function LoginForm() {
             <div className="flex justify-end pt-0.5">
               <a
                 href="#"
-                className="text-xs sm:text-[13px] font-semibold text-[#5a2ee0] dark:text-purple-300 hover:text-[#4922b9] dark:hover:text-purple-200 hover:underline transition py-0.5"
+                className="text-xs sm:text-[13px] font-semibold text-[#1e3a42] dark:text-purple-300 hover:text-[#1e3a42] dark:hover:text-purple-200 hover:underline transition py-0.5"
               >
                 {loginContent.form.forgotPasswordText}
               </a>
             </div>
 
             {/* Primary Sign In Button */}
-            <div className="pt-1.5 sm:pt-2">
+            <div className="pt-2 sm:pt-2">
               <motion.button
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-2.5 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] cursor-pointer group transition-all duration-200"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-4 px-5 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-3 cursor-pointer group transition-colors duration-200"
               >
                 <span>{loginContent.form.submitButtonText}</span>
                 <motion.svg
@@ -383,7 +383,7 @@ export default function LoginForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white dark:bg-[#0f0728] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#16262d] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               {loginContent.form.dividerText}
             </span>
           </div>
@@ -396,7 +396,7 @@ export default function LoginForm() {
               disabled={googleLoading || loading}
               whileHover={{ scale: 1.015, y: -1 }}
               whileTap={{ scale: 0.985 }}
-              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-all duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
+              className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-4 px-5 rounded-xl border border-slate-200/90 dark:border-white/15 bg-white dark:bg-white/[0.06] hover:bg-slate-50/90 dark:hover:bg-white/10 hover:border-slate-300 dark:hover:border-white/25 hover:shadow-md transition-colors duration-200 flex items-center justify-center gap-3 text-sm sm:text-base font-semibold text-slate-700 dark:text-slate-200 shadow-sm cursor-pointer disabled:opacity-70 disabled:cursor-not-allowed"
             >
               {googleLoading ? (
                 <div className="w-5 h-5 border-2 border-purple-600 border-t-transparent rounded-full animate-spin" />
@@ -428,7 +428,7 @@ export default function LoginForm() {
           <div className="mt-4 sm:mt-5 text-center">
             <p className="text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 font-medium">
               {loginContent.form.noAccountText}{" "}
-              <Link href="/signup" className="text-[#592ee0] dark:text-purple-300 font-semibold hover:underline ml-0.5">
+              <Link href="/signup" className="text-[#1e3a42] dark:text-purple-300 font-semibold hover:underline ml-0.5">
                 {loginContent.form.signupLinkText}
               </Link>
             </p>
@@ -437,10 +437,10 @@ export default function LoginForm() {
 
         {/* Mobile Quick App Features Footer */}
         <footer
-          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-[11px] px-2 max-w-[380px]"
+          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-xs px-2 max-w-[380px]"
           data-purpose="mobile-features"
         >
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-2">
             <svg className="w-3.5 h-3.5 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
@@ -452,7 +452,7 @@ export default function LoginForm() {
             <span>File Online</span>
           </div>
           <div className="h-3 w-px bg-white/20" />
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-2">
             <svg className="w-3.5 h-3.5 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
@@ -464,7 +464,7 @@ export default function LoginForm() {
             <span>Real-time Track</span>
           </div>
           <div className="h-3 w-px bg-white/20" />
-          <div className="flex items-center space-x-1.5">
+          <div className="flex items-center space-x-2">
             <svg className="w-3.5 h-3.5 text-purple-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"

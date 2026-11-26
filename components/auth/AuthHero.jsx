@@ -50,14 +50,14 @@ export default function AuthHero({ type = "login" }) {
       {/* Top Header & Badge Row */}
       <motion.div variants={itemFadeUp} className="flex items-center justify-between gap-3 w-full mb-2 lg:mb-0">
         {/* Emblem & Portal Brand */}
-        <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group">
+        <Link href="/" className="flex items-center gap-3 sm:gap-4 group">
           <motion.div
             whileHover={{ scale: 1.05, rotate: [0, -3, 3, 0] }}
             whileTap={{ scale: 0.95 }}
             transition={{ duration: 0.3 }}
-            className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-0.5 shadow-md shadow-purple-500/20 shrink-0"
+            className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-600 p-0.5 shadow-md shrink-0"
           >
-            <div className="w-full h-full bg-[#0d062e] rounded-[14px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#16262d] rounded-[14px] flex items-center justify-center">
               <Emblem className="w-6 h-7 text-white" />
             </div>
           </motion.div>
@@ -65,7 +65,7 @@ export default function AuthHero({ type = "login" }) {
             <h1 className="text-[20px] sm:text-[22px] lg:text-[26px] font-bold tracking-tight text-white font-sans">
               {portalConfig.name}
             </h1>
-            <p className="text-[11px] sm:text-[12px] text-white/75 font-medium tracking-wide">
+            <p className="text-xs sm:text-[12px] text-white/75 font-medium tracking-wide">
               {portalConfig.shortDescription}
             </p>
           </div>
@@ -75,11 +75,9 @@ export default function AuthHero({ type = "login" }) {
         {isLogin ? (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="inline-flex items-center gap-1.5 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[11px] sm:text-xs font-semibold text-purple-200 bg-purple-950/60 border border-purple-500/40 shadow-[0_0_15px_rgba(168,85,247,0.25)] backdrop-blur-md cursor-default shrink-0"
+            className="inline-flex items-center gap-2 px-3 py-1 sm:px-4 sm:py-2 rounded-lg text-xs sm:text-xs font-semibold text-purple-200 bg-purple-950/60 border border-purple-500/40 cursor-default shrink-0"
           >
             <motion.svg
-              animate={{ rotate: [0, 15, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
               className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-purple-300 fill-current"
               viewBox="0 0 24 24"
             >
@@ -90,7 +88,7 @@ export default function AuthHero({ type = "login" }) {
         ) : (
           <motion.div
             whileHover={{ scale: 1.05 }}
-            className="px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full flex items-center gap-1.5 shadow-sm text-[11px] sm:text-xs font-semibold text-white tracking-wide cursor-default shrink-0 bg-white/10 backdrop-blur-md border border-white/20"
+            className="px-3 py-1 sm:px-4 sm:py-2 rounded-lg flex items-center gap-2 shadow-sm text-xs sm:text-xs font-semibold text-white tracking-wide cursor-default shrink-0 bg-white/10 border border-white/20"
           >
             <svg
               className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-300"
@@ -116,8 +114,8 @@ export default function AuthHero({ type = "login" }) {
           <div
             className={`text-2xl sm:text-3xl lg:text-[44px] font-extrabold tracking-tight leading-tight lg:leading-[1.14] ${
               isLogin
-                ? "text-purple-300 lg:text-[#ba99ff]"
-                : "text-transparent bg-clip-text bg-gradient-to-r from-purple-200 via-white to-purple-300"
+                ? "text-purple-300 lg:text-[#87a4ad]"
+                : "   text-purple-200  "
             }`}
           >
             {content.highlight}
@@ -138,9 +136,9 @@ export default function AuthHero({ type = "login" }) {
         {isLogin ? (
           <motion.div
             variants={itemFadeUp}
-            whileHover={{ y: -3, borderColor: "rgba(147, 51, 234, 0.4)" }}
+            whileHover={{ y: -3, borderColor: "rgba(92, 107, 84, 0.5)" }}
             transition={{ duration: 0.3 }}
-            className="hidden lg:block rounded-2xl p-4 sm:p-5 w-full max-w-[490px] bg-white/[0.08] backdrop-blur-xl border border-white/20 shadow-[0_20px_45px_-10px_rgba(8,4,30,0.65),0_0_20px_2px_rgba(138,75,255,0.12)] text-slate-100"
+            className="hidden lg:block rounded-2xl p-4 sm:p-5 w-full max-w-[490px] bg-white/[0.08] border border-white/20 text-slate-100"
             data-purpose="status-tracker-card"
           >
             {/* Card Header Info */}
@@ -170,15 +168,7 @@ export default function AuthHero({ type = "login" }) {
 
               {/* Status Tag */}
               <motion.span
-                animate={{
-                  boxShadow: [
-                    "0 0 10px rgba(245,158,11,0.2)",
-                    "0 0 18px rgba(245,158,11,0.45)",
-                    "0 0 10px rgba(245,158,11,0.2)",
-                  ],
-                }}
-                transition={{ repeat: Infinity, duration: 2.5 }}
-                className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold text-amber-300 bg-amber-500/15 border border-amber-500/30"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-semibold text-amber-300 bg-amber-500/15 border border-amber-500/30"
               >
                 {loginContent.hero.trackerCard.statusBadge}
               </motion.span>
@@ -187,40 +177,33 @@ export default function AuthHero({ type = "login" }) {
             {/* Progress Stepper */}
             <div className="relative pt-1 pb-1 px-3">
               <div className="absolute top-[17px] left-9 right-9 h-[2px] bg-slate-700/80 -z-0" />
-              <motion.div
-                initial={{ width: "0%" }}
-                animate={{ width: "48%" }}
-                transition={{ duration: 1.4, delay: 0.35, ease: "easeInOut" }}
-                className="absolute top-[17px] left-9 h-[2px] bg-gradient-to-r from-emerald-500 via-purple-500 to-indigo-500 -z-0"
-              />
+              <div className="absolute top-[17px] left-9 w-[48%] h-[2px] bg-emerald-500 -z-0" />
 
               <div className="relative z-10 flex justify-between items-start text-center">
                 <div className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-md shadow-emerald-500/40">
+                  <div className="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-md">
                     <svg className="w-4 h-4 stroke-white stroke-[2.5]" fill="none" viewBox="0 0 24 24">
                       <path d="m4.5 12.75 6 6 9-13.5" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
-                  <span className="text-xs font-medium text-slate-200 mt-1.5">Submitted</span>
+                  <span className="text-xs font-medium text-slate-200 mt-2">Submitted</span>
                 </div>
 
                 <div className="flex flex-col items-center">
-                  <div className="w-7 h-7 rounded-full bg-purple-600 border-2 border-purple-400 flex items-center justify-center shadow-[0_0_14px_rgba(168,85,247,0.85)] relative">
+                  <div className="w-7 h-7 rounded-full bg-purple-600 border-2 border-purple-400 flex items-center justify-center relative">
                     <motion.div
-                      animate={{ scale: [1, 1.35, 1], opacity: [0.8, 0.3, 0.8] }}
-                      transition={{ repeat: Infinity, duration: 1.8, ease: "easeInOut" }}
                       className="absolute inset-0 rounded-full border border-purple-400/80"
                     />
                     <div className="w-2.5 h-2.5 rounded-full bg-white ring-4 ring-purple-500/50" />
                   </div>
-                  <span className="text-xs font-semibold text-white mt-1.5">Under Review</span>
+                  <span className="text-xs font-semibold text-white mt-2">Under Review</span>
                 </div>
 
                 <div className="flex flex-col items-center">
                   <div className="w-7 h-7 rounded-full bg-slate-800/90 border border-slate-600/60 flex items-center justify-center text-slate-400">
                     <div className="w-2 h-2 rounded-full bg-slate-600" />
                   </div>
-                  <span className="text-xs font-medium text-slate-400 mt-1.5">Response</span>
+                  <span className="text-xs font-medium text-slate-400 mt-2">Response</span>
                 </div>
               </div>
             </div>
@@ -233,32 +216,18 @@ export default function AuthHero({ type = "login" }) {
             data-purpose="rti-glass-graphic"
           >
             <motion.div
-              animate={{ scale: [1, 1.08, 1], opacity: [0.35, 0.5, 0.35] }}
-              transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut" }}
-              className="absolute w-56 h-56 sm:w-68 sm:h-68 halo-orbit rounded-full blur-2xl pointer-events-none -z-0"
-            />
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ repeat: Infinity, duration: 40, ease: "linear" }}
-              className="absolute w-56 h-32 border border-purple-400/20 rounded-[100%] rotate-[-22deg] blur-[0.5px]"
-            />
-            <motion.div
-              animate={{ rotate: -360 }}
-              transition={{ repeat: Infinity, duration: 50, ease: "linear" }}
               className="absolute w-64 h-36 border border-indigo-400/30 rounded-[100%] rotate-[-15deg]"
             />
 
             <motion.div
-              animate={{ y: [-4, 4, -4], rotate: [-2, -0.5, -2] }}
-              transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
               whileHover={{ rotate: 0, scale: 1.03 }}
               className="relative z-10 glass-doc w-54 sm:w-60 p-4 rounded-2xl shadow-2xl cursor-pointer"
             >
-              <div className="flex items-center justify-between pb-2.5 mb-2.5 border-b border-indigo-300/20">
+              <div className="flex items-center justify-between pb-3 mb-3 border-b border-indigo-300/20">
                 <span className="text-base font-bold text-white tracking-wide">RTI</span>
                 <div className="w-10 h-1.5 bg-indigo-300/40 rounded-full" />
               </div>
-              <div className="flex items-center gap-2.5 my-2">
+              <div className="flex items-center gap-3 my-2">
                 <div className="w-4.5 h-4.5 rounded-md bg-indigo-500/80 flex items-center justify-center text-white shadow-sm">
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path d="M4.5 12.75l6 6 9-13.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -266,7 +235,7 @@ export default function AuthHero({ type = "login" }) {
                 </div>
                 <div className="h-1.5 w-24 bg-indigo-200/50 rounded-full" />
               </div>
-              <div className="flex items-center gap-2.5 my-2">
+              <div className="flex items-center gap-3 my-2">
                 <div className="w-4.5 h-4.5 rounded-md bg-indigo-500/80 flex items-center justify-center text-white shadow-sm">
                   <svg className="w-3 h-3" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                     <path d="M4.5 12.75l6 6 9-13.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -298,9 +267,9 @@ export default function AuthHero({ type = "login" }) {
             key={feat.id}
             whileHover={{ y: -3, scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="flex items-center gap-2.5 cursor-default"
+            className="flex items-center gap-3 cursor-default"
           >
-            <div className="w-8 h-8 rounded-lg bg-white/[0.08] backdrop-blur-md border border-white/15 flex items-center justify-center text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/40">
+            <div className="w-8 h-8 rounded-lg bg-white/[0.08] border border-white/15 flex items-center justify-center text-purple-300 shadow-sm shrink-0 transition-colors hover:border-purple-400/40">
               {feat.icon === "document" && (
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
                   <path
@@ -325,7 +294,7 @@ export default function AuthHero({ type = "login" }) {
                 </svg>
               )}
             </div>
-            <div className="text-[11px] font-medium leading-tight">
+            <div className="text-xs font-medium leading-tight">
               <span className="block text-slate-200 font-semibold">{feat.title}</span>
               <span className="text-slate-400 font-medium">{feat.subtitle}</span>
             </div>

@@ -32,19 +32,19 @@ export default function HowSaralWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="w-full py-16 lg:py-24 relative overflow-hidden">
+    <section id="how-it-works" className="ground-sage w-full py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">
-            <span>HOW SARAL WORKS • डिजिटल पारदर्शी सेतु</span>
-          </div>
+          <span className="label-caps inline-flex items-center gap-2 px-2 py-1 rounded-sm bg-cyan-100 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300">
+            How SARAL works • डिजिटल पारदर्शी सेतु
+          </span>
 
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-            How SARAL Bridges the Citizen and Government
+          <h2 className="text-[32px] leading-10 sm:text-[44px] sm:leading-[54px] font-semibold text-purple-900 dark:text-white tracking-[-0.02em]">
+            How SARAL Helps You File and Track an RTI
           </h2>
 
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+          <p className="text-[17px] leading-7 text-slate-600 dark:text-slate-300">
             Traditional RTI me aam citizen ko dar aur bureaucratic confusion rehta hai. SARAL AI is process ko simple, dignified aur transparent banata hai.
           </p>
         </div>
@@ -60,23 +60,23 @@ export default function HowSaralWorksSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex items-start gap-4"
+                className="p-6 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 shadow-sm hover:shadow-md transition-shadow flex items-start gap-5"
               >
-                <div className="w-10 h-10 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-md">
+                <div className="w-12 h-12 rounded-sm bg-purple-900 dark:bg-white/10 text-white font-display font-semibold text-lg flex items-center justify-center shrink-0">
                   {step.num}
                 </div>
 
                 <div className="space-y-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-base font-bold text-slate-900 dark:text-white">
+                    <h3 className="text-xl leading-7 font-semibold text-purple-900 dark:text-white">
                       {step.title}
                     </h3>
-                    <span className="text-xs font-semibold text-purple-600 dark:text-purple-300">
-                      • {step.hindi}
+                    <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                      {step.hindi}
                     </span>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-[13px] leading-5 sm:text-[15px] sm:leading-6 text-slate-600 dark:text-slate-300">
                     {step.desc}
                   </p>
                 </div>
@@ -86,38 +86,24 @@ export default function HowSaralWorksSection() {
 
           {/* Right: AI Bridge Artwork (5 Cols) */}
           <div className="lg:col-span-5 relative flex flex-col items-center">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="w-full rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-2xl bg-white dark:bg-[#110830]"
-            >
-              <img
-                src="/images/ai-civic-bridge.png"
-                alt="AI-Powered Civic Bridge connecting citizens to government departments"
-                className="w-full h-auto object-cover max-h-[460px]"
-              />
-
-              <div className="p-4 bg-slate-900/85 dark:bg-[#0c0529]/95 text-white">
-                <span className="text-xs font-bold text-cyan-400 block uppercase">
-                  Ethical AI Guarantee
-                </span>
-                <p className="text-xs text-slate-200 mt-0.5 leading-snug">
-                  AI sirf drafting aur department suggestion me help karta hai. Response hamesha official authorized officer dwara sign hota hai.
-                </p>
-              </div>
-            </motion.div>
+            <figure className="w-full rounded-xl bg-purple-600 dark:bg-[#1c2e36] text-white p-8 sm:p-10 flex flex-col gap-6 shadow-lg">
+              <span className="label-caps text-cyan-300">Who signs the reply</span>
+              <blockquote className="font-display text-xl sm:text-2xl font-medium leading-snug text-white">
+                AI sirf drafting aur department suggestion me help karta hai. Response hamesha official authorized officer dwara sign hota hai.
+              </blockquote>
+            </figure>
 
             {/* Quick Action Link below image */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Link
                 href="/how-it-works"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-purple-900 hover:bg-purple-700 text-white dark:bg-white dark:text-purple-900 text-sm font-semibold shadow-sm transition-colors"
               >
                 <span>Explore Full 4-Step Architecture →</span>
               </Link>
               <Link
                 href="/login"
-                className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-purple-600 dark:text-purple-400 hover:underline"
+                className="inline-flex items-center gap-2 px-4 py-3 rounded-lg bg-white dark:bg-white/5 border border-slate-300/60 dark:border-white/10 text-sm font-semibold text-purple-900 dark:text-purple-200 hover:bg-slate-100 transition-colors"
               >
                 <span>File your first petition</span>
               </Link>

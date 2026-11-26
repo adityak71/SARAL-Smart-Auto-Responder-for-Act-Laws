@@ -89,10 +89,10 @@ export default function AdminDashboard({ user }) {
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 items-start animate-fadeIn">
       {/* Mobile Sidebar Drawer Toggle */}
-      <div className="w-full lg:hidden flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#0c0524] text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-sm">
+      <div className="w-full lg:hidden flex items-center justify-between p-4 rounded-2xl bg-white dark:bg-[#16262d] text-slate-900 dark:text-white border border-slate-200 dark:border-white/10 shadow-sm">
         <div className="flex items-center gap-2">
           <span className="font-extrabold text-sm tracking-tight text-slate-900 dark:text-white">SARAL Admin Panel</span>
-          <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+          <span className="px-2 py-0.5 rounded text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
             Admin
           </span>
         </div>
@@ -134,23 +134,23 @@ export default function AdminDashboard({ user }) {
       {/* Main Administrative Workspace */}
       <div className="flex-1 w-full space-y-6 min-w-0">
         {/* Top Control Header */}
-        <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="p-5 sm:p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-500 dark:text-slate-400">
-              <span className="uppercase tracking-wider">{breadcrumb.group}</span>
+              <span className="tracking-wider">{breadcrumb.group}</span>
               <ChevronRight className="w-3.5 h-3.5 text-slate-400 dark:text-slate-500" />
               <span className="text-slate-900 dark:text-white font-bold">{breadcrumb.label}</span>
             </div>
-            <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
+            <h1 className="text-xl sm:text-2xl sm:text-[30px] sm:leading-[38px] font-semibold text-purple-900 dark:text-white tracking-tight flex items-center gap-3">
               <span>{breadcrumb.label}</span>
-              <span className="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
+              <span className="px-2 py-0.5 rounded-lg text-xs font-bold bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30">
                 Admin
               </span>
             </h1>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">
-            <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/30 text-xs font-medium text-purple-700 dark:text-purple-300">
+            <div className="hidden md:flex items-center gap-2 px-3 py-2 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/30 text-xs font-medium text-purple-700 dark:text-purple-300">
               <ShieldCheck className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
               <span>Section 6(1) RTI Act 2005 Enforced</span>
             </div>
@@ -158,7 +158,7 @@ export default function AdminDashboard({ user }) {
               <p className="font-bold text-slate-900 dark:text-white">
                 {user?.fullName || "SARAL Superadmin"}
               </p>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 font-mono">admin@saral.gov.in</p>
+              <p className="text-xs text-slate-500 dark:text-slate-400 font-mono">admin@saral.gov.in</p>
             </div>
           </div>
         </div>

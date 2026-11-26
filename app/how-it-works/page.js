@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { howItWorksSteps } from "@/data/howItWorksData";
+import { Zap as IcZap } from "lucide-react";
 
 export default function HowItWorksPage() {
   const statutoryClockStages = [
@@ -44,29 +45,20 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-16">
         
         {/* Page Hero Header */}
-        <section className="text-center max-w-3xl mx-auto space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider"
-          >
-            <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-            <span>4-Step Sovereign Citizen Architecture</span>
-          </motion.div>
-
+        <section className="band-bleed ground-mist -mt-10 lg:-mt-16 pt-10 lg:pt-16 pb-12 text-center max-w-3xl mx-auto space-y-4">
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
+            className="text-[32px] leading-10 sm:text-[44px] sm:leading-[54px] font-semibold text-purple-900 dark:text-white tracking-tight leading-tight"
           >
-            How SARAL Works. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-600 dark:from-purple-300 dark:via-indigo-200 dark:to-cyan-300">
-              Simple Words to Official Records.
+            How SARAL works <br />
+            <span className="block mt-2 font-normal text-[26px] leading-8 sm:text-[30px] sm:leading-[38px] text-purple-600 dark:text-purple-300">
+              From your question to an official reply
             </span>
           </motion.h1>
 
@@ -74,7 +66,7 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal"
+            className="text-base sm:text-[17px] sm:leading-7 text-slate-600 dark:text-slate-300 font-normal"
           >
             नागरिक की आम बोलचाल से लेकर कानूनी रूप से प्रमाणित सरकारी जवाब तक — SARAL red tape, technical reject, aur legal jargons ko poori tarah khatam karta hai.
           </motion.p>
@@ -89,48 +81,47 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm dark:shadow-[0_20px_45px_rgba(0,0,0,0.5)] transition-colors"
+              className="rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm transition-colors"
             >
-              <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Description (5 Cols) */}
-                <div className="lg:col-span-5 flex flex-col gap-3.5">
-                  <div className="flex items-center gap-2.5">
-                    <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                <div className="lg:col-span-5 flex flex-col gap-4">
+                  <div className="flex items-center gap-3">
+                    <span className="w-9 h-9 rounded-md bg-purple-600 text-white font-semibold text-base flex items-center justify-center">
                       {step.stepNumber}
                     </span>
-                    <span className="text-xs font-bold text-purple-600 dark:text-purple-300 tracking-wider uppercase">
+                    <span className="label-caps text-purple-600 dark:text-purple-300">
                       {step.tag}
                     </span>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+                  <h2 className="text-2xl leading-8 font-semibold text-purple-900 dark:text-white mt-2">
                     {step.title}
                   </h2>
 
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-[15px] leading-6 text-slate-600 dark:text-slate-300">
                     {step.description}
                   </p>
 
-                  <div className="inline-flex items-center gap-1.5 mt-1 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
-                    <span>⚡</span>
+                  <div className="label-caps inline-flex items-center gap-2 mt-2 px-3.5 py-1.5 rounded-md bg-[#ffdbcc] dark:bg-cyan-500/10 text-cyan-800 dark:text-cyan-300 w-fit">
+                    <span><IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{step.badge}</span>
                   </div>
                 </div>
 
                 {/* Right Visual Terminal / Mockup (7 Cols) */}
-                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#08021f] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-3.5 font-sans">
+                <div className="lg:col-span-7 rounded-xl bg-purple-900 text-slate-100 dark:bg-[#0f1a1f] border border-purple-900 dark:border-purple-500/20 p-5 sm:p-6 shadow-md flex flex-col gap-4 font-sans">
                   {/* Mockup Header */}
-                  <div className="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs">
+                  <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-purple-300" />
                       <span className="font-mono text-white text-xs font-semibold">
                         {step.mockup.header}
                       </span>
                     </div>
                     {step.mockup.detectedLanguage && (
-                      <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold">
+                      <span className="label-caps px-3 py-1 rounded-md bg-purple-600 text-purple-100">
                         {step.mockup.detectedLanguage}
                       </span>
                     )}
@@ -139,26 +130,26 @@ export default function HowItWorksPage() {
                   {/* Step-specific Terminal Content */}
                   {step.mockup.type === "input" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block mb-1">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5">
+                        <span className="text-xs text-slate-300 font-bold block mb-1">
                           Raw Citizen Input (Voice or Typing):
                         </span>
-                        <p className="italic text-purple-100">{step.mockup.citizenQuote}</p>
+                        <p className="text-purple-100">{step.mockup.citizenQuote}</p>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1.5">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-purple-200 text-xs">
                             {step.mockup.copilotLabel}
                           </span>
-                          <span className="text-[10px] text-emerald-400 font-semibold">
+                          <span className="text-xs text-emerald-400 font-semibold">
                             ✦ 4 Scopes Identified
                           </span>
                         </div>
-                        <ul className="space-y-1 text-[11px] text-slate-300">
+                        <ul className="space-y-1 text-xs text-slate-300">
                           {step.mockup.scopeNodes.map((node, i) => (
                             <li key={i} className="flex items-center gap-2">
-                              <span className="text-purple-400">▹</span>
+                              <span className="text-purple-300">▸</span>
                               <span>{node}</span>
                             </li>
                           ))}
@@ -169,25 +160,25 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "legal" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1.5">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-cyan-300 text-xs">
                             Competent Authority:
                           </span>
-                          <span className="text-[10px] text-emerald-400 font-mono">
+                          <span className="text-xs text-emerald-400 font-mono">
                             {step.mockup.classificationScore}
                           </span>
                         </div>
                         <p className="font-medium text-white">{step.mockup.ministry}</p>
-                        <p className="text-[10px] text-slate-400">{step.mockup.exemptionsCheck}</p>
+                        <p className="text-xs text-slate-300">{step.mockup.exemptionsCheck}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1">
-                        <span className="font-bold text-purple-200 text-[11px] block mb-1">
+                        <span className="font-bold text-purple-200 text-xs block mb-1">
                           Drafted Section 6(1) Inquiries:
                         </span>
                         {step.mockup.statutoryClauses.map((clause, i) => (
-                          <p key={i} className="text-[11px] text-slate-300">
+                          <p key={i} className="text-xs text-slate-300">
                             • {clause}
                           </p>
                         ))}
@@ -197,19 +188,19 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "officer" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-1">
+                        <span className="text-xs text-slate-300 font-bold block">
                           Assigned Public Information Officer:
                         </span>
                         <p className="font-bold text-white text-sm">{step.mockup.officer}</p>
-                        <p className="text-[11px] text-cyan-300">{step.mockup.verifiedRecords}</p>
+                        <p className="text-xs text-cyan-300">{step.mockup.verifiedRecords}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between">
                         <span className="text-emerald-300 text-xs font-semibold">
                           {step.mockup.actionStatus}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold">
                           ✓ Signed
                         </span>
                       </div>
@@ -218,11 +209,11 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "delivery" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-1">
                         <span className="text-emerald-400 font-bold block">
                           {step.mockup.turnaround}
                         </span>
-                        <p className="text-[11px] text-slate-300">{step.mockup.dispatchDelivery}</p>
+                        <p className="text-xs text-slate-300">{step.mockup.dispatchDelivery}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
@@ -239,9 +230,9 @@ export default function HowItWorksPage() {
         </section>
 
         {/* 30-Day Statutory Clock Lifecycle Section */}
-        <section className="rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
+        <section className="rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
+            <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
               Statutory Transparency Protection
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -263,18 +254,18 @@ export default function HowItWorksPage() {
                     <span className="text-xs font-extrabold text-purple-600 dark:text-purple-300 font-mono">
                       {stage.day}
                     </span>
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
+                    <span className="px-2 py-0.5 rounded text-xs font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
                       {stage.badge}
                     </span>
                   </div>
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
                     {stage.title}
                   </h3>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
                     {stage.desc}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-[10px] text-slate-400 font-mono">
+                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-slate-400 font-mono">
                   Stage {idx + 1} of 5
                 </div>
               </div>
@@ -283,8 +274,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Bottom CTA Banner */}
-        <section className="rounded-3xl bg-gradient-to-br from-purple-900 via-indigo-900 to-[#0d062e] p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+        <section className="rounded-xl bg-purple-600 p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-lg">
           
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
@@ -298,13 +288,13 @@ export default function HowItWorksPage() {
           <div className="flex flex-wrap items-center justify-center gap-4 relative z-10 pt-2">
             <Link
               href="/login"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white text-purple-950 hover:bg-slate-100 shadow-lg hover:shadow-xl transition-colors"
             >
               File an RTI Petition →
             </Link>
             <Link
               href="/tracking"
-              className="px-6 py-3.5 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-all"
+              className="px-6 py-4 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 border border-white/20 text-white transition-colors"
             >
               Track Existing Application
             </Link>
