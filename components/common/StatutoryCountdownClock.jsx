@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Scale as IcScale } from "lucide-react";
 
 export default function StatutoryCountdownClock({
   dateFiled,
@@ -62,7 +63,7 @@ export default function StatutoryCountdownClock({
 
   if (isResolved) {
     return (
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold font-mono">
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold font-mono">
         <span>✓</span>
         <span>Statutory Response Delivered</span>
       </div>
@@ -77,7 +78,7 @@ export default function StatutoryCountdownClock({
             timeLeft.isOverdue
               ? "text-rose-600 dark:text-rose-400"
               : isLifeOrLiberty
-              ? "text-rose-600 dark:text-rose-400 animate-pulse"
+              ? "text-rose-600 dark:text-rose-400 "
               : timeLeft.days <= 7
               ? "text-amber-600 dark:text-amber-400"
               : "text-slate-700 dark:text-slate-200"
@@ -119,8 +120,8 @@ export default function StatutoryCountdownClock({
     >
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-1.5 font-bold text-xs">
-          <span>{isLifeOrLiberty ? "🚨 Section 7(1) Emergency Clock" : "⚖ Statutory RTI Countdown"}</span>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-black/10 dark:bg-white/10 font-mono">
+          <span>{isLifeOrLiberty ? "Section 7(1) Emergency Clock" : "Statutory RTI Countdown"}</span>
+          <span className="text-xs px-2 py-0.5 rounded-lg bg-black/10 dark:bg-white/10 font-mono">
             {isLifeOrLiberty ? "48-Hour Limit" : "30-Day Mandate"}
           </span>
         </div>
@@ -138,19 +139,19 @@ export default function StatutoryCountdownClock({
       <div className="grid grid-cols-4 gap-2 text-center py-2">
         <div className="p-2 rounded-xl bg-white/60 dark:bg-black/40 border border-black/5 dark:border-white/10">
           <span className="block text-xl font-mono font-extrabold">{timeLeft.days}</span>
-          <span className="text-[9px] uppercase tracking-wider text-slate-500">Days</span>
+          <span className="text-xs tracking-wider text-slate-500">Days</span>
         </div>
         <div className="p-2 rounded-xl bg-white/60 dark:bg-black/40 border border-black/5 dark:border-white/10">
           <span className="block text-xl font-mono font-extrabold">{timeLeft.hours}</span>
-          <span className="text-[9px] uppercase tracking-wider text-slate-500">Hours</span>
+          <span className="text-xs tracking-wider text-slate-500">Hours</span>
         </div>
         <div className="p-2 rounded-xl bg-white/60 dark:bg-black/40 border border-black/5 dark:border-white/10">
           <span className="block text-xl font-mono font-extrabold">{timeLeft.minutes}</span>
-          <span className="text-[9px] uppercase tracking-wider text-slate-500">Mins</span>
+          <span className="text-xs tracking-wider text-slate-500">Mins</span>
         </div>
         <div className="p-2 rounded-xl bg-white/60 dark:bg-black/40 border border-black/5 dark:border-white/10">
           <span className="block text-xl font-mono font-extrabold">{timeLeft.seconds}</span>
-          <span className="text-[9px] uppercase tracking-wider text-slate-500">Secs</span>
+          <span className="text-xs tracking-wider text-slate-500">Secs</span>
         </div>
       </div>
 
@@ -172,8 +173,8 @@ export default function StatutoryCountdownClock({
 
       {/* Overdue Warning */}
       {timeLeft.isOverdue && (
-        <div className="mt-2.5 p-2 rounded-xl bg-rose-500/20 text-rose-800 dark:text-rose-300 text-[11px] leading-relaxed">
-          ⚖ <strong>Section 7(2) Deemed Refusal:</strong> The 30-day statutory window has expired. The citizen is entitled to records <strong>free of cost</strong> under Section 7(6), and First Appeal can be filed immediately.
+        <div className="mt-2.5 p-2 rounded-xl bg-rose-500/20 text-rose-800 dark:text-rose-300 text-xs leading-relaxed">
+          <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Section 7(2) Deemed Refusal:</strong> The 30-day statutory window has expired. The citizen is entitled to records <strong>free of cost</strong> under Section 7(6), and First Appeal can be filed immediately.
         </div>
       )}
     </div>

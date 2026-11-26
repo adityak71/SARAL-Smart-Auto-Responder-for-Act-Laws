@@ -3,9 +3,9 @@
  * Built with realistic Indian civic tech terminology, vernacular prompts, and statutory safeguards.
  */
 export const heroContent = {
-  badge: "✦ AI-POWERED RTI ASSISTANCE • RIGHT TO INFORMATION ACT 2005",
-  titlePart1: "Your Right to Know.",
-  titlePart2: "Made Simpler.",
+  badge: "Right to Information Act, 2005",
+  titlePart1: "File your RTI online.",
+  titlePart2: "Track every reply.",
   hindiSubhead: "सत्यमेव जयते • नागरिकों के लिए सुलभ, पारदर्शी एवं सरल आरटीआई",
   description:
     "Access public information without bureaucratic red tape. SARAL uses intelligent AI to structure your concerns into Section 6(1) legal clauses, identify responsible government departments, and track statutory 30-day response clocks — all through one simple, dignified platform.",

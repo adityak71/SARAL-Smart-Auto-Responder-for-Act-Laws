@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import WikipediaArticleModal from "@/components/common/WikipediaArticleModal";
+import { Globe as IcGlobe, Landmark as IcLandmark, Scale as IcScale, Timer as IcTimer } from "lucide-react";
 
 const POPULAR_TOPICS = [
   { label: "RTI Act 2005", query: "Right to Information Act" },
@@ -64,25 +65,16 @@ export default function GeneralInfoPage() {
   };
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 min-h-screen py-8 sm:py-12 transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 min-h-screen py-8 sm:py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300 border border-purple-200 dark:border-purple-700/40 mb-3"
-          >
-            <span className="w-2 h-2 rounded-full bg-purple-600 animate-pulse" />
-            Civic Knowledge & Public Directory Hub
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white"
           >
-            Know Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-400 dark:to-indigo-300">Rights & Laws</span>
+            Know Your <span className="text-purple-600 dark:text-purple-400">Rights & Laws</span>
           </motion.h1>
 
           <motion.p
@@ -91,7 +83,7 @@ export default function GeneralInfoPage() {
             transition={{ delay: 0.1 }}
             className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300"
           >
-            Instant public knowledge powered by verified Wikipedia encyclopedic summaries, official RTI Act 2005 statutory clauses, and government departmental PIO contacts.
+            Plain summaries of the RTI Act, what each section means for you, and contact details for each department&apos;s Public Information Officer.
           </motion.p>
         </div>
 
@@ -113,7 +105,7 @@ export default function GeneralInfoPage() {
                     ? "खोजें: आरटीआई नियम, सड़क टेंडर, ग्राम पंचायत बजट, अधिकारी..."
                     : "Search any topic: RTI Act, Road tenders, Gram Panchayat budget, PIO..."
                 }
-                className="w-full pl-12 pr-32 py-4 rounded-2xl bg-white dark:bg-[#0d062e] border-2 border-slate-200 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.35)] text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-600 dark:focus:border-purple-400 transition-all text-sm sm:text-base"
+                className="w-full pl-12 pr-32 py-4 rounded-2xl bg-white dark:bg-[#1a2330] border-2 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-600 dark:focus:border-purple-400 transition-all text-sm sm:text-base"
               />
               <svg
                 className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -155,7 +147,7 @@ export default function GeneralInfoPage() {
                 key={topic.label}
                 type="button"
                 onClick={() => handleTopicClick(topic.query)}
-                className="text-xs px-3 py-1 rounded-full bg-slate-200/70 hover:bg-purple-100 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
+                className="text-xs px-3 py-1 rounded-lg bg-slate-200/70 hover:bg-purple-100 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
               >
                 {topic.label}
               </button>
@@ -174,7 +166,7 @@ export default function GeneralInfoPage() {
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30">
-                  ⚖
+                  <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -190,15 +182,15 @@ export default function GeneralInfoPage() {
                 {results.statutoryRules.map((rule) => (
                   <div
                     key={rule.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                        <span className="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
                           {rule.section}
                         </span>
-                        <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
-                          ⏱ {rule.timeLimit}
+                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                          <IcTimer className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {rule.timeLimit}
                         </span>
                       </div>
                       <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-1.5">
@@ -236,7 +228,7 @@ export default function GeneralInfoPage() {
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">
-                  🌐
+                  <IcGlobe className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -252,7 +244,7 @@ export default function GeneralInfoPage() {
                 {results.wikipediaArticles.map((article, idx) => (
                   <article
                     key={idx}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
                   >
                     <div>
                       {article.thumbnail && (
@@ -265,7 +257,7 @@ export default function GeneralInfoPage() {
                         </div>
                       )}
                       <div className="flex items-center gap-2 mb-1.5">
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                        <span className="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
                           {article.source}
                         </span>
                       </div>
@@ -293,8 +285,8 @@ export default function GeneralInfoPage() {
                         </svg>
                       </button>
 
-                      <span className="text-[10px] text-slate-400 dark:text-slate-500 font-medium">
-                        In-App Preview ⚡
+                      <span className="text-xs text-slate-400 dark:text-slate-500 font-medium">
+                        In-App Preview
                       </span>
                     </div>
                   </article>
@@ -313,7 +305,7 @@ export default function GeneralInfoPage() {
             >
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-lg bg-amber-500/15 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-sm border border-amber-500/30">
-                  🏛
+                  <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
@@ -329,14 +321,14 @@ export default function GeneralInfoPage() {
                 {results.matchingDepartments.map((dept) => (
                   <div
                     key={dept.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between"
+                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300">
+                        <span className="text-xs font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-300">
                           {dept.code}
                         </span>
-                        <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-300">
+                        <span className="text-xs font-semibold text-purple-600 dark:text-purple-300">
                           Avg: {dept.avgResponseDays} Days
                         </span>
                       </div>

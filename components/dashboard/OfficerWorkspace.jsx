@@ -15,6 +15,7 @@ import {
   Copy,
   CheckCircle2,
 } from "lucide-react";
+import { ClipboardList as IcClipboardList, FilePen as IcFilePen, FileText as IcFileText, Folder as IcFolder, Landmark as IcLandmark, Paperclip as IcPaperclip, Plus as IcPlus, Printer as IcPrinter, Scale as IcScale, Search as IcSearch } from "lucide-react";
 
 function parseClauses(val) {
   if (Array.isArray(val)) return val.filter(Boolean);
@@ -385,47 +386,47 @@ export default function OfficerWorkspace() {
     <div className="space-y-6">
       {/* Officer Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Assigned Queue</span>
           <span className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1 block">
             {stats.assignedApplications ?? cases.length}
           </span>
-          <span className="text-[11px] text-amber-700 dark:text-amber-300 font-semibold">
+          <span className="text-xs text-amber-700 dark:text-amber-300 font-semibold">
             {cases.length} Active in Division
           </span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">AI Drafts Ready</span>
           <span className="text-2xl font-extrabold text-purple-700 dark:text-purple-300 mt-1 block">
             {stats.aiDraftsGenerated ?? cases.length}
           </span>
-          <span className="text-[11px] text-purple-600 dark:text-purple-200">Pre-retrieved from archives</span>
+          <span className="text-xs text-purple-600 dark:text-purple-200">Pre-retrieved from archives</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Dispatched Today</span>
           <span className="text-2xl font-extrabold text-emerald-700 dark:text-emerald-400 mt-1 block">
             {(stats.dispatchedToday || 0) + approvedCaseIds.length}
           </span>
-          <span className="text-[11px] text-emerald-600 dark:text-emerald-300 font-semibold">Digitally Certified</span>
+          <span className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold">Digitally Certified</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Statutory Compliance</span>
           <span className="text-2xl font-extrabold text-cyan-700 dark:text-cyan-400 mt-1 block">
             {stats.complianceRatio || "98.4%"}
           </span>
-          <span className="text-[11px] text-cyan-600 dark:text-cyan-300 font-semibold">Zero Overdue Appeals</span>
+          <span className="text-xs text-cyan-600 dark:text-cyan-300 font-semibold">Zero Overdue Appeals</span>
         </div>
       </div>
 
       {/* Main Split Review Desk */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Assigned Queue List (5 Cols) */}
-        <div className="lg:col-span-5 bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-5 shadow-sm dark:shadow-xl flex flex-col gap-3 transition-colors">
+        <div className="lg:col-span-5 bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-5 shadow-sm dark:shadow-xl flex flex-col gap-3 transition-colors">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
-            <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+            <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-wider">
               Pending Examination Queue
             </h3>
             <span className="text-xs text-purple-700 dark:text-purple-300 font-mono font-bold">
@@ -459,7 +460,7 @@ export default function OfficerWorkspace() {
                         {item.id}
                       </span>
                       <span
-                        className={`text-[10px] px-2 py-0.5 rounded-full font-bold border ${
+                        className={`text-xs px-2 py-0.5 rounded-lg font-bold border ${
                           hasBeenApproved
                             ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/30"
                             : item.urgency.includes("Critical")
@@ -474,7 +475,7 @@ export default function OfficerWorkspace() {
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
                       {item.subject}
                     </h4>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
                       Applicant: {item.citizen} • Due in {item.daysRemaining} days
                     </p>
                   </div>
@@ -485,7 +486,7 @@ export default function OfficerWorkspace() {
         </div>
 
         {/* Right Officer Verification & Multi-Tab AI Response Studio (7 Cols) */}
-        <div className="lg:col-span-7 bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
+        <div className="lg:col-span-7 bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
           {actionSuccessMsg && (
             <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
               <span>{actionSuccessMsg}</span>
@@ -506,7 +507,7 @@ export default function OfficerWorkspace() {
                 <span className="text-xs font-mono text-purple-700 dark:text-purple-300 font-bold">
                   {selectedCase?.id || "SARAL-2026-00124"}
                 </span>
-                <span className="px-2 py-0.5 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded-lg bg-purple-500/10 border border-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-bold">
                   {selectedCase?.aiMatchScore || "98.4% Match"}
                 </span>
               </div>
@@ -520,7 +521,7 @@ export default function OfficerWorkspace() {
 
             {/* Live Statutory Compliance Countdown */}
             <div className="sm:text-right flex flex-col sm:items-end">
-              <span className="text-[10px] text-slate-400 font-mono block">STATUTORY CLOCK:</span>
+              <span className="text-xs text-slate-400 font-mono block">STATUTORY CLOCK:</span>
               <StatutoryCountdownClock
                 dateFiled={selectedCase?.dateFiled || "2026-11-01T00:00:00Z"}
                 statutoryDeadline={selectedCase?.statutoryDeadline || "2026-12-01T00:00:00Z"}
@@ -541,7 +542,7 @@ export default function OfficerWorkspace() {
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <span>📝</span>
+              <span><IcFilePen className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Statutory Memorandum</span>
             </button>
 
@@ -556,7 +557,7 @@ export default function OfficerWorkspace() {
             >
               <Sparkles className="w-3.5 h-3.5 text-amber-400" />
               <span>AI Report Structuring</span>
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase bg-purple-500/20 dark:bg-purple-400/20 text-purple-700 dark:text-purple-300">
+              <span className="text-xs px-1.5 py-0.5 rounded-lg font-bold bg-purple-500/20 dark:bg-purple-400/20 text-purple-700 dark:text-purple-300">
                 Copilot
               </span>
             </button>
@@ -570,7 +571,7 @@ export default function OfficerWorkspace() {
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <span>📁</span>
+              <span><IcFolder className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Attached Registers ({attachedRecords.filter((r) => r.included).length})</span>
             </button>
 
@@ -583,7 +584,7 @@ export default function OfficerWorkspace() {
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <span>⚖️</span>
+              <span><IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Section 8 & FAA Notice</span>
             </button>
 
@@ -596,7 +597,7 @@ export default function OfficerWorkspace() {
                   : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
-              <span>🏛️</span>
+              <span><IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>CIC Precedents (RAG)</span>
             </button>
           </div>
@@ -605,7 +606,7 @@ export default function OfficerWorkspace() {
           {studioTab === "memorandum" && (
             <div className="space-y-3 text-xs">
               {/* Quick AI Report Structuring Banner */}
-              <div className="p-3 rounded-2xl bg-gradient-to-r from-purple-500/10 via-indigo-500/10 to-transparent border border-purple-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
+              <div className="p-3 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5">
                 <div className="flex items-center gap-2">
                   <div className="w-7 h-7 rounded-xl bg-purple-600/20 border border-purple-500/30 flex items-center justify-center text-purple-700 dark:text-purple-300 font-bold shrink-0">
                     <Sparkles className="w-4 h-4 text-amber-500" />
@@ -614,7 +615,7 @@ export default function OfficerWorkspace() {
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white">
                       Need point-by-point Section 7(1) Compliance?
                     </h4>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400">
+                    <p className="text-xs text-slate-500 dark:text-slate-400">
                       Let Officer AI Copilot structure your raw findings and map to Citizen Clauses automatically.
                     </p>
                   </div>
@@ -631,7 +632,7 @@ export default function OfficerWorkspace() {
 
               {/* Quick Snippet Injectors */}
               <div className="flex items-center justify-between gap-2 flex-wrap">
-                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                   Quick Legal Snippets:
                 </span>
                 <div className="flex items-center gap-1.5 flex-wrap">
@@ -642,7 +643,7 @@ export default function OfficerWorkspace() {
                         "Certified copy of Sanctioned Administrative & Financial Approval (A&F Order No. PWD/2025/381) is hereby enclosed."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + A&amp;F Sanction
                   </button>
@@ -653,7 +654,7 @@ export default function OfficerWorkspace() {
                         "On-site technical inspection was conducted by the Executive Engineer on 15 Oct 2026. The bituminous road top was verified as per IRC standards."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + Site Inspection
                   </button>
@@ -664,7 +665,7 @@ export default function OfficerWorkspace() {
                         "Measurement Book Vol. IV pages 42-49 recording exact chainage dimensions have been extracted and verified under Section 2(j)(ii)."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[11px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + MB Vol IV Pages
                   </button>
@@ -677,7 +678,7 @@ export default function OfficerWorkspace() {
                   <label className="font-bold text-slate-900 dark:text-white">
                     Official Response Text (Section 7 Compliant):
                   </label>
-                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-mono">
+                  <span className="text-xs text-purple-700 dark:text-purple-300 font-mono">
                     Ref: MEMO/{selectedCase?.id || "SARAL-001"}/PIO-CERT
                   </span>
                 </div>
@@ -693,7 +694,7 @@ export default function OfficerWorkspace() {
 
               {/* Pre-Retrieved Source Files */}
               <div className="space-y-1.5">
-                <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block">
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
                   Referenced Departmental Records:
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -702,7 +703,7 @@ export default function OfficerWorkspace() {
                       key={source}
                       className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-white/[0.04] border border-slate-200 dark:border-white/10 text-purple-800 dark:text-purple-200 text-xs font-mono"
                     >
-                      📄 {source}
+                      <IcFileText className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {source}
                     </span>
                   ))}
                 </div>
@@ -714,7 +715,7 @@ export default function OfficerWorkspace() {
           {studioTab === "ai-report" && (
             <div className="space-y-4 text-xs">
               {/* Top Explainer Header */}
-              <div className="p-3.5 rounded-2xl bg-gradient-to-r from-purple-500/15 via-indigo-500/10 to-transparent border border-purple-500/30 flex items-start gap-3">
+              <div className="p-3.5 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-start gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-md">
                   <Sparkles className="w-4 h-4 text-amber-300" />
                 </div>
@@ -723,11 +724,11 @@ export default function OfficerWorkspace() {
                     <h4 className="font-bold text-slate-900 dark:text-white text-xs">
                       Section 7(1) Officer AI Report Structuring Copilot
                     </h4>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30">
+                    <span className="text-xs px-2 py-0.5 rounded-lg font-bold bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30">
                       Official PIO Tool
                     </span>
                   </div>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                     Citizen petitions contain distinct statutory clauses under Section 6(1). Enter your raw departmental observations, physical measurements, or sanction numbers. AI will map each citizen query point-by-point into an official Section 7(1) certified compliance report.
                   </p>
                 </div>
@@ -737,10 +738,10 @@ export default function OfficerWorkspace() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <span>📋</span>
+                    <span><IcClipboardList className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Citizen Section 6(1) Clauses Under Audit:</span>
                   </label>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400 font-mono">
+                  <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
                     {(selectedCase?.structuredClauses || parseClauses(null)).length} Statutory Items
                   </span>
                 </div>
@@ -750,7 +751,7 @@ export default function OfficerWorkspace() {
                       key={idx}
                       className="p-2.5 rounded-xl bg-slate-50 dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 flex items-start gap-2.5 text-slate-700 dark:text-slate-300"
                     >
-                      <span className="w-5 h-5 rounded-lg bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold font-mono text-[11px] flex items-center justify-center shrink-0">
+                      <span className="w-5 h-5 rounded-lg bg-purple-500/20 text-purple-700 dark:text-purple-300 font-bold font-mono text-xs flex items-center justify-center shrink-0">
                         {idx + 1}
                       </span>
                       <p className="text-xs leading-relaxed">{clause}</p>
@@ -763,17 +764,17 @@ export default function OfficerWorkspace() {
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <label className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
-                    <span>🔍</span>
+                    <span><IcSearch className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Officer&apos;s Departmental Findings &amp; Ledger Notes:</span>
                   </label>
-                  <span className="text-[10px] text-purple-700 dark:text-purple-300 font-semibold">
+                  <span className="text-xs text-purple-700 dark:text-purple-300 font-semibold">
                     Raw notes will be legally structured
                   </span>
                 </div>
 
                 {/* Quick Presets for Officer */}
                 <div className="flex items-center gap-1.5 flex-wrap">
-                  <span className="text-[10px] font-bold text-slate-400">Quick Remarks:</span>
+                  <span className="text-xs font-bold text-slate-400">Quick Remarks:</span>
                   <button
                     type="button"
                     onClick={() =>
@@ -783,7 +784,7 @@ export default function OfficerWorkspace() {
                           : "• Administrative & Financial Sanction Order #381 verified and intact."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + Sanction Order #381
                   </button>
@@ -796,7 +797,7 @@ export default function OfficerWorkspace() {
                           : "• Measurement Book (MB Vol. IV, Pg 42-58) site inspection records enclosed."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + MB Vol IV Pg 42-58
                   </button>
@@ -809,7 +810,7 @@ export default function OfficerWorkspace() {
                           : "• Total disbursement ₹42.50 Lakhs disbursed across 3 Running Account bills."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + RA Bills (₹42.50 Lakhs)
                   </button>
@@ -822,7 +823,7 @@ export default function OfficerWorkspace() {
                           : "• Quality test reports (bitumen core test) dated 12/03/2026 attached."
                       )
                     }
-                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-[10px] font-medium transition cursor-pointer"
+                    className="px-2 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-xs font-medium transition cursor-pointer"
                   >
                     + Core Test Report
                   </button>
@@ -837,14 +838,14 @@ export default function OfficerWorkspace() {
                 />
 
                 <div className="flex items-center justify-between gap-3 pt-1">
-                  <span className="text-[11px] text-slate-500 dark:text-slate-400">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     AI synthesizes clauses, findings, and Section 7(1) compliance text.
                   </span>
                   <button
                     type="button"
                     onClick={handleGenerateAiReport}
                     disabled={isAiStructuring}
-                    className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs transition cursor-pointer shadow-md disabled:opacity-50 flex items-center gap-2"
+                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer shadow-md disabled:opacity-50 flex items-center gap-2"
                   >
                     {isAiStructuring ? (
                       <>
@@ -879,11 +880,11 @@ export default function OfficerWorkspace() {
                         <span className="font-bold text-slate-900 dark:text-white text-xs">
                           Official Information Report (Section 7(1) RTI Act 2005)
                         </span>
-                        <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                        <span className="text-xs px-2 py-0.5 rounded-lg font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                           {aiStructuredReport.isAiGenerated ? "AI Synthesized" : "Statutory Template"}
                         </span>
                       </div>
-                      <p className="text-[11px] text-purple-700 dark:text-purple-300 font-mono mt-0.5">
+                      <p className="text-xs text-purple-700 dark:text-purple-300 font-mono mt-0.5">
                         Dispatch Ref: {aiStructuredReport.dispatchReference} • Date: {aiStructuredReport.dateOfDispatch}
                       </p>
                     </div>
@@ -892,7 +893,7 @@ export default function OfficerWorkspace() {
                       <button
                         type="button"
                         onClick={handleCopyReportText}
-                        className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-[11px] font-semibold transition cursor-pointer flex items-center gap-1"
+                        className="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-700 dark:text-slate-300 text-xs font-semibold transition cursor-pointer flex items-center gap-1"
                       >
                         {copiedMemoText ? (
                           <>
@@ -910,7 +911,7 @@ export default function OfficerWorkspace() {
                       <button
                         type="button"
                         onClick={handleApplyAiReportToMemo}
-                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-[11px] font-bold transition cursor-pointer flex items-center gap-1.5 shadow-sm"
+                        className="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition cursor-pointer flex items-center gap-1.5 shadow-sm"
                       >
                         <FileText className="w-3.5 h-3.5" />
                         <span>Apply to Memorandum</span>
@@ -920,7 +921,7 @@ export default function OfficerWorkspace() {
 
                   {/* Point-by-Point Clause Mappings */}
                   <div className="space-y-2">
-                    <span className="text-[11px] font-bold text-slate-900 dark:text-white uppercase tracking-wider block">
+                    <span className="text-xs font-bold text-slate-900 dark:text-white tracking-wider block">
                       Point-by-Point Statutory Disclosures:
                     </span>
 
@@ -934,12 +935,12 @@ export default function OfficerWorkspace() {
                             <span className="font-bold text-purple-700 dark:text-purple-300 font-mono">
                               Point No. {c.clauseNumber}
                             </span>
-                            <span className="text-[10px] px-2 py-0.5 rounded-full font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
+                            <span className="text-xs px-2 py-0.5 rounded-lg font-bold bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/20">
                               {c.status || "RECORD_ENCLOSED"}
                             </span>
                           </div>
 
-                          <div className="text-[11px] text-slate-500 dark:text-slate-400">
+                          <div className="text-xs text-slate-500 dark:text-slate-400">
                             <strong>Citizen Query:</strong> &ldquo;{c.citizenQuery}&rdquo;
                           </div>
 
@@ -954,16 +955,16 @@ export default function OfficerWorkspace() {
                   {/* Certified Enclosures & Appellate Preview */}
                   {aiStructuredReport.certifiedEnclosures && aiStructuredReport.certifiedEnclosures.length > 0 && (
                     <div className="pt-2 border-t border-purple-500/20">
-                      <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">
+                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block mb-1">
                         Attached Certified Enclosures (Section 2(j)(ii)):
                       </span>
                       <div className="flex flex-wrap gap-1.5">
                         {aiStructuredReport.certifiedEnclosures.map((enc, idx) => (
                           <span
                             key={idx}
-                            className="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 text-[10px] font-mono border border-purple-500/20"
+                            className="px-2 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 text-xs font-mono border border-purple-500/20"
                           >
-                            📎 {enc}
+                            <IcPaperclip className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {enc}
                           </span>
                         ))}
                       </div>
@@ -1013,7 +1014,7 @@ export default function OfficerWorkspace() {
                       />
                       <div>
                         <div className="font-semibold text-xs font-mono">{rec.name}</div>
-                        <div className="text-[11px] text-slate-400">
+                        <div className="text-xs text-slate-400">
                           {rec.size} • Public Record Register
                         </div>
                       </div>
@@ -1029,11 +1030,11 @@ export default function OfficerWorkspace() {
                             application: selectedCase,
                           });
                         }}
-                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-[10px] font-bold transition cursor-pointer"
+                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer"
                       >
-                        👁️ Preview & Download
+                        Preview & Download
                       </button>
-                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-lg bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
                         Certified
                       </span>
                     </div>
@@ -1047,7 +1048,7 @@ export default function OfficerWorkspace() {
           {studioTab === "exemptions" && (
             <div className="space-y-3 text-xs">
               <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs leading-relaxed">
-                ⚖ <strong>Section 7(8) RTI Act Mandate:</strong> When any information is refused or redacted under Section 8(1), the PIO <em>must</em> state the reasons and furnish particulars of the First Appellate Authority (FAA) with the 30-day limitation window.
+                <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Section 7(8) RTI Act Mandate:</strong> When any information is refused or redacted under Section 8(1), the PIO <em>must</em> state the reasons and furnish particulars of the First Appellate Authority (FAA) with the 30-day limitation window.
               </div>
 
               <div>
@@ -1079,7 +1080,7 @@ export default function OfficerWorkspace() {
                 onClick={handleInsertAppellateNotice}
                 className="w-full py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
-                <span>➕</span>
+                <span><IcPlus className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Inject Section 7(8) Appellate Notice into Memorandum</span>
               </button>
             </div>
@@ -1103,19 +1104,19 @@ export default function OfficerWorkspace() {
                         <h5 className="font-bold text-slate-900 dark:text-white text-xs">
                           {prec.caseTitle}
                         </h5>
-                        <span className="font-mono text-[10px] text-purple-700 dark:text-purple-300">
+                        <span className="font-mono text-xs text-purple-700 dark:text-purple-300">
                           {prec.citation}
                         </span>
                       </div>
                       <button
                         type="button"
                         onClick={() => handleInsertPrecedent(prec)}
-                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-[11px] font-bold transition cursor-pointer whitespace-nowrap"
+                        className="px-2.5 py-1 rounded-lg bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:text-purple-300 dark:hover:text-white border border-purple-500/30 text-xs font-bold transition cursor-pointer whitespace-nowrap"
                       >
                         + Cite in Memo
                       </button>
                     </div>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed italic">
+                    <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed italic">
                       &ldquo;{prec.ratio}&rdquo;
                     </p>
                   </div>
@@ -1126,7 +1127,7 @@ export default function OfficerWorkspace() {
 
           {/* Officer Action Bar */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200 dark:border-white/10">
-            <span className="text-[11px] text-slate-500 dark:text-slate-400">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               {isApproved
                 ? "✓ Digitally signed with Class 3 PKI & Dispatched"
                 : "Certified response will be sealed and synchronized with DigiLocker."}
@@ -1139,7 +1140,7 @@ export default function OfficerWorkspace() {
                 onClick={() => setIsCertifiedModalOpen(true)}
                 className="px-3.5 py-2.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-200 border border-purple-500/30 text-xs font-bold transition cursor-pointer flex items-center gap-1.5 whitespace-nowrap"
               >
-                <span>🖨️</span>
+                <span><IcPrinter className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Preview Certified PDF</span>
               </button>
 
@@ -1189,8 +1190,8 @@ export default function OfficerWorkspace() {
 
       {/* Section 6(3) Transfer Modal */}
       {showTransferModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fadeIn">
-          <div className="bg-white dark:bg-[#120930] border border-slate-200 dark:border-purple-500/30 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-fadeIn">
+          <div className="bg-white dark:bg-[#1d2733] border border-slate-200 dark:border-purple-500/30 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
             <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-3">
               <div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
@@ -1241,8 +1242,8 @@ export default function OfficerWorkspace() {
                 />
               </div>
 
-              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-[11px] leading-relaxed">
-                ⚖ <strong>Statutory Mandate:</strong> Under Section 6(3) of RTI Act 2005, the transfer must be executed within 5 days of receipt and applicant informed immediately.
+              <div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-700 dark:text-amber-300 text-xs leading-relaxed">
+                <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Statutory Mandate:</strong> Under Section 6(3) of RTI Act 2005, the transfer must be executed within 5 days of receipt and applicant informed immediately.
               </div>
 
               <div className="flex items-center justify-end gap-2 pt-2">

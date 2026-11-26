@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { contactInquiryCategories } from "@/data/contactData";
+import { Lock as IcLock } from "lucide-react";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -19,10 +20,10 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       <div>
-        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 text-xs font-semibold mb-2">
-          <span>CITIZEN HELPDESK & GRIEVANCE CELL</span>
+        <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-lg bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20 text-xs font-semibold mb-2">
+          <span>Citizen helpdesk and grievance cell</span>
         </div>
         <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
           Send a Statutory Inquiry or Support Request
@@ -123,8 +124,8 @@ export default function ContactForm() {
 
           {/* Bottom Notice & Submit */}
           <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-            <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-[11px]">
-              <span>🔒</span>
+            <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 text-xs">
+              <span><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Submissions encrypted via DPDP Act 2023 protocol</span>
             </div>
 

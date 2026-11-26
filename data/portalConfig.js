@@ -6,7 +6,7 @@ export const portalConfig = {
   name: "RTI Portal",
   fullName: "Right to Information Portal",
   shortDescription: "Right to Information",
-  tagline: "Empowering Citizens through Transparent Governance",
+  tagline: "File and track Right to Information applications",
   subtext: "Submit RTI applications, track their progress, and receive official responses — all in one place.",
   emblemAlt: "National Emblem of India",
   copyright: "© 2026 Government of India / RTI Digital Initiative. All Rights Reserved.",

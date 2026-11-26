@@ -9,7 +9,7 @@ const appBaseUrl =
 
 export const metadata = {
   ...(appBaseUrl ? { metadataBase: new URL(appBaseUrl) } : {}),
-  title: "SARAL - AI-Powered Right to Information Portal",
+  title: "SARAL - File and Track RTI Applications Online",
   description: "Simplifying Right to Information with AI assistance for Indian citizens.",
   manifest: "/manifest.json?v=5",
   icons: {
@@ -34,7 +34,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" suppressHydrationWarning className="h-full antialiased dark">
+    <html lang="en" suppressHydrationWarning className="h-full antialiased">
       <head>
         <link rel="icon" type="image/png" sizes="512x512" href="/icons/icon-512.png?v=5" />
         <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png?v=5" />
@@ -42,7 +42,7 @@ export default function RootLayout({ children }) {
         <link rel="alternate icon" href="/favicon.ico?v=5" />
         <link rel="manifest" href="/manifest.json?v=5" />
         <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png?v=5" />
-        <meta name="theme-color" content="#0d062e" />
+        <meta name="theme-color" content="#1d2530" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -51,10 +51,10 @@ export default function RootLayout({ children }) {
             __html: `
               try {
                 const savedTheme = localStorage.getItem('saral-theme');
-                if (savedTheme === 'light') {
-                  document.documentElement.classList.remove('dark');
-                } else {
+                if (savedTheme === 'dark') {
                   document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
                 }
               } catch (e) {}
 
@@ -75,13 +75,13 @@ export default function RootLayout({ children }) {
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Red+Hat+Display:wght@500;600;700&family=Red+Hat+Text:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
       </head>
       <body
         suppressHydrationWarning
-        className="min-h-full flex flex-col bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 transition-colors"
+        className="min-h-full flex flex-col bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 transition-colors"
       >
         <ReduxProvider>
           <PwaRegistrar />

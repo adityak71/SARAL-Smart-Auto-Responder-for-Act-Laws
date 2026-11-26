@@ -32,16 +32,16 @@ export default function HowSaralWorksSection() {
   ];
 
   return (
-    <section id="how-it-works" className="w-full py-16 lg:py-24 relative overflow-hidden">
+    <section id="how-it-works" className="ground-sand w-full py-16 lg:py-24 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">
-            <span>HOW SARAL WORKS • डिजिटल पारदर्शी सेतु</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold tracking-wider">
+            <span>How SARAL works • डिजिटल पारदर्शी सेतु</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
-            How SARAL Bridges the Citizen and Government
+            How SARAL Helps You File and Track an RTI
           </h2>
 
           <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
@@ -60,7 +60,7 @@ export default function HowSaralWorksSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex items-start gap-4"
+                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex items-start gap-4"
               >
                 <div className="w-10 h-10 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shrink-0 shadow-md">
                   {step.num}
@@ -86,26 +86,12 @@ export default function HowSaralWorksSection() {
 
           {/* Right: AI Bridge Artwork (5 Cols) */}
           <div className="lg:col-span-5 relative flex flex-col items-center">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="w-full rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-2xl bg-white dark:bg-[#110830]"
-            >
-              <img
-                src="/images/ai-civic-bridge.png"
-                alt="AI-Powered Civic Bridge connecting citizens to government departments"
-                className="w-full h-auto object-cover max-h-[460px]"
-              />
-
-              <div className="p-4 bg-slate-900/85 dark:bg-[#0c0529]/95 text-white">
-                <span className="text-xs font-bold text-cyan-400 block uppercase">
-                  Ethical AI Guarantee
-                </span>
-                <p className="text-xs text-slate-200 mt-0.5 leading-snug">
-                  AI sirf drafting aur department suggestion me help karta hai. Response hamesha official authorized officer dwara sign hota hai.
-                </p>
-              </div>
-            </motion.div>
+            <figure className="w-full rounded-3xl bg-white dark:bg-[#1d2733] border border-slate-300 dark:border-white/15 p-8 sm:p-10 flex flex-col gap-6">
+              <span className="text-sm font-semibold text-cyan-700 dark:text-cyan-300">Who signs the reply</span>
+              <blockquote className="font-[family-name:var(--font-display)] text-xl sm:text-2xl font-semibold leading-snug text-slate-900 dark:text-white">
+                AI sirf drafting aur department suggestion me help karta hai. Response hamesha official authorized officer dwara sign hota hai.
+              </blockquote>
+            </figure>
 
             {/* Quick Action Link below image */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">

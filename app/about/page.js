@@ -34,29 +34,20 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-16">
         
         {/* About Hero Header */}
         <section className="text-center max-w-3xl mx-auto space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-500/10 dark:bg-indigo-500/20 border border-indigo-500/30 text-indigo-700 dark:text-indigo-300 text-xs font-bold uppercase tracking-wider"
-          >
-            <span className="w-2 h-2 rounded-full bg-indigo-500 animate-pulse" />
-            <span>Sovereign Citizen Empowerment Mission</span>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
           >
-            Democratizing Right to Information <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-600 dark:from-purple-300 dark:via-indigo-200 dark:to-cyan-300">
-              with Ethical Civic Technology.
+            Who runs SARAL and how it handles <br />
+            <span className="text-purple-600 dark:text-purple-300">
+              your RTI application.
             </span>
           </motion.h1>
 
@@ -72,10 +63,7 @@ export default function AboutPage() {
 
         {/* 3 Core Ethical Pillars */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-6" data-purpose="ethical-pillars">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
-            <div className="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 text-purple-700 dark:text-purple-300 flex items-center justify-center font-bold text-xl">
-              🎯
-            </div>
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Intelligent Assistance, Not Hallucination
             </h3>
@@ -84,10 +72,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
-            <div className="w-12 h-12 rounded-2xl bg-indigo-500/15 border border-indigo-500/30 text-indigo-700 dark:text-indigo-300 flex items-center justify-center font-bold text-xl">
-              ⚖️
-            </div>
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Public Authority Officer (PIO) Scrutiny
             </h3>
@@ -96,10 +81,7 @@ export default function AboutPage() {
             </p>
           </div>
 
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
-            <div className="w-12 h-12 rounded-2xl bg-cyan-500/15 border border-cyan-500/30 text-cyan-700 dark:text-cyan-300 flex items-center justify-center font-bold text-xl">
-              🛡️
-            </div>
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 space-y-3.5 shadow-sm dark:shadow-xl transition-colors">
             <h3 className="font-bold text-lg text-slate-900 dark:text-white">
               Sovereignty & Citizen Privacy
             </h3>
@@ -110,9 +92,9 @@ export default function AboutPage() {
         </section>
 
         {/* Traditional RTI vs. SARAL Comparison Table */}
-        <section className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-xl overflow-x-auto space-y-6 transition-colors">
+        <section className="p-6 sm:p-8 lg:p-10 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 shadow-sm dark:shadow-xl overflow-x-auto space-y-6 transition-colors">
           <div className="space-y-1">
-            <span className="text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-300">
+            <span className="text-xs font-bold tracking-wider text-purple-600 dark:text-purple-300">
               Comparative Analysis
             </span>
             <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
@@ -153,14 +135,14 @@ export default function AboutPage() {
         {/* Real Citizen Stories Section */}
         <section className="space-y-8" data-purpose="citizen-stories">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider">
-              Real Ground Impact
+            <span className="px-3 py-1 rounded-lg bg-purple-500/10 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold tracking-wider">
+              Example cases
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Real Citizens. Real Answers. Real Change.
+              What an RTI application can get answered
             </h2>
             <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300">
-              SARAL brings genuine human empowerment to citizens across India who needed clarity on public funds.
+              Illustrative cases based on common RTI requests. They are examples, not reviews from SARAL users.
             </p>
           </div>
 
@@ -168,38 +150,33 @@ export default function AboutPage() {
             {citizenStories.map((story) => (
               <div
                 key={story.id}
-                className="p-6 rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 flex flex-col justify-between space-y-4 shadow-sm dark:shadow-xl hover:border-purple-400/50 transition-colors"
+                className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 flex flex-col justify-between space-y-4 shadow-sm dark:shadow-xl hover:border-purple-400/50 transition-colors"
               >
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <img
-                      src={story.avatar}
-                      alt={story.name}
-                      className="w-12 h-12 rounded-full object-cover border-2 border-purple-500/30"
-                    />
                     <div>
                       <h4 className="font-bold text-sm text-slate-900 dark:text-white">{story.name}</h4>
-                      <p className="text-[11px] text-slate-500 dark:text-slate-400">{story.location}</p>
+                      <p className="text-xs text-slate-500 dark:text-slate-400">{story.location}</p>
                     </div>
                   </div>
 
-                  <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                  <span className="inline-block px-2.5 py-0.5 rounded-lg text-xs font-bold bg-purple-500/10 text-purple-700 dark:text-purple-300 border border-purple-500/20">
                     {story.concern}
                   </span>
 
-                  <p className="italic text-xs text-slate-700 dark:text-slate-300 leading-relaxed">
+                  <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
                     {story.quote}
                   </p>
                 </div>
 
                 <div className="pt-3 border-t border-slate-200 dark:border-white/10 space-y-1 text-xs">
-                  <span className="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 uppercase block">
-                    Certified Outcome:
+                  <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 block">
+                    What the reply can lead to:
                   </span>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-snug">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 leading-snug">
                     {story.outcome}
                   </p>
-                  <div className="flex items-center justify-between pt-2 text-[10px] text-slate-500 font-mono">
+                  <div className="flex items-center justify-between pt-2 text-xs text-slate-500 font-mono">
                     <span>{story.department}</span>
                     <span className="text-purple-600 dark:text-purple-300 font-bold">{story.statutoryDays}</span>
                   </div>
@@ -210,7 +187,7 @@ export default function AboutPage() {
         </section>
 
         {/* Bottom CTA Banner */}
-        <section className="rounded-3xl bg-gradient-to-br from-purple-900 via-indigo-900 to-[#0d062e] p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
+        <section className="rounded-3xl bg-purple-900 p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
               Have Questions or Need Assistance?

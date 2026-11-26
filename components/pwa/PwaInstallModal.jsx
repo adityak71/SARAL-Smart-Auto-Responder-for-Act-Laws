@@ -89,7 +89,7 @@ export default function PwaInstallModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-md transition-opacity"
+          className="fixed inset-0 bg-slate-950/70 transition-opacity"
         />
 
         {/* Modal Window */}
@@ -98,13 +98,13 @@ export default function PwaInstallModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-2xl bg-white dark:bg-[#0f0728] rounded-3xl border border-slate-200 dark:border-white/15 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] overflow-hidden text-slate-800 dark:text-slate-100 z-10"
+          className="relative w-full max-w-2xl bg-white dark:bg-[#1a2330] rounded-3xl border border-slate-200 dark:border-white/15 overflow-hidden text-slate-800 dark:text-slate-100 z-10"
         >
           {/* Header */}
-          <div className="relative px-6 pt-6 pb-4 border-b border-slate-200/80 dark:border-white/10 flex items-start justify-between gap-4 bg-gradient-to-r from-purple-500/5 via-indigo-500/5 to-transparent">
+          <div className="relative px-6 pt-6 pb-4 border-b border-slate-200/80 dark:border-white/10 flex items-start justify-between gap-4 bg-purple-500/5">
             <div className="flex items-center gap-3.5">
-              <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-0.5 shadow-md flex items-center justify-center shrink-0">
-                <div className="w-full h-full bg-[#0d062e] rounded-[14px] flex items-center justify-center text-white">
+              <div className="w-11 h-11 rounded-2xl bg-purple-600 p-0.5 shadow-md flex items-center justify-center shrink-0">
+                <div className="w-full h-full bg-[#1a2330] rounded-[14px] flex items-center justify-center text-white">
                   <Download className="w-5 h-5 text-purple-300" />
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function PwaInstallModal({
                   <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
                     Install SARAL Web App
                   </h3>
-                  <span className="px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/20">
+                  <span className="px-2 py-0.5 rounded-lg text-xs font-bold tracking-wider bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/20">
                     PWA v1.0
                   </span>
                 </div>
@@ -134,7 +134,7 @@ export default function PwaInstallModal({
 
           {/* Quick Direct Prompt Trigger (if browser fired beforeinstallprompt) */}
           {deferredPrompt && !isInstalled && (
-            <div className="mx-6 mt-4 p-4 rounded-2xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
+            <div className="mx-6 mt-4 p-4 rounded-2xl bg-purple-600 text-white flex flex-col sm:flex-row items-center justify-between gap-3 shadow-lg">
               <div className="flex items-center gap-3 text-left">
                 <div className="w-9 h-9 rounded-xl bg-white/20 flex items-center justify-center shrink-0">
                   <Zap className="w-5 h-5 text-amber-300" />
@@ -177,7 +177,7 @@ export default function PwaInstallModal({
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex-1 min-w-[120px] py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-all cursor-pointer ${
                       isActive
-                        ? "bg-white dark:bg-[#1f114a] text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200/80 dark:border-white/15"
+                        ? "bg-white dark:bg-[#2a3542] text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200/80 dark:border-white/15"
                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >
@@ -203,7 +203,7 @@ export default function PwaInstallModal({
                   <span className="font-semibold text-slate-700 dark:text-slate-200">
                     Windows 10 / 11 Desktop & Laptop Guide
                   </span>
-                  <span className="bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-md font-mono text-[11px]">
+                  <span className="bg-blue-500/10 text-blue-600 dark:text-blue-400 px-2 py-0.5 rounded-md font-mono text-xs">
                     Chrome & Edge
                   </span>
                 </div>
@@ -217,7 +217,7 @@ export default function PwaInstallModal({
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                         Look at Address Bar
                       </h4>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         In Chrome or Edge, look at the right end of the URL bar for the{" "}
                         <strong>Install icon (⊕)</strong>.
                       </p>
@@ -232,7 +232,7 @@ export default function PwaInstallModal({
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                         Or Open Browser Menu
                       </h4>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         Click the 3 dots <strong>(⋮)</strong> in Chrome / Edge ➔ Select{" "}
                         <strong>"Install SARAL"</strong> or <strong>"Apps ➔ Install"</strong>.
                       </p>
@@ -247,7 +247,7 @@ export default function PwaInstallModal({
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                         Pin to Taskbar
                       </h4>
-                      <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                      <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                         Click <strong>"Install"</strong>. SARAL opens in its own window and can be
                         pinned to your Taskbar and Start Menu.
                       </p>
@@ -277,7 +277,7 @@ export default function PwaInstallModal({
                   <span className="font-semibold text-slate-700 dark:text-slate-200">
                     Android Smartphone & Tablet Guide
                   </span>
-                  <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-md font-mono text-[11px]">
+                  <span className="bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-2 py-0.5 rounded-md font-mono text-xs">
                     Chrome / Samsung Internet
                   </span>
                 </div>
@@ -291,7 +291,7 @@ export default function PwaInstallModal({
                       <span>Tap Menu</span>
                       <MoreVertical className="w-3.5 h-3.5 text-emerald-600" />
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Open SARAL in Chrome on your Android phone. Tap the <strong>3-dots (⋮)</strong>{" "}
                       at the top-right corner.
                     </p>
@@ -304,7 +304,7 @@ export default function PwaInstallModal({
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                       Tap "Install App"
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Scroll down and tap <strong>"Install app"</strong> or{" "}
                       <strong>"Add to Home screen"</strong>.
                     </p>
@@ -317,7 +317,7 @@ export default function PwaInstallModal({
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                       Confirm & Launch
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Tap <strong>"Install"</strong> in the dialog. The app icon will appear on your
                       Home Screen and App Drawer!
                     </p>
@@ -345,7 +345,7 @@ export default function PwaInstallModal({
                   <span className="font-semibold text-slate-700 dark:text-slate-200">
                     Apple iPhone & iPad Safari Guide
                   </span>
-                  <span className="bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-md font-mono text-[11px]">
+                  <span className="bg-purple-500/10 text-purple-600 dark:text-purple-400 px-2 py-0.5 rounded-md font-mono text-xs">
                     iOS Safari Required
                   </span>
                 </div>
@@ -359,7 +359,7 @@ export default function PwaInstallModal({
                       <span>Tap Share Button</span>
                       <Share2 className="w-3.5 h-3.5 text-indigo-500" />
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Open SARAL in <strong>Safari</strong> on your iPhone or iPad. Tap the{" "}
                       <strong>Share icon (⎋)</strong> at the bottom bar.
                     </p>
@@ -373,7 +373,7 @@ export default function PwaInstallModal({
                       <span>Add to Home Screen</span>
                       <PlusSquare className="w-3.5 h-3.5 text-indigo-500" />
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Scroll down the action sheet and tap{" "}
                       <strong>"Add to Home Screen"</strong> with the square plus icon.
                     </p>
@@ -386,7 +386,7 @@ export default function PwaInstallModal({
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white mb-1">
                       Tap "Add"
                     </h4>
-                    <p className="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
                       Tap <strong>"Add"</strong> in the top-right corner. The SARAL icon will now
                       appear on your iOS Home Screen!
                     </p>
@@ -415,7 +415,7 @@ export default function PwaInstallModal({
                   <span className="font-semibold text-slate-700 dark:text-slate-200">
                     Apple Mac (MacBook, iMac, Mac Mini) Guide
                   </span>
-                  <span className="bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-md font-mono text-[11px]">
+                  <span className="bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 px-2 py-0.5 rounded-md font-mono text-xs">
                     Safari Sonoma+ & Chrome
                   </span>
                 </div>
@@ -430,7 +430,7 @@ export default function PwaInstallModal({
                         Using Safari (macOS Sonoma+)
                       </h4>
                     </div>
-                    <ol className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
+                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
                       <li>Open SARAL in Safari.</li>
                       <li>
                         Click <strong>File</strong> in the macOS top menu bar.
@@ -451,7 +451,7 @@ export default function PwaInstallModal({
                         Using Google Chrome or Edge on Mac
                       </h4>
                     </div>
-                    <ol className="text-[11px] text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
+                    <ol className="text-xs text-slate-600 dark:text-slate-400 space-y-1.5 list-decimal list-inside leading-relaxed">
                       <li>
                         Click the <strong>Install icon (⊕)</strong> on the right side of the address
                         bar.
@@ -467,7 +467,7 @@ export default function PwaInstallModal({
                 <div className="p-3 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center gap-2.5 text-xs text-purple-700 dark:text-purple-300">
                   <Apple className="w-4 h-4 shrink-0 text-purple-600 dark:text-purple-400" />
                   <span>
-                    Integrates seamlessly with macOS Mission Control, Stage Manager, and Spotlight
+                    Opens from the Dock, Spotlight and Launchpad like any Mac app
                     Search.
                   </span>
                 </div>

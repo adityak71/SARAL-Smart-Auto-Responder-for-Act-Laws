@@ -104,7 +104,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
-            className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl border text-sm font-semibold flex items-center gap-3 bg-emerald-500/20 text-emerald-300 border-emerald-500/30 backdrop-blur-md"
+            className="fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl border text-sm font-semibold flex items-center gap-3 bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
           >
             <CheckCircle2 className="w-4 h-4 text-emerald-400" />
             {toast.message}
@@ -119,7 +119,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             onClick={() => setActiveSubTab("analytics")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "analytics"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
@@ -130,7 +130,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             onClick={() => setActiveSubTab("audit")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "audit"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
@@ -141,7 +141,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             onClick={() => setActiveSubTab("settings")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer whitespace-nowrap ${
               activeSubTab === "settings"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
@@ -165,7 +165,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
       {activeSubTab === "analytics" && (
         <div className="space-y-6">
           {/* Key Metric Highlights */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -175,7 +175,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                   High-level statutory compliance metrics, user volume trends, and turnaround speeds
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                 Admin
               </span>
             </div>
@@ -186,21 +186,21 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                   {(stats?.totalUsers || 0).toLocaleString()}
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Citizen Base</div>
-                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">Active accounts</div>
+                <div className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">Active accounts</div>
               </div>
               <div className="space-y-1">
                 <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white font-mono">
                   {(stats?.totalRtis || 0).toLocaleString()}
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Filed RTIs</div>
-                <div className="text-[11px] text-blue-600 dark:text-blue-400 font-semibold">Section 6(1) filed</div>
+                <div className="text-xs text-blue-600 dark:text-blue-400 font-semibold">Section 6(1) filed</div>
               </div>
               <div className="space-y-1">
                 <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-emerald-600 dark:text-emerald-400 font-mono">
                   {stats?.totalUsers > 0 ? ((stats.verifiedUsers / stats.totalUsers) * 100).toFixed(1) + "%" : "100%"}
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">DigiLocker Auth Rate</div>
-                <div className="text-[11px] text-emerald-600 dark:text-emerald-400 font-semibold">
+                <div className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
                   {stats?.verifiedUsers || 0} verified
                 </div>
               </div>
@@ -209,13 +209,13 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                   18 Days
                 </div>
                 <div className="text-xs text-slate-500 dark:text-slate-400 font-medium">Avg Settlement Speed</div>
-                <div className="text-[11px] text-slate-500 dark:text-slate-400">Statutory 30d window</div>
+                <div className="text-xs text-slate-500 dark:text-slate-400">Statutory 30d window</div>
               </div>
             </div>
           </div>
 
           {/* Department Breakdown */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
               Department-wise Filing Volumes & PIO Distribution
             </h3>
@@ -246,7 +246,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
 
       {/* VIEW 2: SYSTEM AUDIT LOGS */}
       {activeSubTab === "audit" && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
             <div>
               <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
@@ -260,7 +260,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
 
           <div className="overflow-x-auto w-full">
             <table className="w-full min-w-[850px] text-left text-sm">
-              <thead className="bg-slate-50 dark:bg-white/5 text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+              <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                 <tr>
                   <th className="px-5 py-3.5 font-bold">Action Event</th>
                   <th className="px-5 py-3.5 font-bold">Target Entity</th>
@@ -295,7 +295,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
                       </td>
                       <td className="px-5 py-3.5 text-xs">
                         <p className="font-semibold text-slate-900 dark:text-white">{log.user}</p>
-                        <p className="font-mono text-slate-500 dark:text-slate-400 text-[11px]">{log.userEmail}</p>
+                        <p className="font-mono text-slate-500 dark:text-slate-400 text-xs">{log.userEmail}</p>
                       </td>
                       <td className="px-5 py-3.5 font-mono text-xs text-slate-500 dark:text-slate-400">{log.ip}</td>
                       <td className="px-5 py-3.5 text-xs text-slate-500 dark:text-slate-400">
@@ -321,7 +321,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
       {/* VIEW 3: SECURITY & CONTROLS */}
       {activeSubTab === "settings" && (
         <form onSubmit={handleSaveSettings} className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
               <div>
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
@@ -399,7 +399,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
             <div className="flex justify-end pt-2">
               <button
                 type="submit"
-                className="px-6 py-2.5 rounded-full text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md shadow-purple-600/20 cursor-pointer"
+                className="px-6 py-2.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition shadow-md cursor-pointer"
               >
                 Save Settings
               </button>

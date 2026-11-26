@@ -130,8 +130,8 @@ export default function UserManagement({ initialSubTab = "users" }) {
             exit={{ opacity: 0, y: -20 }}
             className={`fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl border text-sm font-semibold flex items-center gap-3 ${
               toast.type === "success"
-                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 backdrop-blur-md"
-                : "bg-rose-500/10 text-rose-400 border-rose-500/30 backdrop-blur-md"
+                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 "
+                : "bg-rose-500/10 text-rose-400 border-rose-500/30 "
             }`}
           >
             {toast.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
@@ -147,13 +147,13 @@ export default function UserManagement({ initialSubTab = "users" }) {
             onClick={() => setActiveSubTab("users")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeSubTab === "users"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
             <Users className="w-4 h-4" />
             <span>Registered Citizens</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] ${
+            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
               activeSubTab === "users" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {users.length}
@@ -163,7 +163,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
             onClick={() => setActiveSubTab("verification")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeSubTab === "verification"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
@@ -185,7 +185,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
       {activeSubTab === "users" && (
         <div className="space-y-6">
           {/* Quick Metrics Bar matching Screenshot 1 & 4 card styling */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -195,7 +195,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                   Directory of registered citizens, verification status, and account security controls
                 </p>
               </div>
-              <span className="px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
+              <span className="px-2.5 py-1 rounded-lg bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/30 text-xs font-bold">
                 Admin
               </span>
             </div>
@@ -229,7 +229,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           </div>
 
           {/* Search, Filter & Table Container */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
               <form onSubmit={handleSearchSubmit} className="relative w-full sm:w-96">
                 <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -267,7 +267,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
             {/* Users Table */}
             <div className="overflow-x-auto w-full">
               <table className="w-full min-w-[850px] text-left text-sm">
-                <thead className="bg-slate-50 dark:bg-white/5 text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+                <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
                     <th className="px-5 py-3.5 font-bold">Citizen / User</th>
                     <th className="px-5 py-3.5 font-bold">Role</th>
@@ -316,7 +316,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
                         <td className="px-5 py-3.5">
                           <span
-                            className={`inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-bold uppercase tracking-wider ${
+                            className={`inline-flex items-center px-2 py-0.5 rounded-md text-xs font-bold  tracking-wider ${
                               u.role === "ADMIN"
                                 ? "bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30"
                                 : u.role === "OFFICER"
@@ -330,12 +330,12 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
                         <td className="px-5 py-3.5">
                           {u.isDigiLockerVerified ? (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
                               <CheckCircle2 className="w-3.5 h-3.5" />
                               DigiLocker Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
                               <AlertTriangle className="w-3.5 h-3.5" />
                               Unverified Citizen
                             </span>
@@ -424,9 +424,9 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
           {/* Verification Statistics */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                <span className="text-xs font-bold uppercase tracking-wider">Total Verified</span>
+                <span className="text-xs font-bold tracking-wider">Total Verified</span>
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
               </div>
               <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
@@ -437,9 +437,9 @@ export default function UserManagement({ initialSubTab = "users" }) {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                <span className="text-xs font-bold uppercase tracking-wider">Pending Verification</span>
+                <span className="text-xs font-bold tracking-wider">Pending Verification</span>
                 <Clock className="w-5 h-5 text-amber-500 dark:text-amber-400" />
               </div>
               <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
@@ -450,9 +450,9 @@ export default function UserManagement({ initialSubTab = "users" }) {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
-                <span className="text-xs font-bold uppercase tracking-wider">Failed / Timed Out</span>
+                <span className="text-xs font-bold tracking-wider">Failed / Timed Out</span>
                 <XCircle className="w-5 h-5 text-rose-500 dark:text-rose-400" />
               </div>
               <p className="text-3xl font-extrabold text-slate-900 dark:text-white mt-2 font-mono">
@@ -463,7 +463,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           </div>
 
           {/* Verification Audit Stream */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="pb-3 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">
@@ -477,7 +477,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
             <div className="overflow-x-auto w-full">
               <table className="w-full min-w-[850px] text-left text-sm">
-                <thead className="bg-slate-50 dark:bg-white/5 text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+                <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
                     <th className="px-5 py-3.5 font-bold">Petitioner</th>
                     <th className="px-5 py-3.5 font-bold">DigiLocker Reference ID</th>
@@ -507,11 +507,11 @@ export default function UserManagement({ initialSubTab = "users" }) {
                       </td>
                       <td className="px-5 py-3.5">
                         {u.isDigiLockerVerified ? (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-emerald-500/10 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border border-emerald-500/30">
                             <CheckCircle2 className="w-3.5 h-3.5" /> Verified & Validated
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
                             <Clock className="w-3.5 h-3.5" /> Awaiting OTP
                           </span>
                         )}
@@ -536,12 +536,12 @@ export default function UserManagement({ initialSubTab = "users" }) {
       {/* USER DETAIL MODAL */}
       <AnimatePresence>
         {selectedUser && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#0f0728] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div className="flex items-center gap-3">
@@ -566,7 +566,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
               <div className="space-y-3 text-sm">
                 <div className="flex justify-between py-2 border-b border-slate-100 dark:border-white/10">
                   <span className="text-slate-500 dark:text-slate-400">Account Role</span>
-                  <span className="font-bold text-slate-900 dark:text-white uppercase">
+                  <span className="font-bold text-slate-900 dark:text-white">
                     {selectedUser.role}
                   </span>
                 </div>
@@ -608,7 +608,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
               {/* Privacy Warning */}
               <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                🔒 Private security parameters (passwords, tokens, and raw Aadhaar credentials) are encrypted and masked under MeitY data governance protocol.
+                Private security parameters (passwords, tokens, and raw Aadhaar credentials) are encrypted and masked under MeitY data governance protocol.
               </div>
 
               <div className="flex gap-3 pt-2">
@@ -618,8 +618,8 @@ export default function UserManagement({ initialSubTab = "users" }) {
                     disabled={actionLoading}
                     className={`flex-1 py-3 rounded-full text-xs font-bold transition-all cursor-pointer ${
                       selectedUser.isActive
-                        ? "bg-rose-600 hover:bg-rose-700 text-white shadow-lg shadow-rose-600/30"
-                        : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-600/30"
+                        ? "bg-rose-600 hover:bg-rose-700 text-white shadow-lg "
+                        : "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg "
                     }`}
                   >
                     {selectedUser.isActive ? "Suspend Account" : "Reactivate Account"}
@@ -627,7 +627,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                 )}
                 <button
                   onClick={() => setSelectedUser(null)}
-                  className="px-6 py-3 rounded-full text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 transition cursor-pointer"
+                  className="px-6 py-3 rounded-lg text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-white hover:bg-slate-200 dark:hover:bg-white/20 transition cursor-pointer"
                 >
                   Close
                 </button>

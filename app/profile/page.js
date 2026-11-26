@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { motion, AnimatePresence } from "framer-motion";
 import { setCredentials, logout } from "@/redux/slices/authSlice";
 import DigiLockerModal from "@/components/common/DigiLockerModal";
+import { Hourglass as IcHourglass, Landmark as IcLandmark, Lock as IcLock, Pencil as IcPencil, Scale as IcScale, Shield as IcShield, TriangleAlert as IcTriangleAlert } from "lucide-react";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -249,7 +250,7 @@ export default function ProfilePage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-6">
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5">
@@ -275,7 +276,7 @@ export default function ProfilePage() {
           {/* Role Pill Badge */}
           <div className="flex items-center gap-2 self-start sm:self-auto">
             <span
-              className={`px-3 py-1 rounded-full text-xs font-bold border ${
+              className={`px-3 py-1 rounded-lg text-xs font-bold border ${
                 activeRole === "ADMIN"
                   ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
                   : activeRole === "OFFICER"
@@ -294,9 +295,7 @@ export default function ProfilePage() {
           {/* LEFT COLUMN: Profile Picture & Details Display Card (4 Cols) */}
           {/* ========================================================= */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="rounded-3xl bg-white/90 dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 shadow-xl text-center relative overflow-hidden">
-              {/* Top Accent Gradient Line */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500" />
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 shadow-xl text-center relative overflow-hidden">
 
               {/* Avatar with Change Photo Trigger */}
               <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28 mt-2 group">
@@ -319,7 +318,7 @@ export default function ProfilePage() {
                   <span>Change</span>
                 </button>
 
-                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#120930] flex items-center justify-center text-[10px] text-white font-bold">
+                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#1d2733] flex items-center justify-center text-xs text-white font-bold">
                   ✓
                 </span>
               </div>
@@ -335,7 +334,7 @@ export default function ProfilePage() {
 
                 <div className="pt-2 flex justify-center">
                   <span
-                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border ${
+                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border ${
                       activeRole === "ADMIN"
                         ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
                         : activeRole === "OFFICER"
@@ -345,7 +344,7 @@ export default function ProfilePage() {
                         : "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
                     }`}
                   >
-                    <span>{activeRole === "ADMIN" ? "🏛️" : activeRole === "OFFICER" ? "⚖️" : user?.isDigiLockerVerified ? "🛡️" : "⏳"}</span>
+                    <span>{activeRole === "ADMIN" ? <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : activeRole === "OFFICER" ? <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : user?.isDigiLockerVerified ? <IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : <IcHourglass className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />}</span>
                     <span>
                       {activeRole === "ADMIN"
                         ? "Superadmin (CIC Controller)"
@@ -385,13 +384,13 @@ export default function ProfilePage() {
                       </>
                     ) : (
                       <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800/40 text-center space-y-2 mt-2">
-                        <p className="text-[11px] text-amber-800 dark:text-amber-300">
-                          ⚠️ Section 6(1) requires DigiLocker citizenship verification before filing an RTI.
+                        <p className="text-xs text-amber-800 dark:text-amber-300">
+                          Section 6(1) requires DigiLocker citizenship verification before filing an RTI.
                         </p>
                         <button
                           type="button"
                           onClick={() => setIsDigiLockerModalOpen(true)}
-                          className="w-full py-2 px-3 rounded-xl font-bold text-xs text-white bg-gradient-to-r from-blue-700 to-indigo-600 hover:from-blue-800 hover:to-indigo-700 shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer"
+                          className="w-full py-2 px-3 rounded-xl font-bold text-xs text-white bg-blue-700 hover:bg-blue-800 shadow-md transition flex items-center justify-center gap-1.5 cursor-pointer"
                         >
                           <span>Verify with DigiLocker</span>
                           <span>→</span>
@@ -457,11 +456,11 @@ export default function ProfilePage() {
             {/* ------------------------------------------------------- */}
             {/* CARD 1: Update Details Section                         */}
             {/* ------------------------------------------------------- */}
-            <div className="rounded-3xl bg-white/90 dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-purple-600/15 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-lg">
-                    ✏️
+                    <IcPencil className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                   </div>
                   <div>
                     <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">
@@ -473,7 +472,7 @@ export default function ProfilePage() {
                   </div>
                 </div>
 
-                <span className="text-[11px] font-bold text-slate-500 dark:text-slate-400">
+                <span className="text-xs font-bold text-slate-500 dark:text-slate-400">
                   Step 1 of 2
                 </span>
               </div>
@@ -637,7 +636,7 @@ export default function ProfilePage() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={savingDetails}
-                    className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-purple-600/30 transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                    className="px-5 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
                   >
                     <span>{savingDetails ? "Saving..." : "Save Changes"}</span>
                     <span>→</span>
@@ -649,11 +648,11 @@ export default function ProfilePage() {
             {/* ------------------------------------------------------- */}
             {/* CARD 2: Change Password Section                        */}
             {/* ------------------------------------------------------- */}
-            <div className="rounded-3xl bg-white/90 dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-indigo-600/15 text-indigo-600 dark:text-indigo-300 flex items-center justify-center font-bold text-lg">
-                    🔒
+                    <IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                   </div>
                   <div>
                     <h2 className="text-lg font-extrabold text-slate-900 dark:text-white">
@@ -760,10 +759,10 @@ export default function ProfilePage() {
                     whileTap={{ scale: 0.97 }}
                     type="submit"
                     disabled={savingPassword}
-                    className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold shadow-md shadow-indigo-600/30 transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                    className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-semibold shadow-md transition-all duration-200 cursor-pointer disabled:opacity-50 flex items-center gap-2"
                   >
                     <span>{savingPassword ? "Updating..." : "Update Password"}</span>
-                    <span>🔒</span>
+                    <span><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                   </motion.button>
                 </div>
               </form>
@@ -774,11 +773,11 @@ export default function ProfilePage() {
             {/* (Admin and Officer do NOT have this section)           */}
             {/* ------------------------------------------------------- */}
             {activeRole === "CITIZEN" && (
-              <div className="rounded-3xl bg-rose-50/70 dark:bg-rose-950/20 backdrop-blur-2xl border-2 border-rose-300 dark:border-rose-500/30 p-6 sm:p-8 shadow-xl">
+              <div className="rounded-3xl bg-rose-50/70 dark:bg-rose-950/20 border-2 border-rose-300 dark:border-rose-500/30 p-6 sm:p-8 shadow-xl">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                   <div className="space-y-1">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-ping" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500" />
                       <h2 className="text-base sm:text-lg font-extrabold text-rose-700 dark:text-rose-400">
                         Danger Zone: Delete Citizen Account
                       </h2>
@@ -795,7 +794,7 @@ export default function ProfilePage() {
                       setDeleteConfirmText("");
                       setIsDeleteModalOpen(true);
                     }}
-                    className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-rose-600/30 transition-all duration-200 cursor-pointer shrink-0"
+                    className="px-4 py-2.5 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-xs sm:text-sm font-bold shadow-md transition-all duration-200 cursor-pointer shrink-0"
                   >
                     Delete Account
                   </motion.button>
@@ -809,12 +808,12 @@ export default function ProfilePage() {
       {/* Modal: Change Avatar Presets */}
       <AnimatePresence>
         {isAvatarModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#120930] border border-slate-200 dark:border-white/10 p-6 shadow-2xl text-slate-800 dark:text-slate-100"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1d2733] border border-slate-200 dark:border-white/10 p-6 shadow-2xl text-slate-800 dark:text-slate-100"
             >
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-4">
                 <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
@@ -838,7 +837,7 @@ export default function ProfilePage() {
                       setDetailsForm({ ...detailsForm, avatarUrl: preset });
                       setIsAvatarModalOpen(false);
                     }}
-                    className={`relative rounded-2xl overflow-hidden ring-2 transition-all p-1 hover:scale-105 cursor-pointer ${
+                    className={`relative rounded-2xl overflow-hidden ring-2 transition-all p-1  cursor-pointer ${
                       detailsForm.avatarUrl === preset
                         ? "ring-purple-600"
                         : "ring-transparent hover:ring-slate-300 dark:hover:ring-white/20"
@@ -853,7 +852,7 @@ export default function ProfilePage() {
                 ))}
               </div>
 
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center">
+              <p className="text-xs text-slate-500 dark:text-slate-400 text-center">
                 Select an avatar above to instantly update your displayed profile picture.
               </p>
             </motion.div>
@@ -864,16 +863,16 @@ export default function ProfilePage() {
       {/* Modal: Delete Account Confirmation (Citizen Only) */}
       <AnimatePresence>
         {isDeleteModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#120930] border-2 border-rose-500/50 p-6 shadow-2xl text-slate-800 dark:text-slate-100 space-y-4"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1d2733] border-2 border-rose-500/50 p-6 shadow-2xl text-slate-800 dark:text-slate-100 space-y-4"
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl font-bold">
-                  ⚠️
+                  <IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-rose-600 dark:text-rose-400">

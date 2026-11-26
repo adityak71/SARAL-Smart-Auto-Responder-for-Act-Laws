@@ -46,30 +46,30 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#08031d]/90 backdrop-blur-xl border-b border-slate-200/80 dark:border-white/10 shadow-[0_4px_20px_rgba(0,0,0,0.06)] dark:shadow-[0_4px_30px_rgba(0,0,0,0.35)] transition-all">
+    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#121821]/90 border-b border-slate-200/80 dark:border-white/10 transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Identity / Emblem */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
           <motion.div
             whileHover={{ scale: 1.05, rotate: [0, -3, 3, 0] }}
             transition={{ duration: 0.3 }}
-            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-gradient-to-tr from-purple-600 via-indigo-600 to-cyan-500 p-0.5 shadow-[0_0_20px_rgba(147,51,234,0.35)]"
+            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-purple-600 p-0.5"
           >
-            <div className="w-full h-full bg-[#0d062e] rounded-[10px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#1a2330] rounded-[10px] flex items-center justify-center">
               <Emblem className="w-6 h-7 text-white" />
             </div>
           </motion.div>
 
           <div className="flex flex-col text-left">
             <div className="flex items-center gap-1.5">
-              <span className="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight uppercase">
+              <span className="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight">
                 SARAL
               </span>
-              <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30 hidden xs:inline-block">
+              <span className="px-1.5 py-0.5 rounded text-xs font-bold bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30 hidden xs:inline-block">
                 RTI AI
               </span>
             </div>
-            <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 dark:text-slate-400 tracking-wide uppercase hidden sm:block">
+            <span className="text-xs sm:text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide hidden sm:block">
               Simplifying Right to Information
             </span>
           </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
         {/* Center Navigation Links (Desktop) */}
         <nav
-          className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 backdrop-blur-md shadow-inner"
+          className="hidden md:flex items-center gap-1 p-1.5 rounded-full bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-inner"
           aria-label="Main Navigation"
         >
           {navigationLinks.map((link) => {
@@ -93,9 +93,9 @@ export default function Navbar() {
                 key={link.id}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className={`relative px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
+                className={`relative px-3.5 py-1.5 rounded-lg text-xs sm:text-[13px] font-semibold transition-all duration-200 cursor-pointer ${
                   isActive
-                    ? "text-white bg-purple-600 shadow-[0_2px_12px_rgba(147,51,234,0.4)]"
+                    ? "text-white bg-purple-600 "
                     : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/10"
                 }`}
               >
@@ -164,7 +164,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#0c0529] px-4 py-4 space-y-2 overflow-hidden shadow-lg"
+            className="md:hidden border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#1a2330] px-4 py-4 space-y-2 overflow-hidden shadow-lg"
           >
             <div className="flex flex-col space-y-1">
               {navigationLinks.map((link) => (
@@ -184,7 +184,7 @@ export default function Navbar() {
                   onClick={() => dispatch(setMobileMenu(false))}
                   className="px-3.5 py-2.5 rounded-xl text-sm font-semibold text-purple-600 dark:text-purple-300 hover:bg-purple-50 dark:hover:bg-purple-950/30 flex items-center justify-between transition"
                 >
-                  <span>👤 View Your Profile</span>
+                  <span>View Your Profile</span>
                   <span className="text-xs">→</span>
                 </Link>
               )}

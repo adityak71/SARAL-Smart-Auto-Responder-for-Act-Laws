@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { ClipboardList as IcClipboardList, Landmark as IcLandmark, Scale as IcScale, Shield as IcShield } from "lucide-react";
 
 export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
   const [copied, setCopied] = useState(false);
@@ -13,7 +14,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
     CITIZEN: {
       badge: "DigiLocker Verified Citizen",
       badgeColor: "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/30",
-      icon: "🛡️",
+      icon: <IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       refLabel: "SARAL Citizen ID",
       refId: user?.citizenProfile?.digiLockerId || "DL-IND-90218821",
       subtitle: "Rural Panchayat Jurisdiction • Hoshangabad, MP",
@@ -22,7 +23,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
     OFFICER: {
       badge: "Section 5(1) Designated PIO",
       badgeColor: "bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border-purple-500/30",
-      icon: "⚖️",
+      icon: <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       refLabel: "Officer Service ID",
       refId: user?.officerProfile?.employeeId || "EMP-MP-PWD-4091",
       subtitle: "Public Works Department • Division II, Pipariya",
@@ -31,7 +32,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
     ADMIN: {
       badge: "Central Comptroller & Superadmin",
       badgeColor: "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/30",
-      icon: "🏛️",
+      icon: <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       refLabel: "Admin Clearance Node",
       refId: "ADM-CENTRAL-001",
       subtitle: "National Transparency Innovation Hub • New Delhi",
@@ -62,10 +63,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
   };
 
   return (
-    <div className="relative rounded-3xl bg-white/90 dark:bg-[#120930]/90 backdrop-blur-2xl border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl overflow-hidden">
-      {/* Decorative Top Accent Glow */}
-      <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500" />
-      <div className="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
+    <div className="relative rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl overflow-hidden">
 
       <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
         {/* Left: Avatar + Identity Info */}
@@ -83,7 +81,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
               alt={user?.fullName || "User Avatar"}
               className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover ring-4 ring-purple-500/40 shadow-lg"
             />
-            <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-[#120930] flex items-center justify-center text-[10px] text-white font-bold">
+            <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-[#1d2733] flex items-center justify-center text-xs text-white font-bold">
               ✓
             </span>
           </div>
@@ -93,7 +91,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
               <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
                 {user?.fullName || (normalizedRole === "OFFICER" ? "Er. Rameshwar Verma" : normalizedRole === "ADMIN" ? "Central Administrator" : "Rahul Sharma")}
               </h1>
-              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-bold border ${roleConfig.badgeColor}`}>
+              <span className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg text-xs font-bold border ${roleConfig.badgeColor}`}>
                 <span>{roleConfig.icon}</span>
                 <span>{roleConfig.badge}</span>
               </span>
@@ -122,12 +120,12 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
               <button
                 type="button"
                 onClick={handleCopy}
-                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-mono text-[11px] transition cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 font-mono text-xs transition cursor-pointer"
                 title="Click to copy identifier"
               >
                 <span className="text-slate-400 font-sans">{roleConfig.refLabel}:</span>
                 <span className="font-bold text-purple-600 dark:text-purple-400">{roleConfig.refId}</span>
-                <span className="text-[10px] text-slate-400">{copied ? "✓ Copied" : "📋"}</span>
+                <span className="text-xs text-slate-400">{copied ? "✓ Copied" : <IcClipboardList className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />}</span>
               </button>
             </div>
           </div>
@@ -140,20 +138,20 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
             onClick={onEditToggle}
             className={`px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 flex items-center gap-1.5 cursor-pointer ${
               isEditing
-                ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md shadow-emerald-600/30"
+                ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-md "
                 : "bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/15 text-slate-800 dark:text-white border border-slate-200 dark:border-white/10"
             }`}
           >
-            <span>{isEditing ? "💾 Save Profile" : "✏️ Edit Details"}</span>
+            <span>{isEditing ? "Save Profile" : "Edit Details"}</span>
           </motion.button>
 
           <motion.button
             whileTap={{ scale: 0.96 }}
             onClick={handleDownload}
             disabled={downloading}
-            className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-md shadow-purple-600/30 transition-all duration-200 flex items-center gap-1.5 cursor-pointer"
+            className="px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white shadow-md transition-all duration-200 flex items-center gap-1.5 cursor-pointer"
           >
-            <span>{downloading ? "Generating..." : "📄 Export Dossier"}</span>
+            <span>{downloading ? "Generating..." : "Export Dossier"}</span>
           </motion.button>
         </div>
       </div>

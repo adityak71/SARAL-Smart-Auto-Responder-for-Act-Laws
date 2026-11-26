@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { citizenProfileData } from "@/data/profileData";
+import { Files as IcFiles, Hourglass as IcHourglass, MapPin as IcMapPin, Shield as IcShield, User as IcUser, Zap as IcZap } from "lucide-react";
 
 export default function CitizenProfileView({ user, isEditing, onSaved }) {
   const [liveStats, setLiveStats] = useState(null);
@@ -62,7 +63,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             label: "Total RTIs Filed",
             val: totalFiled,
             sub: "All-time verified",
-            icon: "📑",
+            icon: <IcFiles className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
             color: "text-purple-600 dark:text-purple-400",
             bg: "bg-purple-500/10 border-purple-500/20",
           },
@@ -70,7 +71,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             label: "Active In Review",
             val: underReview,
             sub: "Currently under review",
-            icon: "⏳",
+            icon: <IcHourglass className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
             color: "text-amber-600 dark:text-amber-400",
             bg: "bg-amber-500/10 border-amber-500/20",
           },
@@ -86,7 +87,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             label: "Compliance Track Record",
             val: complianceRate,
             sub: "Within 30 statutory days",
-            icon: "⚡",
+            icon: <IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
             color: "text-cyan-600 dark:text-cyan-400",
             bg: "bg-cyan-500/10 border-cyan-500/20",
           },
@@ -96,14 +97,14 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className={`rounded-2xl p-4 sm:p-5 border backdrop-blur-xl bg-white/70 dark:bg-[#120930]/70 shadow-sm ${stat.bg}`}
+            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1d2733]/70 shadow-sm ${stat.bg}`}
           >
             <div className="flex items-center justify-between">
               <span className="text-xl sm:text-2xl">{stat.icon}</span>
               <span className={`text-2xl sm:text-3xl font-black ${stat.color}`}>{stat.val}</span>
             </div>
             <h4 className="mt-2 text-xs sm:text-sm font-bold text-slate-800 dark:text-slate-100">{stat.label}</h4>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{stat.sub}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{stat.sub}</p>
           </motion.div>
         ))}
       </div>
@@ -112,18 +113,18 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
         {/* Left 7 Columns: Personal & Residential Dossier */}
         <div className="lg:col-span-7 space-y-6">
           {/* Card 1: Citizen Particulars */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#120930]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-purple-600/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
-                  👤
+                  <IcUser className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Personal & Contact Details</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Citizen identification for Section 6(1) filing</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">
+              <span className="px-2 py-0.5 rounded text-xs font-bold bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300">
                 DPDP Encrypted
               </span>
             </div>
@@ -181,7 +182,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                   <select
                     value={formData.preferredLanguage}
                     onChange={(e) => handleChange("preferredLanguage", e.target.value)}
-                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#120930] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-2.5 rounded-xl bg-white dark:bg-[#1d2733] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   >
                     <option value="Hindi & Hinglish (हिंदी / हिंग्लिश)">Hindi & Hinglish (हिंदी / हिंग्लिश)</option>
                     <option value="English (Standard Legal)">English (Standard Legal)</option>
@@ -204,18 +205,18 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           </div>
 
           {/* Card 2: Jurisdiction & Postal Address */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#120930]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded-xl bg-cyan-600/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-sm">
-                  📍
+                  <IcMapPin className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className="text-base font-extrabold text-slate-900 dark:text-white">Statutory Postal Address</h3>
                   <p className="text-xs text-slate-500 dark:text-slate-400">Used for official speed-post responses from PIOs</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
+              <span className="px-2 py-0.5 rounded text-xs font-bold bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">
                 {citizenProfileData.address.type}
               </span>
             </div>
@@ -280,18 +281,18 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
         {/* Right 5 Columns: Sovereign Verification & Activity Stream */}
         <div className="lg:col-span-5 space-y-6">
           {/* Card 3: DigiLocker Sovereign Verification Card */}
-          <div className="rounded-3xl bg-gradient-to-br from-emerald-500/10 via-white/80 to-teal-500/5 dark:from-emerald-950/30 dark:via-[#120930]/80 dark:to-teal-950/20 backdrop-blur-xl border border-emerald-500/30 p-6 shadow-sm">
+          <div className="rounded-3xl bg-emerald-500/10 dark:bg-emerald-950/30 dark:via-[#1d2733]/80 border border-emerald-500/30 p-6 shadow-sm">
             <div className="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-4">
               <div className="flex items-center gap-2">
-                <span className="text-xl">🛡️</span>
+                <span className="text-xl"><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <div>
-                  <h3 className="text-sm font-extrabold text-emerald-800 dark:text-emerald-300 uppercase tracking-wider">
+                  <h3 className="text-sm font-extrabold text-emerald-800 dark:text-emerald-300 tracking-wider">
                     DigiLocker Verified
                   </h3>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400">National Cloud Gateway</span>
+                  <span className="text-xs text-slate-500 dark:text-slate-400">National Cloud Gateway</span>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500 text-white shadow-sm">
+              <span className="px-2 py-0.5 rounded-lg text-xs font-bold bg-emerald-500 text-white shadow-sm">
                 Active KYC
               </span>
             </div>
@@ -318,7 +319,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
               </div>
 
               <div className="pt-2">
-                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-[11px] text-emerald-800 dark:text-emerald-300 leading-relaxed">
+                <div className="p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-xs text-emerald-800 dark:text-emerald-300 leading-relaxed">
                   ✓ Verified identity allows 1-click filing without manual photo ID attachments under Section 6(1).
                 </div>
               </div>
@@ -326,7 +327,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           </div>
 
           {/* Card 4: Recent RTI Petitions */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#120930]/80 backdrop-blur-xl border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-3">
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Active & Past Petitions</h3>
               <Link href="/tracking" className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline">
@@ -346,7 +347,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                       {app.id}
                     </span>
                     <span
-                      className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      className={`px-2 py-0.5 rounded-lg text-xs font-bold ${
                         app.status === "UNDER_REVIEW"
                           ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
                           : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
@@ -356,7 +357,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     </span>
                   </div>
                   <h4 className="text-xs font-bold text-slate-800 dark:text-slate-200 truncate">{app.subject}</h4>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">{app.department}</p>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{app.department}</p>
                 </Link>
               ))}
             </div>

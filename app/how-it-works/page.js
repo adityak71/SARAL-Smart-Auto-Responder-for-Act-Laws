@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { howItWorksSteps } from "@/data/howItWorksData";
+import { Zap as IcZap } from "lucide-react";
 
 export default function HowItWorksPage() {
   const statutoryClockStages = [
@@ -44,20 +45,11 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-16">
         
         {/* Page Hero Header */}
         <section className="text-center max-w-3xl mx-auto space-y-4">
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 dark:bg-purple-500/20 border border-purple-500/30 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider"
-          >
-            <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse" />
-            <span>4-Step Sovereign Citizen Architecture</span>
-          </motion.div>
-
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
@@ -65,8 +57,8 @@ export default function HowItWorksPage() {
             className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
           >
             How SARAL Works. <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-600 dark:from-purple-300 dark:via-indigo-200 dark:to-cyan-300">
-              Simple Words to Official Records.
+            <span className="text-purple-600 dark:text-purple-300">
+              From your question to an official reply.
             </span>
           </motion.h1>
 
@@ -89,9 +81,8 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm dark:shadow-[0_20px_45px_rgba(0,0,0,0.5)] transition-colors"
+              className="rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm transition-colors"
             >
-              <div className="absolute top-0 left-0 h-1.5 w-full bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500" />
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Description (5 Cols) */}
@@ -100,7 +91,7 @@ export default function HowItWorksPage() {
                     <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md">
                       {step.stepNumber}
                     </span>
-                    <span className="text-xs font-bold text-purple-600 dark:text-purple-300 tracking-wider uppercase">
+                    <span className="text-xs font-bold text-purple-600 dark:text-purple-300 tracking-wider">
                       {step.tag}
                     </span>
                   </div>
@@ -113,24 +104,24 @@ export default function HowItWorksPage() {
                     {step.description}
                   </p>
 
-                  <div className="inline-flex items-center gap-1.5 mt-1 px-3 py-1 rounded-full bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
-                    <span>⚡</span>
+                  <div className="inline-flex items-center gap-1.5 mt-1 px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
+                    <span><IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{step.badge}</span>
                   </div>
                 </div>
 
                 {/* Right Visual Terminal / Mockup (7 Cols) */}
-                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#08021f] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-3.5 font-sans">
+                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#121821] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-3.5 font-sans">
                   {/* Mockup Header */}
                   <div className="flex items-center justify-between pb-2.5 border-b border-white/10 text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
                       <span className="font-mono text-white text-xs font-semibold">
                         {step.mockup.header}
                       </span>
                     </div>
                     {step.mockup.detectedLanguage && (
-                      <span className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-bold">
+                      <span className="px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 text-xs font-bold">
                         {step.mockup.detectedLanguage}
                       </span>
                     )}
@@ -140,7 +131,7 @@ export default function HowItWorksPage() {
                   {step.mockup.type === "input" && (
                     <div className="space-y-3 text-xs">
                       <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block mb-1">
+                        <span className="text-xs text-slate-400 font-bold block mb-1">
                           Raw Citizen Input (Voice or Typing):
                         </span>
                         <p className="italic text-purple-100">{step.mockup.citizenQuote}</p>
@@ -151,11 +142,11 @@ export default function HowItWorksPage() {
                           <span className="font-bold text-purple-200 text-xs">
                             {step.mockup.copilotLabel}
                           </span>
-                          <span className="text-[10px] text-emerald-400 font-semibold">
+                          <span className="text-xs text-emerald-400 font-semibold">
                             ✦ 4 Scopes Identified
                           </span>
                         </div>
-                        <ul className="space-y-1 text-[11px] text-slate-300">
+                        <ul className="space-y-1 text-xs text-slate-300">
                           {step.mockup.scopeNodes.map((node, i) => (
                             <li key={i} className="flex items-center gap-2">
                               <span className="text-purple-400">▹</span>
@@ -174,20 +165,20 @@ export default function HowItWorksPage() {
                           <span className="font-bold text-cyan-300 text-xs">
                             Competent Authority:
                           </span>
-                          <span className="text-[10px] text-emerald-400 font-mono">
+                          <span className="text-xs text-emerald-400 font-mono">
                             {step.mockup.classificationScore}
                           </span>
                         </div>
                         <p className="font-medium text-white">{step.mockup.ministry}</p>
-                        <p className="text-[10px] text-slate-400">{step.mockup.exemptionsCheck}</p>
+                        <p className="text-xs text-slate-400">{step.mockup.exemptionsCheck}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1">
-                        <span className="font-bold text-purple-200 text-[11px] block mb-1">
+                        <span className="font-bold text-purple-200 text-xs block mb-1">
                           Drafted Section 6(1) Inquiries:
                         </span>
                         {step.mockup.statutoryClauses.map((clause, i) => (
-                          <p key={i} className="text-[11px] text-slate-300">
+                          <p key={i} className="text-xs text-slate-300">
                             • {clause}
                           </p>
                         ))}
@@ -198,18 +189,18 @@ export default function HowItWorksPage() {
                   {step.mockup.type === "officer" && (
                     <div className="space-y-3 text-xs">
                       <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
-                        <span className="text-[10px] text-slate-400 uppercase font-bold block">
+                        <span className="text-xs text-slate-400 font-bold block">
                           Assigned Public Information Officer:
                         </span>
                         <p className="font-bold text-white text-sm">{step.mockup.officer}</p>
-                        <p className="text-[11px] text-cyan-300">{step.mockup.verifiedRecords}</p>
+                        <p className="text-xs text-cyan-300">{step.mockup.verifiedRecords}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-emerald-950/40 border border-emerald-500/30 flex items-center justify-between">
                         <span className="text-emerald-300 text-xs font-semibold">
                           {step.mockup.actionStatus}
                         </span>
-                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-[10px] font-bold">
+                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 text-xs font-bold">
                           ✓ Signed
                         </span>
                       </div>
@@ -222,7 +213,7 @@ export default function HowItWorksPage() {
                         <span className="text-emerald-400 font-bold block">
                           {step.mockup.turnaround}
                         </span>
-                        <p className="text-[11px] text-slate-300">{step.mockup.dispatchDelivery}</p>
+                        <p className="text-xs text-slate-300">{step.mockup.dispatchDelivery}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-indigo-950/40 border border-indigo-500/30">
@@ -239,9 +230,9 @@ export default function HowItWorksPage() {
         </section>
 
         {/* 30-Day Statutory Clock Lifecycle Section */}
-        <section className="rounded-3xl bg-white dark:bg-[#0c0529] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
+        <section className="rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
-            <span className="px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
+            <span className="px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wider">
               Statutory Transparency Protection
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
@@ -263,18 +254,18 @@ export default function HowItWorksPage() {
                     <span className="text-xs font-extrabold text-purple-600 dark:text-purple-300 font-mono">
                       {stage.day}
                     </span>
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
+                    <span className="px-1.5 py-0.5 rounded text-xs font-semibold bg-purple-500/10 text-purple-700 dark:text-purple-300">
                       {stage.badge}
                     </span>
                   </div>
                   <h3 className="font-bold text-sm text-slate-900 dark:text-white leading-snug">
                     {stage.title}
                   </h3>
-                  <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-slate-600 dark:text-slate-400 mt-1.5 leading-relaxed">
                     {stage.desc}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-[10px] text-slate-400 font-mono">
+                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-xs text-slate-400 font-mono">
                   Stage {idx + 1} of 5
                 </div>
               </div>
@@ -283,8 +274,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Bottom CTA Banner */}
-        <section className="rounded-3xl bg-gradient-to-br from-purple-900 via-indigo-900 to-[#0d062e] p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+        <section className="rounded-3xl bg-purple-900 p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
           
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">

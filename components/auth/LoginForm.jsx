@@ -224,7 +224,7 @@ export default function LoginForm() {
           initial={{ opacity: 0, scale: 0.98, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white dark:bg-[#0f0728]/95 dark:backdrop-blur-2xl rounded-3xl p-6 sm:p-8 shadow-[0_22px_55px_-12px_rgba(75,34,160,0.14),0_2px_8px_rgba(0,0,0,0.02)] dark:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7),0_0_25px_rgba(139,92,246,0.15)] border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
+          className="w-full bg-white dark:bg-[#1a2330]/95 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
           data-purpose="login-form-card"
         >
           {/* Heading */}
@@ -233,7 +233,7 @@ export default function LoginForm() {
               {loginContent.form.title}{" "}
               <span
                 style={{ fontFamily: "var(--font-serif)" }}
-                className="italic font-normal text-[#582fe0] dark:text-[#a78bfa] tracking-normal text-[29px] sm:text-[33px]"
+                className="italic font-normal text-[#2c5877] dark:text-[#8eaec5] tracking-normal text-[29px] sm:text-[33px]"
               >
                 {loginContent.form.titleItalic}
               </span>
@@ -351,7 +351,7 @@ export default function LoginForm() {
             <div className="flex justify-end pt-0.5">
               <a
                 href="#"
-                className="text-xs sm:text-[13px] font-semibold text-[#5a2ee0] dark:text-purple-300 hover:text-[#4922b9] dark:hover:text-purple-200 hover:underline transition py-0.5"
+                className="text-xs sm:text-[13px] font-semibold text-[#2c5877] dark:text-purple-300 hover:text-[#2c5877] dark:hover:text-purple-200 hover:underline transition py-0.5"
               >
                 {loginContent.form.forgotPasswordText}
               </a>
@@ -363,7 +363,7 @@ export default function LoginForm() {
                 type="submit"
                 whileHover={{ scale: 1.015, y: -1 }}
                 whileTap={{ scale: 0.985 }}
-                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-2.5 shadow-[0_8px_20px_-3px_rgba(93,55,239,0.38)] hover:shadow-[0_12px_28px_-3px_rgba(93,55,239,0.48)] cursor-pointer group transition-all duration-200"
+                className="w-full min-h-[46px] sm:min-h-[48px] py-3 sm:py-3.5 px-5 rounded-xl font-semibold text-sm sm:text-base text-white gradient-btn flex items-center justify-center gap-2.5 cursor-pointer group transition-all duration-200"
               >
                 <span>{loginContent.form.submitButtonText}</span>
                 <motion.svg
@@ -383,7 +383,7 @@ export default function LoginForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white dark:bg-[#0f0728] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#1a2330] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               {loginContent.form.dividerText}
             </span>
           </div>
@@ -428,7 +428,7 @@ export default function LoginForm() {
           <div className="mt-4 sm:mt-5 text-center">
             <p className="text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 font-medium">
               {loginContent.form.noAccountText}{" "}
-              <Link href="/signup" className="text-[#592ee0] dark:text-purple-300 font-semibold hover:underline ml-0.5">
+              <Link href="/signup" className="text-[#2c5877] dark:text-purple-300 font-semibold hover:underline ml-0.5">
                 {loginContent.form.signupLinkText}
               </Link>
             </p>
@@ -437,7 +437,7 @@ export default function LoginForm() {
 
         {/* Mobile Quick App Features Footer */}
         <footer
-          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-[11px] px-2 max-w-[380px]"
+          className="w-full mt-4 flex lg:hidden items-center justify-between text-purple-200/75 text-xs px-2 max-w-[380px]"
           data-purpose="mobile-features"
         >
           <div className="flex items-center space-x-1.5">

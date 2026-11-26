@@ -32,10 +32,10 @@ export const footerCivicDirectory = {
     title: "SARAL",
     tagline: "Smart Auto-Responder for Act Laws",
     hindiTagline: "सरल — सूचना का अधिकार पोर्टल",
-    authority: "Public Transparency & Citizen Empowerment Initiative",
+    authority: "Right to Information filing and tracking service",
     motto: "सत्यमेव जयते • Transparency at Every Citizen's Fingertips",
     description:
-      "SARAL is an AI-assisted digital public infrastructure platform that empowers Indian citizens to draft, submit, and track Right to Information (RTI) applications with zero legal complexity, direct treasury fee settlement, and statutory 30-day compliance tracking.",
+      "SARAL is an AI-assisted digital public infrastructure platform that helps Indian citizens draft, submit, and track Right to Information (RTI) applications with zero legal complexity, direct treasury fee settlement, and statutory 30-day compliance tracking.",
   },
   quickLinks: [
     { label: "Citizen Dashboard", href: "/dashboard" },

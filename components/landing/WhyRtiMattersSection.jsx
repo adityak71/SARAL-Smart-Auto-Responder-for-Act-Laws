@@ -6,7 +6,6 @@ import { motion } from "framer-motion";
 export default function WhyRtiMattersSection() {
   const pillars = [
     {
-      icon: "🛣️",
       title: "Roads & Public Infrastructure",
       hindiTitle: "सड़क एवं सरकारी निर्माण कार्य",
       description:
@@ -14,7 +13,6 @@ export default function WhyRtiMattersSection() {
       statute: "Section 6(1) Public Works Requisition",
     },
     {
-      icon: "🎓",
       title: "Education & School Grants",
       hindiTitle: "शिक्षा, स्कूल एवं मिड-डे मील",
       description:
@@ -22,7 +20,6 @@ export default function WhyRtiMattersSection() {
       statute: "Samagra Shiksha & RTE Transparency",
     },
     {
-      icon: "🌾",
       title: "PDS Ration & Welfare Schemes",
       hindiTitle: "राशन, खाद्य सुरक्षा एवं जन कल्याण",
       description:
@@ -30,7 +27,6 @@ export default function WhyRtiMattersSection() {
       statute: "National Food Security Act (NFSA)",
     },
     {
-      icon: "💧",
       title: "Clean Water & Healthcare",
       hindiTitle: "शुद्ध पेयजल एवं अस्पताल सुविधाएं",
       description:
@@ -40,12 +36,12 @@ export default function WhyRtiMattersSection() {
   ];
 
   return (
-    <section id="why-rti" className="w-full py-16 lg:py-24 bg-slate-100/60 dark:bg-white/[0.02] border-y border-slate-200 dark:border-white/10 relative overflow-hidden transition-colors">
+    <section id="why-rti" className="w-full py-16 lg:py-24 relative overflow-hidden transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         {/* Section Header */}
         <div className="max-w-3xl space-y-3 text-left">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-            <span>RTI ACT 2005 • सूचना का अधिकार</span>
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold tracking-wider">
+            <span>RTI Act 2005 • सूचना का अधिकार</span>
           </div>
 
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
@@ -61,26 +57,14 @@ export default function WhyRtiMattersSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           {/* Left Presentation Artwork (5 Cols) */}
           <div className="lg:col-span-5 relative">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="rounded-3xl overflow-hidden border border-slate-200 dark:border-white/15 shadow-2xl bg-white dark:bg-[#110830]"
-            >
-              <img
-                src="/images/why-rti-matters.png"
-                alt="Citizens inspecting local road project with digital RTI transparency"
-                className="w-full h-auto object-cover max-h-[480px]"
-              />
-
-              <div className="p-4 bg-slate-900/85 dark:bg-[#0c0529]/95 text-white">
-                <span className="text-xs font-bold text-emerald-400 block uppercase">
-                  Community Accountability
-                </span>
-                <p className="text-xs text-slate-200 mt-0.5 leading-snug">
-                  Jab nagrik sawal poochte hain, tabhi sadak banti hai aur corruption par lagam lagti hai.
-                </p>
-              </div>
-            </motion.div>
+            <figure className="rounded-3xl bg-purple-800 dark:bg-[#1d2733] text-white p-8 sm:p-10 flex flex-col gap-6 min-h-[320px] justify-between">
+              <blockquote className="font-[family-name:var(--font-display)] text-xl sm:text-2xl font-semibold leading-snug">
+                Jab nagrik sawal poochte hain, tabhi sadak banti hai aur corruption par lagam lagti hai.
+              </blockquote>
+              <figcaption className="text-sm text-purple-100 border-t border-white/20 pt-4">
+                Community accountability under Article 19(1)(a) of the Constitution
+              </figcaption>
+            </figure>
           </div>
 
           {/* Right 4 Concrete Civic Pillars (7 Cols) */}
@@ -92,15 +76,14 @@ export default function WhyRtiMattersSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
-                className="p-5 rounded-2xl bg-white dark:bg-[#0d062e] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-3 group"
+                className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm hover:shadow-md transition-all flex flex-col justify-between gap-3 group"
               >
                 <div className="space-y-2">
-                  <span className="text-2xl block">{pillar.icon}</span>
                   <div>
                     <h3 className="text-base font-bold text-slate-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-300 transition-colors">
                       {pillar.title}
                     </h3>
-                    <span className="text-[11px] font-semibold text-purple-600 dark:text-purple-300 block mt-0.5">
+                    <span className="text-xs font-semibold text-purple-600 dark:text-purple-300 block mt-0.5">
                       {pillar.hindiTitle}
                     </span>
                   </div>
@@ -110,7 +93,7 @@ export default function WhyRtiMattersSection() {
                 </div>
 
                 <div className="pt-2 border-t border-slate-100 dark:border-white/5">
-                  <span className="text-[10px] font-mono text-slate-400 dark:text-slate-500 font-semibold block uppercase">
+                  <span className="text-xs font-mono text-slate-400 dark:text-slate-500 font-semibold block">
                     {pillar.statute}
                   </span>
                 </div>
@@ -123,7 +106,7 @@ export default function WhyRtiMattersSection() {
         <div className="pt-2 text-center">
           <Link
             href="/about"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/10 shadow-sm transition-all"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-white dark:bg-white/5 border border-slate-300 dark:border-white/10 text-xs sm:text-sm font-semibold text-purple-700 dark:text-purple-300 hover:bg-slate-50 dark:hover:bg-white/10 shadow-sm transition-all"
           >
             <span>Learn more about SARAL Mission &amp; DPDP compliance →</span>
           </Link>

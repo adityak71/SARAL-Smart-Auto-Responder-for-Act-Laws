@@ -9,6 +9,7 @@ import ApplicationTimeline from "@/components/tracking/ApplicationTimeline";
 import StatutoryClock from "@/components/tracking/StatutoryClock";
 import OfficerDetailsCard from "@/components/tracking/OfficerDetailsCard";
 import { fetchApplication } from "@/redux/slices/trackingSlice";
+import { Search as IcSearch } from "lucide-react";
 
 function TrackingContent() {
   const searchParams = useSearchParams();
@@ -43,9 +44,9 @@ function TrackingContent() {
           </div>
         </div>
       ) : (
-        <div className="w-full py-16 px-6 text-center rounded-3xl bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 shadow-sm flex flex-col items-center justify-center">
+        <div className="w-full py-16 px-6 text-center rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm flex flex-col items-center justify-center">
           <div className="w-16 h-16 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-3xl mb-4 text-purple-600 dark:text-purple-400">
-            🔍
+            <IcSearch className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
           </div>
           <h3 className="text-xl font-bold text-slate-900 dark:text-white">
             Enter Application Reference ID
@@ -61,7 +62,7 @@ function TrackingContent() {
 
 export default function TrackingPage() {
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#08031d] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1">
         <Suspense fallback={<div className="p-8 text-center text-slate-500 dark:text-slate-400">Loading Tracking Dossier...</div>}>
           <TrackingContent />

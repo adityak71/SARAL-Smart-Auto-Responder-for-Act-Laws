@@ -6,7 +6,7 @@ export default function ApplicationTimeline({ application }) {
   if (!application) return null;
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
@@ -42,7 +42,7 @@ export default function ApplicationTimeline({ application }) {
                   isCompleted
                     ? "bg-purple-600 text-white ring-4 ring-purple-100 dark:ring-purple-900/40"
                     : isActive
-                    ? "bg-cyan-500 text-slate-900 ring-4 ring-cyan-500/30 animate-pulse"
+                    ? "bg-cyan-500 text-slate-900 ring-4 ring-cyan-500/30 "
                     : "bg-slate-100 dark:bg-white/10 text-slate-400 border border-slate-300 dark:border-white/10"
                 }`}
               >
@@ -69,7 +69,7 @@ export default function ApplicationTimeline({ application }) {
                   >
                     {item.title}
                   </h4>
-                  <span className="text-[11px] font-mono text-purple-700 dark:text-purple-300/80 bg-purple-50 dark:bg-white/5 border border-purple-200 dark:border-transparent px-2 py-0.5 rounded-md">
+                  <span className="text-xs font-mono text-purple-700 dark:text-purple-300/80 bg-purple-50 dark:bg-white/5 border border-purple-200 dark:border-transparent px-2 py-0.5 rounded-md">
                     {!item.date || item.date === "Invalid Date"
                       ? isCompleted
                         ? "Completed"

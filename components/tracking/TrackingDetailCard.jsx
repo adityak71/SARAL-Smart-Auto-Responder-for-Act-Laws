@@ -21,7 +21,7 @@ export default function TrackingDetailCard({ application }) {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       {/* Header Info */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
@@ -42,7 +42,7 @@ export default function TrackingDetailCard({ application }) {
             onClick={() => handleOpenPreview("RECEIPT", "Statutory Filing Receipt")}
             className="px-3.5 py-1.5 rounded-xl bg-purple-600/15 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/25 dark:hover:bg-purple-600 dark:text-purple-300 dark:hover:text-white text-xs font-semibold border border-purple-500/30 transition flex items-center gap-1.5 cursor-pointer"
           >
-            <span>📄 View Receipt</span>
+            <span>View Receipt</span>
           </button>
 
           {(application.status === "completed" || application.officialResponse) && (
@@ -51,12 +51,12 @@ export default function TrackingDetailCard({ application }) {
               onClick={() => handleOpenPreview("CERTIFIED_RESPONSE", "Official Response Memorandum")}
               className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold shadow-md transition flex items-center gap-1.5 cursor-pointer"
             >
-              <span>📜 View Certified Response</span>
+              <span>View Certified Response</span>
             </button>
           )}
 
           <span
-            className={`px-3 py-1 rounded-full text-xs font-bold w-fit ${
+            className={`px-3 py-1 rounded-lg text-xs font-bold w-fit ${
               application.status === "completed"
                 ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30"
                 : application.status === "appeal_open"
@@ -71,7 +71,7 @@ export default function TrackingDetailCard({ application }) {
 
       {/* Citizen Raw Speech / Inquiry */}
       <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 space-y-1.5 text-xs">
-        <span className="text-[10px] text-slate-500 dark:text-slate-400 uppercase font-bold tracking-wider block">
+        <span className="text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wider block">
           Original Citizen Inquiry (Vernacular Input):
         </span>
         <blockquote className="italic text-slate-700 dark:text-slate-200 leading-relaxed">
@@ -85,7 +85,7 @@ export default function TrackingDetailCard({ application }) {
           <span className="font-bold text-purple-900 dark:text-purple-200 text-xs">
             Formulated Legal Clauses under Section 6(1) of RTI Act, 2005:
           </span>
-          <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold">
+          <span className="text-xs text-emerald-600 dark:text-emerald-400 font-semibold">
             Zero Legal Ambiguity
           </span>
         </div>
@@ -113,7 +113,7 @@ export default function TrackingDetailCard({ application }) {
             }
             return clauses.map((clause, index) => (
               <div key={index} className="flex items-start gap-2 text-slate-700 dark:text-slate-200 text-xs leading-relaxed">
-                <span className="w-5 h-5 rounded-full bg-purple-600/15 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+                <span className="w-5 h-5 rounded-full bg-purple-600/15 dark:bg-purple-600/30 text-purple-700 dark:text-purple-300 text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">
                   {index + 1}
                 </span>
                 <span>{clause}</span>
@@ -125,7 +125,7 @@ export default function TrackingDetailCard({ application }) {
 
       {/* Certified Records & Documents Vault */}
       <div className="space-y-2.5">
-        <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider">
+        <h4 className="text-xs font-bold text-slate-900 dark:text-white tracking-wider">
           Official Certified Documents & Receipts
         </h4>
 
@@ -145,7 +145,7 @@ export default function TrackingDetailCard({ application }) {
                   <span className="text-slate-900 dark:text-white font-medium truncate block">
                     {doc.name}
                   </span>
-                  <span className="text-[10px] text-slate-500 dark:text-slate-400">
+                  <span className="text-xs text-slate-500 dark:text-slate-400">
                     {doc.size} • <strong className="text-emerald-600 dark:text-emerald-400">{doc.status}</strong>
                   </span>
                 </div>

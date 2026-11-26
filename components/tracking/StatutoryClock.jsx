@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { TriangleAlert as IcTriangleAlert } from "lucide-react";
 
 export default function StatutoryClock({ application }) {
   if (!application) return null;
@@ -11,10 +12,10 @@ export default function StatutoryClock({ application }) {
   const percentage = Math.min(100, Math.round((daysElapsed / totalDaysAllowed) * 100));
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
-          <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
             Statutory Compliance Clock
           </span>
           <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
@@ -23,7 +24,7 @@ export default function StatutoryClock({ application }) {
         </div>
 
         <span
-          className={`px-3 py-1 rounded-full text-xs font-bold ${
+          className={`px-3 py-1 rounded-lg text-xs font-bold ${
             isOverdue
               ? "bg-rose-500/15 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
               : status === "completed"
@@ -52,16 +53,16 @@ export default function StatutoryClock({ application }) {
           <div
             className={`h-full rounded-full transition-all duration-500 ${
               isOverdue
-                ? "bg-gradient-to-r from-rose-500 to-red-600"
+                ? " bg-rose-500 "
                 : status === "completed"
-                ? "bg-gradient-to-r from-emerald-500 to-teal-400"
-                : "bg-gradient-to-r from-purple-500 via-indigo-500 to-cyan-400"
+                ? " bg-emerald-500 "
+                : " bg-purple-500  "
             }`}
             style={{ width: `${percentage}%` }}
           />
         </div>
 
-        <div className="flex justify-between text-[11px] text-slate-500 dark:text-slate-400 pt-1">
+        <div className="flex justify-between text-xs text-slate-500 dark:text-slate-400 pt-1">
           <span>Date Filed: {application.dateFiled}</span>
           <span>Statutory Deadline: {statutoryDeadline}</span>
         </div>
@@ -71,10 +72,10 @@ export default function StatutoryClock({ application }) {
       {isOverdue && (
         <div className="p-3.5 rounded-2xl bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 flex flex-col gap-2">
           <div className="flex items-center gap-2 text-rose-700 dark:text-rose-300 font-bold text-xs">
-            <span>⚠️</span>
+            <span><IcTriangleAlert className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
             <span>Section 19(1) First Appeal Unlocked</span>
           </div>
-          <p className="text-[11px] text-slate-700 dark:text-slate-300 leading-snug">
+          <p className="text-xs text-slate-700 dark:text-slate-300 leading-snug">
             The Public Information Officer has not provided certified records within the 30-day statutory period. SARAL has auto-drafted your First Appeal memorandum.
           </p>
           <Link

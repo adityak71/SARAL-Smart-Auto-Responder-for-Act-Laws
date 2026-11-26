@@ -203,8 +203,8 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             exit={{ opacity: 0, y: -20 }}
             className={`fixed top-6 right-6 z-50 px-5 py-3 rounded-2xl shadow-2xl border text-sm font-semibold flex items-center gap-3 ${
               toast.type === "success"
-                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 backdrop-blur-md"
-                : "bg-rose-500/10 text-rose-400 border-rose-500/30 backdrop-blur-md"
+                ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/30 "
+                : "bg-rose-500/10 text-rose-400 border-rose-500/30 "
             }`}
           >
             {toast.type === "success" ? <CheckCircle2 className="w-4 h-4" /> : <AlertTriangle className="w-4 h-4" />}
@@ -220,13 +220,13 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             onClick={() => setActiveSubTab("rtis")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeSubTab === "rtis"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
             <FileText className="w-4 h-4" />
             <span>All RTI Applications</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] ${
+            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
               activeSubTab === "rtis" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {applications.length}
@@ -236,13 +236,13 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             onClick={() => setActiveSubTab("departments")}
             className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold transition-all cursor-pointer ${
               activeSubTab === "departments"
-                ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
+                ? "bg-purple-600 text-white shadow-md "
                 : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/5"
             }`}
           >
             <Landmark className="w-4 h-4" />
             <span>Departments Directory</span>
-            <span className={`ml-1 px-1.5 py-0.5 rounded text-[10px] ${
+            <span className={`ml-1 px-1.5 py-0.5 rounded text-xs ${
               activeSubTab === "departments" ? "bg-purple-700 text-white" : "bg-slate-200 dark:bg-slate-800 text-slate-700 dark:text-slate-300"
             }`}>
               {departments.length}
@@ -278,7 +278,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
           </div>
 
           {/* Search, Filter & RTI Table Container */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
               <form
                 onSubmit={(e) => {
@@ -323,7 +323,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             {/* Applications Table */}
             <div className="overflow-x-auto w-full">
               <table className="w-full min-w-[900px] text-left text-sm">
-                <thead className="bg-slate-50 dark:bg-white/5 text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
+                <thead className="bg-slate-50 dark:bg-white/5 text-xs tracking-wider text-slate-500 dark:text-slate-400 border-b border-slate-200 dark:border-white/10">
                   <tr>
                     <th className="px-5 py-3.5 font-bold">Reference ID</th>
                     <th className="px-5 py-3.5 font-bold">Subject & Authority</th>
@@ -403,7 +403,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
 
                         <td className="px-5 py-3.5 whitespace-nowrap">
                           <span
-                            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-bold uppercase tracking-wider ${
+                            className={`inline-flex items-center px-2.5 py-0.5 rounded-lg text-xs font-bold  tracking-wider ${
                               app.status === "RESPONDED" || app.status === "CLOSED"
                                 ? "bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
                                 : app.status === "IN_REVIEW"
@@ -445,7 +445,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
       {/* VIEW 2: DEPARTMENTS DIRECTORY */}
       {activeSubTab === "departments" && (
         <div className="space-y-6">
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                 Department Directory & Public Authorities
@@ -456,7 +456,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             </div>
             <button
               onClick={() => setShowAddDeptModal(true)}
-              className="px-5 py-2.5 rounded-full text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-2 cursor-pointer shrink-0 shadow-md shadow-purple-600/20"
+              className="px-5 py-2.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all flex items-center gap-2 cursor-pointer shrink-0 shadow-md"
             >
               <Plus className="w-4 h-4" /> Add Department
             </button>
@@ -466,7 +466,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             {departments.map((dept) => (
               <div
                 key={dept.id}
-                className="p-6 rounded-3xl bg-white dark:bg-[#0c0524] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col justify-between space-y-4"
+                className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -510,16 +510,16 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
       {/* READ-ONLY RTI DOSSIER MODAL */}
       <AnimatePresence>
         {selectedRti && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#0f0728] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div>
-                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 mb-2">
+                  <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-lg text-xs font-bold bg-purple-500/10 dark:bg-purple-500/20 text-purple-700 dark:text-purple-300 border border-purple-500/30 mb-2">
                     <Lock className="w-3.5 h-3.5" /> Read-Only Statutory Dossier
                   </div>
                   <h3 className="font-black text-slate-900 dark:text-white text-xl">
@@ -537,7 +537,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
 
               {/* Citizen Prompt */}
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <h4 className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400">
                   Original Citizen Prompt
                 </h4>
                 <div className="p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed">
@@ -547,7 +547,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
 
               {/* AI-Structured Clauses */}
               <div className="space-y-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                <h4 className="text-xs font-bold tracking-wider text-slate-500 dark:text-slate-400">
                   Section 6(1) Structured Clauses (Immutable)
                 </h4>
                 <div className="space-y-2">
@@ -606,10 +606,10 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
 
               {/* Zero-Tampering Enforcement Bar */}
               <div className="p-3.5 rounded-xl bg-purple-500/10 dark:bg-purple-500/15 border border-purple-500/30 text-xs text-purple-800 dark:text-purple-200 flex items-center justify-between">
-                <span>🔒 Content modification & deletion disabled by Section 6(1) of RTI Act 2005.</span>
+                <span>Content modification & deletion disabled by Section 6(1) of RTI Act 2005.</span>
                 <button
                   onClick={() => setSelectedRti(null)}
-                  className="px-4 py-2 rounded-full bg-slate-200 dark:bg-white/10 text-slate-800 dark:text-white font-bold hover:bg-slate-300 dark:hover:bg-white/20 transition-colors cursor-pointer"
+                  className="px-4 py-2 rounded-lg bg-slate-200 dark:bg-white/10 text-slate-800 dark:text-white font-bold hover:bg-slate-300 dark:hover:bg-white/20 transition-colors cursor-pointer"
                 >
                   Dismiss
                 </button>
@@ -622,12 +622,12 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
       {/* ADD DEPARTMENT MODAL */}
       <AnimatePresence>
         {showAddDeptModal && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80 backdrop-blur-sm">
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 dark:bg-black/80">
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#0f0728] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
@@ -723,14 +723,14 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
                   <button
                     type="button"
                     onClick={() => setShowAddDeptModal(false)}
-                    className="px-4 py-2 rounded-full text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white cursor-pointer"
+                    className="px-4 py-2 rounded-lg text-xs font-semibold text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-white cursor-pointer"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
                     disabled={deptSubmitting}
-                    className="px-6 py-2.5 rounded-full text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all cursor-pointer shadow-md shadow-purple-600/20"
+                    className="px-6 py-2.5 rounded-lg text-xs font-bold bg-purple-600 hover:bg-purple-700 text-white transition-all cursor-pointer shadow-md"
                   >
                     {deptSubmitting ? "Creating..." : "Save Department"}
                   </button>

@@ -1,17 +1,16 @@
 /**
- * Authentic Indian citizen impact stories.
- * Gives the SARAL portal a genuine, empathetic human grounding rather than generic AI template copy.
+ * Illustrative RTI cases. These are examples of common requests and what an RTI reply can
+ * lead to, not testimonials from real SARAL users; the page labels them as examples.
  */
 export const citizenStories = [
   {
     id: "story-1",
-    name: "Rahul Sharma",
+    name: "Example: a village road",
     role: "Farmer & Village Youth Coordinator",
     location: "Pipariya, District Hoshangabad (M.P.)",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=200",
     concern: "Road Fund Diversion & 14-Month Paved Road Delay",
     quote:
-      "“Humare gaon mein har baar election ke baad bola jata tha ki road ka paisa khatam ho gaya. SARAL ne meri Hindi baat ko legal RTI petition mein badal diya. 18 din mein PWD se certified bill aur thekedar ka agreement mila — aur 2 mahine ke andar sadak ka kaam shuru ho gaya!”",
+      "Villagers are told after every election that the road money has run out. An RTI to the PWD asks for the certified bill and the contractor's agreement, which show where the sanctioned budget went.",
     outcome: "₹42 Lakh sanctioned road budget unblocked; 3.8 km paved bitumen road completed.",
     department: "Public Works Department",
     appId: "SARAL-2026-00124",
@@ -20,13 +19,12 @@ export const citizenStories = [
   },
   {
     id: "story-2",
-    name: "Sunita Devi",
+    name: "Example: stopped ration cards",
     role: "Homemaker & Community Lead",
     location: "Darbhanga Rural, Bihar",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200",
     concern: "PDS Ration Card Stoppage & Quota Diversion",
     quote:
-      "“Hum 60 parivaaron ka ration 7 mahine se band tha. Ration dealer keh raha tha ki aage se anaaj nahi aa raha. SARAL ke through ration godown ke stock register ki RTI daali. Officer ko pata chala ki quota deliver hua tha par becha ja raha tha. Agle hafte sabka ration shuru ho gaya.”",
+      "Sixty families stop receiving rations for months. An RTI asks for the ration godown's stock register, which shows whether the quota was delivered to the dealer.",
     outcome: "60 NFSA ration cards restored; Fair price shop dealer audited by Sub-Divisional Magistrate.",
     department: "Food & Civil Supplies",
     appId: "SARAL-2026-00201",
@@ -35,13 +33,12 @@ export const citizenStories = [
   },
   {
     id: "story-3",
-    name: "Arvind Patel",
+    name: "Example: unsafe drinking water",
     role: "Retired Postal Employee",
     location: "South Zone, Vadodara, Gujarat",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200",
     concern: "Contaminated Drinking Water & Pipeline Leakage",
     quote:
-      "“Ward 14 mein nal se peela paani aa raha tha. Corporation mein complaints register hoti thi par koi action nahi hota tha. SARAL ne Section 6(1) ke under weekly potability lab reports maangi. Jab PIO ne dekha ki statutory clock chal rahi hai, unhone 48 ghante mein main valve change karwaya.”",
+      "A ward's tap water turns yellow and complaints go unanswered. An RTI asks the corporation for its weekly water-quality lab reports and repair records.",
     outcome: "Contaminated water line isolated and replacement ductile iron pipe laid in 12 days.",
     department: "Vadodara Municipal Corporation",
     appId: "SARAL-2026-00155",
@@ -50,13 +47,12 @@ export const citizenStories = [
   },
   {
     id: "story-4",
-    name: "Meenakshi Sundaram",
+    name: "Example: a school lab grant",
     role: "Government High School PTA President",
     location: "Thirumangalam, Madurai, Tamil Nadu",
-    avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200",
     concern: "School Smart Laboratory Equipment Grant Delay",
     quote:
-      "“Samagra Shiksha ke under ₹18 Lakh pass hue the computer lab ke liye par saal beet gaya aur ek bhi computer nahi aaya. Humne SARAL portal se district educational officer ko RTI dali. 22 din mein certified invoice aur delivery challan mila. Aaj school mein 20 computers chal rahe hain.”",
+      "A school's computer-lab grant is sanctioned but no equipment arrives. An RTI to the district education officer asks for the invoice and delivery challan.",
     outcome: "20 computers, projector and science kits installed for 420 village students.",
     department: "School Education & Literacy",
     appId: "SARAL-2026-00089",

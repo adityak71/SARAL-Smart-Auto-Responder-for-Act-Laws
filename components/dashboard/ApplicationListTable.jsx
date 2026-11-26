@@ -131,13 +131,13 @@ export default function ApplicationListTable() {
   }, [enrichedApps, filter, searchTerm]);
 
   return (
-    <div className="w-full bg-white dark:bg-[#0d062e] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
       {/* Top Filter and Search Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
             <span>My Filed RTI Applications</span>
-            <span className="px-2 py-0.5 rounded-full bg-purple-500/15 text-purple-700 dark:text-purple-300 text-xs font-mono font-bold">
+            <span className="px-2 py-0.5 rounded-lg bg-purple-500/15 text-purple-700 dark:text-purple-300 text-xs font-mono font-bold">
               {filteredApps.length}
             </span>
           </h3>
@@ -246,7 +246,7 @@ export default function ApplicationListTable() {
                     <div className="font-semibold text-slate-900 dark:text-white max-w-xs truncate">
                       {app.title}
                     </div>
-                    <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate">
+                    <div className="text-xs text-slate-500 dark:text-slate-400 truncate">
                       {app.deptName}
                     </div>
                   </td>
@@ -267,7 +267,7 @@ export default function ApplicationListTable() {
 
                   <td className="py-4 pr-3 whitespace-nowrap">
                     <span
-                      className={`px-2.5 py-1 rounded-full text-[11px] font-bold border ${app.statusBadge.classes}`}
+                      className={`px-2.5 py-1 rounded-lg text-xs font-bold border ${app.statusBadge.classes}`}
                     >
                       {app.statusBadge.label}
                     </span>
@@ -285,10 +285,10 @@ export default function ApplicationListTable() {
                             application: app,
                           })
                         }
-                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-[11px] font-semibold transition cursor-pointer"
+                        className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-purple-50 hover:bg-purple-600 text-purple-700 hover:text-white dark:bg-purple-600/20 dark:hover:bg-purple-600 dark:text-purple-300 border border-purple-200 dark:border-purple-500/30 text-xs font-semibold transition cursor-pointer"
                         title="View & Download Official Receipt"
                       >
-                        <span>📄 Receipt</span>
+                        <span>Receipt</span>
                       </button>
 
                       {/* Certified Response Preview & Download */}
@@ -302,16 +302,16 @@ export default function ApplicationListTable() {
                               application: app,
                             })
                           }
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white dark:bg-emerald-600/20 dark:hover:bg-emerald-600 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-[11px] font-bold transition cursor-pointer"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white dark:bg-emerald-600/20 dark:hover:bg-emerald-600 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-500/30 text-xs font-bold transition cursor-pointer"
                         >
-                          <span>📜 Certified PDF</span>
+                          <span>Certified PDF</span>
                         </button>
                       )}
 
                       {app.isAppeal && (
                         <Link
                           href={`/appeal?id=${app.idStr}`}
-                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-700 hover:text-white dark:bg-rose-600/20 dark:hover:bg-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 text-[11px] font-bold transition"
+                          className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-600 text-rose-700 hover:text-white dark:bg-rose-600/20 dark:hover:bg-rose-600 dark:text-rose-300 border border-rose-200 dark:border-rose-500/30 text-xs font-bold transition"
                         >
                           <span>File Appeal</span>
                         </Link>

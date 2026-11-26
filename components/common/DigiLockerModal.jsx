@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useDispatch, useSelector } from "react-redux";
 import { setDigiLockerVerified, setCredentials } from "@/redux/slices/authSlice";
+import { Lightbulb as IcLightbulb, Lock as IcLock, Shield as IcShield, Smartphone as IcSmartphone } from "lucide-react";
 
 /**
  * DigiLocker National Gateway Authentication Modal
@@ -148,7 +149,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 bg-slate-950/75 backdrop-blur-md"
+          className="fixed inset-0 bg-slate-950/75"
         />
 
         {/* Modal Dialog Card */}
@@ -157,14 +158,14 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className="relative w-full max-w-lg bg-white dark:bg-[#0f0826] rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden z-10 text-slate-800 dark:text-slate-100"
+          className="relative w-full max-w-lg bg-white dark:bg-[#1a2330] rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden z-10 text-slate-800 dark:text-slate-100"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Government Official Top Banner */}
-          <div className="bg-gradient-to-r from-blue-900 via-indigo-900 to-slate-900 text-white p-5 sm:p-6 relative">
+          <div className="bg-blue-900 text-white p-5 sm:p-6 relative">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 p-1 flex items-center justify-center shrink-0">
+                <div className="w-12 h-12 rounded-xl bg-white/10 border border-white/20 p-1 flex items-center justify-center shrink-0">
                   <img
                     src="https://upload.wikimedia.org/wikipedia/commons/5/55/Emblem_of_India.svg"
                     alt="Emblem of India"
@@ -174,11 +175,11 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 <div>
                   <div className="flex items-center gap-1.5">
                     <span className="text-base font-extrabold tracking-tight">DigiLocker</span>
-                    <span className="px-1.5 py-0.2 rounded text-[9px] font-bold bg-blue-500/30 border border-blue-400/40 text-blue-200">
+                    <span className="px-1.5 py-0.2 rounded text-xs font-bold bg-blue-500/30 border border-blue-400/40 text-blue-200">
                       National Gateway
                     </span>
                   </div>
-                  <p className="text-[11px] text-blue-200/80">
+                  <p className="text-xs text-blue-200/80">
                     MeriPehchaan • Digital India Corporation (MeitY)
                   </p>
                 </div>
@@ -212,13 +213,13 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     <div
                       className={`h-1.5 w-full rounded-full transition-all duration-300 ${
                         isActive
-                          ? "bg-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]"
+                          ? "bg-amber-400 "
                           : isPassed
                           ? "bg-emerald-400"
                           : "bg-white/20"
                       }`}
                     />
-                    <span className="text-[9px] text-slate-300 font-medium">{s.label}</span>
+                    <span className="text-xs text-slate-300 font-medium">{s.label}</span>
                   </div>
                 );
               })}
@@ -292,7 +293,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     }
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm font-mono tracking-wider focus:ring-2 focus:ring-indigo-500 outline-none"
                   />
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
                     {authMode === "aadhaar"
                       ? "Aadhaar will be masked per UIDAI privacy regulations."
                       : "Registered with your DigiLocker / Aadhaar account."}
@@ -312,7 +313,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     placeholder="••••••"
                     className="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-white/15 bg-white dark:bg-white/5 text-slate-900 dark:text-white text-sm tracking-widest text-center font-bold focus:ring-2 focus:ring-indigo-500 outline-none"
                   />
-                  <p className="text-[11px] text-slate-400 text-center mt-1">
+                  <p className="text-xs text-slate-400 text-center mt-1">
                     (Sample PIN: <span className="font-mono text-purple-600 dark:text-purple-300">123456</span>)
                   </p>
                 </div>
@@ -324,7 +325,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                 <button
                   type="submit"
                   disabled={isVerifying}
-                  className="w-full py-3 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-blue-700 via-indigo-600 to-purple-600 hover:from-blue-800 hover:to-purple-700 shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                  className="w-full py-3 px-4 rounded-xl font-bold text-sm text-white bg-blue-700 hover:bg-blue-800 shadow-lg transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                 >
                   {isVerifying ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -340,7 +341,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
               <form onSubmit={handleVerifyOtp} className="space-y-4">
                 <div className="text-center pb-2">
                   <div className="w-12 h-12 rounded-2xl bg-indigo-100 dark:bg-purple-900/40 text-indigo-600 dark:text-purple-300 mx-auto flex items-center justify-center text-xl mb-2">
-                    📱
+                    <IcSmartphone className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                   </div>
                   <h3 className="text-lg font-bold text-slate-900 dark:text-white">
                     Enter Verification OTP
@@ -394,8 +395,8 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
 
                 {/* Helper info pill */}
                 <div className="p-2.5 rounded-xl bg-purple-50 dark:bg-purple-950/30 border border-purple-200/60 dark:border-purple-800/40 text-center">
-                  <p className="text-[11px] text-purple-700 dark:text-purple-300">
-                    💡 <strong>Test Mode Hint:</strong> Pre-filled with demo OTP <code className="font-bold">123456</code>.
+                  <p className="text-xs text-purple-700 dark:text-purple-300">
+                    <IcLightbulb className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> <strong>Test Mode Hint:</strong> Pre-filled with demo OTP <code className="font-bold">123456</code>.
                   </p>
                 </div>
 
@@ -414,7 +415,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   <button
                     type="submit"
                     disabled={isVerifying}
-                    className="flex-2 py-3 px-4 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 shadow-md shadow-indigo-500/20 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                    className="flex-2 py-3 px-4 rounded-xl font-bold text-sm text-white bg-indigo-600 hover:bg-indigo-700 shadow-md transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                   >
                     {isVerifying ? (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -476,8 +477,8 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   </div>
                 </div>
 
-                <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 text-[11px] text-blue-800 dark:text-blue-300 flex items-center gap-2">
-                  <span className="text-base">🔒</span>
+                <div className="p-3 rounded-xl bg-blue-50/70 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900/40 text-xs text-blue-800 dark:text-blue-300 flex items-center gap-2">
+                  <span className="text-base"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                   <span>
                     Protected under Digital Personal Data Protection (DPDP) Act 2023. Encrypted end-to-end.
                   </span>
@@ -495,7 +496,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                     type="button"
                     onClick={handleConsentGrant}
                     disabled={isVerifying}
-                    className="flex-2 py-3 px-4 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 shadow-md shadow-emerald-500/20 transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
+                    className="flex-2 py-3 px-4 rounded-xl font-bold text-sm text-white bg-emerald-600 hover:bg-emerald-700 shadow-md transition flex items-center justify-center gap-2 cursor-pointer disabled:opacity-70"
                   >
                     {isVerifying ? (
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
@@ -514,7 +515,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                  className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl mx-auto shadow-xl shadow-emerald-500/30 ring-8 ring-emerald-500/20"
+                  className="w-16 h-16 rounded-full bg-emerald-500 text-white flex items-center justify-center text-3xl mx-auto shadow-xl ring-8 ring-emerald-500/20"
                 >
                   ✓
                 </motion.div>
@@ -525,8 +526,8 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
                   Your Indian Citizen status is certified via DigiLocker. You can now file RTI applications with full legal standing under Section 6(1).
                 </p>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
-                    <span>🛡️</span>
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-700">
+                    <span><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>Certified DigiLocker Citizen</span>
                   </span>
                 </div>

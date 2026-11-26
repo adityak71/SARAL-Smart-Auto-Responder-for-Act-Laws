@@ -3,6 +3,7 @@
 import Link from "next/link";
 import CitizenOverview from "@/components/dashboard/CitizenOverview";
 import ApplicationListTable from "@/components/dashboard/ApplicationListTable";
+import { Scale as IcScale } from "lucide-react";
 
 export default function CitizenDashboard({ user }) {
   const citizenName =
@@ -18,19 +19,17 @@ export default function CitizenDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner & Quick Actions */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-purple-700 via-indigo-700 to-slate-900 dark:from-purple-950/70 dark:via-indigo-950/50 dark:to-slate-900 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
-        {/* Glow decoration */}
-        <div className="absolute -right-10 -top-10 w-48 h-48 bg-purple-600/20 rounded-full blur-3xl pointer-events-none" />
+      <div className="p-6 sm:p-8 rounded-3xl bg-purple-700 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-all">
 
         <div className="space-y-2 z-10">
           {user?.isDigiLockerVerified ? (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
               DigiLocker Verified Citizen • Section 6(1) Authorized
             </div>
           ) : (
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse" />
+            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
               Citizen Account • Verification Pending
             </div>
           )}
@@ -45,7 +44,7 @@ export default function CitizenDashboard({ user }) {
         <div className="flex flex-wrap items-center gap-3 shrink-0 z-10">
           <Link
             href="/file-rti"
-            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-purple-600/30 transition-all transform hover:-translate-y-0.5 cursor-pointer flex items-center gap-2"
+            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-lg transition-all transform cursor-pointer flex items-center gap-2"
           >
             <span>+ File New RTI Petition</span>
           </Link>
@@ -68,7 +67,7 @@ export default function CitizenDashboard({ user }) {
       <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-slate-800 dark:text-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
           <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-lg shrink-0">
-            ⚖
+            <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
           </div>
           <div>
             <h4 className="text-sm font-bold text-slate-900 dark:text-white">

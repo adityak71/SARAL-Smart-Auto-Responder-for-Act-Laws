@@ -2,157 +2,292 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-@layer base {
-  :root {
-    --font-sans: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    --font-serif: 'Newsreader', Georgia, serif;
-  }
+/*
+ * SARAL visual system — palette "Linen and harbour blue" (Taste skill deal, clinic/public service):
+ * linen ground #f3f1ec, sand surface #e6e2d9, navy ink #1d2530, harbour-blue accent #2c5877,
+ * with a muted clay complement for status and the hero's margin rule.
+ * Type: Red Hat Display (headings) / Red Hat Text (body), Noto Sans Devanagari for Hindi.
+ * The components use Tailwind's violet/purple/indigo/fuchsia/cyan/slate/white names;
+ * remapping those scales here reskins every page without touching layout markup.
+ */
+@theme {
+  --font-sans: "Red Hat Text", "Noto Sans Devanagari", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Red Hat Display", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-display);
 
+  --font-weight-bold: 600;
+  --font-weight-extrabold: 600;
+  --font-weight-black: 700;
+
+  --tracking-wide: 0.01em;
+  --tracking-wider: 0.015em;
+  --tracking-widest: 0.02em;
+
+  /* Restrained radii: 4 / 4 / 6 / 8 / 8 / 10 */
+  --radius-sm: 4px;
+  --radius-md: 4px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
+  --radius-3xl: 10px;
+
+  /* Elevation is a hairline more than a shadow */
+  --shadow-sm: 0 1px 1px 0 rgb(29 37 48 / 0.05);
+  --shadow: 0 1px 2px 0 rgb(29 37 48 / 0.06);
+  --shadow-md: 0 1px 3px 0 rgb(29 37 48 / 0.07);
+  --shadow-lg: 0 2px 6px -2px rgb(29 37 48 / 0.08);
+  --shadow-xl: 0 4px 12px -6px rgb(29 37 48 / 0.12);
+  --shadow-2xl: 0 6px 16px -8px rgb(29 37 48 / 0.14);
+
+  /* Paper, not pure white: cards and inputs sit warm on the linen ground */
+  --color-white: #fcfbf8;
+
+  /* Accent: harbour blue (600 = #2c5877). Every former violet-family scale maps here. */
+  --color-harbour-50: #eef3f7;
+  --color-harbour-100: #dce6ee;
+  --color-harbour-200: #b9cddc;
+  --color-harbour-300: #8eaec5;
+  --color-harbour-400: #5f8aa8;
+  --color-harbour-500: #3f6f8f;
+  --color-harbour-600: #2c5877;
+  --color-harbour-700: #234862;
+  --color-harbour-800: #1c3a50;
+  --color-harbour-900: #172f41;
+  --color-harbour-950: #0e1d29;
+
+  --color-purple-50: var(--color-harbour-50);
+  --color-purple-100: var(--color-harbour-100);
+  --color-purple-200: var(--color-harbour-200);
+  --color-purple-300: var(--color-harbour-300);
+  --color-purple-400: var(--color-harbour-400);
+  --color-purple-500: var(--color-harbour-500);
+  --color-purple-600: var(--color-harbour-600);
+  --color-purple-700: var(--color-harbour-700);
+  --color-purple-800: var(--color-harbour-800);
+  --color-purple-900: var(--color-harbour-900);
+  --color-purple-950: var(--color-harbour-950);
+
+  --color-violet-50: var(--color-harbour-50);
+  --color-violet-100: var(--color-harbour-100);
+  --color-violet-200: var(--color-harbour-200);
+  --color-violet-300: var(--color-harbour-300);
+  --color-violet-400: var(--color-harbour-400);
+  --color-violet-500: var(--color-harbour-500);
+  --color-violet-600: var(--color-harbour-600);
+  --color-violet-700: var(--color-harbour-700);
+  --color-violet-800: var(--color-harbour-800);
+  --color-violet-900: var(--color-harbour-900);
+  --color-violet-950: var(--color-harbour-950);
+
+  --color-indigo-50: var(--color-harbour-50);
+  --color-indigo-100: var(--color-harbour-100);
+  --color-indigo-200: var(--color-harbour-200);
+  --color-indigo-300: var(--color-harbour-300);
+  --color-indigo-400: var(--color-harbour-400);
+  --color-indigo-500: var(--color-harbour-500);
+  --color-indigo-600: var(--color-harbour-600);
+  --color-indigo-700: var(--color-harbour-700);
+  --color-indigo-800: var(--color-harbour-800);
+  --color-indigo-900: var(--color-harbour-900);
+  --color-indigo-950: var(--color-harbour-950);
+
+  --color-fuchsia-50: var(--color-harbour-50);
+  --color-fuchsia-100: var(--color-harbour-100);
+  --color-fuchsia-200: var(--color-harbour-200);
+  --color-fuchsia-300: var(--color-harbour-300);
+  --color-fuchsia-400: var(--color-harbour-400);
+  --color-fuchsia-500: var(--color-harbour-500);
+  --color-fuchsia-600: var(--color-harbour-600);
+  --color-fuchsia-700: var(--color-harbour-700);
+  --color-fuchsia-800: var(--color-harbour-800);
+  --color-fuchsia-900: var(--color-harbour-900);
+  --color-fuchsia-950: var(--color-harbour-950);
+
+  /* Complement (former cyan): muted clay, for secondary emphasis only */
+  --color-cyan-50: #fbf2eb;
+  --color-cyan-100: #f5e2d4;
+  --color-cyan-200: #ebc4a8;
+  --color-cyan-300: #dea07a;
+  --color-cyan-400: #cf8255;
+  --color-cyan-500: #b8693d;
+  --color-cyan-600: #9c5530;
+  --color-cyan-700: #7e4528;
+  --color-cyan-800: #623621;
+  --color-cyan-900: #4b2a1b;
+  --color-cyan-950: #2a170f;
+
+  /* Neutrals (former slate/gray): linen light end, navy ink dark end */
+  --color-slate-50: #f6f4ef;
+  --color-slate-100: #edeae3;
+  --color-slate-200: #e1dcd1;
+  --color-slate-300: #cbc5b9;
+  --color-slate-400: #9b9a95;
+  --color-slate-500: #6c6f73;
+  --color-slate-600: #50555c;
+  --color-slate-700: #3b414a;
+  --color-slate-800: #2a313b;
+  --color-slate-900: #1d2530;
+  --color-slate-950: #121821;
+
+  --color-gray-50: var(--color-slate-50);
+  --color-gray-100: var(--color-slate-100);
+  --color-gray-200: var(--color-slate-200);
+  --color-gray-300: var(--color-slate-300);
+  --color-gray-400: var(--color-slate-400);
+  --color-gray-500: var(--color-slate-500);
+  --color-gray-600: var(--color-slate-600);
+  --color-gray-700: var(--color-slate-700);
+  --color-gray-800: var(--color-slate-800);
+  --color-gray-900: var(--color-slate-900);
+  --color-gray-950: var(--color-slate-950);
+}
+
+@layer base {
   body {
     font-family: var(--font-sans);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    line-height: 1.55;
   }
 
-  /* Default Dark Mode */
   html.dark body {
-    background-color: #08031d;
-    color: #f8fafc;
+    background-color: #121821;
+    color: #edeae3;
   }
 
-  /* Default Light Mode */
   html:not(.dark) body {
-    background-color: #faf9fe;
-    color: #0f172a;
+    background-color: #f3f1ec;
+    color: #1d2530;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.015em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-harbour-600);
+    outline-offset: 2px;
   }
 }
 
-/* Glassmorphism & Custom Civic Lumina Styles - Dual Mode */
-html.dark .glass-card {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 20px 45px -10px rgba(8, 4, 30, 0.65), 0 0 20px 2px rgba(138, 75, 255, 0.12);
-}
+/*
+ * Section grounds. The page sits on linen; a few existing sections take a tinted ground
+ * so the page has depth without white expanses (Taste rhythm: surface-pairs + one dark band).
+ */
+.ground-sand { background-color: #e9e4d9; }
+.ground-mist { background-color: #e2e9ee; }
+.ground-ink { background-color: #1d2530; }
 
-html:not(.dark) .glass-card {
-  background: rgba(255, 255, 255, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(226, 232, 240, 0.95);
-  box-shadow: 0 10px 30px -5px rgba(100, 116, 139, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
-}
+html.dark .ground-sand { background-color: #161e28; }
+html.dark .ground-mist { background-color: #142030; }
+html.dark .ground-ink { background-color: #0e141c; }
 
-html.dark .glass-chip {
-  background: rgba(255, 255, 255, 0.07);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-html:not(.dark) .glass-chip {
-  background: rgba(241, 245, 249, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(203, 213, 225, 0.85);
-}
-
-html.dark .glass-pill {
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.22);
-}
-
-html:not(.dark) .glass-pill {
-  background: rgba(248, 250, 252, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(203, 213, 225, 0.85);
-}
-
-html.dark .glass-card-subtle {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-}
-
-html:not(.dark) .glass-card-subtle {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(226, 232, 240, 0.85);
-}
-
+/*
+ * Legacy surface classes kept by name so markup stays unchanged;
+ * they are flat, bordered paper surfaces (no blur, glow or gradient).
+ */
+html.dark .glass-card,
+html.dark .glass-card-subtle,
 html.dark .glass-doc {
-  background: linear-gradient(135deg, rgba(76, 29, 149, 0.65) 0%, rgba(30, 27, 75, 0.85) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(167, 139, 250, 0.35);
-  box-shadow: 0 20px 40px -15px rgba(15, 3, 40, 0.8), inset 0 1px 1px 0 rgba(255, 255, 255, 0.25);
+  background: #1a2330;
+  border: 1px solid #2a3542;
+  box-shadow: none;
 }
 
+html:not(.dark) .glass-card,
+html:not(.dark) .glass-card-subtle,
 html:not(.dark) .glass-doc {
-  background: linear-gradient(135deg, rgba(238, 242, 255, 0.95) 0%, rgba(224, 231, 255, 0.85) 100%);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1.5px solid rgba(165, 180, 252, 0.8);
-  box-shadow: 0 15px 35px -10px rgba(99, 102, 241, 0.2), inset 0 1px 1px 0 rgba(255, 255, 255, 0.8);
+  background: #fcfbf8;
+  border: 1px solid #e1dcd1;
+  box-shadow: var(--shadow-sm);
+}
+
+html.dark .glass-chip,
+html.dark .glass-pill {
+  background: #212c3a;
+  border: 1px solid #2a3542;
+}
+
+html:not(.dark) .glass-chip,
+html:not(.dark) .glass-pill {
+  background: #edeae3;
+  border: 1px solid #e1dcd1;
 }
 
 .shield-badge {
-  background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
-  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  background: var(--color-harbour-600);
 }
 
 .halo-orbit {
-  background: radial-gradient(ellipse at center, rgba(168, 85, 247, 0.35) 0%, rgba(99, 102, 241, 0.1) 50%, transparent 75%);
+  display: none;
 }
 
 .gradient-btn {
-  background: linear-gradient(135deg, #6636ef 0%, #5125dd 100%);
-  transition: background 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-harbour-600);
+  transition: background-color 0.15s ease;
 }
 
 .gradient-btn:hover {
-  background: linear-gradient(135deg, #7443fb 0%, #5c2ded 100%);
-  box-shadow: 0 10px 25px -4px rgba(99, 48, 240, 0.45);
+  background: var(--color-harbour-700);
 }
 
 .shadow-card-lift {
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.35), 0 10px 30px -10px rgba(94, 23, 235, 0.18);
+  box-shadow: var(--shadow-lg);
 }
 
 .shadow-btn-glow {
-  box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5), 0 8px 10px -6px rgba(99, 102, 241, 0.3);
+  box-shadow: none;
 }
 
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0px) rotate(-2deg);
-  }
-  50% {
-    transform: translateY(-8px) rotate(0deg);
-  }
-}
-
+/* Kept for markup compatibility; floating motion removed */
 .animate-float-slow {
-  animation: floatSlow 6s ease-in-out infinite;
+  animation: none;
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.25s ease-out forwards;
+  animation: fadeIn 0.15s ease-out forwards;
 }
 
+/*
+ * The one identity element: the home hero is a sheet of blue-ruled government foolscap with a
+ * clay margin rule, the paper the RTI application used to be written on. Static.
+ */
+.ledger-ground {
+  background-color: #e4ecf1;
+  background-image:
+    linear-gradient(to right, transparent calc(var(--ledger-margin) - 1px), #c0683a calc(var(--ledger-margin) - 1px), #c0683a var(--ledger-margin), transparent var(--ledger-margin)),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #c9d7e1 31px, #c9d7e1 32px);
+  border-bottom: 1px solid #c9d7e1;
+}
+
+html.dark .ledger-ground {
+  background-color: #132131;
+  background-image:
+    linear-gradient(to right, transparent calc(var(--ledger-margin) - 1px), #9c5530 calc(var(--ledger-margin) - 1px), #9c5530 var(--ledger-margin), transparent var(--ledger-margin)),
+    repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #1c2d40 31px, #1c2d40 32px);
+  border-bottom-color: #1c2d40;
+}
+
+/* The margin rule sits just left of the content edge at every width */
+.ledger-ground { --ledger-margin: 8px; }
+
+@media (min-width: 640px) {
+  .ledger-ground { --ledger-margin: 12px; }
+}
+
+@media (min-width: 1024px) {
+  .ledger-ground { --ledger-margin: max(16px, calc((100vw - 80rem) / 2 + 12px)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
