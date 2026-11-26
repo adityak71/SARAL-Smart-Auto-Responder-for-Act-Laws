@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="https://raw.githubusercontent.com/adityak71/public/SARAL_Banner" alt="SARAL Portal Banner" width="100%" style="border-radius: 16px; margin-bottom: 20px;" onerror="this.style.display='none'" />
+  <img src="https://raw.githubusercontent.com/adityak71/SARAL-Smart-Auto-Responder-for-Act-Laws/refs/heads/main/public/SARAL_Banner.png" alt="SARAL Portal Banner" width="100%" height="250px" style="border-radius: 16px; margin-bottom: 20px;" onerror="this.style.display='none'" />
 
   # ⚖️ SARAL (सरल)
   ### Smart Auto-Responder for Act Laws
