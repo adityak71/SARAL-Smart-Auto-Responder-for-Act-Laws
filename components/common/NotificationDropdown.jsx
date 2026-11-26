@@ -145,7 +145,7 @@ export default function NotificationDropdown() {
 
         {/* Live Unread Counter Badge */}
         {unreadCount > 0 && (
-          <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-rose-500 text-white text-xs font-extrabold ring-2 ring-white dark:ring-[#121821]">
+          <span className="absolute -top-1 -right-1 flex h-5 min-w-[20px] px-1 items-center justify-center rounded-full bg-rose-700 text-white text-xs font-bold ring-2 ring-white dark:ring-[#0f1a1f]">
             {unreadCount}
           </span>
         )}
@@ -166,7 +166,7 @@ export default function NotificationDropdown() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 mt-3 w-[340px] sm:w-[420px] max-h-[540px] rounded-2xl bg-white dark:bg-[#1d2733]/95 border border-slate-200 dark:border-purple-500/25 z-50 flex flex-col overflow-hidden text-slate-800 dark:text-slate-100"
+              className="absolute right-0 mt-3 w-[340px] sm:w-[420px] max-h-[540px] rounded-2xl bg-white dark:bg-[#1c2e36]/95 border border-slate-200 dark:border-purple-500/25 z-50 flex flex-col overflow-hidden text-slate-800 dark:text-slate-100"
             >
               {/* Card Header */}
               <div className="p-4 border-b border-slate-200 dark:border-white/10 flex items-center justify-between bg-slate-50 dark:bg-slate-950/60">

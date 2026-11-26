@@ -75,7 +75,7 @@ export default function AdminProfileView({ user }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1d2733]/70 shadow-sm ${stat.bg}`}
+            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1c2e36]/70 shadow-sm ${stat.bg}`}
           >
             <div className="flex items-center justify-between">
               <span className="text-xl sm:text-2xl">{stat.icon}</span>
@@ -91,7 +91,7 @@ export default function AdminProfileView({ user }) {
         {/* Left 7 Cols: Comptroller Credentials */}
         <div className="lg:col-span-7 space-y-6">
           {/* Card 1: Central Administrator Particulars */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-amber-600/15 dark:bg-amber-500/20 text-amber-600 dark:text-amber-300 flex items-center justify-center font-bold text-sm">
@@ -102,7 +102,7 @@ export default function AdminProfileView({ user }) {
                   <p className="text-xs text-slate-500 dark:text-slate-400">Platform administrator & regulatory oversight</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/20">
+              <span className="px-2 py-0.5 rounded text-xs font-bold bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/20">
                 Tier-1 Sovereign
               </span>
             </div>
@@ -154,7 +154,7 @@ export default function AdminProfileView({ user }) {
           </div>
 
           {/* Card 2: Security & Session Posture */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white mb-4">Security & Access Safeguards</h3>
 
             <div className="space-y-3 text-xs">
@@ -193,7 +193,7 @@ export default function AdminProfileView({ user }) {
 
         {/* Right 5 Cols: Platform Console Quick Links */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-3">Admin Master Consoles</h3>
 
             <div className="space-y-3">

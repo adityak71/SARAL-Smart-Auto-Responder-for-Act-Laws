@@ -98,19 +98,19 @@ export default function PwaInstallModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-          className="relative w-full max-w-2xl bg-white dark:bg-[#1a2330] rounded-3xl border border-slate-200 dark:border-white/15 overflow-hidden text-slate-800 dark:text-slate-100 z-10"
+          className="relative w-full max-w-2xl bg-white dark:bg-[#16262d] rounded-3xl border border-slate-200 dark:border-white/15 overflow-hidden text-slate-800 dark:text-slate-100 z-10"
         >
           {/* Header */}
           <div className="relative px-6 pt-6 pb-4 border-b border-slate-200/80 dark:border-white/10 flex items-start justify-between gap-4 bg-purple-500/5">
             <div className="flex items-center gap-4">
               <div className="w-11 h-11 rounded-2xl bg-purple-600 p-0.5 shadow-md flex items-center justify-center shrink-0">
-                <div className="w-full h-full bg-[#1a2330] rounded-[14px] flex items-center justify-center text-white">
+                <div className="w-full h-full bg-[#16262d] rounded-[14px] flex items-center justify-center text-white">
                   <Download className="w-5 h-5 text-purple-300" />
                 </div>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+                  <h3 className="text-lg sm:font-display text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
                     Install SARAL Web App
                   </h3>
                   <span className="px-2 py-0.5 rounded-lg text-xs font-bold tracking-wider bg-purple-500/15 text-purple-700 dark:text-purple-300 border border-purple-500/20">
@@ -177,7 +177,7 @@ export default function PwaInstallModal({
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex-1 min-w-[120px] py-2 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-2 transition-colors cursor-pointer ${
                       isActive
-                        ? "bg-white dark:bg-[#2a3542] text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200/80 dark:border-white/15"
+                        ? "bg-white dark:bg-[#24373f] text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200/80 dark:border-white/15"
                         : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                     }`}
                   >

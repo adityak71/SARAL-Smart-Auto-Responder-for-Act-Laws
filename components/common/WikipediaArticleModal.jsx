@@ -90,7 +90,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="relative w-full max-w-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-purple-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto flex flex-col max-h-[90vh] text-slate-800 dark:text-slate-100"
+          className="relative w-full max-w-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-purple-500/30 rounded-3xl shadow-2xl overflow-hidden my-auto flex flex-col max-h-[90vh] text-slate-800 dark:text-slate-100"
         >
           {/* Top Control Bar (Modal Header) */}
           <div className="p-4 sm:px-6 bg-slate-50 dark:bg-purple-950/50 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0">
@@ -224,7 +224,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
                 <Link
                   href="/file-rti"
                   onClick={onClose}
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition cursor-pointer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition cursor-pointer"
                 >
                   <span>+ File RTI on this Topic</span>
                   <span>→</span>
@@ -276,7 +276,7 @@ export default function WikipediaArticleModal({ isOpen, onClose, article }) {
               <button
                 type="button"
                 onClick={onClose}
-                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition cursor-pointer"
+                className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition cursor-pointer"
               >
                 Close
               </button>

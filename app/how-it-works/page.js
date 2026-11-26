@@ -45,7 +45,7 @@ export default function HowItWorksPage() {
   ];
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16 space-y-16">
         
         {/* Page Hero Header */}
@@ -54,10 +54,10 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight"
+            className="text-[32px] leading-10 sm:text-[44px] sm:leading-[54px] font-semibold text-purple-900 dark:text-white tracking-tight leading-tight"
           >
             How SARAL works <br />
-            <span className="text-purple-600 dark:text-purple-300">
+            <span className="block mt-2 font-normal text-[26px] leading-8 sm:text-[30px] sm:leading-[38px] text-purple-600 dark:text-purple-300">
               From your question to an official reply
             </span>
           </motion.h1>
@@ -66,7 +66,7 @@ export default function HowItWorksPage() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed font-normal"
+            className="text-base sm:text-[17px] sm:leading-7 text-slate-600 dark:text-slate-300 font-normal"
           >
             नागरिक की आम बोलचाल से लेकर कानूनी रूप से प्रमाणित सरकारी जवाब तक — SARAL red tape, technical reject, aur legal jargons ko poori tarah khatam karta hai.
           </motion.p>
@@ -81,47 +81,47 @@ export default function HowItWorksPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-40px" }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm transition-colors"
+              className="rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 p-6 sm:p-8 lg:p-10 relative overflow-hidden shadow-sm transition-colors"
             >
 
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 {/* Left Description (5 Cols) */}
                 <div className="lg:col-span-5 flex flex-col gap-4">
                   <div className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-xl bg-purple-600 text-white font-extrabold text-sm flex items-center justify-center shadow-md">
+                    <span className="w-9 h-9 rounded-md bg-purple-600 text-white font-semibold text-base flex items-center justify-center">
                       {step.stepNumber}
                     </span>
-                    <span className="text-xs font-bold text-purple-600 dark:text-purple-300 tracking-wider">
+                    <span className="label-caps text-purple-600 dark:text-purple-300">
                       {step.tag}
                     </span>
                   </div>
 
-                  <h2 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
+                  <h2 className="text-2xl leading-8 font-semibold text-purple-900 dark:text-white mt-2">
                     {step.title}
                   </h2>
 
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                  <p className="text-[15px] leading-6 text-slate-600 dark:text-slate-300">
                     {step.description}
                   </p>
 
-                  <div className="inline-flex items-center gap-2 mt-1 px-3 py-1 rounded-lg bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-cyan-700 dark:text-cyan-300 text-xs font-semibold w-fit">
+                  <div className="label-caps inline-flex items-center gap-2 mt-2 px-3.5 py-1.5 rounded-md bg-[#ffdbcc] dark:bg-cyan-500/10 text-cyan-800 dark:text-cyan-300 w-fit">
                     <span><IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                     <span>{step.badge}</span>
                   </div>
                 </div>
 
                 {/* Right Visual Terminal / Mockup (7 Cols) */}
-                <div className="lg:col-span-7 rounded-2xl bg-slate-900 text-slate-100 dark:bg-[#121821] border border-slate-800 dark:border-purple-500/20 p-5 sm:p-6 shadow-xl flex flex-col gap-4 font-sans">
+                <div className="lg:col-span-7 rounded-xl bg-purple-900 text-slate-100 dark:bg-[#0f1a1f] border border-purple-900 dark:border-purple-500/20 p-5 sm:p-6 shadow-md flex flex-col gap-4 font-sans">
                   {/* Mockup Header */}
                   <div className="flex items-center justify-between pb-3 border-b border-white/10 text-xs">
                     <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-purple-400" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-purple-300" />
                       <span className="font-mono text-white text-xs font-semibold">
                         {step.mockup.header}
                       </span>
                     </div>
                     {step.mockup.detectedLanguage && (
-                      <span className="px-2 py-0.5 rounded-lg bg-purple-500/20 text-purple-300 text-xs font-bold">
+                      <span className="label-caps px-3 py-1 rounded-md bg-purple-600 text-purple-100">
                         {step.mockup.detectedLanguage}
                       </span>
                     )}
@@ -130,14 +130,14 @@ export default function HowItWorksPage() {
                   {/* Step-specific Terminal Content */}
                   {step.mockup.type === "input" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5">
-                        <span className="text-xs text-slate-400 font-bold block mb-1">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5">
+                        <span className="text-xs text-slate-300 font-bold block mb-1">
                           Raw Citizen Input (Voice or Typing):
                         </span>
                         <p className="text-purple-100">{step.mockup.citizenQuote}</p>
                       </div>
 
-                      <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-2">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-purple-200 text-xs">
                             {step.mockup.copilotLabel}
@@ -149,7 +149,7 @@ export default function HowItWorksPage() {
                         <ul className="space-y-1 text-xs text-slate-300">
                           {step.mockup.scopeNodes.map((node, i) => (
                             <li key={i} className="flex items-center gap-2">
-                              <span className="text-purple-400">▹</span>
+                              <span className="text-purple-300">▸</span>
                               <span>{node}</span>
                             </li>
                           ))}
@@ -160,7 +160,7 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "legal" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-2">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-2">
                         <div className="flex items-center justify-between">
                           <span className="font-bold text-cyan-300 text-xs">
                             Competent Authority:
@@ -170,7 +170,7 @@ export default function HowItWorksPage() {
                           </span>
                         </div>
                         <p className="font-medium text-white">{step.mockup.ministry}</p>
-                        <p className="text-xs text-slate-400">{step.mockup.exemptionsCheck}</p>
+                        <p className="text-xs text-slate-300">{step.mockup.exemptionsCheck}</p>
                       </div>
 
                       <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-500/30 space-y-1">
@@ -188,8 +188,8 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "officer" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
-                        <span className="text-xs text-slate-400 font-bold block">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-1">
+                        <span className="text-xs text-slate-300 font-bold block">
                           Assigned Public Information Officer:
                         </span>
                         <p className="font-bold text-white text-sm">{step.mockup.officer}</p>
@@ -209,7 +209,7 @@ export default function HowItWorksPage() {
 
                   {step.mockup.type === "delivery" && (
                     <div className="space-y-3 text-xs">
-                      <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
+                      <div className="p-4 rounded-lg bg-purple-600/70 border border-white/5 space-y-1">
                         <span className="text-emerald-400 font-bold block">
                           {step.mockup.turnaround}
                         </span>
@@ -230,7 +230,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* 30-Day Statutory Clock Lifecycle Section */}
-        <section className="rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
+        <section className="rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 p-6 sm:p-8 lg:p-10 shadow-sm dark:shadow-xl space-y-8">
           <div className="text-center max-w-2xl mx-auto space-y-2">
             <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
               Statutory Transparency Protection
@@ -265,7 +265,7 @@ export default function HowItWorksPage() {
                     {stage.desc}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-xs text-slate-400 font-mono">
+                <div className="pt-2 border-t border-slate-200 dark:border-white/5 text-xs text-slate-500 dark:text-slate-400 font-mono">
                   Stage {idx + 1} of 5
                 </div>
               </div>
@@ -274,7 +274,7 @@ export default function HowItWorksPage() {
         </section>
 
         {/* Bottom CTA Banner */}
-        <section className="rounded-3xl bg-purple-900 p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-2xl">
+        <section className="rounded-xl bg-purple-600 p-8 sm:p-12 text-center text-white space-y-6 relative overflow-hidden shadow-lg">
           
           <div className="max-w-2xl mx-auto space-y-3 relative z-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">

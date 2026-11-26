@@ -185,7 +185,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
       {activeSubTab === "users" && (
         <div className="space-y-6">
           {/* Quick Metrics Bar matching Screenshot 1 & 4 card styling */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -229,7 +229,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           </div>
 
           {/* Search, Filter & Table Container */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
               <form onSubmit={handleSearchSubmit} className="relative w-full sm:w-96">
                 <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -335,7 +335,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                               DigiLocker Verified
                             </span>
                           ) : (
-                            <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                            <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-400 border border-amber-500/30">
                               <AlertTriangle className="w-3.5 h-3.5" />
                               Unverified Citizen
                             </span>
@@ -424,7 +424,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
 
           {/* Verification Statistics */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-xs font-bold tracking-wider">Total Verified</span>
                 <CheckCircle2 className="w-5 h-5 text-emerald-500 dark:text-emerald-400" />
@@ -437,7 +437,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-xs font-bold tracking-wider">Pending Verification</span>
                 <Clock className="w-5 h-5 text-amber-500 dark:text-amber-400" />
@@ -450,7 +450,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
               </p>
             </div>
 
-            <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
+            <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-2xl space-y-2">
               <div className="flex items-center justify-between text-slate-500 dark:text-slate-400">
                 <span className="text-xs font-bold tracking-wider">Failed / Timed Out</span>
                 <XCircle className="w-5 h-5 text-rose-500 dark:text-rose-400" />
@@ -463,7 +463,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
           </div>
 
           {/* Verification Audit Stream */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="pb-3 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
               <div>
                 <h3 className="font-bold text-slate-900 dark:text-white text-base">
@@ -511,7 +511,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
                             <CheckCircle2 className="w-3.5 h-3.5" /> Verified & Validated
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 border border-amber-500/30">
+                          <span className="inline-flex items-center gap-2 px-3 py-0.5 rounded-lg text-xs font-semibold bg-amber-500/10 dark:bg-amber-500/15 text-amber-800 dark:text-amber-400 border border-amber-500/30">
                             <Clock className="w-3.5 h-3.5" /> Awaiting OTP
                           </span>
                         )}
@@ -541,7 +541,7 @@ export default function UserManagement({ initialSubTab = "users" }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div className="flex items-center gap-3">

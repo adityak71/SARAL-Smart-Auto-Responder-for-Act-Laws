@@ -18,10 +18,10 @@ export default function AuthInput({
     <motion.div
       whileHover={{ scale: 1.012, y: -1 }}
       transition={{ duration: 0.18, ease: "easeOut" }}
-      className="relative flex items-center rounded-xl border border-slate-200/90 dark:border-white/15 bg-slate-50/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] hover:border-purple-400/90 dark:hover:border-purple-400/60 focus-within:bg-white dark:focus-within:bg-white/[0.1] focus-within:border-[#2c5877] dark:focus-within:border-purple-400 focus-within:ring-3 focus-within:ring-[#2c5877]/15 dark:focus-within:ring-purple-500/25 transition-colors duration-200 group"
+      className="relative flex items-center rounded-xl border border-slate-200/90 dark:border-white/15 bg-slate-50/80 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.1] hover:border-purple-400/90 dark:hover:border-purple-400/60 focus-within:bg-white dark:focus-within:bg-white/[0.1] focus-within:border-[#1e3a42] dark:focus-within:border-purple-400 focus-within:ring-3 focus-within:ring-[#1e3a42]/15 dark:focus-within:ring-purple-500/25 transition-colors duration-200 group"
     >
       {icon && (
-        <div className="pl-4 pr-3 flex items-center pointer-events-none text-slate-400 dark:text-purple-300/70 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-focus-within:text-[#2c5877] dark:group-focus-within:text-purple-300 transition-colors duration-150">
+        <div className="pl-4 pr-3 flex items-center pointer-events-none text-slate-400 dark:text-purple-300/70 group-hover:text-purple-600 dark:group-hover:text-purple-300 group-focus-within:text-[#1e3a42] dark:group-focus-within:text-purple-300 transition-colors duration-150">
           {icon}
         </div>
       )}

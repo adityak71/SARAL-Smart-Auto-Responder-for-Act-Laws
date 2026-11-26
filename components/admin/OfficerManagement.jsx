@@ -327,7 +327,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
       {activeView === "directory" ? (
         <>
           {/* Officer Management Top Card with Dual-Theme */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6 transition-colors">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6 transition-colors">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight">
@@ -405,7 +405,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           )}
 
           {/* Officers Table Container with Dual-Theme */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4 transition-colors">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4 transition-colors">
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-white/10">
               <div className="relative flex-1 max-w-sm">
                 <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
@@ -568,7 +568,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
       ) : (
         /* ROLE HIERARCHY & PERMISSIONS MATRIX */
         <div className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <h3 className="text-lg font-bold">1. Updated Role Hierarchy</h3>
             <div className="flex flex-col items-center max-w-xl mx-auto space-y-4">
               <div className="w-full max-w-md p-5 rounded-2xl bg-slate-50 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-center space-y-1">
@@ -603,7 +603,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           </div>
 
           {/* Admin Permissions Table */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-lg font-bold">Admin ke Officer Management Permissions</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-left text-xs min-w-[500px]">
@@ -639,7 +639,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
           </div>
 
           {/* Officer Powers Table */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-lg font-bold">Officer ke Powers &amp; Boundaries</h3>
             <p className="text-xs text-slate-500 dark:text-slate-400">
               Officer ko sirf uske assigned department aur responsibilities ke according access milega.
@@ -695,7 +695,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/15 p-6 sm:p-8 shadow-2xl space-y-6 text-slate-900 dark:text-white transition-colors"
+              className="w-full max-w-2xl max-h-[92vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/15 p-6 sm:p-8 shadow-2xl space-y-6 text-slate-900 dark:text-white transition-colors"
             >
               {createdOfficerSuccess ? (
                 /* SUCCESS CREDENTIALS SLIP FOR ADMIN */
@@ -931,7 +931,7 @@ export default function OfficerManagement({ onNavigateToCreate, openCreateDirect
                         <select
                           value={createForm.departmentId}
                           onChange={(e) => handleDepartmentChange(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
+                          className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white focus:outline-none focus:border-purple-500"
                         >
                           {departments.map((dept) => (
                             <option key={dept.id} value={dept.id} className="bg-white dark:bg-slate-900 text-slate-900 dark:text-white">

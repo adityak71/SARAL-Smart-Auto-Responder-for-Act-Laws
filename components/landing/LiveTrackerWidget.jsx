@@ -29,7 +29,7 @@ export default function LiveTrackerWidget() {
   };
 
   return (
-    <section className="w-full py-12 lg:py-16 bg-[#1a2330]/70 border-y border-white/5 relative">
+    <section className="w-full py-12 lg:py-16 bg-[#16262d]/70 border-y border-white/5 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
           {/* Left Text & Search Input */}
@@ -65,7 +65,7 @@ export default function LiveTrackerWidget() {
 
               <button
                 type="submit"
-                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer"
+                className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer"
               >
                 Inspect Status
               </button>
@@ -100,7 +100,7 @@ export default function LiveTrackerWidget() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.25 }}
-                className="p-5 sm:p-6 rounded-2xl bg-[#1d2733] border border-purple-500/25 shadow-xl flex flex-col gap-4 text-slate-100"
+                className="p-5 sm:p-6 rounded-2xl bg-[#1c2e36] border border-purple-500/25 shadow-xl flex flex-col gap-4 text-slate-100"
               >
                 {/* Header */}
                 <div className="flex items-start justify-between gap-3">
@@ -170,7 +170,7 @@ export default function LiveTrackerWidget() {
                   </span>
                   <Link
                     href={`/tracking?id=${selectedApp.id}`}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold shadow-md transition"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold shadow-md transition"
                   >
                     <span>Open Full Tracking Dossier</span>
                     <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

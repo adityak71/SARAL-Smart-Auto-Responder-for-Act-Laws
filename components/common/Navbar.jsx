@@ -46,30 +46,30 @@ export default function Navbar() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 dark:bg-[#121821]/90 border-b border-slate-200/80 dark:border-white/10 transition-colors">
+    <header className="sticky top-0 z-50 w-full bg-slate-50/95 dark:bg-[#0f1a1f]/95 shadow-[0_1px_8px_rgba(0,0,0,0.04)] border-b border-slate-300/30 dark:border-white/10 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4">
         {/* Brand Identity / Emblem */}
         <Link href="/" className="flex items-center gap-3 group shrink-0">
           <motion.div
             whileHover={{ scale: 1.05, rotate: [0, -3, 3, 0] }}
             transition={{ duration: 0.3 }}
-            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-purple-600 p-0.5"
+            className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-sm bg-purple-900 dark:bg-white/10 shadow-sm"
           >
-            <div className="w-full h-full bg-[#1a2330] rounded-[10px] flex items-center justify-center">
+            <div className="w-full h-full flex items-center justify-center">
               <Emblem className="w-6 h-7 text-white" />
             </div>
           </motion.div>
 
           <div className="flex flex-col text-left">
             <div className="flex items-center gap-2">
-              <span className="font-extrabold text-lg sm:text-xl text-slate-900 dark:text-white tracking-tight">
+              <span className="font-display font-semibold text-xl text-purple-900 dark:text-white tracking-tight">
                 SARAL
               </span>
-              <span className="px-2 py-0.5 rounded text-xs font-bold bg-purple-500/15 text-purple-700 dark:bg-purple-500/20 dark:text-purple-300 border border-purple-500/30 hidden xs:inline-block">
+              <span className="label-caps px-1 py-0.5 rounded-sm bg-[#dfeaf2] text-purple-900 dark:bg-white/10 dark:text-purple-200 border border-slate-300/40 hidden xs:inline-block">
                 RTI AI
               </span>
             </div>
-            <span className="text-xs sm:text-xs font-medium text-slate-500 dark:text-slate-400 tracking-wide hidden sm:block">
+            <span className="text-[13px] leading-none font-medium text-slate-600 dark:text-slate-400 hidden sm:block">
               Simplifying Right to Information
             </span>
           </div>
@@ -77,7 +77,7 @@ export default function Navbar() {
 
         {/* Center Navigation Links (Desktop) */}
         <nav
-          className="hidden md:flex items-center gap-1 p-1 rounded-full bg-slate-100/90 dark:bg-white/5 border border-slate-200/80 dark:border-white/10 shadow-inner"
+          className="hidden md:flex items-center gap-1"
           aria-label="Main Navigation"
         >
           {navigationLinks.map((link) => {
@@ -93,10 +93,10 @@ export default function Navbar() {
                 key={link.id}
                 href={link.href}
                 onClick={(e) => handleLinkClick(e, link)}
-                className={`relative px-3 py-2 rounded-lg whitespace-nowrap text-xs sm:text-[13px] font-semibold transition-colors duration-200 cursor-pointer ${
+                className={`relative px-2.5 lg:px-3 py-1.5 rounded-sm whitespace-nowrap text-[13px] lg:text-sm transition-colors duration-200 cursor-pointer ${
                   isActive
-                    ? "text-white bg-purple-600 "
-                    : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/60 dark:hover:bg-white/10"
+                    ? "font-semibold text-purple-900 bg-slate-100 dark:text-white dark:bg-white/10"
+                    : "font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-[#eaf5fd] dark:hover:bg-white/10"
                 }`}
               >
                 {link.label}
@@ -119,14 +119,14 @@ export default function Navbar() {
               type="button"
               whileTap={{ scale: 0.95 }}
               onClick={handleLogout}
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-rose-600 dark:text-rose-300 hover:text-white hover:bg-rose-600 bg-rose-50 dark:bg-rose-500/10 border border-rose-200 dark:border-rose-500/30 shadow-sm transition-colors duration-200 cursor-pointer"
+              className="hidden sm:inline-flex items-center justify-center px-3 py-1.5 rounded-sm text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors duration-200 cursor-pointer"
             >
               Logout
             </motion.button>
           ) : (
             <Link
               href="/login"
-              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-800 dark:text-white bg-slate-100 hover:bg-slate-200/80 dark:bg-white/10 dark:hover:bg-white/15 border border-slate-300/80 dark:border-white/15 hover:border-purple-400/50 shadow-sm transition-colors duration-200 cursor-pointer"
+              className="hidden sm:inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold text-white bg-purple-900 hover:bg-purple-700 dark:bg-white dark:text-purple-900 shadow-sm transition-colors duration-200 cursor-pointer"
             >
               Login
             </Link>
@@ -140,7 +140,7 @@ export default function Navbar() {
             type="button"
             whileTap={{ scale: 0.9 }}
             onClick={() => dispatch(toggleMobileMenu())}
-            className="md:hidden w-9 h-9 rounded-xl flex items-center justify-center bg-slate-100 dark:bg-white/10 border border-slate-200 dark:border-white/15 text-slate-700 dark:text-slate-200 cursor-pointer"
+            className="md:hidden w-9 h-9 rounded-sm flex items-center justify-center bg-slate-100 dark:bg-white/10 border border-slate-300/40 dark:border-white/15 text-slate-700 dark:text-slate-200 cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {isMobileMenuOpen ? (
@@ -164,7 +164,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="md:hidden border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#1a2330] px-4 py-4 space-y-2 overflow-hidden shadow-lg"
+            className="md:hidden border-t border-slate-200 dark:border-white/10 bg-white dark:bg-[#16262d] px-4 py-4 space-y-2 overflow-hidden shadow-lg"
           >
             <div className="flex flex-col space-y-1">
               {navigationLinks.map((link) => (

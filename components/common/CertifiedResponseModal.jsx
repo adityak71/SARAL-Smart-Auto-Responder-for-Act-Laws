@@ -25,7 +25,7 @@ export default function CertifiedResponseModal({ isOpen, onClose, application, o
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="bg-white dark:bg-[#1a2330] border border-slate-300 dark:border-purple-500/40 rounded-3xl max-w-3xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none"
+        className="bg-white dark:bg-[#16262d] border border-slate-300 dark:border-purple-500/40 rounded-3xl max-w-3xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none"
       >
         {/* Top Control Bar (Hidden in Print) */}
         <div className="p-4 bg-slate-100 dark:bg-purple-950/50 border-b border-slate-200 dark:border-white/10 flex items-center justify-between print:hidden">
@@ -40,7 +40,7 @@ export default function CertifiedResponseModal({ isOpen, onClose, application, o
             <button
               type="button"
               onClick={() => downloadCertifiedResponse(application, responseText)}
-              className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
+              className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
             >
               <span>Download Certified PDF</span>
             </button>
@@ -62,7 +62,7 @@ export default function CertifiedResponseModal({ isOpen, onClose, application, o
         </div>
 
         {/* Official Sovereign Document Sheet */}
-        <div className="p-6 sm:p-10 space-y-6 bg-white dark:bg-[#1a2330] relative">
+        <div className="p-6 sm:p-10 space-y-6 bg-white dark:bg-[#16262d] relative">
           {/* Watermark */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] dark:opacity-[0.05]">
             <span className="text-8xl sm:text-9xl font-extrabold tracking-widest text-slate-900 dark:text-white">

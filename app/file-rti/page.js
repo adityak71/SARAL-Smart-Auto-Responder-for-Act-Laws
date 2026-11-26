@@ -710,7 +710,7 @@ export default function FileRtiPage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-8">
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5">
@@ -740,7 +740,7 @@ export default function FileRtiPage() {
                 <span>DigiLocker Verified Citizen</span>
               </span>
             ) : (
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30 text-xs font-bold">
                 <span className="w-2 h-2 rounded-full bg-amber-500" />
                 <span>Verification Pending</span>
               </span>
@@ -755,7 +755,7 @@ export default function FileRtiPage() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            className="rounded-3xl bg-white dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden"
+            className="rounded-3xl bg-white dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-10 shadow-2xl relative overflow-hidden"
           >
 
             <div className="max-w-2xl mx-auto text-center space-y-6 pt-2">
@@ -764,7 +764,7 @@ export default function FileRtiPage() {
               </div>
 
               <div className="space-y-2">
-                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-extrabold tracking-wider bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                <span className="inline-flex items-center gap-2 px-3 py-1 rounded-lg text-xs font-extrabold tracking-wider bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30">
                   <span className="w-2 h-2 rounded-full bg-amber-500" />
                   Section 6(1) Citizen Mandate
                 </span>
@@ -834,7 +834,7 @@ export default function FileRtiPage() {
         {/* PROGRESS STEPPER (Steps 1 to 5)                           */}
         {/* ========================================================= */}
         {currentStep <= 5 && (
-          <div className="rounded-2xl bg-white dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-4 sm:p-6 shadow-md">
+          <div className="rounded-2xl bg-white dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-4 sm:p-6 shadow-md">
             <div className="grid grid-cols-5 gap-2 sm:gap-4">
               {stepsConfig.map((s) => {
                 const isActive = currentStep === s.num;
@@ -911,7 +911,7 @@ export default function FileRtiPage() {
         {/* ========================================================= */}
         {/* STEPPER CONTENT CARDS                                     */}
         {/* ========================================================= */}
-        <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+        <div className="rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
           {/* ------------------------------------------------------- */}
           {/* STEP 1: JURISDICTION & TARGET PUBLIC AUTHORITY          */}
           {/* ------------------------------------------------------- */}
@@ -976,7 +976,7 @@ export default function FileRtiPage() {
                         onChange={(e) =>
                           setFormData((prev) => ({ ...prev, selectedState: e.target.value }))
                         }
-                        className="py-1 px-3 rounded-lg bg-white dark:bg-[#1d2733] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
+                        className="py-1 px-3 rounded-lg bg-white dark:bg-[#1c2e36] border border-purple-300 dark:border-white/20 text-slate-900 dark:text-white text-xs font-bold focus:outline-none focus:ring-2 focus:ring-purple-500/30 cursor-pointer shadow-xs"
                       >
                         <option value="">Select State</option>
                         {INDIAN_STATES.map((st) => (
@@ -1036,7 +1036,7 @@ export default function FileRtiPage() {
                     type="button"
                     onClick={() => handleAutoRoute()}
                     disabled={isRoutingAi}
-                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 shrink-0 cursor-pointer"
+                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition disabled:opacity-50 shrink-0 cursor-pointer"
                   >
                     {isRoutingAi ? "Routing..." : "Auto-Detect →"}
                   </button>
@@ -1346,7 +1346,7 @@ export default function FileRtiPage() {
                         type="button"
                         onClick={() => handleAiAnalyze()}
                         disabled={isAnalyzingWithAi}
-                        className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
+                        className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs shadow-md transition disabled:opacity-50 flex items-center gap-2 cursor-pointer"
                       >
                         {isAnalyzingWithAi ? (
                           <>
@@ -1989,7 +1989,7 @@ export default function FileRtiPage() {
 
               {/* Reference ID Pill */}
               <div className="p-4 max-w-md mx-auto rounded-2xl bg-purple-50 dark:bg-purple-950/30 border border-purple-500/30 text-center space-y-1">
-                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+                <span className="label-caps text-slate-500 dark:text-slate-400 block">
                   Sovereign Application Number
                 </span>
                 <span className="font-mono text-xl sm:text-2xl font-black text-purple-600 dark:text-purple-400">
@@ -2012,7 +2012,7 @@ export default function FileRtiPage() {
                 <button
                   type="button"
                   onClick={() => setIsPreviewModalOpen(true)}
-                  className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
+                  className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs sm:text-sm shadow-md transition cursor-pointer flex items-center gap-2"
                 >
                   <span>View &amp; Download Statutory Receipt</span>
                 </button>
@@ -2063,7 +2063,7 @@ export default function FileRtiPage() {
                   type="button"
                   disabled={submitting}
                   onClick={handleSubmit}
-                  className="px-7 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs sm:text-sm font-bold shadow-lg transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
+                  className="px-7 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs sm:text-sm font-bold shadow-lg transition cursor-pointer disabled:opacity-50 flex items-center gap-2"
                 >
                   <span>{submitting ? "Encapsulating & Dispatching..." : "File Petition & Settle Fee"}</span>
                   <span><IcSend className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>

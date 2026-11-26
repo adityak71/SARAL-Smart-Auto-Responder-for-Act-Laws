@@ -250,7 +250,7 @@ export default function ProfilePage() {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-12 space-y-6">
         {/* Top Header & Breadcrumb */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-200 dark:border-white/10 pb-5">
@@ -278,7 +278,7 @@ export default function ProfilePage() {
             <span
               className={`px-3 py-1 rounded-lg text-xs font-bold border ${
                 activeRole === "ADMIN"
-                  ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
+                  ? "bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30"
                   : activeRole === "OFFICER"
                   ? "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30"
                   : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
@@ -295,7 +295,7 @@ export default function ProfilePage() {
           {/* LEFT COLUMN: Profile Picture & Details Display Card (4 Cols) */}
           {/* ========================================================= */}
           <div className="lg:col-span-4 space-y-6">
-            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 shadow-xl text-center relative overflow-hidden">
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 shadow-xl text-center relative overflow-hidden">
 
               {/* Avatar with Change Photo Trigger */}
               <div className="relative mx-auto w-24 h-24 sm:w-28 sm:h-28 mt-2 group">
@@ -318,7 +318,7 @@ export default function ProfilePage() {
                   <span>Change</span>
                 </button>
 
-                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#1d2733] flex items-center justify-center text-xs text-white font-bold">
+                <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#1c2e36] flex items-center justify-center text-xs text-white font-bold">
                   ✓
                 </span>
               </div>
@@ -336,12 +336,12 @@ export default function ProfilePage() {
                   <span
                     className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg text-xs font-bold border ${
                       activeRole === "ADMIN"
-                        ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
+                        ? "bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30"
                         : activeRole === "OFFICER"
                         ? "bg-purple-500/15 text-purple-700 dark:text-purple-300 border-purple-500/30"
                         : user?.isDigiLockerVerified
                         ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
-                        : "bg-amber-500/15 text-amber-700 dark:text-amber-300 border-amber-500/30"
+                        : "bg-amber-500/15 text-amber-800 dark:text-amber-300 border-amber-500/30"
                     }`}
                   >
                     <span>{activeRole === "ADMIN" ? <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : activeRole === "OFFICER" ? <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : user?.isDigiLockerVerified ? <IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> : <IcHourglass className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />}</span>
@@ -456,7 +456,7 @@ export default function ProfilePage() {
             {/* ------------------------------------------------------- */}
             {/* CARD 1: Update Details Section                         */}
             {/* ------------------------------------------------------- */}
-            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-purple-600/15 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-lg">
@@ -648,7 +648,7 @@ export default function ProfilePage() {
             {/* ------------------------------------------------------- */}
             {/* CARD 2: Change Password Section                        */}
             {/* ------------------------------------------------------- */}
-            <div className="rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
+            <div className="rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl">
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-5">
                 <div className="flex items-center gap-3">
                   <div className="w-9 h-9 rounded-xl bg-indigo-600/15 text-indigo-600 dark:text-indigo-300 flex items-center justify-center font-bold text-lg">
@@ -813,7 +813,7 @@ export default function ProfilePage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1d2733] border border-slate-200 dark:border-white/10 p-6 shadow-2xl text-slate-800 dark:text-slate-100"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1c2e36] border border-slate-200 dark:border-white/10 p-6 shadow-2xl text-slate-800 dark:text-slate-100"
             >
               <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-4">
                 <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
@@ -868,7 +868,7 @@ export default function ProfilePage() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1d2733] border-2 border-rose-500/50 p-6 shadow-2xl text-slate-800 dark:text-slate-100 space-y-4"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1c2e36] border-2 border-rose-500/50 p-6 shadow-2xl text-slate-800 dark:text-slate-100 space-y-4"
             >
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-2xl bg-rose-500/20 text-rose-600 dark:text-rose-400 flex items-center justify-center text-xl font-bold">

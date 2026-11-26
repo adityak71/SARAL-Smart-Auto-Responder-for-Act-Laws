@@ -85,7 +85,7 @@ export default function DocumentPreviewModal({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 10 }}
           transition={{ duration: 0.2 }}
-          className="bg-white dark:bg-[#1a2330] border border-slate-300 dark:border-purple-500/30 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none flex flex-col max-h-[92vh]"
+          className="bg-white dark:bg-[#16262d] border border-slate-300 dark:border-purple-500/30 rounded-3xl max-w-4xl w-full shadow-2xl overflow-hidden my-auto text-slate-800 dark:text-slate-100 print:m-0 print:border-none print:shadow-none flex flex-col max-h-[92vh]"
         >
           {/* Top Control Bar (Floating Modal Header) */}
           <div className="p-4 bg-slate-100 dark:bg-purple-950/60 border-b border-slate-200 dark:border-white/10 flex items-center justify-between gap-3 shrink-0 print:hidden">
@@ -109,7 +109,7 @@ export default function DocumentPreviewModal({
               <button
                 type="button"
                 onClick={handleDownload}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-bold shadow-md transition flex items-center gap-2 cursor-pointer"
               >
                 <span><IcDownload className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Download PDF</span>
@@ -134,7 +134,7 @@ export default function DocumentPreviewModal({
           </div>
 
           {/* Document Preview Sheet (Clean, Simple, Perfectly Aligned) */}
-          <div className="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-100 dark:bg-[#121821]">
+          <div className="p-4 sm:p-8 overflow-y-auto flex-1 bg-slate-100 dark:bg-[#0f1a1f]">
             <div className="max-w-2xl mx-auto bg-white text-slate-900 rounded-2xl shadow-xl border border-slate-300 p-6 sm:p-10 space-y-6 font-sans">
               
               {/* Sovereign Letterhead */}

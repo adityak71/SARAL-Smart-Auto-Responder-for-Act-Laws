@@ -79,7 +79,7 @@ export default function AboutSection() {
         </div>
 
         {/* Traditional RTI vs SARAL Comparison Table */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-[#1a2330] border border-purple-500/20 shadow-xl overflow-x-auto">
+        <div className="p-6 sm:p-8 rounded-3xl bg-[#16262d] border border-purple-500/20 shadow-xl overflow-x-auto">
           <h3 className="text-lg font-bold text-white mb-4">
             Traditional RTI vs. SARAL AI Portal
           </h3>

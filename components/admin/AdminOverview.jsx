@@ -30,7 +30,7 @@ export default function AdminOverview({ stats, isLoading }) {
   return (
     <div className="space-y-6 w-full animate-fadeIn">
       {/* 1. Main Admin Overview Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -151,7 +151,7 @@ export default function AdminOverview({ stats, isLoading }) {
       </div>
 
       {/* 2. Monthly RTI Applications Bar Chart */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+      <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900 dark:text-white">

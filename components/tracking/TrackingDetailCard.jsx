@@ -21,14 +21,14 @@ export default function TrackingDetailCard({ application }) {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       {/* Header Info */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
           <span className="text-xs font-mono text-purple-700 dark:text-purple-300 font-bold block">
             {application.id}
           </span>
-          <h2 className="text-xl font-extrabold text-slate-900 dark:text-white tracking-tight mt-0.5">
+          <h2 className="font-display text-2xl leading-8 font-semibold text-purple-900 dark:text-white mt-0.5">
             {application.title}
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
@@ -61,7 +61,7 @@ export default function TrackingDetailCard({ application }) {
                 ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/30"
                 : application.status === "appeal_open"
                 ? "bg-rose-500/15 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 border border-rose-500/30"
-                : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30"
+                : "bg-amber-500/15 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border border-amber-500/30"
             }`}
           >
             {application.statusLabel}
@@ -70,17 +70,17 @@ export default function TrackingDetailCard({ application }) {
       </div>
 
       {/* Citizen Raw Speech / Inquiry */}
-      <div className="p-4 rounded-2xl bg-slate-50 dark:bg-white/[0.04] border border-slate-200 dark:border-white/5 space-y-2 text-xs">
+      <div className="p-4 rounded-xl bg-[#eaf5fd] dark:bg-white/[0.04] border border-slate-300/40 dark:border-white/5 space-y-2 text-[13px]">
         <span className="text-xs text-slate-500 dark:text-slate-400 font-bold tracking-wider block">
           Original Citizen Inquiry (Vernacular Input):
         </span>
-        <blockquote className="text-slate-700 dark:text-slate-200 leading-relaxed">
+        <blockquote className="font-display italic text-[15px] text-slate-700 dark:text-slate-200 leading-relaxed">
           &ldquo;{application.rawPrompt}&rdquo;
         </blockquote>
       </div>
 
       {/* Structured Section 6(1) Statutory Clauses */}
-      <div className="p-4 rounded-2xl bg-purple-50/80 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-500/20 space-y-3 text-xs">
+      <div className="p-4 rounded-xl bg-white dark:bg-white/[0.03] border border-slate-300/40 dark:border-white/10 space-y-3 text-[13px]">
         <div className="flex items-center justify-between border-b border-purple-200 dark:border-purple-500/20 pb-2">
           <span className="font-bold text-purple-900 dark:text-purple-200 text-xs">
             Formulated Legal Clauses under Section 6(1) of RTI Act, 2005:

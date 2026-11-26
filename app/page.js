@@ -7,7 +7,7 @@ import CivicFooter from "@/components/common/CivicFooter";
 
 export default function HomePage() {
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased selection:bg-purple-600 selection:text-white transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased selection:bg-purple-600 selection:text-white transition-colors">
       <main className="flex-1 w-full">
         {/* 1. What is SARAL? Clean, Inspiring Hero with AI Artwork */}
         <HeroIntroSection />

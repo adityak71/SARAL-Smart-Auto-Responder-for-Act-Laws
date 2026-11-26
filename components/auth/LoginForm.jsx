@@ -224,7 +224,7 @@ export default function LoginForm() {
           initial={{ opacity: 0, scale: 0.98, y: 12 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white dark:bg-[#1a2330]/95 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
+          className="w-full bg-white dark:bg-[#16262d]/95 rounded-3xl p-6 sm:p-8 border border-slate-200/90 dark:border-white/15 text-slate-800 dark:text-slate-100 transition-colors"
           data-purpose="login-form-card"
         >
           {/* Heading */}
@@ -233,7 +233,7 @@ export default function LoginForm() {
               {loginContent.form.title}{" "}
               <span
                 style={{ fontFamily: "var(--font-serif)" }}
-                className="font-normal text-[#2c5877] dark:text-[#8eaec5] tracking-normal text-[29px] sm:text-[33px]"
+                className="font-normal text-[#1e3a42] dark:text-[#87a4ad] tracking-normal text-[29px] sm:text-[33px]"
               >
                 {loginContent.form.titleItalic}
               </span>
@@ -351,7 +351,7 @@ export default function LoginForm() {
             <div className="flex justify-end pt-0.5">
               <a
                 href="#"
-                className="text-xs sm:text-[13px] font-semibold text-[#2c5877] dark:text-purple-300 hover:text-[#2c5877] dark:hover:text-purple-200 hover:underline transition py-0.5"
+                className="text-xs sm:text-[13px] font-semibold text-[#1e3a42] dark:text-purple-300 hover:text-[#1e3a42] dark:hover:text-purple-200 hover:underline transition py-0.5"
               >
                 {loginContent.form.forgotPasswordText}
               </a>
@@ -383,7 +383,7 @@ export default function LoginForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white dark:bg-[#1a2330] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#16262d] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               {loginContent.form.dividerText}
             </span>
           </div>
@@ -428,7 +428,7 @@ export default function LoginForm() {
           <div className="mt-4 sm:mt-5 text-center">
             <p className="text-xs sm:text-[13px] text-slate-500 dark:text-slate-400 font-medium">
               {loginContent.form.noAccountText}{" "}
-              <Link href="/signup" className="text-[#2c5877] dark:text-purple-300 font-semibold hover:underline ml-0.5">
+              <Link href="/signup" className="text-[#1e3a42] dark:text-purple-300 font-semibold hover:underline ml-0.5">
                 {loginContent.form.signupLinkText}
               </Link>
             </p>

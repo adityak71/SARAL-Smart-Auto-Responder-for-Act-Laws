@@ -3,7 +3,7 @@
 import Link from "next/link";
 import CitizenOverview from "@/components/dashboard/CitizenOverview";
 import ApplicationListTable from "@/components/dashboard/ApplicationListTable";
-import { Scale as IcScale } from "lucide-react";
+import { Gavel as IcGavel, Landmark as IcLandmark, Plus as IcPlus, SearchCheck as IcSearchCheck, ChevronRight as IcChevronRight } from "lucide-react";
 
 export default function CitizenDashboard({ user }) {
   const citizenName =
@@ -19,40 +19,42 @@ export default function CitizenDashboard({ user }) {
   return (
     <div className="space-y-8 animate-fadeIn">
       {/* Top Banner & Quick Actions */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-purple-700 dark:bg-purple-950/70 border border-purple-400/40 dark:border-purple-500/30 shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden transition-colors">
-
-        <div className="space-y-2 z-10">
+      <div className="p-8 sm:p-10 lg:p-12 rounded-xl bg-purple-600 dark:bg-[#16262d] shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-8 relative overflow-hidden transition-colors">
+        <IcLandmark className="hidden sm:block absolute -right-8 -bottom-12 w-72 h-72 text-white/[0.06] pointer-events-none" strokeWidth={1} aria-hidden="true" />
+        <div className="space-y-4 z-10">
           {user?.isDigiLockerVerified ? (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 text-xs font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-900/60 text-slate-100 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#c9eadd]" />
               DigiLocker Verified Citizen • Section 6(1) Authorized
             </div>
           ) : (
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold tracking-wide">
-              <span className="w-1.5 h-1.5 rounded-full bg-amber-400" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-900/60 text-cyan-200 text-xs font-semibold">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-300" />
               Citizen Account • Verification Pending
             </div>
           )}
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-            My RTI applications
+          <h2 className="text-[32px] leading-10 sm:text-[44px] sm:leading-[54px] font-semibold text-white tracking-[-0.02em]">
+            Namaste, {citizenName}
           </h2>
-          <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-            Signed in as {citizenName}. Draft a new application, check each 30-day deadline and download certified replies.
+          <p className="text-[15px] leading-6 sm:text-[17px] sm:leading-7 text-purple-300 max-w-2xl">
+            Welcome to your unified Right to Information dashboard. Draft new petitions, monitor statutory 30-day response clocks, and download official certified government memorandums.
           </p>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 shrink-0 z-10">
           <Link
             href="/file-rti"
-            className="px-5 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-lg transition-colors transform cursor-pointer flex items-center gap-2"
+            className="px-5 py-3 rounded-lg bg-white hover:bg-slate-100 text-purple-900 font-semibold text-sm sm:text-base shadow-sm transition-colors cursor-pointer flex items-center gap-2"
           >
-            <span>+ File New RTI Petition</span>
+            <IcPlus className="w-4 h-4" strokeWidth={2} aria-hidden="true" />
+            <span>File New RTI Petition</span>
           </Link>
           <Link
             href="/tracking?id=SARAL-2026-00124"
-            className="px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-slate-200 border border-white/15 font-semibold text-xs sm:text-sm transition cursor-pointer"
+            className="px-5 py-3 rounded-lg bg-white/15 hover:bg-white/20 text-white font-semibold text-sm sm:text-base transition-colors cursor-pointer flex items-center gap-2"
           >
-            Track Active Dossier
+            <IcSearchCheck className="w-4 h-4" strokeWidth={1.75} aria-hidden="true" />
+            <span>Track Active Dossier</span>
           </Link>
         </div>
       </div>
@@ -64,16 +66,16 @@ export default function CitizenDashboard({ user }) {
       <ApplicationListTable />
 
       {/* Section 19(1) First Appeal Advisory Notice */}
-      <div className="p-5 sm:p-6 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-slate-800 dark:text-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+      <div className="p-5 sm:p-6 rounded-xl bg-slate-100 dark:bg-white/5 border border-slate-300/40 dark:border-white/10 text-slate-800 dark:text-slate-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-start gap-3">
-          <div className="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold text-lg shrink-0">
-            <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
+          <div className="w-10 h-10 rounded-sm bg-slate-200 dark:bg-white/10 text-purple-900 dark:text-purple-200 flex items-center justify-center shrink-0">
+            <IcGavel className="w-5 h-5" strokeWidth={1.75} aria-hidden="true" />
           </div>
           <div>
-            <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+            <h4 className="text-base font-semibold text-slate-900 dark:text-white">
               Statutory 30-Day Response Protection (Section 19)
             </h4>
-            <p className="text-xs text-slate-600 dark:text-slate-300 mt-0.5 max-w-2xl">
+            <p className="text-[13px] leading-5 text-slate-600 dark:text-slate-300 mt-0.5 max-w-2xl">
               If a designated Public Information Officer fails to provide certified records within the 30-day statutory window, you have the right to file a First Appeal to the Appellate Authority at zero additional charge.
             </p>
           </div>
@@ -82,13 +84,13 @@ export default function CitizenDashboard({ user }) {
         <div className="flex items-center gap-2 shrink-0">
           <Link
             href="/appeal"
-            className="px-4 py-2 rounded-xl text-xs font-bold text-white bg-rose-600 hover:bg-rose-500 shadow-sm transition"
+            className="px-4 py-2.5 rounded-lg text-sm font-semibold text-white bg-cyan-700 hover:bg-cyan-800 shadow-sm transition-colors inline-flex items-center gap-1"
           >
-            File First Appeal →
+            File First Appeal <IcChevronRight className="w-4 h-4" strokeWidth={2} aria-hidden="true" />
           </Link>
           <Link
             href="/tracking?id=SARAL-2026-00124"
-            className="px-4 py-2 rounded-xl text-xs font-semibold text-amber-700 dark:text-amber-300 bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 transition"
+            className="px-4 py-2.5 rounded-lg text-sm font-semibold text-purple-900 dark:text-purple-100 bg-white dark:bg-white/10 hover:bg-slate-50 border border-slate-300/60 dark:border-white/15 shadow-sm transition-colors"
           >
             Check Deadlines
           </Link>

@@ -79,7 +79,7 @@ export default function OfficerProfileView({ user, isEditing }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1d2733]/70 shadow-sm ${stat.bg}`}
+            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1c2e36]/70 shadow-sm ${stat.bg}`}
           >
             <div className="flex items-center justify-between">
               <span className="text-xl sm:text-2xl">{stat.icon}</span>
@@ -95,7 +95,7 @@ export default function OfficerProfileView({ user, isEditing }) {
         {/* Left 7 Cols: Official Gazetted Dossier */}
         <div className="lg:col-span-7 space-y-6">
           {/* Card 1: Official Cadre & Public Authority */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
@@ -157,7 +157,7 @@ export default function OfficerProfileView({ user, isEditing }) {
           </div>
 
           {/* Card 2: Jurisdiction & Section 19(1) Appellate Hierarchy */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-cyan-600/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-sm">
@@ -202,7 +202,7 @@ export default function OfficerProfileView({ user, isEditing }) {
         {/* Right 5 Cols: DSC Security & Quick Workbench */}
         <div className="lg:col-span-5 space-y-6">
           {/* Card 3: Digital Signature Certificate (DSC) Token */}
-          <div className="rounded-3xl bg-indigo-500/10 dark:bg-indigo-950/30 dark:via-[#1d2733]/80 border border-indigo-500/30 p-6 shadow-sm">
+          <div className="rounded-3xl bg-indigo-500/10 dark:bg-indigo-950/30 dark:via-[#1c2e36]/80 border border-indigo-500/30 p-6 shadow-sm">
             <div className="flex items-center justify-between pb-4 border-b border-indigo-500/20 mb-4">
               <div className="flex items-center gap-2">
                 <span className="text-xl"><IcLockKeyhole className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
@@ -248,7 +248,7 @@ export default function OfficerProfileView({ user, isEditing }) {
           </div>
 
           {/* Card 4: Quick Officer Actions */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <h3 className="text-sm font-extrabold text-slate-900 dark:text-white mb-3">PIO Quick Actions</h3>
 
             <div className="space-y-3">

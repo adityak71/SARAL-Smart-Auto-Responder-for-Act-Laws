@@ -65,7 +65,7 @@ export const ADMIN_SECTIONS = [
 
 export default function AdminSidebar({ activeTab, onSelectTab, onLogout }) {
   return (
-    <aside className="w-full lg:w-72 bg-white dark:bg-[#121821] border border-slate-200 dark:border-white/10 rounded-3xl p-5 text-slate-800 dark:text-white flex flex-col justify-between shadow-sm dark:shadow-2xl shrink-0">
+    <aside className="w-full lg:w-72 bg-white dark:bg-[#0f1a1f] border border-slate-200 dark:border-white/10 rounded-3xl p-5 text-slate-800 dark:text-white flex flex-col justify-between shadow-sm dark:shadow-2xl shrink-0">
       <div className="space-y-6">
         {/* Brand Header matching Screenshot 3 & 7 */}
         <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">

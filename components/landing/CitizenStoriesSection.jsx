@@ -33,7 +33,7 @@ export default function CitizenStoriesSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.45, delay: idx * 0.1 }}
-              className="p-6 rounded-3xl bg-[#1a2330]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-colors duration-300 group"
+              className="p-6 rounded-3xl bg-[#16262d]/80 border border-purple-500/20 hover:border-purple-400/50 shadow-xl flex flex-col justify-between gap-5 transition-colors duration-300 group"
             >
               {/* Top Citizen Header */}
               <div className="flex items-start justify-between gap-3">

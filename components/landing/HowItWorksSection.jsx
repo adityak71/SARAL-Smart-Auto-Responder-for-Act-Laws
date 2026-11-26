@@ -65,7 +65,7 @@ export default function HowItWorksSection() {
                 </div>
 
                 {/* Right Visual Terminal / Mockup (7 Cols) */}
-                <div className="lg:col-span-7 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-purple-500/20 p-4 sm:p-6 shadow-inner flex flex-col gap-3 text-slate-700 dark:text-slate-200">
+                <div className="lg:col-span-7 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-purple-500/20 p-4 sm:p-6 shadow-inner flex flex-col gap-3 text-slate-700 dark:text-slate-200">
                   {/* Mockup Header */}
                   <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-white/10 text-xs">
                     <div className="flex items-center gap-2">

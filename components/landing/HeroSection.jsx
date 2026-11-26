@@ -69,7 +69,7 @@ export default function HeroSection() {
             >
               <Link
                 href={heroContent.ctas.primary.href}
-                className="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm active:scale-[0.98] transition-colors group"
+                className="inline-flex items-center justify-center gap-3 px-6 py-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm active:scale-[0.98] transition-colors group"
               >
                 <span>{heroContent.ctas.primary.label}</span>
                 <svg
@@ -155,7 +155,7 @@ export default function HeroSection() {
           <div className="lg:col-span-6 relative mt-4 lg:mt-0">
 
             {/* Main Glass Workspace Card */}
-            <div className="relative rounded-3xl bg-[#1a2330]/90 border border-white/15 p-5 sm:p-7 flex flex-col gap-4 text-slate-100">
+            <div className="relative rounded-3xl bg-[#16262d]/90 border border-white/15 p-5 sm:p-7 flex flex-col gap-4 text-slate-100">
               {/* Top Window Bar */}
               <div className="flex items-center justify-between pb-3 bg-white/[0.04] border border-white/10 px-4 py-3 rounded-2xl">
                 <div className="flex items-center gap-2">

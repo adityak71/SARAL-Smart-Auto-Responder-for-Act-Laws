@@ -114,7 +114,7 @@ export default function OfficerDashboard({ user }) {
         <div className="flex flex-wrap items-center gap-3 shrink-0 z-10">
           <Link
             href="/general-info"
-            className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs sm:text-sm shadow-md transition"
+            className="px-4 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs sm:text-sm shadow-md transition"
           >
             Statutory Rules Catalog
           </Link>
@@ -166,7 +166,7 @@ export default function OfficerDashboard({ user }) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Section 6(1) Dossiers Locked
               </div>
@@ -174,7 +174,7 @@ export default function OfficerDashboard({ user }) {
                 Citizen petition inspection and confidential public works records cannot be accessed prior to officer e-KYC.
               </p>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> AI Evidence Matching Blocked
               </div>
@@ -182,7 +182,7 @@ export default function OfficerDashboard({ user }) {
                 Automated measurement books and municipal voucher cross-referencing tools remain secured.
               </p>
             </div>
-            <div className="p-4 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
+            <div className="p-4 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 space-y-2 shadow-sm">
               <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
                 <span className="text-rose-500"><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span> Disposal Order Issuance
               </div>
@@ -220,7 +220,7 @@ export default function OfficerDashboard({ user }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-5 text-slate-900 dark:text-white"
+              className="w-full max-w-md rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-5 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div className="flex items-center gap-3">

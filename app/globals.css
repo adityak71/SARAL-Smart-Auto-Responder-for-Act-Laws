@@ -3,133 +3,163 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 /*
- * SARAL visual system — palette "Linen and harbour blue" (Taste skill deal, clinic/public service):
- * linen ground #f3f1ec, sand surface #e6e2d9, navy ink #1d2530, harbour-blue accent #2c5877,
- * with a muted clay complement for status and the hero's margin rule.
- * Type: Red Hat Display (headings) / Red Hat Text (body), Noto Sans Devanagari for Hindi.
- * The components use Tailwind's violet/purple/indigo/fuchsia/cyan/slate/white names;
- * remapping those scales here reskins every page without touching layout markup.
+ * SARAL visual system, taken from the Stitch project "SARAL Civic Platform Redesign"
+ * (design system "Dignified Civic Editorial"; see .stitch-reference/saral/DESIGN.md).
+ * Petrol slate #1e3a42 / #05242c anchors, terracotta #9d4413 / #c86432 marks urgency,
+ * forest #2a473e marks verified states, on cool surfaces #f5faff → #d9e4ec.
+ * Type: Source Serif 4 (headings) / Plus Jakarta Sans (body), Noto Sans Devanagari for Hindi.
+ * Components use Tailwind's violet/purple/indigo/fuchsia/cyan/slate names; remapping those
+ * scales here reskins every page without touching layout markup.
  */
 @theme {
-  --font-sans: "Red Hat Text", "Noto Sans Devanagari", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-display: "Red Hat Display", "Noto Sans Devanagari", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Noto Sans Devanagari", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Source Serif 4", "Noto Sans Devanagari", ui-serif, Georgia, serif;
   --font-serif: var(--font-display);
 
-  /* Two working weights (400, 500); semibold 600 stays for rare emphasis.
-     Hierarchy comes from size and colour, not weight. */
-  --font-weight-bold: 500;
-  --font-weight-extrabold: 500;
-  --font-weight-black: 600;
+  /* Stitch: serif headings at 600, stat counters at 700, sans labels at 600–700 */
+  --font-weight-bold: 600;
+  --font-weight-extrabold: 600;
+  --font-weight-black: 700;
 
-  --tracking-wide: 0.01em;
-  --tracking-wider: 0.015em;
-  --tracking-widest: 0.02em;
+  /* label-caps tracking is 0.06em */
+  --tracking-wide: 0.02em;
+  --tracking-wider: 0.06em;
+  --tracking-widest: 0.08em;
 
-  /* Restrained radii: 4 / 4 / 6 / 8 / 8 / 10 */
+  /* Badges 4px, cards / inputs / buttons 6–8px */
   --radius-sm: 4px;
   --radius-md: 4px;
   --radius-lg: 6px;
   --radius-xl: 8px;
   --radius-2xl: 8px;
-  --radius-3xl: 10px;
+  /* 3xl was the old "big card" radius on file-rti, profile, admin and modals; Stitch cards are 8px */
+  --radius-3xl: 8px;
 
-  /* Elevation is a hairline more than a shadow */
-  --shadow-sm: 0 1px 1px 0 rgb(29 37 48 / 0.05);
-  --shadow: 0 1px 2px 0 rgb(29 37 48 / 0.06);
-  --shadow-md: 0 1px 3px 0 rgb(29 37 48 / 0.07);
-  --shadow-lg: 0 2px 6px -2px rgb(29 37 48 / 0.08);
-  --shadow-xl: 0 4px 12px -6px rgb(29 37 48 / 0.12);
-  --shadow-2xl: 0 6px 16px -8px rgb(29 37 48 / 0.14);
+  /* Neutral, small shadows; page cards that asked for xl get the design system's ambient float,
+     2xl stays for modals and toasts that genuinely sit above the page */
+  --shadow-sm: 0 1px 2px 0 rgb(19 29 35 / 0.05);
+  --shadow: 0 1px 3px 0 rgb(19 29 35 / 0.06);
+  --shadow-md: 0 2px 6px -1px rgb(19 29 35 / 0.07);
+  --shadow-lg: 0 4px 16px -2px rgb(25 35 41 / 0.06), 0 1px 3px 0 rgb(25 35 41 / 0.04);
+  --shadow-xl: 0 4px 16px -2px rgb(25 35 41 / 0.07), 0 1px 3px 0 rgb(25 35 41 / 0.04);
+  --shadow-2xl: 0 12px 32px -8px rgb(25 35 41 / 0.14);
 
-  /* Paper, not pure white: cards and inputs sit warm on the linen ground */
-  --color-white: #fcfbf8;
+  /* surface-container-lowest */
+  --color-white: #ffffff;
 
-  /* Accent: harbour blue (600 = #2c5877). Every former violet-family scale maps here. */
-  --color-harbour-50: #eef3f7;
-  --color-harbour-100: #dce6ee;
-  --color-harbour-200: #b9cddc;
-  --color-harbour-300: #8eaec5;
-  --color-harbour-400: #5f8aa8;
-  --color-harbour-500: #3f6f8f;
-  --color-harbour-600: #2c5877;
-  --color-harbour-700: #234862;
-  --color-harbour-800: #1c3a50;
-  --color-harbour-900: #172f41;
-  --color-harbour-950: #0e1d29;
+  /* Primary: petrol slate (600 = #1e3a42 primary-container, 900 = #05242c primary) */
+  --color-petrol-50: #eef5f8;
+  --color-petrol-100: #dce9ef;
+  --color-petrol-200: #b9d0d8;
+  --color-petrol-300: #87a4ad;
+  --color-petrol-400: #5f7f88;
+  --color-petrol-500: #47636b;
+  --color-petrol-600: #1e3a42;
+  --color-petrol-700: #162e35;
+  --color-petrol-800: #0f282f;
+  --color-petrol-900: #05242c;
+  --color-petrol-950: #021a20;
 
-  --color-purple-50: var(--color-harbour-50);
-  --color-purple-100: var(--color-harbour-100);
-  --color-purple-200: var(--color-harbour-200);
-  --color-purple-300: var(--color-harbour-300);
-  --color-purple-400: var(--color-harbour-400);
-  --color-purple-500: var(--color-harbour-500);
-  --color-purple-600: var(--color-harbour-600);
-  --color-purple-700: var(--color-harbour-700);
-  --color-purple-800: var(--color-harbour-800);
-  --color-purple-900: var(--color-harbour-900);
-  --color-purple-950: var(--color-harbour-950);
+  --color-purple-50: var(--color-petrol-50);
+  --color-purple-100: var(--color-petrol-100);
+  --color-purple-200: var(--color-petrol-200);
+  --color-purple-300: var(--color-petrol-300);
+  --color-purple-400: var(--color-petrol-400);
+  --color-purple-500: var(--color-petrol-500);
+  --color-purple-600: var(--color-petrol-600);
+  --color-purple-700: var(--color-petrol-700);
+  --color-purple-800: var(--color-petrol-800);
+  --color-purple-900: var(--color-petrol-900);
+  --color-purple-950: var(--color-petrol-950);
 
-  --color-violet-50: var(--color-harbour-50);
-  --color-violet-100: var(--color-harbour-100);
-  --color-violet-200: var(--color-harbour-200);
-  --color-violet-300: var(--color-harbour-300);
-  --color-violet-400: var(--color-harbour-400);
-  --color-violet-500: var(--color-harbour-500);
-  --color-violet-600: var(--color-harbour-600);
-  --color-violet-700: var(--color-harbour-700);
-  --color-violet-800: var(--color-harbour-800);
-  --color-violet-900: var(--color-harbour-900);
-  --color-violet-950: var(--color-harbour-950);
+  --color-violet-50: var(--color-petrol-50);
+  --color-violet-100: var(--color-petrol-100);
+  --color-violet-200: var(--color-petrol-200);
+  --color-violet-300: var(--color-petrol-300);
+  --color-violet-400: var(--color-petrol-400);
+  --color-violet-500: var(--color-petrol-500);
+  --color-violet-600: var(--color-petrol-600);
+  --color-violet-700: var(--color-petrol-700);
+  --color-violet-800: var(--color-petrol-800);
+  --color-violet-900: var(--color-petrol-900);
+  --color-violet-950: var(--color-petrol-950);
 
-  --color-indigo-50: var(--color-harbour-50);
-  --color-indigo-100: var(--color-harbour-100);
-  --color-indigo-200: var(--color-harbour-200);
-  --color-indigo-300: var(--color-harbour-300);
-  --color-indigo-400: var(--color-harbour-400);
-  --color-indigo-500: var(--color-harbour-500);
-  --color-indigo-600: var(--color-harbour-600);
-  --color-indigo-700: var(--color-harbour-700);
-  --color-indigo-800: var(--color-harbour-800);
-  --color-indigo-900: var(--color-harbour-900);
-  --color-indigo-950: var(--color-harbour-950);
+  --color-indigo-50: var(--color-petrol-50);
+  --color-indigo-100: var(--color-petrol-100);
+  --color-indigo-200: var(--color-petrol-200);
+  --color-indigo-300: var(--color-petrol-300);
+  --color-indigo-400: var(--color-petrol-400);
+  --color-indigo-500: var(--color-petrol-500);
+  --color-indigo-600: var(--color-petrol-600);
+  --color-indigo-700: var(--color-petrol-700);
+  --color-indigo-800: var(--color-petrol-800);
+  --color-indigo-900: var(--color-petrol-900);
+  --color-indigo-950: var(--color-petrol-950);
 
-  --color-fuchsia-50: var(--color-harbour-50);
-  --color-fuchsia-100: var(--color-harbour-100);
-  --color-fuchsia-200: var(--color-harbour-200);
-  --color-fuchsia-300: var(--color-harbour-300);
-  --color-fuchsia-400: var(--color-harbour-400);
-  --color-fuchsia-500: var(--color-harbour-500);
-  --color-fuchsia-600: var(--color-harbour-600);
-  --color-fuchsia-700: var(--color-harbour-700);
-  --color-fuchsia-800: var(--color-harbour-800);
-  --color-fuchsia-900: var(--color-harbour-900);
-  --color-fuchsia-950: var(--color-harbour-950);
+  --color-fuchsia-50: var(--color-petrol-50);
+  --color-fuchsia-100: var(--color-petrol-100);
+  --color-fuchsia-200: var(--color-petrol-200);
+  --color-fuchsia-300: var(--color-petrol-300);
+  --color-fuchsia-400: var(--color-petrol-400);
+  --color-fuchsia-500: var(--color-petrol-500);
+  --color-fuchsia-600: var(--color-petrol-600);
+  --color-fuchsia-700: var(--color-petrol-700);
+  --color-fuchsia-800: var(--color-petrol-800);
+  --color-fuchsia-900: var(--color-petrol-900);
+  --color-fuchsia-950: var(--color-petrol-950);
 
-  /* Complement (former cyan): muted clay, for secondary emphasis only */
-  --color-cyan-50: #fbf2eb;
-  --color-cyan-100: #f5e2d4;
-  --color-cyan-200: #ebc4a8;
-  --color-cyan-300: #dea07a;
-  --color-cyan-400: #cf8255;
-  --color-cyan-500: #b8693d;
-  --color-cyan-600: #9c5530;
-  --color-cyan-700: #7e4528;
-  --color-cyan-800: #623621;
-  --color-cyan-900: #4b2a1b;
-  --color-cyan-950: #2a170f;
+  /* Info blue folds into the petrol ramp so every page stays on one accent */
+  --color-blue-50: var(--color-petrol-50);
+  --color-blue-100: var(--color-petrol-100);
+  --color-blue-200: var(--color-petrol-200);
+  --color-blue-300: var(--color-petrol-300);
+  --color-blue-400: var(--color-petrol-400);
+  --color-blue-500: var(--color-petrol-500);
+  --color-blue-600: var(--color-petrol-600);
+  --color-blue-700: var(--color-petrol-700);
+  --color-blue-800: var(--color-petrol-800);
+  --color-blue-900: var(--color-petrol-900);
+  --color-blue-950: var(--color-petrol-950);
 
-  /* Neutrals (former slate/gray): linen light end, navy ink dark end */
-  --color-slate-50: #f6f4ef;
-  --color-slate-100: #edeae3;
-  --color-slate-200: #e1dcd1;
-  --color-slate-300: #cbc5b9;
-  --color-slate-400: #9b9a95;
-  --color-slate-500: #6c6f73;
-  --color-slate-600: #50555c;
-  --color-slate-700: #3b414a;
-  --color-slate-800: #2a313b;
-  --color-slate-900: #1d2530;
-  --color-slate-950: #121821;
+  /* Success / verified (emerald) becomes the design system's forest tertiary (700 = #2a473e,
+     50/200 = the verified chip fill and border) instead of bright mint */
+  --color-emerald-50: #eaefea;
+  --color-emerald-100: #dbe6dc;
+  --color-emerald-200: #c2d6c5;
+  --color-emerald-300: #9dc2a8;
+  --color-emerald-400: #74a585;
+  --color-emerald-500: #4f8763;
+  --color-emerald-600: #33694b;
+  --color-emerald-700: #2a473e;
+  --color-emerald-800: #1e3b32;
+  --color-emerald-900: #142a23;
+  --color-emerald-950: #0a1a15;
+
+  /* Secondary (former cyan): terracotta. 100/200/700 are the "pending" chip fill / border / text */
+  --color-cyan-50: #fcf4ef;
+  --color-cyan-100: #f8ede6;
+  --color-cyan-200: #eacbb8;
+  --color-cyan-300: #ffb595;
+  --color-cyan-400: #dc8559;
+  --color-cyan-500: #c86432;
+  --color-cyan-600: #b35424;
+  --color-cyan-700: #9d4413;
+  --color-cyan-800: #7c2e00;
+  --color-cyan-900: #5a2200;
+  --color-cyan-950: #351000;
+
+  /* Neutrals (former slate/gray): cool surfaces → on-surface ink */
+  --color-slate-50: #f5faff;
+  --color-slate-100: #e5eff8;
+  --color-slate-200: #d9e4ec;
+  --color-slate-300: #c1c7ca;
+  --color-slate-400: #8c9396;
+  --color-slate-500: #5f676b;
+  --color-slate-600: #42484a;
+  --color-slate-700: #33444c;
+  --color-slate-800: #283238;
+  --color-slate-900: #131d23;
+  --color-slate-950: #0b1418;
 
   --color-gray-50: var(--color-slate-50);
   --color-gray-100: var(--color-slate-100);
@@ -142,84 +172,96 @@
   --color-gray-800: var(--color-slate-800);
   --color-gray-900: var(--color-slate-900);
   --color-gray-950: var(--color-slate-950);
+
+  /* Stitch surface ramp, for new markup */
+  --color-surface: #f5faff;
+  --color-surface-low: #eaf5fd;
+  --color-surface-container: #e5eff8;
+  --color-surface-high: #dfeaf2;
+  --color-surface-highest: #d9e4ec;
+  --color-outline-variant: #c1c7ca;
+  --color-forest: #2a473e;
 }
 
 @layer base {
   body {
     font-family: var(--font-sans);
-    line-height: 1.55;
+    line-height: 1.6;
     /* Fees, day counts and reference numbers line up in every column */
     font-variant-numeric: tabular-nums;
   }
 
   html.dark body {
-    background-color: #121821;
-    color: #edeae3;
+    background-color: #0f1a1f;
+    color: #e5eff8;
   }
 
   html:not(.dark) body {
-    background-color: #f3f1ec;
-    color: #1d2530;
+    background-color: #f5faff;
+    color: #131d23;
   }
 
   h1, h2, h3 {
     font-family: var(--font-display);
+    font-weight: 600;
     text-wrap: balance;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.01em;
   }
 
   :focus-visible {
-    outline: 2px solid var(--color-harbour-600);
+    outline: 2px solid #c86432;
     outline-offset: 2px;
   }
 }
 
-/*
- * Section grounds. The page sits on linen; a few existing sections take a tinted ground
- * so the page has depth without white expanses (Taste rhythm: surface-pairs + one dark band).
- */
-.ground-sand { background-color: #e9e4d9; }
-.ground-mist { background-color: #e2e9ee; }
-.ground-ink { background-color: #1d2530; }
+/* Dark mode lifts the two muted mid-tones so secondary text on dark cards (#16262d) clears 4.5:1;
+   light mode keeps the original values. Aliases (purple/violet/indigo/blue-400) follow petrol-400. */
+html.dark {
+  --color-slate-400: #a3aaad;
+  --color-petrol-400: #86a6b0;
+  --color-petrol-300: #a7c2ca;
+}
 
-html.dark .ground-sand { background-color: #161e28; }
-html.dark .ground-mist { background-color: #142030; }
-html.dark .ground-ink { background-color: #0e141c; }
+/* Section grounds: surface-container steps and the petrol "inverted civic anchor" */
+.ground-sand { background-color: #e5eff8; }
+.ground-mist { background-color: #eaf5fd; }
+.ground-ink { background-color: #1e3a42; }
 
-/*
- * Legacy surface classes kept by name so markup stays unchanged;
- * they are flat, bordered paper surfaces (no blur, glow or gradient).
- */
+html.dark .ground-sand { background-color: #13232a; }
+html.dark .ground-mist { background-color: #112027; }
+html.dark .ground-ink { background-color: #0a1a1f; }
+
+/* Legacy surface classes kept by name: white sheets with a hairline outline-variant border */
 html.dark .glass-card,
 html.dark .glass-card-subtle,
 html.dark .glass-doc {
-  background: #1a2330;
-  border: 1px solid #2a3542;
+  background: #16262d;
+  border: 1px solid #24373f;
   box-shadow: none;
 }
 
 html:not(.dark) .glass-card,
 html:not(.dark) .glass-card-subtle,
 html:not(.dark) .glass-doc {
-  background: #fcfbf8;
-  border: 1px solid #e1dcd1;
+  background: #ffffff;
+  border: 1px solid rgb(193 199 202 / 0.6);
   box-shadow: var(--shadow-sm);
 }
 
 html.dark .glass-chip,
 html.dark .glass-pill {
-  background: #212c3a;
-  border: 1px solid #2a3542;
+  background: #1c2e36;
+  border: 1px solid #24373f;
 }
 
 html:not(.dark) .glass-chip,
 html:not(.dark) .glass-pill {
-  background: #edeae3;
-  border: 1px solid #e1dcd1;
+  background: #e5eff8;
+  border: 1px solid rgb(193 199 202 / 0.4);
 }
 
 .shield-badge {
-  background: var(--color-harbour-600);
+  background: var(--color-petrol-900);
 }
 
 .halo-orbit {
@@ -227,12 +269,12 @@ html:not(.dark) .glass-pill {
 }
 
 .gradient-btn {
-  background: var(--color-harbour-600);
+  background: var(--color-petrol-900);
   transition: background-color 0.15s ease;
 }
 
 .gradient-btn:hover {
-  background: var(--color-harbour-700);
+  background: var(--color-petrol-700);
 }
 
 .shadow-card-lift {
@@ -253,39 +295,36 @@ html:not(.dark) .glass-pill {
   to { opacity: 1; }
 }
 
+/* No `forwards` fill: a held opacity animation makes a stacking context that traps
+   descendant modals under the sticky z-50 header. The end state is opacity 1 anyway. */
 .animate-fadeIn {
-  animation: fadeIn 0.15s ease-out forwards;
+  animation: fadeIn 0.15s ease-out;
 }
 
 /*
- * The one identity element: the home hero is a sheet of blue-ruled government foolscap with a
- * clay margin rule, the paper the RTI application used to be written on. Static.
+ * Home hero ground (Stitch screen 1): the surface with a faint constitutional dot grid,
+ * primary ink dots at 3.5% opacity every 24px. Class name kept from the previous pass.
  */
 .ledger-ground {
-  background-color: #e4ecf1;
-  background-image:
-    linear-gradient(to right, transparent calc(var(--ledger-margin) - 1px), #c0683a calc(var(--ledger-margin) - 1px), #c0683a var(--ledger-margin), transparent var(--ledger-margin)),
-    repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #c9d7e1 31px, #c9d7e1 32px);
-  border-bottom: 1px solid #c9d7e1;
+  background-color: #f5faff;
+  background-image: radial-gradient(rgb(5 36 44 / 0.07) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border-bottom: 1px solid rgb(193 199 202 / 0.4);
 }
 
 html.dark .ledger-ground {
-  background-color: #132131;
-  background-image:
-    linear-gradient(to right, transparent calc(var(--ledger-margin) - 1px), #9c5530 calc(var(--ledger-margin) - 1px), #9c5530 var(--ledger-margin), transparent var(--ledger-margin)),
-    repeating-linear-gradient(to bottom, transparent 0, transparent 31px, #1c2d40 31px, #1c2d40 32px);
-  border-bottom-color: #1c2d40;
+  background-color: #0f1a1f;
+  background-image: radial-gradient(rgb(174 203 213 / 0.07) 1px, transparent 1px);
+  border-bottom-color: #24373f;
 }
 
-/* The margin rule sits just left of the content edge at every width */
-.ledger-ground { --ledger-margin: 8px; }
-
-@media (min-width: 640px) {
-  .ledger-ground { --ledger-margin: 12px; }
-}
-
-@media (min-width: 1024px) {
-  .ledger-ground { --ledger-margin: max(16px, calc((100vw - 80rem) / 2 + 12px)); }
+/* label-caps (Stitch): 11px / 16px, 700, +0.06em, uppercase */
+.label-caps {
+  font-size: 11px;
+  line-height: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
 
 @media (prefers-reduced-motion: reduce) {

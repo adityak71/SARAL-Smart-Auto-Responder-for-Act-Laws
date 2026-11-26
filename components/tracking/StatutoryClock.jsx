@@ -12,13 +12,13 @@ export default function StatutoryClock({ application }) {
   const percentage = Math.min(100, Math.round((daysElapsed / totalDaysAllowed) * 100));
 
   return (
-    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-5 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
-          <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+          <span className="label-caps text-slate-500 dark:text-slate-400 block">
             Statutory Compliance Clock
           </span>
-          <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight">
+          <h3 className="font-display text-lg leading-7 font-semibold text-purple-900 dark:text-white">
             Section 7(1) Statutory Response Timer
           </h3>
         </div>

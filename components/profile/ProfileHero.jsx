@@ -31,7 +31,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
     },
     ADMIN: {
       badge: "Central Comptroller & Superadmin",
-      badgeColor: "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/30",
+      badgeColor: "bg-amber-500/15 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/30",
       icon: <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />,
       refLabel: "Admin Clearance Node",
       refId: "ADM-CENTRAL-001",
@@ -63,7 +63,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
   };
 
   return (
-    <div className="relative rounded-3xl bg-white/90 dark:bg-[#1d2733]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl overflow-hidden">
+    <div className="relative rounded-3xl bg-white/90 dark:bg-[#1c2e36]/90 border border-slate-200 dark:border-white/10 p-6 sm:p-8 shadow-xl overflow-hidden">
 
       <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-6">
         {/* Left: Avatar + Identity Info */}
@@ -81,7 +81,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
               alt={user?.fullName || "User Avatar"}
               className="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover ring-4 ring-purple-500/40 shadow-lg"
             />
-            <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-[#1d2733] flex items-center justify-center text-xs text-white font-bold">
+            <span className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-emerald-500 ring-4 ring-white dark:ring-[#1c2e36] flex items-center justify-center text-xs text-white font-bold">
               ✓
             </span>
           </div>
@@ -149,7 +149,7 @@ export default function ProfileHero({ user, role, onEditToggle, isEditing }) {
             whileTap={{ scale: 0.96 }}
             onClick={handleDownload}
             disabled={downloading}
-            className="px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-purple-600 hover:bg-purple-500 text-white shadow-md transition-colors duration-200 flex items-center gap-2 cursor-pointer"
+            className="px-4 py-3 rounded-xl text-xs sm:text-sm font-semibold bg-purple-600 hover:bg-purple-700 text-white shadow-md transition-colors duration-200 flex items-center gap-2 cursor-pointer"
           >
             <span>{downloading ? "Generating..." : "Export Dossier"}</span>
           </motion.button>

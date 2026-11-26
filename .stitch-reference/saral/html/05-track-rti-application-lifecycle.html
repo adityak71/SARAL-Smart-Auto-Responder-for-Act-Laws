@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SARAL - Track RTI Application Lifecycle</title>
+<!-- Tailwind CSS CDN with forms and container queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Source Serif 4 & Plus Jakarta Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<script data-purpose="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'Georgia', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            saral: {
+              petrol: '#1e3a42',
+              'petrol-dark': '#13262c',
+              'petrol-light': '#2c525d',
+              bone: '#f6f5f0',
+              canvas: '#f8f8f5',
+              surface: '#ffffff',
+              accent: '#d97706',
+              amber: '#d97706',
+              border: '#e6e4dc'
+            }
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-styling">
+    body {
+      background-color: #f7f6f1;
+      color: #1e293b;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body class="font-sans min-h-screen text-slate-800 antialiased selection:bg-[#1e3a42] selection:text-white">
+<!-- BEGIN: TopNavigationBar -->
+<header class="bg-[#f7f6f1] border-b border-[#e5e3da] sticky top-0 z-50 px-6 py-3">
+<div class="max-w-[1520px] mx-auto flex items-center justify-between">
+<!-- Brand & Emblen Section -->
+<div class="flex items-center space-x-3.5">
+<div class="w-10 h-10 rounded-lg bg-[#1e3a42] flex items-center justify-center text-amber-400 shadow-sm border border-[#14282e]">
+<svg class="w-6 h-6 fill-current" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"></path>
+</svg>
+</div>
+<div>
+<span class="font-serif font-bold text-xl tracking-tight text-slate-900 block leading-tight">SARAL</span>
+<span class="text-xs text-slate-500 font-medium">Simplifying Right to Information</span>
+</div>
+</div>
+<!-- Main Navigation Links -->
+<nav class="hidden md:flex items-center space-x-1 bg-[#edeae1]/60 px-2 py-1.5 rounded-full border border-[#e0ddd2]">
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">Home</a>
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">Dashboard</a>
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">General Info</a>
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">How It Works</a>
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">About</a>
+<a class="px-4 py-1.5 text-xs font-medium text-slate-700 hover:text-slate-950 transition-colors" href="#">Contact</a>
+<a class="px-4 py-1.5 text-xs font-semibold text-white bg-[#1e3a42] rounded-full shadow-sm" href="#">Tracking</a>
+</nav>
+<!-- Right Utility Actions -->
+<div class="flex items-center space-x-3">
+<!-- Theme Toggle -->
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-[#d8d5cb] bg-white/70 text-slate-600 hover:text-slate-900 shadow-sm" title="Toggle Theme">
+<svg class="w-4 h-4 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+</button>
+<!-- Notification Bell -->
+<div class="relative">
+<button class="w-9 h-9 flex items-center justify-center rounded-full border border-[#d8d5cb] bg-white/70 text-slate-600 hover:text-slate-950 shadow-sm" title="Notifications">
+<svg class="w-4 h-4 stroke-current" fill="none" stroke-width="2" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
+<span class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">1</span>
+</button>
+</div>
+<!-- Logout Button -->
+<button class="px-3.5 py-1.5 border border-red-200 text-red-600 text-xs font-semibold rounded-lg hover:bg-red-50/80 transition-colors">
+          Logout
+        </button>
+<!-- User Profile Pill -->
+<div class="flex items-center pl-2 border-l border-[#d8d5cb] space-x-2">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-[#1e3a42] text-amber-200 border-2 border-white shadow-sm flex items-center justify-center font-bold text-xs">
+              CM
+            </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white"></span>
+</div>
+<svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopNavigationBar -->
+<!-- BEGIN: MainContent -->
+<main class="max-w-[1520px] mx-auto px-6 py-6 space-y-6">
+<!-- BEGIN: SearchDocketHero -->
+<section class="bg-white rounded-xl border border-[#e5e2d8] p-7 shadow-xs">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-5">
+<div>
+<h1 class="text-2xl font-serif font-bold text-slate-900 tracking-tight">Track RTI Application Lifecycle</h1>
+<p class="text-xs text-slate-500 mt-1">Enter your statutory reference ID to inspect real-time PIO disposal clock and certified documents</p>
+</div>
+<div>
+<span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-semibold bg-[#e7f0f3] text-[#1e3a42] border border-[#cbdfe5]">
+<span class="w-2 h-2 rounded-full bg-[#1e3a42] mr-2 animate-pulse"></span>
+            30-Day Mandatory Statutory Clock Active
+          </span>
+</div>
+</div>
+<!-- Search Input Container -->
+<form class="flex flex-col sm:flex-row items-center gap-3">
+<div class="relative flex-1 w-full">
+<div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<input class="block w-full pl-10 pr-4 py-3 bg-[#f8f8f6] border border-[#dcd8cb] rounded-lg text-sm text-slate-800 font-mono focus:ring-2 focus:ring-[#1e3a42] focus:bg-white focus:outline-hidden transition-all" placeholder="e.g. SARAL - YYYY - XXXXX" type="text" value="SARAL - 2026 - 00004"/>
+</div>
+<button class="w-full sm:w-auto px-7 py-3 bg-[#1e3a42] hover:bg-[#15292f] text-white font-medium text-sm rounded-lg shadow-sm transition-all flex items-center justify-center space-x-2" type="submit">
+<span>Track Status</span>
+</button>
+</form>
+</section>
+<!-- END: SearchDocketHero -->
+<!-- BEGIN: TrackingGridDetails -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+<!-- Left Column: Dossier Details & Timeline (8 Cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Case Dossier Primary Card -->
+<article class="bg-white rounded-xl border border-[#e5e2d8] p-6 shadow-xs space-y-5">
+<!-- Dossier Heading -->
+<div class="border-b border-[#f1eee4] pb-4">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-mono font-bold tracking-wider text-[#1e3a42] uppercase">SARAL - 2026 - 00004</span>
+<div class="flex items-center space-x-2">
+<button class="text-xs font-medium text-slate-600 hover:text-slate-900 border border-[#dedad0] px-2.5 py-1 rounded bg-[#faf9f5]">View Receipt</button>
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-semibold bg-amber-50 text-amber-800 border border-amber-200">
+                  Under Review by PIO
+                </span>
+</div>
+</div>
+<h2 class="text-xl font-serif font-bold text-slate-900 leading-snug">
+              Drinking Water Pipeline &amp; Filtration Plant Sanction Audit (Urban Water Supply &amp; Sanitation)
+            </h2>
+<div class="mt-2 text-xs text-slate-500">
+              Applicant: <span class="font-semibold text-slate-700">Crazy Minds</span> • India
+            </div>
+</div>
+<!-- Original Citizen Inquiry Vernacular Block -->
+<div class="bg-[#faf9f5] border border-[#ebe7dc] rounded-lg p-4">
+<h3 class="text-xs font-semibold text-slate-600 uppercase tracking-wider mb-2">
+              Original Citizen Inquiry (Vernacular Input):
+            </h3>
+<p class="text-xs leading-relaxed text-slate-700 italic font-serif">
+              “1. Certified copy of the Administrative &amp; Financial Sanction Order for the drinking water pipeline/tank project in the specified locality. 2. Name, GST Registration ID, and agreement copy of the contractor awarded the installation tender. 3. Itemized statement of funds sanctioned, disbursed, and remaining unspent under the scheme as of current date. 4. Certified copy of water quality test reports (BIS 10500 compliant) conducted by the public authority prior to pipeline commissioning. 5. Certified copy of file notings recorded by the Sub-Divisional Officer regarding any delays or non-completion beyond the tender milestone.”
+            </p>
+</div>
+<!-- Formulated Legal Clauses Section -->
+<div class="pt-2">
+<div class="flex items-center justify-between mb-3">
+<h3 class="text-xs font-semibold text-slate-800">
+                Formulated Legal Clauses under Section 6(1) of RTI Act, 2005:
+              </h3>
+<span class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+                Zero Legal Ambiguity
+              </span>
+</div>
+<!-- Numbered RTI Queries -->
+<ol class="space-y-2.5 text-xs text-slate-700">
+<li class="flex items-start space-x-2.5 bg-[#fbfbfa] p-2.5 rounded-lg border border-[#f0eee6]">
+<span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#1e3a42]/10 text-[#1e3a42] font-bold text-[11px] flex items-center justify-center">1</span>
+<span>Certified copy of the Administrative &amp; Financial Sanction Order for the drinking water pipeline/tank project in the specified locality.</span>
+</li>
+<li class="flex items-start space-x-2.5 bg-[#fbfbfa] p-2.5 rounded-lg border border-[#f0eee6]">
+<span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#1e3a42]/10 text-[#1e3a42] font-bold text-[11px] flex items-center justify-center">2</span>
+<span>Name, GST Registration ID, and agreement copy of the contractor awarded the installation tender.</span>
+</li>
+<li class="flex items-start space-x-2.5 bg-[#fbfbfa] p-2.5 rounded-lg border border-[#f0eee6]">
+<span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#1e3a42]/10 text-[#1e3a42] font-bold text-[11px] flex items-center justify-center">3</span>
+<span>Itemized statement of funds sanctioned, disbursed, and remaining unspent under the scheme as of current date.</span>
+</li>
+<li class="flex items-start space-x-2.5 bg-[#fbfbfa] p-2.5 rounded-lg border border-[#f0eee6]">
+<span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#1e3a42]/10 text-[#1e3a42] font-bold text-[11px] flex items-center justify-center">4</span>
+<span>Certified copy of water quality test reports (BIS 10500 compliant) conducted by the public authority prior to pipeline commissioning.</span>
+</li>
+<li class="flex items-start space-x-2.5 bg-[#fbfbfa] p-2.5 rounded-lg border border-[#f0eee6]">
+<span class="flex-shrink-0 w-5 h-5 rounded-full bg-[#1e3a42]/10 text-[#1e3a42] font-bold text-[11px] flex items-center justify-center">5</span>
+<span>Certified copy of file notings recorded by the Sub-Divisional Officer regarding any delays or non-completion beyond the tender milestone.</span>
+</li>
+</ol>
+</div>
+<!-- Official Certified Documents & Receipts -->
+<div class="pt-4 border-t border-[#f1eee4]">
+<h4 class="text-xs font-semibold text-slate-700 mb-3">Official Certified Documents &amp; Receipts</h4>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Doc 1 -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-[#dedad0] bg-[#fbfbfa] hover:border-slate-400 transition-colors">
+<div class="flex items-center space-x-2.5 overflow-hidden">
+<div class="w-8 h-8 rounded bg-slate-200 flex items-center justify-center text-slate-600 flex-shrink-0">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="truncate">
+<div class="text-xs font-semibold text-slate-800 truncate" title="Acknowledgement_Receipt.pdf">Acknowledgement_Rece...</div>
+<div class="text-[11px] text-slate-500">348 KB • <span class="text-emerald-700 font-semibold">Certified</span></div>
+</div>
+</div>
+<button class="px-2.5 py-1 text-xs font-medium text-slate-700 bg-white border border-[#d2cec3] rounded hover:bg-slate-50 transition-colors flex-shrink-0">
+                  View &amp; Download
+                </button>
+</div>
+<!-- Doc 2 -->
+<div class="flex items-center justify-between p-3 rounded-lg border border-[#dedad0] bg-[#fbfbfa] hover:border-slate-400 transition-colors">
+<div class="flex items-center space-x-2.5 overflow-hidden">
+<div class="w-8 h-8 rounded bg-slate-200 flex items-center justify-center text-slate-600 flex-shrink-0">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<div class="truncate">
+<div class="text-xs font-semibold text-slate-800 truncate" title="Section_6_1_Statutory_Petition.pdf">Section_6_1_Statutory_...</div>
+<div class="text-[11px] text-slate-500">512 KB • <span class="text-blue-700 font-semibold">Submitted</span></div>
+</div>
+</div>
+<button class="px-2.5 py-1 text-xs font-medium text-slate-700 bg-white border border-[#d2cec3] rounded hover:bg-slate-50 transition-colors flex-shrink-0">
+                  View &amp; Download
+                </button>
+</div>
+</div>
+</div>
+</article>
+<!-- Lifecycle Milestones Timeline Card -->
+<section class="bg-white rounded-xl border border-[#e5e2d8] p-6 shadow-xs">
+<div class="flex items-center justify-between mb-6 pb-3 border-b border-[#f1eee4]">
+<div>
+<h2 class="text-base font-serif font-bold text-slate-900">Application Lifecycle Milestones</h2>
+<p class="text-xs text-slate-500">Statutory trail under the Right to Information Act, 2005</p>
+</div>
+<span class="text-xs font-bold text-[#1e3a42] bg-[#f0f5f7] border border-[#d3e3e8] px-2.5 py-1 rounded-full">
+              Stage 3 of 5
+            </span>
+</div>
+<!-- Vertical Timeline Steps -->
+<div class="relative pl-6 space-y-7 before:content-[''] before:absolute before:left-3 before:top-2 before:bottom-3 before:w-0.5 before:bg-slate-200">
+<!-- Step 1: Completed -->
+<div class="relative flex items-start space-x-3.5 group">
+<span class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-[#1e3a42] text-white flex items-center justify-center ring-4 ring-white">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</span>
+<div class="flex-1 bg-[#fcfbfa] border border-[#eeebdf] p-3.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-slate-900">Application Drafted &amp; AI-Structured</h4>
+<span class="text-[11px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">26 Nov 2026, 09:46 pm</span>
+</div>
+<p class="text-xs text-slate-600 mt-1">Citizen concern structured into Section 6(1) RTI clauses by SARAL Copilot.</p>
+</div>
+</div>
+<!-- Step 2: Completed -->
+<div class="relative flex items-start space-x-3.5 group">
+<span class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-[#1e3a42] text-white flex items-center justify-center ring-4 ring-white">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M5 13l4 4L19 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"></path>
+</svg>
+</span>
+<div class="flex-1 bg-[#fcfbfa] border border-[#eeebdf] p-3.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-slate-900">Treasury Fee Paid &amp; Petition Submitted</h4>
+<span class="text-[11px] font-mono text-slate-500 bg-white px-2 py-0.5 rounded border border-slate-200">26 Nov 2026, 09:46 pm</span>
+</div>
+<p class="text-xs text-slate-600 mt-1">Statutory fee exempted (BPL). Acknowledgement receipt generated.</p>
+</div>
+</div>
+<!-- Step 3: Current / In Progress -->
+<div class="relative flex items-start space-x-3.5 group">
+<span class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center ring-4 ring-amber-100 animate-pulse">
+<span class="w-2 h-2 rounded-full bg-white"></span>
+</span>
+<div class="flex-1 bg-amber-50/40 border border-amber-200/70 p-3.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-bold text-amber-950">Assigned to Public Information Officer (PIO)</h4>
+<span class="text-[11px] font-semibold text-amber-800 bg-amber-100 px-2 py-0.5 rounded">Pending Action</span>
+</div>
+<p class="text-xs text-slate-700 mt-1">Dossier marked to Er. Rameshwar Verma for collation of records across municipal accounts and engineering divisions.</p>
+</div>
+</div>
+<!-- Step 4: Upcoming -->
+<div class="relative flex items-start space-x-3.5 opacity-60">
+<span class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center ring-4 ring-white text-[11px] font-bold">
+                4
+              </span>
+<div class="flex-1 bg-white border border-slate-200 p-3.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-semibold text-slate-800">PIO Disposal &amp; Response Memorandum</h4>
+<span class="text-[11px] text-slate-400">Scheduled by 26 Dec 2026</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Certified information delivery or formal statutory reply upload.</p>
+</div>
+</div>
+<!-- Step 5: Final Evaluation -->
+<div class="relative flex items-start space-x-3.5 opacity-60">
+<span class="absolute -left-6 top-0 w-6 h-6 rounded-full bg-slate-200 text-slate-500 flex items-center justify-center ring-4 ring-white text-[11px] font-bold">
+                5
+              </span>
+<div class="flex-1 bg-white border border-slate-200 p-3.5 rounded-lg">
+<div class="flex items-center justify-between">
+<h4 class="text-xs font-semibold text-slate-800">Citizen Verification or Section 19(1) First Appeal</h4>
+<span class="text-[11px] text-slate-400">Statutory Window: 30 Days</span>
+</div>
+<p class="text-xs text-slate-500 mt-1">Option to close petition or elevate to First Appellate Authority (FAA) upon incomplete disclosures.</p>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Right Column: Statutory Clocks & Public Authority (4 Cols) -->
+<aside class="lg:col-span-4 space-y-6">
+<!-- Statutory Compliance Clock Card -->
+<div class="bg-white rounded-xl border border-[#e5e2d8] p-5 shadow-xs space-y-4">
+<div class="flex items-center justify-between border-b border-[#f1eee4] pb-3">
+<div>
+<span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">Statutory Compliance Clock</span>
+<h3 class="text-sm font-bold text-slate-900 font-serif">Section 7(1) Statutory Response Timer</h3>
+</div>
+<span class="px-2.5 py-1 text-xs font-bold text-amber-800 bg-amber-50 border border-amber-200 rounded">
+              30 Days Left
+            </span>
+</div>
+<!-- Progress Indicator -->
+<div class="space-y-1.5">
+<div class="flex justify-between text-xs font-medium text-slate-600">
+<span>Mandatory Clock: <strong class="text-slate-900">Day 0</strong> of 30</span>
+<span class="font-mono text-slate-500">0% Time Used</span>
+</div>
+<div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden border border-slate-200">
+<div class="h-full bg-[#1e3a42] rounded-full transition-all duration-500" style="width: 2%;"></div>
+</div>
+</div>
+<!-- Key Deadlines -->
+<div class="pt-2 grid grid-cols-2 gap-2 text-xs border-b border-[#f1eee4] pb-3">
+<div>
+<span class="text-slate-400 block text-[11px]">Date Filed:</span>
+<span class="font-medium text-slate-800">26 November 2026</span>
+</div>
+<div>
+<span class="text-slate-400 block text-[11px]">Statutory Deadline:</span>
+<span class="font-medium text-slate-800">26 December 2026</span>
+</div>
+</div>
+<!-- Fee Exemption Tag -->
+<div class="flex items-center justify-between bg-[#fbfbfa] p-3 rounded-lg border border-[#eeebe2]">
+<span class="text-xs text-slate-600 font-medium">Treasury Fee Status:</span>
+<span class="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+              Exempted (BPL Category)
+            </span>
+</div>
+</div>
+<!-- Competent Public Authority Card -->
+<div class="bg-white rounded-xl border border-[#e5e2d8] p-5 shadow-xs space-y-4">
+<div class="flex items-center justify-between border-b border-[#f1eee4] pb-3">
+<div>
+<span class="text-[11px] uppercase tracking-wider text-slate-400 font-semibold block">Competent Public Authority</span>
+<h3 class="text-sm font-bold text-slate-900 font-serif">Designated Public Information Officer (PIO)</h3>
+</div>
+<span class="text-[11px] font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded">
+              Section 5(1) Gazetted
+            </span>
+</div>
+<!-- Officer Identity Brief -->
+<div class="flex items-center space-x-3 bg-[#faf9f5] p-3 rounded-lg border border-[#eeebe2]">
+<div class="w-11 h-11 rounded-lg bg-[#1e3a42] text-white flex items-center justify-center font-bold text-base shadow-sm">
+              E
+            </div>
+<div>
+<h4 class="text-xs font-bold text-slate-900">Er. Rameshwar Verma</h4>
+<p class="text-[11px] text-slate-600 font-medium leading-tight">Executive Engineer &amp; Designated PIO</p>
+<p class="text-[11px] text-slate-400">Municipal Water Works Division</p>
+</div>
+</div>
+<!-- Department Contact Details Grid -->
+<div class="space-y-2.5 pt-1 text-xs">
+<div class="bg-[#fbfbfa] p-2.5 rounded border border-[#f0eee5]">
+<span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Nodal Department</span>
+<span class="font-medium text-slate-800 truncate block">Urban Water Supply &amp; Sanitation</span>
+</div>
+<div class="bg-[#fbfbfa] p-2.5 rounded border border-[#f0eee5]">
+<span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Target Public Authority</span>
+<span class="font-medium text-slate-800 truncate block">Urban Water Supply &amp; Sanitation Board</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+<div class="bg-[#fbfbfa] p-2.5 rounded border border-[#f0eee5]">
+<span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Official Email</span>
+<span class="font-medium text-slate-800 text-[11px] truncate block hover:underline cursor-pointer">pio.pwd@saral-rti.gov.in</span>
+</div>
+<div class="bg-[#fbfbfa] p-2.5 rounded border border-[#f0eee5]">
+<span class="text-slate-400 text-[10px] uppercase font-bold tracking-wider block">Desk Phone</span>
+<span class="font-medium text-slate-800 text-[11px] block">+91 7574-254190</span>
+</div>
+</div>
+</div>
+<!-- Civic Trust Disclaimer -->
+<div class="p-3 bg-amber-50/60 rounded border border-amber-200/50 text-[11px] text-amber-900 leading-normal">
+<strong class="font-semibold">Statutory Advisory:</strong> Under Section 7(1), non-disposal within the prescribed 30 days shall be deemed a refusal under Section 7(2) invoking First Appeal rights.
+          </div>
+</div>
+<!-- Section 19 Support Card -->
+<div class="bg-[#faf9f5] rounded-xl border border-[#dedad0] p-4 text-xs text-slate-600">
+<div class="flex items-center space-x-2 text-slate-900 font-semibold mb-1">
+<svg class="w-4 h-4 text-[#1e3a42]" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span>First Appellate Authority (FAA) Contact</span>
+</div>
+<p class="text-[11px] leading-relaxed">
+            In case of dissatisfaction or deemed refusal after 26 Dec 2026, the petition can be escalated to the Superintending Engineer (FAA) directly with single-click filing.
+          </p>
+</div>
+</aside>
+</div>
+<!-- END: TrackingGridDetails -->
+</main>
+<!-- END: MainContent -->
+<!-- BEGIN: CivicFooter -->
+<footer class="border-t border-[#e2dfd4] bg-[#f2efe6] mt-12 py-8 px-6 text-xs text-slate-600">
+<div class="max-w-[1520px] mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex items-center space-x-2">
+<div class="w-6 h-6 rounded bg-[#1e3a42] text-amber-300 flex items-center justify-center font-serif text-xs font-bold">
+          S
+        </div>
+<span class="font-serif font-semibold text-slate-800">SARAL Digital Public Infrastructure</span>
+<span class="text-slate-400">•</span>
+<span>Right to Information Act, 2005 Compliance Portal</span>
+</div>
+<div class="flex items-center space-x-6 text-slate-500">
+<a class="hover:text-slate-800" href="#">Statutory Provisions</a>
+<a class="hover:text-slate-800" href="#">Citizen Charter</a>
+<a class="hover:text-slate-800" href="#">Security &amp; Privacy</a>
+<a class="hover:text-slate-800" href="#">Gov.in Directory</a>
+</div>
+<div class="text-slate-400 text-[11px]">
+        Empowering Citizens with Sovereign Governance Transparency
+      </div>
+</div>
+</footer>
+<!-- END: CivicFooter -->
+</body></html>

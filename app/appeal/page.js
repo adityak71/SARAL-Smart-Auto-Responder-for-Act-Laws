@@ -179,7 +179,7 @@ function AppealForm() {
     });
 
     return (
-      <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-purple-500/30 shadow-2xl text-slate-800 dark:text-slate-100 space-y-6 animate-fadeIn">
+      <div className="max-w-2xl mx-auto p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-purple-500/30 shadow-2xl text-slate-800 dark:text-slate-100 space-y-6 animate-fadeIn">
         <div className="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center justify-center text-3xl mx-auto">
           ✓
         </div>
@@ -188,7 +188,7 @@ function AppealForm() {
           <span className="inline-flex items-center gap-2 text-sm font-medium text-emerald-700 dark:text-emerald-300">
             Section 19(1) Statutory Appeal Admitted
           </span>
-          <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
+          <h2 className="text-2xl sm:text-[30px] sm:leading-[38px] font-semibold text-purple-900 dark:text-white">
             First Appeal Successfully Registered
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -231,7 +231,7 @@ function AppealForm() {
         <div className="flex flex-col sm:flex-row gap-3 pt-2">
           <Link
             href={`/tracking?id=${selectedApp?.applicationNumber || selectedAppId}`}
-            className="flex-1 py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs text-center shadow-md transition"
+            className="flex-1 py-3 px-4 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs text-center shadow-md transition"
           >
             Track in Live Dossier →
           </Link>
@@ -258,7 +258,7 @@ function AppealForm() {
       )}
 
       {/* Step 1: Target Application */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
+      <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
             1
@@ -320,7 +320,7 @@ function AppealForm() {
       </div>
 
       {/* Step 2: Grounds of Appeal */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
+      <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
             2
@@ -350,7 +350,7 @@ function AppealForm() {
               >
                 <div className="flex items-start justify-between gap-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-lg">{ground.icon}</span>
+                    <span className="text-lg text-purple-900 dark:text-purple-200">{ground.icon}</span>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white leading-tight">
                       {ground.title}
                     </h4>
@@ -369,7 +369,7 @@ function AppealForm() {
       </div>
 
       {/* Step 3: Statement of Facts */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
+      <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
         <div className="flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
@@ -405,7 +405,7 @@ function AppealForm() {
       </div>
 
       {/* Step 4: Reliefs Sought from FAA */}
-      <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
+      <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-xl space-y-4">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-xl bg-purple-600/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
             4
@@ -457,20 +457,20 @@ function AppealForm() {
       </div>
 
       {/* Submission Bar */}
-      <div className="p-6 rounded-3xl bg-purple-950/60 border border-purple-500/20 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div className="p-6 rounded-xl bg-purple-600 dark:bg-[#16262d] border border-purple-600 dark:border-white/10 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="text-xs text-slate-300 space-y-0.5">
           <p className="font-semibold text-white">Zero Filing Fee for Section 19(1) Appeals</p>
-          <p className="text-slate-400">Statutory 30-day disposal clock begins immediately upon submission.</p>
+          <p className="text-slate-200">Statutory 30-day disposal clock begins immediately upon submission.</p>
         </div>
 
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full sm:w-auto px-8 py-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-sm shadow-lg transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
+          className="w-full sm:w-auto px-8 py-4 rounded-lg bg-white hover:bg-slate-100 text-purple-900 font-semibold text-sm shadow-sm transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer"
         >
           {isSubmitting ? (
             <>
-              <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+              <span className="w-4 h-4 border-2 border-purple-900 border-t-transparent rounded-full animate-spin" />
               <span>Registering Appeal...</span>
             </>
           ) : (
@@ -484,11 +484,11 @@ function AppealForm() {
 
 export default function AppealPage() {
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-[#121821] py-12 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100">
+    <div className="min-h-screen bg-slate-50 dark:bg-[#0f1a1f] py-12 px-4 sm:px-6 lg:px-8 text-slate-900 dark:text-slate-100">
       <div className="max-w-4xl mx-auto space-y-8">
         {/* Page Header */}
         <div className="text-center space-y-3">
-          <div className="inline-flex items-center gap-2 text-sm font-medium text-rose-700 dark:text-rose-300">
+          <div className="label-caps inline-flex items-center gap-2 text-cyan-700 dark:text-cyan-300">
             <span>Right to Information Act, 2005 • Section 19(1)</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">

@@ -158,7 +158,7 @@ export default function DigiLockerModal({ isOpen, onClose, onSuccess }) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 15 }}
           transition={{ type: "spring", stiffness: 350, damping: 28 }}
-          className="relative w-full max-w-lg bg-white dark:bg-[#1a2330] rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden z-10 text-slate-800 dark:text-slate-100"
+          className="relative w-full max-w-lg bg-white dark:bg-[#16262d] rounded-3xl shadow-2xl border border-slate-200 dark:border-white/10 overflow-hidden z-10 text-slate-800 dark:text-slate-100"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Government Official Top Banner */}

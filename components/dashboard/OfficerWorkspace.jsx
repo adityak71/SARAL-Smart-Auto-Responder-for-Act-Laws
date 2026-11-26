@@ -386,9 +386,9 @@ export default function OfficerWorkspace() {
     <div className="space-y-6">
       {/* Officer Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Assigned Queue</span>
-          <span className="text-2xl font-extrabold text-slate-900 dark:text-white mt-1 block">
+          <span className="text-2xl sm:text-[30px] sm:leading-[38px] font-semibold text-purple-900 dark:text-white mt-1 block">
             {stats.assignedApplications ?? cases.length}
           </span>
           <span className="text-xs text-amber-700 dark:text-amber-300 font-semibold">
@@ -396,7 +396,7 @@ export default function OfficerWorkspace() {
           </span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">AI Drafts Ready</span>
           <span className="text-2xl font-extrabold text-purple-700 dark:text-purple-300 mt-1 block">
             {stats.aiDraftsGenerated ?? cases.length}
@@ -404,7 +404,7 @@ export default function OfficerWorkspace() {
           <span className="text-xs text-purple-600 dark:text-purple-200">Pre-retrieved from archives</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Dispatched Today</span>
           <span className="text-2xl font-extrabold text-emerald-700 dark:text-emerald-400 mt-1 block">
             {(stats.dispatchedToday || 0) + approvedCaseIds.length}
@@ -412,7 +412,7 @@ export default function OfficerWorkspace() {
           <span className="text-xs text-emerald-600 dark:text-emerald-300 font-semibold">Digitally Certified</span>
         </div>
 
-        <div className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
+        <div className="p-5 rounded-2xl bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md transition-colors">
           <span className="text-xs text-slate-500 dark:text-slate-400 block font-medium">Statutory Compliance</span>
           <span className="text-2xl font-extrabold text-cyan-700 dark:text-cyan-400 mt-1 block">
             {stats.complianceRatio || "98.4%"}
@@ -424,7 +424,7 @@ export default function OfficerWorkspace() {
       {/* Main Split Review Desk */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Assigned Queue List (5 Cols) */}
-        <div className="lg:col-span-5 bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-5 shadow-sm dark:shadow-xl flex flex-col gap-3 transition-colors">
+        <div className="lg:col-span-5 bg-white dark:bg-[#16262d] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-5 shadow-sm dark:shadow-xl flex flex-col gap-3 transition-colors">
           <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-3">
             <h3 className="text-sm font-bold text-slate-900 dark:text-white tracking-wider">
               Pending Examination Queue
@@ -465,7 +465,7 @@ export default function OfficerWorkspace() {
                             ? "bg-emerald-500/15 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border-emerald-500/30"
                             : item.urgency.includes("Critical")
                             ? "bg-rose-500/15 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300 border-rose-500/30"
-                            : "bg-amber-500/15 text-amber-700 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/30"
+                            : "bg-amber-500/15 text-amber-800 dark:bg-amber-500/20 dark:text-amber-300 border-amber-500/30"
                         }`}
                       >
                         {hasBeenApproved ? "Dispatched" : item.urgency}
@@ -486,7 +486,7 @@ export default function OfficerWorkspace() {
         </div>
 
         {/* Right Officer Verification & Multi-Tab AI Response Studio (7 Cols) */}
-        <div className="lg:col-span-7 bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
+        <div className="lg:col-span-7 bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
           {actionSuccessMsg && (
             <div className="p-4 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-800 dark:text-emerald-300 text-xs font-semibold flex items-center justify-between">
               <span>{actionSuccessMsg}</span>
@@ -521,7 +521,7 @@ export default function OfficerWorkspace() {
 
             {/* Live Statutory Compliance Countdown */}
             <div className="sm:text-right flex flex-col sm:items-end">
-              <span className="text-xs text-slate-400 font-mono block">STATUTORY CLOCK:</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono block">STATUTORY CLOCK:</span>
               <StatutoryCountdownClock
                 dateFiled={selectedCase?.dateFiled || "2026-11-01T00:00:00Z"}
                 statutoryDeadline={selectedCase?.statutoryDeadline || "2026-12-01T00:00:00Z"}
@@ -623,7 +623,7 @@ export default function OfficerWorkspace() {
                 <button
                   type="button"
                   onClick={() => setStudioTab("ai-report")}
-                  className="px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer flex items-center gap-2 shrink-0 shadow-sm"
+                  className="px-3 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition cursor-pointer flex items-center gap-2 shrink-0 shadow-sm"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>Launch AI Structuring</span>
@@ -694,7 +694,7 @@ export default function OfficerWorkspace() {
 
               {/* Pre-Retrieved Source Files */}
               <div className="space-y-2">
-                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block">
+                <span className="label-caps text-slate-500 dark:text-slate-400 block">
                   Referenced Departmental Records:
                 </span>
                 <div className="flex flex-wrap gap-2">
@@ -845,7 +845,7 @@ export default function OfficerWorkspace() {
                     type="button"
                     onClick={handleGenerateAiReport}
                     disabled={isAiStructuring}
-                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs transition cursor-pointer shadow-md disabled:opacity-50 flex items-center gap-2"
+                    className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold text-xs transition cursor-pointer shadow-md disabled:opacity-50 flex items-center gap-2"
                   >
                     {isAiStructuring ? (
                       <>
@@ -955,7 +955,7 @@ export default function OfficerWorkspace() {
                   {/* Certified Enclosures & Appellate Preview */}
                   {aiStructuredReport.certifiedEnclosures && aiStructuredReport.certifiedEnclosures.length > 0 && (
                     <div className="pt-2 border-t border-purple-500/20">
-                      <span className="text-xs font-bold text-slate-500 dark:text-slate-400 tracking-wider block mb-1">
+                      <span className="label-caps text-slate-500 dark:text-slate-400 block mb-1">
                         Attached Certified Enclosures (Section 2(j)(ii)):
                       </span>
                       <div className="flex flex-wrap gap-2">
@@ -976,7 +976,7 @@ export default function OfficerWorkspace() {
                     <button
                       type="button"
                       onClick={handleApplyAiReportToMemo}
-                      className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer text-xs"
+                      className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold transition flex items-center justify-center gap-2 shadow-md cursor-pointer text-xs"
                     >
                       <Check className="w-4 h-4" />
                       <span>Insert This Full Structured Report into Official Memorandum</span>
@@ -1078,7 +1078,7 @@ export default function OfficerWorkspace() {
               <button
                 type="button"
                 onClick={handleInsertAppellateNotice}
-                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
+                className="w-full py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold transition flex items-center justify-center gap-2 cursor-pointer shadow-sm"
               >
                 <span><IcPlus className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
                 <span>Inject Section 7(8) Appellate Notice into Memorandum</span>
@@ -1191,7 +1191,7 @@ export default function OfficerWorkspace() {
       {/* Section 6(3) Transfer Modal */}
       {showTransferModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 animate-fadeIn">
-          <div className="bg-white dark:bg-[#1d2733] border border-slate-200 dark:border-purple-500/30 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
+          <div className="bg-white dark:bg-[#1c2e36] border border-slate-200 dark:border-purple-500/30 rounded-3xl p-6 max-w-lg w-full shadow-2xl space-y-4">
             <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-3">
               <div>
                 <h3 className="text-base font-bold text-slate-900 dark:text-white">
@@ -1257,7 +1257,7 @@ export default function OfficerWorkspace() {
                 <button
                   type="submit"
                   disabled={isTransferring}
-                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold shadow-md disabled:opacity-50 flex items-center gap-2"
+                  className="px-5 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-bold shadow-md disabled:opacity-50 flex items-center gap-2"
                 >
                   {isTransferring ? (
                     <>

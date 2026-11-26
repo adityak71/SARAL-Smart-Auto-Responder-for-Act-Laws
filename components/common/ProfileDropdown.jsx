@@ -79,7 +79,7 @@ export default function ProfileDropdown() {
             className="w-8 h-8 sm:w-9 sm:h-9 rounded-full object-cover ring-2 ring-purple-500/60"
           />
           {/* Online Verification Indicator */}
-          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#121821]" />
+          <span className="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-[#0f1a1f]" />
         </div>
 
         {/* Down caret */}
@@ -111,7 +111,7 @@ export default function ProfileDropdown() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 8, scale: 0.95 }}
               transition={{ duration: 0.2, ease: "easeOut" }}
-              className="absolute right-0 mt-3 w-72 sm:w-80 rounded-2xl bg-white dark:bg-[#1d2733]/95 border border-slate-200 dark:border-purple-500/25 z-50 overflow-hidden text-slate-800 dark:text-slate-100"
+              className="absolute right-0 mt-3 w-72 sm:w-80 rounded-2xl bg-white dark:bg-[#1c2e36]/95 border border-slate-200 dark:border-purple-500/25 z-50 overflow-hidden text-slate-800 dark:text-slate-100"
             >
               {/* Profile Card Header (Clickable to /profile) */}
               <Link
@@ -126,7 +126,7 @@ export default function ProfileDropdown() {
                       alt={displayName}
                       className="w-12 h-12 rounded-full object-cover ring-2 ring-white/60 dark:ring-purple-500/80 shadow-md group-hover:ring-white transition"
                     />
-                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-[#1a2330]" />
+                    <span className="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-emerald-400 ring-2 ring-white dark:ring-[#16262d]" />
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between">
@@ -200,7 +200,7 @@ export default function ProfileDropdown() {
                       ? "Assigned Inward Docket"
                       : "My Filed RTIs"}
                   </span>
-                  <span className="px-2 py-0.5 rounded-lg bg-purple-100 text-purple-800 dark:bg-[#2a3542] dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-500/30">
+                  <span className="px-2 py-0.5 rounded-lg bg-purple-100 text-purple-800 dark:bg-[#24373f] dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-500/30">
                     {userRole === "OFFICER" ? "5 Pending" : "3 Active"}
                   </span>
                 </Link>
@@ -217,7 +217,7 @@ export default function ProfileDropdown() {
                       ? "Section 6(3) Transfer Queue"
                       : "Drafted Applications"}
                   </span>
-                  <span className="px-2 py-0.5 rounded-lg bg-purple-100 text-purple-800 dark:bg-[#2a3542] dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-500/30">
+                  <span className="px-2 py-0.5 rounded-lg bg-purple-100 text-purple-800 dark:bg-[#24373f] dark:text-purple-300 text-xs font-bold border border-purple-200 dark:border-purple-500/30">
                     1
                   </span>
                 </Link>

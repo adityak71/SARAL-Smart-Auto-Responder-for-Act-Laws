@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SARAL - Know Your Rights &amp; Laws</title>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Fonts: Source Serif 4 & Inter -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['"Source Serif 4"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            civic: {
+              teal: '#1e3a42',
+              'teal-dark': '#142930',
+              'teal-light': '#2d535e',
+              slate: '#475569',
+              bg: '#f8fafc',
+              surface: '#ffffff',
+              border: '#e2e8f0',
+              accent: '#0d9488',
+            }
+          }
+        }
+      }
+    }
+  </script>
+<!-- Custom Styles for Dignified Civic Aesthetic -->
+<style data-purpose="custom-typography">
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fcfdfd;
+      color: #1e293b;
+    }
+    .headline-font {
+      font-family: 'Source Serif 4', Georgia, serif;
+    }
+  </style>
+<meta content="web_standard" name="shell-type"/></head>
+<body class="min-h-screen flex flex-col bg-[#fbfdfd] text-slate-800 antialiased selection:bg-teal-100 selection:text-teal-900">
+<!-- BEGIN: MainHeader -->
+<header class="bg-white border-b border-slate-200 sticky top-0 z-50">
+<div class="max-w-[1400px] mx-auto px-6 h-20 flex items-center justify-between">
+<!-- Brand & Emblem -->
+<div class="flex items-center space-x-3.5">
+<div class="w-11 h-11 bg-slate-900 rounded-lg flex items-center justify-center text-white shadow-sm border border-slate-800">
+<svg aria-label="National Emblem Icon" class="w-6 h-6 fill-current text-amber-100" viewbox="0 0 24 24">
+<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"></path>
+</svg>
+</div>
+<div class="flex flex-col">
+<span class="font-serif font-bold text-xl tracking-tight text-slate-900 leading-none">SARAL</span>
+<span class="text-xs text-slate-500 font-medium tracking-normal mt-1">Simplifying Right to Information</span>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav aria-label="Main Navigation" class="hidden lg:flex items-center space-x-1">
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Home</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Dashboard</a>
+<!-- Active Nav Pill -->
+<a class="px-4 py-1.5 rounded-md text-sm font-semibold text-white bg-[#1e3a42] shadow-sm transition-all" href="#">General Info</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">How It Works</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">About</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Contact</a>
+<a class="px-3.5 py-1.5 rounded-md text-sm font-medium text-slate-600 hover:text-slate-900 hover:bg-slate-50 transition-colors" href="#">Tracking</a>
+</nav>
+<!-- Right Utility Actions -->
+<div class="flex items-center space-x-3">
+<!-- Theme Toggle -->
+<button aria-label="Toggle Theme" class="w-9 h-9 flex items-center justify-center rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+<!-- Notification Bell with Count Badge -->
+<button aria-label="Notifications" class="relative w-9 h-9 flex items-center justify-center rounded-full text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-colors">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+<span class="absolute top-1 right-1 bg-rose-500 text-white font-semibold text-[10px] w-4 h-4 rounded-full flex items-center justify-center border-2 border-white">1</span>
+</button>
+<!-- Logout Button -->
+<button class="px-3.5 py-1.5 text-xs font-semibold text-rose-600 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-md transition-colors">
+          Logout
+        </button>
+<div class="h-6 w-px bg-slate-200"></div>
+<!-- User Profile Avatar -->
+<button aria-label="User Profile Menu" class="flex items-center space-x-2 p-1 rounded-full hover:bg-slate-50 transition-colors">
+<div class="relative">
+<img alt="Crazy Minds Profile" class="w-8 h-8 rounded-full border border-slate-300 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDukAdRs8VB1mKVuD-KdgqcqkM1lpNv-GvB3O3yMe9KC17COFOAHxqsdCZHSTXD0jrjbemS0D_mLiN0O-tqGJImQbehr-BZplDYhDqfk6_Ymwp5GHwaA-F50Lrcwqr2oYVe319kxsRMTix5z9FtCAfjE50XkqdEoeIAaqAcvQG9bcNkDCD8_isDDmdAkjJJZ_toxq-TF4pWqMm0vjGMixXw--ONbX3NsVMvTHd22A"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 border-2 border-white rounded-full"></span>
+</div>
+<svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewbox="0 0 24 24">
+<path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</button>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<!-- BEGIN: HeroAndSearchSection -->
+<main class="flex-1 pb-16"><div class="flex flex-col w-full">
+<section class="w-full max-w-4xl mx-auto px-6 pt-12 pb-12 text-center">
+<h1 class="font-display-lg text-display-lg text-on-surface tracking-tight">How SARAL works</h1>
+<p class="font-headline-lg text-headline-lg text-primary-container mt-2">From your question to an official reply</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-5 max-w-2xl mx-auto">
+      नागरिक की आम बोलचाल से लेकर कानूनी रूप से प्रमाणित सरकारी जवाब तक — SARAL red tape, technical reject, aur legal jargons ko poori tarah khatam karta hai.
+    </p>
+</section>
+<section class="w-full max-w-6xl mx-auto px-6 flex flex-col gap-10 pb-12">
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+<div class="lg:col-span-5 flex flex-col items-start min-w-0">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary-container text-on-primary font-title-md text-title-md">01</span>
+<span class="font-label-caps text-label-caps uppercase text-primary-container">STAGE 01 : CITIZEN INPUT</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-6">Describe Your Concern in Simple Words</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-4">
+          Speak or write in Hindi, English, Hinglish, or your local language. No legal jargon required. Tell us what you want to know: broken roads, delayed scholarship funds, hospital medicine availability, or government tender details.
+        </p>
+<div class="mt-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span class="font-label-caps text-label-caps">Vernacular Voice &amp; Text Supported</span>
+</div>
+</div>
+<div class="lg:col-span-7 bg-primary text-on-primary rounded-xl p-6 shadow-md flex flex-col gap-4 min-w-0">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim shrink-0"></span>
+<span class="font-title-md text-title-md text-on-primary truncate">Citizen Audio &amp; Text Terminal</span>
+</div>
+<span class="px-3 py-1 rounded-lg bg-primary-container text-primary-fixed font-label-caps text-label-caps">Hindi / Hinglish Detected</span>
+</div>
+<div class="bg-primary-container/70 rounded-lg p-4 flex flex-col gap-1.5">
+<span class="font-body-sm text-body-sm text-on-primary-container">Raw Citizen Input (Voice or Typing):</span>
+<p class="font-body-md text-body-md text-on-primary">
+            “Mere gaon ki road 2 saal se tooti hai. Baar baar complaint ki koi nahi sunta. Humein tender ki copy, sanctioned amount aur thekedar ka naam chahiye.”
+          </p>
+</div>
+<div class="bg-primary-container/70 rounded-lg p-4 flex flex-col gap-3">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<span class="font-title-md text-title-md text-on-primary">SARAL Copilot NLP Structuring</span>
+<span class="inline-flex items-center gap-1 font-label-caps text-label-caps text-tertiary-fixed-dim">
+<span class="material-symbols-outlined text-[14px]">auto_awesome</span>
+              4 Scopes Identified
+            </span>
+</div>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-inverse-on-surface">
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim mt-0.5 shrink-0">arrow_right</span>
+<span>Public Works Scope: Bitumen Road Maintenance</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim mt-0.5 shrink-0">arrow_right</span>
+<span>Records: Sanctioned Tender &amp; Work Order</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim mt-0.5 shrink-0">arrow_right</span>
+<span>Financials: Total Bill Disbursements Cleared</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="material-symbols-outlined text-[16px] text-primary-fixed-dim mt-0.5 shrink-0">arrow_right</span>
+<span>Identity: Contractor Name &amp; Executive Engineer</span>
+</li>
+</ul>
+</div>
+</div>
+</article>
+<article class="bg-surface-container-lowest rounded-xl shadow-sm p-8 lg:p-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+<div class="lg:col-span-5 flex flex-col items-start min-w-0">
+<div class="flex items-center gap-3">
+<span class="inline-flex items-center justify-center w-9 h-9 rounded-lg bg-primary-container text-on-primary font-title-md text-title-md">02</span>
+<span class="font-label-caps text-label-caps uppercase text-primary-container">STAGE 02 : AI ASSISTANCE &amp; LEGAL MAPPING</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-surface mt-6">Instant Section 6(1) Structuring &amp; Ministry Mapping</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-4">
+          SARAL’s domain-trained AI identifies the competent public authority (Central, State, or Local Panchayat), checks for Section 8 public interest exclusions, and converts informal questions into legally structured RTI questions that cannot be rejected on technical grounds.
+        </p>
+<div class="mt-6 inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-secondary-fixed text-on-secondary-fixed-variant">
+<span class="material-symbols-outlined text-[16px]">bolt</span>
+<span class="font-label-caps text-label-caps">Semantic Gazette Matching</span>
+</div>
+</div>
+<div class="lg:col-span-7 bg-primary text-on-primary rounded-xl p-6 shadow-md flex flex-col gap-4 min-w-0">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-fixed-dim shrink-0"></span>
+<span class="font-title-md text-title-md text-on-primary truncate">Jurisdictional Engine &amp; Section 6(1) Structuring</span>
+</div>
+<div class="bg-primary-container/70 rounded-lg p-4 flex flex-col gap-1.5">
+<div class="flex flex-wrap items-center justify-between gap-2">
+<span class="font-body-sm text-body-sm text-secondary-fixed-dim">Competent Authority:</span>
+<span class="font-label-caps text-label-caps text-tertiary-fixed-dim">99.2% Jurisdiction Confidence</span>
+</div>
+<p class="font-title-md text-title-md text-on-primary">Ministry of Rural Development / State PWD</p>
+<p class="font-body-sm text-body-sm text-on-primary-container">Exemption Check: 100% Public Record (Section 8 Clean)</p>
+</div>
+<div class="bg-primary-container/70 rounded-lg p-4 flex flex-col gap-3">
+<span class="font-title-md text-title-md text-on-primary">Drafted Section 6(1) Inquiries:</span>
+<ul class="flex flex-col gap-2 font-body-sm text-body-sm text-inverse-on-surface">
+<li class="flex items-start gap-2">
+<span class="text-primary-fixed-dim">•</span>
+<span>Clause 1: Certified copy of Sanction Order and GFR Allocation.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-primary-fixed-dim">•</span>
+<span>Clause 2: Name &amp; Vendor Registration of Awarded Contractor.</span>
+</li>
+<li class="flex items-start gap-2">
+<span class="text-primary-fixed-dim">•</span>
+<span>Clause 3: Certified extracts of Measurement Book (MB) recordings.</span>
+</li>
+</ul>
+</div>
+</div>
+</article>
+</section>
+</div></main>
+<!-- END: HeroAndSearchSection -->
+<!-- BEGIN: SiteFooter -->
+<footer class="bg-white border-t border-slate-200 mt-auto py-8">
+<div class="max-w-[1320px] mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+<div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
+<span class="font-semibold text-slate-800">Right to Information Act, 2005</span>
+<span class="hidden sm:inline text-slate-300">•</span>
+<span>National Informatics &amp; Transparency Framework</span>
+<span class="hidden sm:inline text-slate-300">•</span>
+<span>DoPT Acknowledged Portal</span>
+</div>
+<div class="flex flex-wrap items-center justify-center gap-4">
+<a class="hover:text-slate-800 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-800 transition-colors" href="#">Terms of Use</a>
+<a class="hover:text-slate-800 transition-colors" href="#">RTI Act Rules</a>
+<span class="text-slate-300">|</span>
+<span class="font-medium text-slate-700">Helpline: 1800-RTI-SARAL</span>
+</div>
+</div>
+</footer>
+<!-- END: SiteFooter -->
+</body></html>

@@ -2,6 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { citizenDashboardStats } from "@/data/dashboardData";
+import { Hourglass as IcHourglass, CheckCheck as IcCheckCheck, TriangleAlert as IcAlert, Zap as IcZap } from "lucide-react";
+
+// Stitch screen 2 stat cards: label, a 32px icon tile at top right, a serif figure and a caption
+const ICON = { amber: IcHourglass, emerald: IcCheckCheck, rose: IcAlert, purple: IcZap };
+const TILE = {
+  amber: "bg-slate-100 text-purple-900 dark:bg-white/10 dark:text-purple-200",
+  emerald: "bg-slate-100 text-purple-900 dark:bg-white/10 dark:text-purple-200",
+  rose: "bg-cyan-100 text-cyan-700 dark:bg-cyan-500/10 dark:text-cyan-300",
+  purple: "bg-slate-100 text-cyan-700 dark:bg-white/10 dark:text-cyan-300",
+};
 
 export default function CitizenOverview() {
   const [liveStats, setLiveStats] = useState(null);
@@ -72,28 +82,34 @@ export default function CitizenOverview() {
     <div className="w-full">
       {/* 4 Stat Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((stat) => (
+        {stats.map((stat) => {
+          const Icon = ICON[stat.color];
+          return (
           <div
             key={stat.label}
-            className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 shadow-sm dark:shadow-md flex flex-col gap-2 text-slate-800 dark:text-slate-100 transition-colors"
+            className="p-5 sm:p-6 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 shadow-sm flex flex-col gap-3 text-slate-800 dark:text-slate-100 transition-colors"
           >
             <div className="flex items-center justify-between">
-              <span className="text-xs font-semibold text-slate-500 dark:text-slate-400">
+              <span className="text-sm sm:text-base font-medium text-slate-600 dark:text-slate-300">
                 {stat.label}
               </span>
+              <span className={`shrink-0 w-8 h-8 rounded-sm flex items-center justify-center ${TILE[stat.color]}`}>
+                <Icon className="w-4 h-4" strokeWidth={2} aria-hidden="true" />
+              </span>
             </div>
-            <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+            <div className="font-display text-[28px] leading-9 sm:text-4xl sm:leading-10 font-black text-purple-900 dark:text-white flex items-center gap-2">
               {isLoading ? (
                 <div className="h-8 w-12 bg-slate-200 dark:bg-white/10 rounded" />
               ) : (
                 stat.value
               )}
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400">
+            <p className="text-[13px] leading-5 text-slate-600 dark:text-slate-400">
               {stat.subtext}
             </p>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

@@ -6,10 +6,10 @@ export default function ApplicationTimeline({ application }) {
   if (!application) return null;
 
   return (
-    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight">
+          <h3 className="font-display text-xl leading-8 font-semibold text-purple-900 dark:text-white">
             Application Lifecycle Milestones
           </h3>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -42,8 +42,8 @@ export default function ApplicationTimeline({ application }) {
                   isCompleted
                     ? "bg-purple-600 text-white ring-4 ring-purple-100 dark:ring-purple-900/40"
                     : isActive
-                    ? "bg-cyan-500 text-slate-900 ring-4 ring-cyan-500/30 "
-                    : "bg-slate-100 dark:bg-white/10 text-slate-400 border border-slate-300 dark:border-white/10"
+                    ? "bg-cyan-600 text-white ring-4 ring-cyan-500/30 "
+                    : "bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300 border border-slate-300 dark:border-white/10"
                 }`}
               >
                 {isCompleted ? (

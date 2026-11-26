@@ -20,15 +20,13 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 sm:p-8 shadow-sm dark:shadow-xl flex flex-col gap-6 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-10 shadow-sm flex flex-col gap-8 text-slate-800 dark:text-slate-100 transition-colors">
       <div>
-        <div className="inline-flex items-center gap-2 text-sm font-medium text-purple-700 dark:text-purple-300">
-          <span>Citizen helpdesk and grievance cell</span>
-        </div>
-        <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+        <p className="label-caps text-purple-500 dark:text-purple-300">Citizen helpdesk and grievance cell</p>
+        <h2 className="mt-2 text-[26px] leading-8 sm:text-[30px] sm:leading-[38px] font-semibold text-purple-900 dark:text-white tracking-[-0.01em]">
           Send a Statutory Inquiry or Support Request
         </h2>
-        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
+        <p className="text-[15px] leading-6 text-slate-600 dark:text-slate-400 mt-2">
           Have questions regarding the Right to Information Act, jurisdictional mapping, or technical filing? Reach out to our facilitation cell.
         </p>
       </div>
@@ -48,51 +46,51 @@ export default function ContactForm() {
               setSubmitted(false);
               setFormData({ name: "", email: "", phone: "", category: contactInquiryCategories[0].id, message: "" });
             }}
-            className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-semibold transition cursor-pointer mt-2"
+            className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white text-xs font-semibold transition cursor-pointer mt-2"
           >
             Submit Another Query
           </button>
         </div>
       ) : (
-        <form onSubmit={handleSubmit} className="space-y-4 text-xs">
+        <form onSubmit={handleSubmit} className="space-y-6 text-sm">
           {/* Name & Email Row */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1">
-              <label className="text-slate-700 dark:text-slate-300 font-semibold block">Full Name *</label>
+              <label className="text-sm text-slate-800 dark:text-slate-200 font-medium block mb-1">Full Name *</label>
               <input
                 type="text"
                 required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Dr. Rajesh Kumar"
-                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-white/5 border border-slate-300/70 dark:border-white/10 text-[15px] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-slate-700 dark:text-slate-300 font-semibold block">Email Address *</label>
+              <label className="text-sm text-slate-800 dark:text-slate-200 font-medium block mb-1">Email Address *</label>
               <input
                 type="email"
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 placeholder="citizen@example.in"
-                className="w-full px-4 py-3 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
+                className="w-full px-4 py-3 rounded-lg bg-white dark:bg-white/5 border border-slate-300/70 dark:border-white/10 text-[15px] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500"
               />
             </div>
           </div>
 
           {/* Category Selector Grid */}
           <div className="space-y-2">
-            <label className="text-slate-700 dark:text-slate-300 font-semibold block">Inquiry Category *</label>
+            <label className="text-sm text-slate-800 dark:text-slate-200 font-medium block mb-1">Inquiry Category *</label>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {contactInquiryCategories.map((cat) => (
                 <label
                   key={cat.id}
-                  className={`p-3 rounded-xl border flex items-center gap-3 transition cursor-pointer ${
+                  className={`px-4 py-3 rounded-lg border flex items-center gap-3 transition-colors cursor-pointer ${
                     formData.category === cat.id
-                      ? "bg-purple-50 dark:bg-purple-600/30 border-purple-400 text-purple-950 dark:text-white font-bold"
-                      : "bg-slate-50 dark:bg-white/[0.03] border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
+                      ? "bg-slate-50 dark:bg-purple-600/30 border-purple-600 ring-1 ring-purple-600 text-purple-900 dark:text-white font-semibold"
+                      : "bg-white dark:bg-white/[0.03] border-slate-300/70 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-white/[0.06]"
                   }`}
                 >
                   <input
@@ -103,7 +101,7 @@ export default function ContactForm() {
                     onChange={() => setFormData({ ...formData, category: cat.id })}
                     className="accent-purple-600"
                   />
-                  <span className="text-xs">{cat.label}</span>
+                  <span className="text-sm">{cat.label}</span>
                 </label>
               ))}
             </div>
@@ -111,27 +109,27 @@ export default function ContactForm() {
 
           {/* Message Textarea */}
           <div className="space-y-1">
-            <label className="text-slate-700 dark:text-slate-300 font-semibold block">Message / Inquiry Details *</label>
+            <label className="text-sm text-slate-800 dark:text-slate-200 font-medium block mb-1">Message / Inquiry Details *</label>
             <textarea
               required
               rows={4}
               value={formData.message}
               onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               placeholder="Kindly articulate the statutory reference or platform friction you experienced..."
-              className="w-full p-4 rounded-xl bg-slate-50 dark:bg-white/5 border border-slate-300/80 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500 resize-none"
+              className="w-full p-4 rounded-lg bg-white dark:bg-white/5 border border-slate-300/70 dark:border-white/10 text-[15px] text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-purple-500 resize-none"
             />
           </div>
 
           {/* Bottom Notice & Submit */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2">
-            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-xs">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 border-t border-slate-200 dark:border-white/10">
+            <div className="flex items-center gap-2 text-slate-500 dark:text-slate-400 text-sm">
               <span><IcLock className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
               <span>Submissions encrypted via DPDP Act 2023 protocol</span>
             </div>
 
             <button
               type="submit"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md transition cursor-pointer"
+              className="w-full sm:w-auto px-6 py-3 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-sm transition-colors cursor-pointer"
             >
               Submit Support Query →
             </button>

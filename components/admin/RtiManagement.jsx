@@ -278,7 +278,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
           </div>
 
           {/* Search, Filter & RTI Table Container */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <div className="flex flex-col sm:flex-row gap-3 items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
               <form
                 onSubmit={(e) => {
@@ -445,7 +445,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
       {/* VIEW 2: DEPARTMENTS DIRECTORY */}
       {activeSubTab === "departments" && (
         <div className="space-y-6">
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                 Department Directory & Public Authorities
@@ -466,7 +466,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
             {departments.map((dept) => (
               <div
                 key={dept.id}
-                className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col justify-between space-y-4"
+                className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col justify-between space-y-4"
               >
                 <div className="space-y-2">
                   <div className="flex items-center justify-between">
@@ -515,7 +515,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div>
@@ -627,7 +627,7 @@ export default function RtiManagement({ initialSubTab = "rtis" }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">

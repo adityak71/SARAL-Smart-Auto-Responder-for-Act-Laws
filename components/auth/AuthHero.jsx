@@ -57,7 +57,7 @@ export default function AuthHero({ type = "login" }) {
             transition={{ duration: 0.3 }}
             className="flex items-center justify-center w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-purple-600 p-0.5 shadow-md shrink-0"
           >
-            <div className="w-full h-full bg-[#1a2330] rounded-[14px] flex items-center justify-center">
+            <div className="w-full h-full bg-[#16262d] rounded-[14px] flex items-center justify-center">
               <Emblem className="w-6 h-7 text-white" />
             </div>
           </motion.div>
@@ -114,7 +114,7 @@ export default function AuthHero({ type = "login" }) {
           <div
             className={`text-2xl sm:text-3xl lg:text-[44px] font-extrabold tracking-tight leading-tight lg:leading-[1.14] ${
               isLogin
-                ? "text-purple-300 lg:text-[#8eaec5]"
+                ? "text-purple-300 lg:text-[#87a4ad]"
                 : "   text-purple-200  "
             }`}
           >

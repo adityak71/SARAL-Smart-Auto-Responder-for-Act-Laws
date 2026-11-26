@@ -167,7 +167,7 @@ export default function SignupForm() {
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="w-full bg-white dark:bg-[#1a2330]/95 rounded-2xl sm:rounded-2xl p-5 sm:p-6 sm:px-7 shadow-card-lift border border-slate-200/90 dark:border-white/15 relative text-slate-800 dark:text-slate-100 pt-7 sm:pt-8 transition-colors"
+          className="w-full bg-white dark:bg-[#16262d]/95 rounded-2xl sm:rounded-2xl p-5 sm:p-6 sm:px-7 shadow-card-lift border border-slate-200/90 dark:border-white/15 relative text-slate-800 dark:text-slate-100 pt-7 sm:pt-8 transition-colors"
         >
           {/* Floating Citizen Icon Header Badge */}
           <motion.div
@@ -175,7 +175,7 @@ export default function SignupForm() {
             animate={{ y: 0, scale: 1, opacity: 1 }}
             transition={{ type: "spring", stiffness: 350, damping: 22, delay: 0.15 }}
             whileHover={{ scale: 1.08, rotate: [0, -5, 5, 0] }}
-            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 dark:bg-[#1d2733] rounded-2xl shadow-md border border-indigo-100 dark:border-white/20 flex items-center justify-center text-indigo-600 dark:text-purple-300 cursor-pointer"
+            className="absolute -top-6 left-1/2 -translate-x-1/2 w-12 h-12 bg-white/95 dark:bg-[#1c2e36] rounded-2xl shadow-md border border-indigo-100 dark:border-white/20 flex items-center justify-center text-indigo-600 dark:text-purple-300 cursor-pointer"
             data-purpose="citizen-badge"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" strokeWidth="1.8" viewBox="0 0 24 24">
@@ -238,7 +238,7 @@ export default function SignupForm() {
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-200 dark:border-white/15" />
             </div>
-            <span className="relative bg-white dark:bg-[#1a2330] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
+            <span className="relative bg-white dark:bg-[#16262d] px-3 text-xs font-normal text-slate-400 dark:text-slate-400 select-none">
               or register with email
             </span>
           </div>
@@ -431,15 +431,15 @@ export default function SignupForm() {
                 required
                 checked={signupForm.agreeTerms}
                 onChange={(e) => handleInputChange("agreeTerms", e.target.checked)}
-                className="w-4 h-4 rounded text-[#2c5877] border-slate-300 dark:border-white/20 focus:ring-[#2c5877] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#2c5877]"
+                className="w-4 h-4 rounded text-[#1e3a42] border-slate-300 dark:border-white/20 focus:ring-[#1e3a42] focus:ring-offset-0 cursor-pointer shrink-0 accent-[#1e3a42]"
               />
               <label htmlFor="terms" className="text-xs sm:text-xs text-slate-600 dark:text-slate-300 select-none cursor-pointer leading-tight">
                 {signupContent.form.termsText}{" "}
-                <a href="#" className="font-semibold text-[#2c5877] dark:text-purple-300 hover:underline">
+                <a href="#" className="font-semibold text-[#1e3a42] dark:text-purple-300 hover:underline">
                   {signupContent.form.termsLink}
                 </a>{" "}
                 {signupContent.form.andText}{" "}
-                <a href="#" className="font-semibold text-[#2c5877] dark:text-purple-300 hover:underline">
+                <a href="#" className="font-semibold text-[#1e3a42] dark:text-purple-300 hover:underline">
                   {signupContent.form.privacyLink}
                 </a>
               </label>
@@ -477,7 +477,7 @@ export default function SignupForm() {
           {/* Divider & Secondary Sign In Link */}
           <div className="mt-4 sm:mt-4 text-center text-xs sm:text-[13px] text-slate-500 dark:text-slate-400">
             <span>{signupContent.form.haveAccountText}</span>
-            <Link href="/login" className="font-bold text-[#2c5877] dark:text-purple-300 hover:text-[#2c5877] dark:hover:text-purple-200 ml-1 hover:underline">
+            <Link href="/login" className="font-bold text-[#1e3a42] dark:text-purple-300 hover:text-[#1e3a42] dark:hover:text-purple-200 ml-1 hover:underline">
               {signupContent.form.signinLinkText}
             </Link>
           </div>

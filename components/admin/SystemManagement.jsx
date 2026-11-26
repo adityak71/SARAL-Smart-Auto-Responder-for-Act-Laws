@@ -165,7 +165,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
       {activeSubTab === "analytics" && (
         <div className="space-y-6">
           {/* Key Metric Highlights */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
@@ -215,7 +215,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
           </div>
 
           {/* Department Breakdown */}
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
               Department-wise Filing Volumes & PIO Distribution
             </h3>
@@ -246,7 +246,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
 
       {/* VIEW 2: SYSTEM AUDIT LOGS */}
       {activeSubTab === "audit" && (
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
           <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10">
             <div>
               <h3 className="font-extrabold text-slate-900 dark:text-white text-base">
@@ -321,7 +321,7 @@ export default function SystemManagement({ initialSubTab = "analytics" }) {
       {/* VIEW 3: SECURITY & CONTROLS */}
       {activeSubTab === "settings" && (
         <form onSubmit={handleSaveSettings} className="space-y-6">
-          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
+          <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-6">
             <div className="flex items-center justify-between pb-4 border-b border-slate-200 dark:border-white/10">
               <div>
                 <h3 className="font-extrabold text-slate-900 dark:text-white text-base">

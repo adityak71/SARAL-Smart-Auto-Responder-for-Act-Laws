@@ -97,7 +97,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.05 }}
-            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1d2733]/70 shadow-sm ${stat.bg}`}
+            className={`rounded-2xl p-4 sm:p-5 border  bg-white/70 dark:bg-[#1c2e36]/70 shadow-sm ${stat.bg}`}
           >
             <div className="flex items-center justify-between">
               <span className="text-xl sm:text-2xl">{stat.icon}</span>
@@ -113,7 +113,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
         {/* Left 7 Columns: Personal & Residential Dossier */}
         <div className="lg:col-span-7 space-y-6">
           {/* Card 1: Citizen Particulars */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-purple-600/15 dark:bg-purple-500/20 text-purple-600 dark:text-purple-300 flex items-center justify-center font-bold text-sm">
@@ -182,7 +182,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                   <select
                     value={formData.preferredLanguage}
                     onChange={(e) => handleChange("preferredLanguage", e.target.value)}
-                    className="w-full p-3 rounded-xl bg-white dark:bg-[#1d2733] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
+                    className="w-full p-3 rounded-xl bg-white dark:bg-[#1c2e36] border border-purple-500 text-slate-900 dark:text-white focus:outline-none"
                   >
                     <option value="Hindi & Hinglish (हिंदी / हिंग्लिश)">Hindi & Hinglish (हिंदी / हिंग्लिश)</option>
                     <option value="English (Standard Legal)">English (Standard Legal)</option>
@@ -205,7 +205,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           </div>
 
           {/* Card 2: Jurisdiction & Postal Address */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between border-b border-slate-200 dark:border-white/10 pb-4 mb-4">
               <div className="flex items-center gap-3">
                 <div className="w-8 h-8 rounded-xl bg-cyan-600/15 dark:bg-cyan-500/20 text-cyan-600 dark:text-cyan-300 flex items-center justify-center font-bold text-sm">
@@ -281,7 +281,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
         {/* Right 5 Columns: Sovereign Verification & Activity Stream */}
         <div className="lg:col-span-5 space-y-6">
           {/* Card 3: DigiLocker Sovereign Verification Card */}
-          <div className="rounded-3xl bg-emerald-500/10 dark:bg-emerald-950/30 dark:via-[#1d2733]/80 border border-emerald-500/30 p-6 shadow-sm">
+          <div className="rounded-3xl bg-emerald-500/10 dark:bg-emerald-950/30 dark:via-[#1c2e36]/80 border border-emerald-500/30 p-6 shadow-sm">
             <div className="flex items-center justify-between pb-4 border-b border-emerald-500/20 mb-4">
               <div className="flex items-center gap-2">
                 <span className="text-xl"><IcShield className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /></span>
@@ -327,7 +327,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
           </div>
 
           {/* Card 4: Recent RTI Petitions */}
-          <div className="rounded-3xl bg-white/80 dark:bg-[#1d2733]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
+          <div className="rounded-3xl bg-white/80 dark:bg-[#1c2e36]/80 border border-slate-200 dark:border-white/10 p-6 shadow-sm">
             <div className="flex items-center justify-between pb-3 border-b border-slate-200 dark:border-white/10 mb-3">
               <h3 className="text-sm font-extrabold text-slate-900 dark:text-white">Active & Past Petitions</h3>
               <Link href="/tracking" className="text-xs font-bold text-purple-600 dark:text-purple-400 hover:underline">
@@ -349,7 +349,7 @@ export default function CitizenProfileView({ user, isEditing, onSaved }) {
                     <span
                       className={`px-2 py-0.5 rounded-lg text-xs font-bold ${
                         app.status === "UNDER_REVIEW"
-                          ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
+                          ? "bg-amber-500/15 text-amber-800 dark:text-amber-300 border border-amber-500/30"
                           : "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
                       }`}
                     >

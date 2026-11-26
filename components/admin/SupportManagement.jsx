@@ -312,7 +312,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {activeSubTab === "complaints" && (
         <div className="space-y-6">
           {/* Status Lifecycle Flow Indicator */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div className="text-xs font-semibold text-slate-500 dark:text-slate-400">
               Grievance SLA Lifecycle:
             </div>
@@ -340,7 +340,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           </div>
 
           {/* Table Container */}
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             {/* Filter Pills */}
             <div className="flex items-center gap-2 overflow-x-auto pb-3 border-b border-slate-200 dark:border-white/10">
               {["ALL", "OPEN", "IN PROGRESS", "RESOLVED", "CLOSED"].map((f) => (
@@ -436,7 +436,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {activeSubTab === "notifications" && (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Notification Composer */}
-          <div className="lg:col-span-1 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="lg:col-span-1 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
               <Send className="w-5 h-5 text-purple-600 dark:text-purple-400" /> Dispatch Platform Broadcast
             </h3>
@@ -511,7 +511,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
           </div>
 
           {/* Broadcast History */}
-          <div className="lg:col-span-2 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
+          <div className="lg:col-span-2 p-6 sm:p-8 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-4">
             <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
               Dispatched Broadcast Log
             </h3>
@@ -546,7 +546,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
       {/* VIEW 3: CONTENT & FAQS */}
       {activeSubTab === "content" && (
         <div className="space-y-6">
-          <div className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">
                 RTI Knowledgebase & FAQs
@@ -567,7 +567,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
             {faqs.map((faq) => (
               <div
                 key={faq.id}
-                className="p-6 rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-3"
+                className="p-6 rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/10 text-slate-900 dark:text-white shadow-sm dark:shadow-2xl space-y-3"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 px-3 py-0.5 rounded-lg border border-emerald-500/30">
@@ -595,7 +595,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-6 text-slate-900 dark:text-white"
             >
               <div className="flex items-start justify-between border-b border-slate-200 dark:border-white/10 pb-4">
                 <div>
@@ -681,7 +681,7 @@ export default function SupportManagement({ initialSubTab = "complaints" }) {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-4 text-slate-900 dark:text-white"
+              className="w-full max-w-lg rounded-3xl bg-white dark:bg-[#16262d] border border-slate-200 dark:border-white/20 p-6 shadow-2xl space-y-4 text-slate-900 dark:text-white"
             >
               <h3 className="font-extrabold text-slate-900 dark:text-white text-lg">
                 Add Knowledgebase FAQ

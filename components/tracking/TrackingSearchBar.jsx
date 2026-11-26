@@ -18,10 +18,10 @@ export default function TrackingSearchBar() {
   };
 
   return (
-    <div className="w-full bg-white dark:bg-[#1a2330] border border-slate-200/90 dark:border-purple-500/20 rounded-3xl p-6 shadow-sm dark:shadow-xl flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
+    <div className="w-full bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 rounded-xl p-6 sm:p-8 shadow-sm flex flex-col gap-4 text-slate-800 dark:text-slate-100 transition-colors">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
-          <h2 className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">
+          <h2 className="font-display text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
             Track RTI Application Lifecycle
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -54,7 +54,7 @@ export default function TrackingSearchBar() {
         <button
           type="submit"
           disabled={searchStatus === "loading"}
-          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer disabled:opacity-50"
+          className="w-full sm:w-auto px-6 py-3 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-md transition whitespace-nowrap cursor-pointer disabled:opacity-50"
         >
           {searchStatus === "loading" ? "Tracking..." : "Track Status"}
         </button>

@@ -23,7 +23,7 @@ export default function DashboardPage() {
 
   if (!isAuthenticated) {
     return (
-      <div className="flex-1 bg-slate-50 dark:bg-[#121821] flex flex-col items-center justify-center p-6 text-center min-h-[60vh]">
+      <div className="flex-1 bg-slate-50 dark:bg-[#0f1a1f] flex flex-col items-center justify-center p-6 text-center min-h-[60vh]">
         <div className="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-300 text-xl font-bold mb-3 animate-spin">
           <IcZap className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
         </div>
@@ -38,7 +38,7 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 flex flex-col antialiased transition-colors">
       <main className={`flex-1 w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 space-y-6 ${userRole === "ADMIN" ? "max-w-[1580px]" : "max-w-7xl"}`}>
         {/* Dynamic RBAC Dashboard Rendering */}
         {userRole === "ADMIN" ? (

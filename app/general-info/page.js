@@ -65,23 +65,23 @@ export default function GeneralInfoPage() {
   };
 
   return (
-    <div className="flex-1 w-full bg-slate-50 dark:bg-[#121821] text-slate-800 dark:text-slate-100 min-h-screen py-8 sm:py-12 transition-colors">
+    <div className="flex-1 w-full bg-slate-50 dark:bg-[#0f1a1f] text-slate-800 dark:text-slate-100 min-h-screen py-8 sm:py-12 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <motion.h1
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight text-slate-900 dark:text-white"
+            className="text-[36px] leading-[44px] sm:text-[52px] sm:leading-[60px] font-bold tracking-[-0.02em] text-purple-900 dark:text-white"
           >
-            Know Your <span className="text-purple-600 dark:text-purple-400">Rights & Laws</span>
+            Know Your <span className="italic font-semibold text-purple-500 dark:text-purple-300">Rights & Laws</span>
           </motion.h1>
 
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.1 }}
-            className="mt-3 text-sm sm:text-base text-slate-600 dark:text-slate-300"
+            className="mt-4 text-base sm:text-[17px] sm:leading-7 text-slate-600 dark:text-slate-300"
           >
             Plain summaries of the RTI Act, what each section means for you, and contact details for each department&apos;s Public Information Officer.
           </motion.p>
@@ -105,7 +105,7 @@ export default function GeneralInfoPage() {
                     ? "खोजें: आरटीआई नियम, सड़क टेंडर, ग्राम पंचायत बजट, अधिकारी..."
                     : "Search any topic: RTI Act, Road tenders, Gram Panchayat budget, PIO..."
                 }
-                className="w-full pl-12 pr-32 py-4 rounded-2xl bg-white dark:bg-[#1a2330] border-2 border-slate-200 dark:border-white/10 text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-600 dark:focus:border-purple-400 transition-colors text-sm sm:text-base"
+                className="w-full pl-12 pr-32 py-4 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/60 dark:border-white/10 shadow-sm text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-purple-600 dark:focus:border-purple-400 transition-colors text-sm sm:text-base"
               />
               <svg
                 className="w-5 h-5 absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
@@ -123,7 +123,7 @@ export default function GeneralInfoPage() {
               <button
                 type="button"
                 onClick={() => setSelectedLang(selectedLang === "en" ? "hi" : "en")}
-                className="px-3 py-2 rounded-xl text-xs font-bold border border-slate-200 dark:border-white/15 bg-slate-100 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:border-purple-400 transition cursor-pointer"
+                className="px-3 py-2 rounded-md text-xs font-semibold border border-slate-300/60 dark:border-white/15 bg-slate-50 dark:bg-white/10 text-slate-700 dark:text-slate-200 hover:border-purple-400 transition cursor-pointer"
                 title="Switch Language"
               >
                 {selectedLang === "en" ? "EN ⇄ हिंदी" : "हिंदी ⇄ EN"}
@@ -132,7 +132,7 @@ export default function GeneralInfoPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-700 text-white font-semibold text-xs sm:text-sm shadow-md transition disabled:opacity-50 cursor-pointer"
+                className="px-5 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold text-sm shadow-sm transition disabled:opacity-50 cursor-pointer"
               >
                 {isLoading ? "Searching..." : "Search"}
               </button>
@@ -147,7 +147,7 @@ export default function GeneralInfoPage() {
                 key={topic.label}
                 type="button"
                 onClick={() => handleTopicClick(topic.query)}
-                className="text-xs px-3 py-1 rounded-lg bg-slate-200/70 hover:bg-purple-100 hover:text-purple-700 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
+                className="text-sm px-3 py-1.5 rounded-md bg-slate-100 border border-slate-300/40 text-slate-700 hover:bg-slate-200 hover:text-purple-900 dark:bg-white/5 dark:hover:bg-purple-900/40 dark:hover:text-purple-300 text-slate-700 dark:text-slate-300 border border-slate-300/60 dark:border-white/10 transition cursor-pointer"
               >
                 {topic.label}
               </button>
@@ -165,11 +165,11 @@ export default function GeneralInfoPage() {
               className="space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30">
+                <div className="w-10 h-10 rounded-md bg-[#eaefea] text-[#2a473e] dark:text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/30">
                   <IcScale className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-xl sm:text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
                     Statutory Legal Clauses & RTI Act Rules
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -182,21 +182,21 @@ export default function GeneralInfoPage() {
                 {results.statutoryRules.map((rule) => (
                   <div
                     key={rule.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="p-6 sm:p-8 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
                   >
                     <div>
                       <div className="flex items-center justify-between gap-2 mb-2">
-                        <span className="px-2 py-0.5 rounded text-xs font-bold bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
+                        <span className="whitespace-nowrap px-2.5 py-1 rounded-sm text-xs font-semibold bg-slate-100 text-purple-900 dark:bg-purple-900/40 dark:text-purple-300 border border-purple-200 dark:border-purple-800">
                           {rule.section}
                         </span>
-                        <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400">
+                        <span className="text-xs font-semibold px-2.5 py-1 rounded-sm bg-[#eaefea] border border-[#c2d6c5] text-[#2a473e] dark:bg-emerald-500/10 dark:border-emerald-500/30 dark:text-emerald-400">
                           <IcTimer className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" /> {rule.timeLimit}
                         </span>
                       </div>
-                      <h3 className="font-bold text-sm sm:text-base text-slate-900 dark:text-white mb-2">
+                      <h3 className="font-display font-semibold text-lg sm:text-xl leading-7 text-purple-900 dark:text-white mb-2">
                         {rule.title}
                       </h3>
-                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed mb-3">
+                      <p className="text-[15px] leading-6 text-slate-600 dark:text-slate-300 mb-4">
                         {rule.summary}
                       </p>
                     </div>
@@ -207,7 +207,7 @@ export default function GeneralInfoPage() {
                       </span>
                       <Link
                         href="/login"
-                        className="text-purple-600 dark:text-purple-400 font-bold hover:underline"
+                        className="text-purple-900 dark:text-purple-200 font-semibold hover:underline"
                       >
                         File Petition →
                       </Link>
@@ -227,11 +227,11 @@ export default function GeneralInfoPage() {
               className="space-y-4"
             >
               <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-500/15 text-blue-600 dark:text-blue-400 flex items-center justify-center font-bold text-sm border border-blue-500/30">
+                <div className="w-10 h-10 rounded-md bg-slate-100 text-purple-900 dark:text-purple-300 flex items-center justify-center font-bold text-lg border border-slue-500/30">
                   <IcGlobe className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-xl sm:text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
                     Verified Public Encyclopedia (Wikipedia Integration)
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -244,7 +244,7 @@ export default function GeneralInfoPage() {
                 {results.wikipediaArticles.map((article, idx) => (
                   <article
                     key={idx}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
+                    className="p-6 sm:p-8 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow"
                   >
                     <div>
                       {article.thumbnail && (
@@ -257,14 +257,14 @@ export default function GeneralInfoPage() {
                         </div>
                       )}
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-xs font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                        <span className="label-caps px-2 py-0.5 rounded-sm bg-[#ebeff0] text-purple-600 dark:bg-white/10 dark:text-purple-300 border border-[#cbd7da] dark:border-blue-800">
                           {article.source}
                         </span>
                       </div>
-                      <h3 className="font-bold text-base text-slate-900 dark:text-white mb-2">
+                      <h3 className="font-display font-semibold text-lg sm:text-xl leading-7 text-purple-900 dark:text-white mb-2">
                         {article.title}
                       </h3>
-                      <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed line-clamp-4">
+                      <p className="text-[15px] leading-6 text-slate-600 dark:text-slate-300 line-clamp-4">
                         {article.extract}
                       </p>
                     </div>
@@ -276,7 +276,7 @@ export default function GeneralInfoPage() {
                           setSelectedArticle(article);
                           setIsArticleModalOpen(true);
                         }}
-                        className="text-xs font-bold text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 hover:underline flex items-center gap-2 cursor-pointer py-1 px-2 -ml-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
+                        className="text-sm font-semibold text-purple-900 dark:text-purple-200 hover:text-cyan-700 hover:underline flex items-center gap-2 cursor-pointer py-1 px-2 -ml-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors"
                       >
                         <span>Read Full Article</span>
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,7 +308,7 @@ export default function GeneralInfoPage() {
                   <IcLandmark className="inline-block w-[1em] h-[1em] align-[-0.125em] shrink-0" strokeWidth={1.75} aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
+                  <h2 className="text-xl sm:text-2xl leading-8 font-semibold text-purple-900 dark:text-white">
                     Responsible Public Authorities & PIO Directory
                   </h2>
                   <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -321,7 +321,7 @@ export default function GeneralInfoPage() {
                 {results.matchingDepartments.map((dept) => (
                   <div
                     key={dept.id}
-                    className="p-5 rounded-2xl bg-white dark:bg-[#1a2330] border border-slate-200 dark:border-white/10 shadow-sm flex flex-col justify-between"
+                    className="p-6 sm:p-8 rounded-xl bg-white dark:bg-[#16262d] border border-slate-300/40 dark:border-white/10 shadow-sm flex flex-col justify-between"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-2">
